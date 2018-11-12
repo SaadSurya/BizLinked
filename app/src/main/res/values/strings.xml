@@ -1,0 +1,243 @@
+<resources>
+    <string name="app_name">BizLinked</string>
+    <string name="card_login">Card Login</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
+
+    <string name="registration">REGISTRATION</string>
+    <string name="existing_customer_login">Existing Customer Login</string>
+    <string name="shop_number">Shop Number</string>
+    <string name="user_phone">Phone</string>
+    <string name="user_phone2">Phone 2</string>
+    <string name="market">Market</string>
+    <string name="user_name_here">User Name Here</string>
+    <string name="password_here">Password Here</string>
+    <string name="c_name">Company Name</string>
+    <string name="f_name">First Name</string>
+    <string name="l_name">User Name</string>
+    <string name="email_address">Email Adddress</string>
+    <string name="area">area</string>
+    <string name="web_site">Web Site</string>
+    <string name="category">Category</string>
+    <string name="create_password">Create Password</string>
+    <string name="confirm__password">Confirm Password</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="error_password">Password should be 6 characters long</string>
+    <string name="error_user_name">Username should be 3 characters long</string>
+    <string name="error_fname">First Name should be 3 characters long</string>
+    <string name="error_lname">Last Name should be 3 characters long</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alerts">Alerts</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="live_chat">Live Chat</string>
+    <string name="favourites">Favourites</string>
+    <string name="no_network_available">No network available!!!</string>
+    <string name="will_be_implemented">Will be implemented in next phase</string>
+    <string name="customer_support">Customer Support</string>
+    <string name="customer_support_number">Customer Support Call Center Number</string>
+    <string name="customer_support_address">Customer Support Address:</string>
+    <string name="connect_online">Connect Online:</string>
+    <string name="regional_address">Regional Address:</string>
+    <string name="customer_support_options">Customer Support Options</string>
+    <string name="document_download">Document Download</string>
+    <string name="emergency_number_claim_intimation">Emergency Number for Claim Intimation</string>
+    <string name="customer_complain">Customer Complain</string>
+    <string name="clear_screen">Clear Screen</string>
+    <string name="send_complain">Send Complain</string>
+    <string name="tracking_by">Tracking - [ By . . . .        ]</string>
+    <string name="tracking_dash">Tracking - </string>
+    <string name="search_here">Search Here</string>
+    <string name="s_no">S.No.</string>
+    <string name="document_description">Document Description</string>
+    <string name="action">Action</string>
+    <string name="document_requested">Document Requested, Please Upload</string>
+    <string name="scan">Scan</string>
+    <string name="view">View</string>
+    <string name="upload">Upload</string>
+    <string name="capture_image">Capture Image(s)</string>
+    <string name="tap_to_capture">Tap to Capture</string>
+    <string name="special_note">Special Note</string>
+    <string name="select_document">Select Document</string>
+    <string name="locate_cocument">Locate Document</string>
+    <string name="browse">Browse</string>
+    <string name="view_document">View Document</string>
+    <string name="permission_denied">Permission Denied!!!</string>
+    <string name="compressing_please_wait">Compressing... Please Wait!!</string>
+    <string name="change_password">Change Password</string>
+    <string name="show_all">Show All</string>
+    <string name="nearest_3">Nearest 3</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="no_class_available">No Class Available For This Name!!!!!</string>
+    <string name="voice_recording">Voice Recorder</string>
+    <string name="cancel_recording">Cancel Recording</string>
+    <string name="done_recording">Done Recording</string>
+    <string name="something_went_wrong_play_voice">Some thing went wrong in playing audio!!!</string>
+    <string name="something_went_wrong_record_voice">Some thing went wrong in recording audio!!!</string>
+    <string name="claim_list">Claim List</string>
+    <string name="policy_no">Policy#</string>
+    <string name="intimation_no">Intimation#</string>
+    <string name="claim_no">Claim #</string>
+    <string name="product">Product</string>
+    <string name="claim_detail">Claim Detail</string>
+    <string name="time_duration_within">Time Duration Within:</string>
+    <string name="five_days">05 Days</string>
+    <string name="seven_days">07 Days</string>
+    <string name="seven_days_plus">07 Days+</string>
+    <string name="contact_person">Contact Person</string>
+    <string name="name">Name:</string>
+
+    <string name="cell_no">Cell#:</string>
+
+    <string name="not_intimated">Not Initiated</string>
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="claim_intimation">Claim Intimation</string>
+    <string name="issue_date">Issue Date</string>
+    <string name="heading_name">Name</string>
+    <string name="userName">User Name</string>
+    <string name="userEmail">Email</string>
+    <string name="userOldPassword">Old Password</string>
+    <string name="userNewPassword">New Password</string>
+    <string name="search_your_location">Search Your Location</string>
+    <string name="hospital_name">Hospital Name</string>
+    <string name="nearest_land_mark">Nearest Landmark</string>
+    <string name="confirm_non_panel_hospital_cordinates">Confirm Non Panel Hospital Coordinates</string>
+    <string name="search">Search</string>
+    <string name="item_details">Item Details</string>
+    <string name="name_heading">Name</string>
+    <string name="relation">Relation</string>
+    <string name="dob">DOB</string>
+    <string name="panel_hospital">Panel Hospitals</string>
+    <string name="detail">Details</string>
+    <string name="customer">Customer</string>
+    <string name="supplier">Supplier</string>
+    <string name="address">Address</string>
+    <string name="non_panel_hospital">Non Panel Hospital</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="loading_file">Loading For Audio File....</string>
+    <string name="alert">Alert</string>
+    <string name="something_went_wrong_in_audio_file">Something went wrong in audio file...</string>
+    <string name="please_wait_data_is_loading">Please wait data is loading!!!</string>
+    <string name="loading">Loading...</string>
+    <string name="please_select_captcha">Please select captcha image</string>
+    <string name="no_captcha">No captcha found. Please refresh!</string>
+    <string name="something_bad_happen">Something bad happen</string>
+    <string name="ws_error_timeout">Server is taking too long to respond. Please try again.</string>
+    <string name="ws_error_general">Error occurred. Please try again.</string>
+    <string name="ws_error_general1">Server not responding.Check setting and try again later.</string>
+    <string name="server_error">Server Error</string>
+    <string name="token_expired">Token Expired.</string>
+    <string name="no_application_found">No application found</string>
+    <string name="hospital_tracking">Hospital Tracking</string>
+    <string name="discount_centres">Discount Centers</string>
+    <string name="next">Next</string>
+    <string name="new_button">New</string>
+    <string name="please_select_item">Please Select Policy Item Detail!</string>
+    <string name="please_select_hospital">Please Confirm Hospital Coordinates!</string>
+    <string name="select_hospital">Please select hospital !</string>
+    <string name="confirmationNonPanel">Please confirm co-ordinates first !</string>
+    <string name="turn_on_location">Turn On Location</string>
+    <string name="please_turn_on_location">Please turn on location in order to use this feature!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout_confirmation">Are you sure you want to logout?</string>
+    <string name="logout">Logout</string>
+    <string name="get_gps">Are you sure you want to select current location?</string>
+    <string name="location_not_found">Location not found yet. Please wait to get user current position!</string>
+    <string name="select_options">Select Options</string>
+    <string name="preview">Preview</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="sure_delete">Are you sure you want to delete this audio file?</string>
+    <string name="audio_delete_success">Audio file deleted successfully</string>
+    <string name="grant_permission_first">Grant permission first !</string>
+    <string name="complain_sent_success">Complain sent successfully</string>
+    <string name="comments">Comments</string>
+    <string name="saveComment">Save Comments</string>
+    <string name="comments_saved_success">Comments saved successfully</string>
+    <string name="previously_saved_comment">Previously Saved Comment !</string>
+    <string name="get_quote">Get Quote</string>
+    <string name="continue_text">Continue</string>
+    <string name="decline_text">Decline</string>
+    <string name="mandatory">%s is required.</string>
+    <string name="save">Save</string>
+    <string name="benefits">Benefits</string>
+    <string name="policy_insurance">Policy Insurance</string>
+    <string name="save_pdf">&#xf1c1; Save PDF</string>
+    <string name="quit">Quit</string>
+
+
+
+    <string name="coverage">Coverage</string>
+
+    <!--Font Awsome Codes-->
+    <string name="calendar">&#xf073;</string>
+    <string name="dropdown">&#xf0d7;</string>
+    <string name="edit">&#xf044;</string>
+    <string name="pdf_file">&#xf1c1;</string>
+
+
+
+
+
+
+
+    <string-array name="busines_nature">
+        <item>Manufacturer</item>
+        <item>Whole seller</item>
+        <item>Retailer</item>
+    </string-array>
+
+    <string-array name="cities">
+        <item>Karachi</item>
+        <item>Lahore</item>
+        <item>Islamabad</item>
+    </string-array>
+
+
+
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_search">Search</string>
+
+    <string name="nav_stateless">Stateless Section</string>
+    <string name="nav_example1">Section with Header</string>
+    <string name="nav_example2">Section with Header and Footer</string>
+    <string name="nav_example4">Expandable Section</string>
+    <string name="nav_example5">Grid Section with Header</string>
+    <string name="nav_example6">Expandable Grid Section</string>
+
+    <string name="nav_example7">SearchView with Sections</string>
+    <string name="nav_stateful">Stateful Section</string>
+    <string name="nav_example3">Section with Header and Footer</string>
+    <string name="nav_example8">Animations</string>
+
+    <string name="world_topic">World</string>
+    <string name="biz_topic">Business</string>
+    <string name="tech_topic">Technology</string>
+    <string name="sports_topic">Sports</string>
+
+    <string name="top_rated_movies_topic">Top Rated Movies</string>
+    <string name="most_popular_movies_topic">Most Popular Movies</string>
+
+    <string name="group_title">Group #%1$s</string>
+
+    <string name="more">MORE</string>
+    <string name="see_more">See more..</string>
+    <string name="failed_load">Failed to load, tap to try again.</string>
+
+    <string name="add">ADD</string>
+    <string name="clear">CLEAR</string>
+    <string name="add_group">ADD GROUP</string>
+    <string name="navigation_section">navigation section</string>
+    <string name="profile">Profile</string>
+    <string name="my_bizlinks">My Links</string>
+    <string name="my_sent">Sent</string>
+    <string name="my_request">Requests</string>
+
+</resources>

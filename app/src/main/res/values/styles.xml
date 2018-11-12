@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Splash Screen Style -->
+    <style name="splash_footer_logo_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/centegy_logo</item>
+        <item name="android:layout_marginEnd">@dimen/x10</item>
+    </style>
+
+    <style name="splash_footer_text_color">
+        <item name="android:textColor">@color/footer_text_color</item>
+        <item name="android:textSize">@dimen/s12</item>
+    </style>
+
+    <style name="splash_footer_centegy_text">
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="round_button_skyblue_color_style">
+        <item name="android:background">@drawable/rounded_button_app_color</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+
+    <style name="header_text_color_size">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/s13</item>
+    </style>
+
+    <style name="primaryColorCheckBox">
+        <item name="colorAccent">@color/appThemeColor</item>
+    </style>
+
+    <style name="secondaryColorCheckBox">
+        <item name="colorAccent">@color/cb_nonpanel_color</item>
+    </style>
+
+
+    <!--<style name="without_round_button_skyblue_color_style">-->
+    <!--<item name="android:background">@drawable/without_rounded_button_app_color</item>-->
+    <!--<item name="android:textColor">@color/white</item>-->
+    <!--</style>-->
+
+    <!-- Splash Screen Style -->
+
+
+</resources>

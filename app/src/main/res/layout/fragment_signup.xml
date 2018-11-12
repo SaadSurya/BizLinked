@@ -1,0 +1,61 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x20"
+        android:text="@string/registration"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s18"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/et_user_cname"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="@string/c_name"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/et_user_lname"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:drawableStart="@drawable/ic_user"
+        android:hint="@string/l_name"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/et_user_password"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:drawableStart="@drawable/ic_key"
+        android:inputType="textPassword"
+        android:imeOptions="actionDone"
+        android:hint="@string/create_password"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:id="@+id/et_user_category"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:drawableStart="@drawable/ic_email"
+        android:hint="@string/category"
+        android:visibility="invisible"/>
+
+
+
+
+
+    <Button
+        android:id="@+id/btn_create_account"
+        style="?attr/roundSkyBlueButtonColorStyle"
+        android:text="@string/create_new_account"
+        android:visibility="invisible"/>
+
+
+</LinearLayout>

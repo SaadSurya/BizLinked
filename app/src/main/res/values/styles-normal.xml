@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Normal Style Style Start-->
+
+    <!-- Splash Background Root Element Style-->
+    <style name="splash_bg_style">
+        <item name="android:background">@color/appPrimaryColor</item>
+    </style>
+
+    <!-- Splash Image Element Style-->
+    <style name="splash_logo_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/s32</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <!-- Splash QR Logo Element Style-->
+    <style name="splash_qr_icon_style" parent="round_button_skyblue_color_style">
+        <item name="android:drawableTop">@drawable/qr_splash_logo</item>
+        <item name="android:padding">@dimen/x15</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:layout_margin">@dimen/x15</item>
+        <item name="android:text">@string/card_login</item>
+    </style>
+
+    <!-- Round Button Element Style-->
+    <style name="round_button_style" parent="round_button_skyblue_color_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/x8</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:layout_marginStart">@dimen/x30</item>
+        <item name="android:layout_marginEnd">@dimen/x30</item>
+        <item name="android:layout_marginTop">@dimen/x10</item>
+        <item name="android:layout_marginBottom">@dimen/x10</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+
+    <!-- Without Round Button Element Style-->
+    <style name="without_round_button_style" parent="round_button_style">
+        <item name="android:background">@drawable/without_rounded_button_app_color</item>
+        <item name="android:padding">@dimen/x7</item>
+    </style>
+
+    <!-- Button style that changes color on click-->
+    <style name="round_button_hovered" parent="round_button_style">
+        <item name="android:background">@drawable/rounded_button_app_color_hovered</item>
+        <item name="android:textColor">@color/button_color_selector</item>
+        <item name="android:paddingTop">@dimen/x5</item>
+        <item name="android:paddingBottom">@dimen/x5</item>
+        <item name="android:paddingRight">@dimen/x8</item>
+        <item name="android:paddingLeft">@dimen/x8</item>
+    </style>
+
+
+    <!-- Round Edittext Element Style -->
+    <!--<item name="android:drawableStart">@drawable/ic_tablet</item>-->
+    <style name="round_edittext_style" parent="round_button_style">
+
+        <item name="android:padding">@dimen/x8</item>
+        <item name="android:layout_marginTop">@dimen/x5</item>
+        <item name="android:layout_marginBottom">@dimen/x5</item>
+        <item name="android:drawablePadding">@dimen/x10</item>
+
+        <item name="android:background">@drawable/rounded_edittextview_background_drawable</item>
+        <item name="android:textColorHint">@color/edittextview_normal_theme_text_color</item>
+        <item name="android:textColor">@color/edittextview_normal_theme_text_color</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionNext</item>
+
+    </style>
+
+    <!-- TitleBar Element Style -->
+    <style name="titlebar_bg_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x32</item>
+        <item name="android:background">@color/titlebar_normal_bg_color</item>
+    </style>
+
+    <style name="titlebar_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:src">@drawable/logo_titlebar</item>
+    </style>
+
+    <style name="titlebar_dots_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/ic_more_vert</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingStart">@dimen/x10</item>
+        <item name="android:paddingEnd">@dimen/x10</item>
+    </style>
+    <!-- TitleBar Element Style -->
+
+
+    <!-- Home Background Color Style -->
+    <style name="home_bg_color_style">
+        <item name="android:background">@color/home_main_container_bg_color</item>
+    </style>
+
+
+    <!-- Home Circle Item Image Style -->
+    <style name="home_circle_item_image_style">
+        <item name="android:layout_width">@dimen/x75</item>
+        <item name="android:layout_height">@dimen/x75</item>
+        <item name="android:padding">@dimen/x15</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:background">@drawable/normal_home_circle_selector</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+
+    <!-- Home Circle Item Image Style -->
+    <style name="home_circle_item_image_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/x5</item>
+        <item name="android:drawablePadding">@dimen/x5</item>
+        <item name="android:minLines">2</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:lines">2</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/home_normal_circle_text_color</item>
+        <item name="android:layout_gravity">bottom|center</item>
+
+    </style>
+
+
+    <!-- Home Bottom Tab Text Style -->
+    <style name="home_normal_bottom_tab_bg_color_style">
+        <item name="android:background">@color/home_normal_tab_bottom_bg_color</item>
+    </style>
+
+
+    <style name="home_normal_bottom_tab_text_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">0.25</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/s14</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/x10</item>
+        <item name="android:drawablePadding">@dimen/x5</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textColor">@drawable/bottom_bar_text_color_selector</item>
+        <item name="android:drawableTop">@drawable/ic_alert</item>
+    </style>
+    <!-- Home Bottom Tab Text Style -->
+
+
+    <!-- All Page Card Header Style-->
+    <style name="all_page_card_header_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/appThemeColor</item>
+        <item name="android:drawablePadding">@dimen/x5</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/x10</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/s14</item>
+    </style>
+    <!-- All Page Card Header Style-->
+
+
+    <!-- Support Center Info Page Style-->
+    <style name="support_center_info_number_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:drawablePadding">@dimen/x10</item>
+        <item name="android:padding">@dimen/x5</item>
+        <item name="android:textColor">?attr/appThemeColor</item>
+        <item name="android:textSize">@dimen/s18</item>
+    </style>
+
+    <style name="support_center_info_number_header_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColor">@color/customer_support_center_number_text_color</item>
+        <item name="android:textSize">@dimen/s14</item>
+    </style>
+
+
+    <style name="support_center_info_seperater_line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x1</item>
+        <item name="android:layout_marginBottom">@dimen/x15</item>
+        <item name="android:layout_marginTop">@dimen/x15</item>
+        <item name="android:background">@color/customer_support_center_seperater_color</item>
+    </style>
+
+
+    <style name="support_center_info_bg_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:background">@drawable/shadow_image_new_small</item>
+        <item name="android:layout_marginBottom">@dimen/x10</item>
+    </style>
+
+
+    <style name="support_center_info_address_text_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/customer_support_center_number_text_color</item>
+        <item name="android:textSize">@dimen/s12</item>
+    </style>
+    <!-- Support Center Info Page Style-->
+
+
+    <!-- Document Download Page Style-->
+    <style name="document_download_image_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@drawable/ic_pdf</item>
+    </style>
+
+    <style name="document_download_file_name_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/document_download_text_color</item>
+        <item name="android:textSize">@dimen/s14</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <style name="document_download_file_size_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/document_download_file_mb_text_color</item>
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingTop">@dimen/x3</item>
+    </style>
+    <!-- Document Download Page Style-->
+
+
+    <!-- Document Download Page Style-->
+
+    <style name="customer_complain_edittext_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginBottom">@dimen/x10</item>
+        <item name="android:background">@drawable/complain_edittext_style</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/s14</item>
+        <item name="android:padding">@dimen/x10</item>
+        <item name="android:textColor">@color/customer_support_center_number_text_color</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:overScrollMode">ifContentScrolls</item>
+    </style>
+
+
+    <style name="customer_complain_button_style" parent="without_round_button_style">
+
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:layout_margin">@dimen/x2</item>
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:padding">@dimen/x3</item>
+    </style>
+    <!-- Document Download Page Style-->
+
+
+    <!--Document Request Page Style -->
+    <style name="document_request_table_info_text_style">
+        <item name="android:textColor">@color/edittextview_normal_theme_text_color</item>
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!--Document Request Page Style -->
+
+    <!--Policy Details Grid Label -->
+
+    <style name="table_info_text_style_label">
+        <item name="android:textColor">@color/edittextview_normal_theme_text_color</item>
+        <item name="android:textSize">@dimen/s10</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="table_info_text_style_value">
+        <item name="android:textColor">@color/edittextview_normal_theme_text_color</item>
+        <item name="android:textSize">@dimen/s10</item>
+    </style>
+
+
+    <!--Policy Details Grid Label -->
+
+
+    <!-- Signature Header Style -->
+    <style name="signature_page_card_header_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/signature_header_bg_color</item>
+        <item name="android:drawablePadding">@dimen/x5</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/x10</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:textColor">@color/signature_header_color</item>
+        <item name="android:textSize">@dimen/s12</item>
+    </style>
+    <!-- Signature Header Style -->
+
+    <style name="search_btn_attribute_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/x1</item>
+        <item name="android:layout_marginStart">@dimen/x1</item>
+        <item name="android:background">@color/tracking_search_button_color</item>
+        <item name="android:button">@null</item>
+        <item name="android:padding">@dimen/x3</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/s12</item>
+    </style>
+
+    <style name="background_edit_button">
+        <item name="android:background">@drawable/back_edit_quote_button</item>
+    </style>
+
+    <!-- Normal Style Style End-->
+
+
+</resources>

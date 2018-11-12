@@ -1,0 +1,169 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    style="?attr/supportCenterInfoBgStyle"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/x0"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="?attr/supportCenterInfoBgStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x0"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvHeaderView"
+            style="?attr/allPageCardHeaderStyle"
+            android:drawableStart="@drawable/ic_camera"
+            android:text="@string/capture_image"
+            android:visibility="invisible" />
+
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/glImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/x5"
+            app:columnCount="3"
+            app:rowCount="2"
+
+            >
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage1"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage2"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage3"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage4"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage5"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flCaptureImage6"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                app:layout_columnWeight="1">
+
+                <include layout="@layout/capture_image_layout" />
+
+            </FrameLayout>
+
+
+        </android.support.v7.widget.GridLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/x0"
+        android:layout_weight="1"
+        android:background="@drawable/shadow_image"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="?attr/signaturePageCardHeaderStyle"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvSignatureHeadText"
+                style="?attr/signaturePageCardHeaderStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/ic_signature"
+
+                android:padding="@dimen/x0"
+                android:text="@string/special_note"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ivRefreshIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/x20"
+                android:src="@drawable/ic_refresh"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/ivSaveIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_save"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/flSignatureView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/x3"
+            android:background="@drawable/editetxt_border_drawable">
+
+            <com.application.lumaque.bizlinked.customViews.SignatureView
+                xmlns:sign="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/signature_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                sign:enableSignature="true"
+                sign:penColor="@color/black"
+                sign:penSize="@dimen/x2"
+                android:layout_margin="@dimen/x2"/>
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

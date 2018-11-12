@@ -1,0 +1,7 @@
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_bar_navigation_button_bg"
+    android:textColor="@color/white"/>

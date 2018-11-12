@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/allPageCardHeaderStyle"
+    android:layout_marginTop="@dimen/x2"
+    android:orientation="horizontal"
+    android:id="@+id/container_view"
+    >
+
+    <!--<TextView-->
+
+        <!--style="@style/header_text_color_size"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+
+        <!--android:id="@+id/tvHead1"-->
+        <!--android:text="@string/policy_no" />-->
+
+    <!--<TextView-->
+
+        <!--style="@style/header_text_color_size"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+
+        <!--android:id="@+id/tvHead2"-->
+        <!--android:text="@string/intimation_no" />-->
+
+    <!--<TextView-->
+        <!--style="@style/header_text_color_size"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+
+        <!--android:id="@+id/tvHead3"-->
+        <!--android:text="@string/claim_no" />-->
+
+
+    <!--<TextView-->
+        <!--style="@style/header_text_color_size"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+
+        <!--android:id="@+id/tvHead4"-->
+        <!--android:text="@string/product" />-->
+
+
+
+
+</LinearLayout>

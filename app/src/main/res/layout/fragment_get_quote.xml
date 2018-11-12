@@ -1,0 +1,130 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/supportCenterInfoBgStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/get_quote" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/currency_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/customer_support_center_seperater_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/divider_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x0.5"
+                android:background="@color/customer_support_center_seperater_color" />
+
+
+            <RelativeLayout
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider_top"
+                android:background="@color/support_center_info_bg"
+                android:paddingBottom="@dimen/x5"
+                android:paddingTop="@dimen/x5">
+
+
+                <TextView
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x10"
+                    android:text="@string/benefits" />
+
+                <TextView
+                    android:id="@+id/currency"
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/x10"
+                    android:text="$" />
+
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/divider_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x0.5"
+                android:layout_below="@+id/heading"
+                android:background="@color/customer_support_center_seperater_color" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/benefits_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/bottom_buttons"
+                android:layout_below="@+id/divider_bottom" />
+
+            <LinearLayout
+                android:id="@+id/bottom_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_policy_insurance"
+                    style="?attr/roundHoveredButtonColorStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_marginEnd="@dimen/x5"
+                    android:layout_marginStart="@dimen/x10"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_weight="0.33"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/policy_insurance" />
+
+                <Button
+                    android:id="@+id/btn_save_pdf"
+                    style="?attr/roundHoveredButtonColorStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_marginEnd="@dimen/x5"
+                    android:layout_marginStart="@dimen/x5"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_weight="0.33"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/save_pdf" />
+
+                <Button
+                    android:id="@+id/btn_quit"
+                    style="?attr/roundHoveredButtonColorStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_marginEnd="@dimen/x10"
+                    android:layout_marginStart="@dimen/x5"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_weight="0.33"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/quit" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

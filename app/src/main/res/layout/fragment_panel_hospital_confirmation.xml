@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/supportCenterInfoBgStyle"
+    android:layout_margin="@dimen/x0"
+    android:background="@null"
+    android:orientation="vertical"
+    android:padding="@dimen/x0">
+
+    <LinearLayout
+        style="?attr/allPageCardHeaderStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x0"
+            android:text="@string/search_your_location" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/et_searchBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/x5"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/search_here"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="@dimen/x4"
+                android:textColor="@color/home_normal_bottom_tab_text_color"
+                android:textSize="@dimen/s12" />
+
+            <ImageView
+                android:id="@+id/iv_SearchBtn"
+                style="?attr/searchBtnAttrbuteStyle"
+                android:src="@drawable/ic_search"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/claimMapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

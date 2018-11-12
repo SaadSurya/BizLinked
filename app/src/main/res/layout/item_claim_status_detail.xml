@@ -1,0 +1,212 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow_small"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+
+    <TextView
+        android:id="@+id/tvClaimStatusIcon"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.20"
+        android:gravity="center"
+        android:paddingBottom="@dimen/x7"
+        android:paddingEnd="@dimen/x5"
+        android:paddingStart="@dimen/x5"
+        android:paddingTop="@dimen/x7"
+
+
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/s10"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.55"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/x5">
+
+        <TextView
+            android:id="@+id/tvClaimStatusDetailTitle"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x2"
+                android:layout_marginTop="@dimen/x2"
+                android:text="@string/time_duration_within"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:id="@+id/ivClaimStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/x10"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x2"
+                android:layout_marginEnd="@dimen/x5"
+                android:layout_marginTop="@dimen/x2"
+                android:drawableEnd="@drawable/claim_status_completed_circle"
+                android:drawablePadding="@dimen/x5"
+                android:text="@string/five_days"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal" />
+
+
+            <View
+                style="?attr/supportCenterInfoSeperaterLineStyle"
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/x10"
+                android:layout_margin="@dimen/x0" />
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x2"
+                android:layout_marginEnd="@dimen/x5"
+                android:layout_marginStart="@dimen/x5"
+                android:layout_marginTop="@dimen/x2"
+                android:drawableEnd="@drawable/claim_status_pending_circle"
+                android:drawablePadding="@dimen/x5"
+                android:text="@string/seven_days"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal" />
+
+
+            <View
+                style="?attr/supportCenterInfoSeperaterLineStyle"
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/x10"
+                android:layout_margin="@dimen/x0" />
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/x2"
+                android:layout_marginEnd="@dimen/x5"
+                android:layout_marginStart="@dimen/x5"
+                android:layout_marginTop="@dimen/x2"
+                android:drawableEnd="@drawable/claim_status_not_intimated_circle"
+                android:drawablePadding="@dimen/x5"
+                android:lines="1"
+                android:text="@string/seven_days_plus"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/x5"
+        android:background="@drawable/vertical_line">
+
+
+        <TextView
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x2"
+            android:layout_marginTop="@dimen/x2"
+            android:lines="1"
+            android:text="@string/contact_person"
+            android:textSize="@dimen/s10" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textSize="@dimen/s10" />
+
+            <TextView
+                android:id="@+id/ivClaimStatusPersonName"
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:paddingStart="@dimen/x3"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cell_no"
+                android:textSize="@dimen/s10" />
+
+            <TextView
+                android:id="@+id/ivClaimStatusPersonContact"
+                style="?attr/documentRequestTableInfoTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:paddingStart="@dimen/x3"
+                android:textSize="@dimen/s10"
+                android:textStyle="normal"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/x10"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/rb_healthCoverage"
+            android:theme="@style/primaryColorCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/x5"
+            android:gravity="center"
+            android:checked="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_healthDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/s14"
+                android:maxLines="3"
+                android:textColor="@color/document_download_text_color"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_healthDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:textColor="@color/document_download_file_mb_text_color"
+                android:textSize="@dimen/s9"
+                android:visibility="gone"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="@color/customer_support_center_seperater_color" />
+
+</LinearLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Normal Theme -->
+    <style name="NormalTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/appPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/appPrimaryColor</item>
+        <item name="colorAccent">@color/appPrimaryColor</item>
+        <item name="appThemeColor">@color/appThemeColor</item>
+
+
+        <!-- Splash Page Style-->
+        <item name="splashBackgroundImageStyle">@style/splash_bg_style</item>
+        <item name="splashLogoImageStyle">@style/splash_logo_image_style</item>
+        <item name="splashQRIconStyle">@style/splash_qr_icon_style</item>
+        <item name="roundPrimaryColorStyle">@style/round_button_skyblue_color_style</item>
+        <item name="roundSkyBlueButtonColorStyle">@style/round_button_style</item>
+        <item name="roundEditTextNormalColorStyle">@style/round_edittext_style</item>
+        <!-- Splash Page Style-->
+
+        <!-- Titlebar Color Style-->
+        <item name="titlebarNormalBackgroundStyle">@style/titlebar_bg_style</item>
+        <item name="titlebarNormalImageStyle">@style/titlebar_image_style</item>
+        <item name="titlebarNormalDotsStyle">@style/titlebar_dots_style</item>
+        <!-- Titlebar Color Style-->
+
+        <!-- Home Page Style-->
+        <item name="homeNormalBgColorStyle">@style/home_bg_color_style</item>
+        <item name="homeNormalCircleImageStyle">@style/home_circle_item_image_style</item>
+        <item name="homeNormalCircleImageTextStyle">@style/home_circle_item_image_text_style</item>
+
+        <item name="homeNormalBottomTabBgColorStyle">@style/home_normal_bottom_tab_bg_color_style
+        </item>
+        <item name="homeNormalBottomTabTextStyle">@style/home_normal_bottom_tab_text_style</item>
+
+        <!-- Home Page Style-->
+
+        <!-- Customer Support Page Style-->
+        <item name="withoutRoundSkyBlueButtonColorStyle">@style/without_round_button_style</item>
+        <!-- Customer Support Page Style-->
+
+
+        <!-- All Page Card Header Style-->
+        <item name="allPageCardHeaderStyle">@style/all_page_card_header_style</item>
+        <!-- All Page Card Header Style-->
+
+        <!-- Signature Header Style-->
+        <item name="signaturePageCardHeaderStyle">@style/signature_page_card_header_style</item>
+        <!-- Signature Header Style-->
+
+
+        <!-- Support Center Info Page Style-->
+        <item name="supportCenterInfoBgStyle">@style/support_center_info_bg_style</item>
+        <item name="supportCenterInfoNumberStyle">@style/support_center_info_number_style</item>
+        <item name="supportCenterInfoNumberHeaderStyle">
+            @style/support_center_info_number_header_style
+        </item>
+        <item name="supportCenterInfoSeperaterLineStyle">
+            @style/support_center_info_seperater_line_style
+        </item>
+        <item name="supportCenterInfoAddressTextStyle">
+            @style/support_center_info_address_text_style
+        </item>
+        <!-- Support Center Info Page Style-->
+
+
+        <!-- Document Download Page Style-->
+        <item name="documentDownloadImageStyle">@style/document_download_image_style</item>
+        <item name="documentDownloadFileNameStyle">@style/document_download_file_name_style</item>
+        <item name="documentDownloadFileSizeStyle">@style/document_download_file_size_style</item>
+        <!-- Document Download Page Style-->
+
+
+        <!-- Customer Complain Page Style-->
+        <item name="customerComplainEdiTextStyle">@style/customer_complain_edittext_style</item>
+        <item name="customerComplainButtonStyle">@style/customer_complain_button_style</item>
+
+        <!-- Customer Complain Page Style-->
+
+        <!--Document Request Page Style -->
+        <item name="documentRequestTableInfoTextStyle">
+            @style/document_request_table_info_text_style
+        </item>
+        <!-- Document Request Page Style -->
+
+        <!--Quote Edit Item -->
+        <item name="quoteEditItem">
+            @style/background_edit_button
+        </item>
+        <!-- Quote Edit Item -->
+
+
+        <!--Table info text style label -->
+        <item name="tableInfoTextStyleLabel">@style/table_info_text_style_label</item>
+        <!-- Table info text style label -->
+
+        <!--Table info text style label -->
+        <item name="tableInfoTextStyleValue">@style/table_info_text_style_value</item>
+        <!-- Table info text style label -->
+
+        <!-- Map Search Button Style -->
+        <item name="searchBtnAttrbuteStyle">@style/search_btn_attribute_style</item>
+        <!-- Map Search Button Style -->
+
+        <!--Hovered button style for Quotation Fragments-->
+        <item name="roundHoveredButtonColorStyle">@style/round_button_hovered</item>
+        <!--Hovered button style for Quotation Fragments-->
+
+    </style>
+</resources>

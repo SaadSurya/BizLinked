@@ -1,0 +1,151 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.application.lumaque.bizlinked"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
+        }
+
+        debug {
+            multiDexEnabled true
+        }
+    }
+
+}
+
+
+dependencies {
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Google play services for Location
+    implementation "com.google.android.gms:play-services-location:$playServicesLibVersion"
+
+    //For Places
+    implementation "com.google.android.gms:play-services-places:$playServicesLibVersion"
+
+    //For Google Map
+    implementation "com.google.android.gms:play-services-maps:$playServicesMapLibVersion"
+
+    //App Compat Support V7
+    implementation supportDependencies.appCompat
+
+    //App Compat Support V4
+    implementation supportDependencies.supportV4
+
+    //Constraint Layout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    //Junit
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.google.firebase:firebase-database:15.0.1'
+    testImplementation "junit:junit:$junitVersion"
+
+    //Test Runner
+    androidTestImplementation "com.android.support.test:runner:$runnerVersion"
+
+    //Espresso
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+
+    //For Card View and Tab Layout
+//    implementation supportDependencies.cardView
+    implementation supportDependencies.design
+
+    //For Grid Layout
+    implementation supportDependencies.gridLayout
+
+    //For RecyclerView
+    implementation supportDependencies.recyclerView
+
+    //For ripple effect
+    implementation "com.github.traex.rippleeffect:library:$rippleEffectButttonLibVersion"
+
+    //Android Animation Liberary
+    implementation animationLibDependencies.easingAnimationLiberary
+    implementation animationLibDependencies.androidAnimationLiberary
+
+    //Butterknife
+    implementation "com.jakewharton:butterknife:$butterKnifeLibVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeLibVersion"
+
+    //Saripar
+    implementation "com.mobsandgeeks:android-saripaar:$saripaarValidationLibVersion"
+
+    //For Glide
+    implementation "com.github.bumptech.glide:glide:$glideLibVersion"
+
+    //For Custom Progress Bar
+    implementation "com.github.ybq:Android-SpinKit:$progressBarLibVersion"
+
+    //Toasty
+    implementation "com.github.GrenderG:Toasty:$toastyLibVersion"
+
+    //Signature View
+//    implementation 'com.kyanogen.signatureview:signature-view:1.2'
+
+    //Permission Liberary
+    implementation "gun0912.ted:tedpermission:$permissionTEDLibVersion"
+
+    //For Image File Select
+    implementation "com.droidninja:filepicker:$filePickerLibVersion"
+    implementation "com.github.bumptech.glide:glide:$glideLibVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideLibVersion"
+
+    //For Image Compression
+    implementation "id.zelory:compressor:$imageCompressionLibVersion"
+
+    //Retrofit
+   /* implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup:otto:1.3.8'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'*/
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //Image Popup
+    implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.1'
+
+    //Video Compression
+    implementation 'com.yovenny.VideoCompress:videocompress:1.0.0'
+
+    //Record Button Liberary
+    implementation 'com.github.emrekose26:RecordButton:1.2.4'
+
+    //Progress Bar
+    implementation 'com.github.ybq:Android-SpinKit:1.1.0'
+
+    //Volley Class
+    implementation 'com.android.volley:volley:1.0.0'
+
+    //Recycler View Animater
+    implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
+
+   // implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:1.2.0'
+
+
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+//view loader animator
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+}
+
+apply plugin: 'com.google.gms.google-services'
+
+

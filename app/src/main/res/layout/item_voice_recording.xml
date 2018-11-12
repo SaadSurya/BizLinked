@@ -1,0 +1,30 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/x5"
+    android:paddingEnd="@dimen/x10"
+    android:paddingStart="@dimen/x10"
+    android:paddingTop="@dimen/x5"
+    android:layout_margin="@dimen/x1">
+
+    <TextView
+        android:id="@+id/tvRecordingTitle"
+        style="?attr/documentRequestTableInfoTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Rec-000-230PM"
+
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/tvRecordingTime"
+        style="?attr/documentRequestTableInfoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2:01"
+        android:textStyle="normal" />
+
+</LinearLayout>

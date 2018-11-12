@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/supportCenterInfoBgStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:elevation="@dimen/x10"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTrackByText"
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/tracking_by" />
+
+        <LinearLayout
+            style="?attr/allPageCardHeaderStyle"
+            android:layout_marginTop="@dimen/x2"
+            android:orientation="horizontal">
+
+            <AutoCompleteTextView
+                android:id="@+id/etSearchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/search_here"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:padding="@dimen/x3"
+                android:textColor="@color/home_normal_bottom_tab_text_color"
+                android:textSize="@dimen/s12" />
+
+            <ImageView
+                android:id="@+id/ivSearchBtn"
+                style="?attr/searchBtnAttrbuteStyle"
+
+                android:src="@drawable/ic_search"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvShowNearest"
+                style="?attr/searchBtnAttrbuteStyle"
+                android:visibility="gone"
+                android:text="@string/nearest_3"
+                />
+
+
+            <ImageView
+                android:id="@+id/ivTrackingMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/x1"
+                android:layout_marginStart="@dimen/x1"
+
+
+                android:src="@drawable/ic_menu" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/mapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <!--<fragment-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--class="com.google.android.gms.maps.SupportMapFragment" />-->
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

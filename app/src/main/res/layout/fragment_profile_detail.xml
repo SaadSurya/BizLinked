@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+
+    style="?attr/supportCenterInfoBgStyle">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/supportCenterInfoBgStyle"
+    android:layout_margin="@dimen/x0"
+    android:padding="@dimen/x0"
+    android:background="@null">
+
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="?attr/supportCenterInfoBgStyle"
+        android:layout_margin="@dimen/x0"
+        android:padding="@dimen/x0"
+        android:background="@null"></FrameLayout>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/flCaptureImage"
+            android:layout_width="@dimen/x100"
+
+           android:layout_height="@dimen/x100"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x32"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+
+            <include layout="@layout/capture_image_layout" />
+
+        </FrameLayout>
+
+
+
+
+        <EditText
+            android:id="@+id/et_user_name"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/x8"
+
+            android:layout_marginEnd="@dimen/x16"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+
+
+            android:hint="@string/user_name_here"
+            app:layout_constraintBottom_toTopOf="@+id/et_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toEndOf="@+id/flCaptureImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Spinner
+            android:id="@+id/sp_busines_type"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/flCaptureImage"></Spinner>
+
+        <EditText
+            android:id="@+id/et_phone"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+android:inputType="number"
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/user_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_busines_type" />
+
+
+
+ <EditText
+            android:id="@+id/et_phone2"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+     android:inputType="number"
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/user_phone2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_phone" />
+
+ <EditText
+            android:id="@+id/et_email"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/email_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_phone2" />
+
+
+ <EditText
+            android:id="@+id/et_website"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+     android:imeOptions="actionDone"
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/web_site"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_email" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="?attr/roundSkyBlueButtonColorStyle"
+
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/x16"
+
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_website"
+            app:layout_constraintVertical_bias="0.963" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</FrameLayout>
+</ScrollView>

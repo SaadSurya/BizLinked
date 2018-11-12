@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/supportCenterInfoBgStyle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:elevation="@dimen/x10"
+        android:orientation="vertical">
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/comments" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/x15"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/etCustomerComplain"
+                style="?attr/customerComplainEdiTextStyle" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnClearScreen"
+                    style="?attr/customerComplainButtonStyle"
+                    android:padding="@dimen/x7"
+                    android:text="@string/clear_screen" />
+
+                <Button
+                    android:id="@+id/btnSaveComments"
+                    style="?attr/customerComplainButtonStyle"
+                    android:padding="@dimen/x7"
+                    android:text="@string/saveComment" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

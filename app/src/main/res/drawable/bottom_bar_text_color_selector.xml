@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:color="@color/appThemeColor" android:state_pressed="true" /><!-- pressed -->
+    <item android:color="@color/appThemeColor" android:state_activated="true" /><!-- activated -->
+    <item android:color="@color/appThemeColor" android:state_selected="true" /><!-- selected -->
+    <item android:color="@color/appThemeColor" android:state_focused="true" /><!-- focused -->
+
+    <item android:color="@color/home_normal_bottom_tab_text_color" /><!-- default -->
+
+
+
+</selector>

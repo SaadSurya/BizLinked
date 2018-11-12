@@ -1,0 +1,42 @@
+<LinearLayout
+    android:id="@+id/llBottomBarLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:layout_gravity="bottom"
+    style="?attr/homeNormalBottomTabBgColorStyle">
+
+    <TextView
+        android:id="@+id/tvAlert"
+        style="?attr/homeNormalBottomTabTextStyle"
+
+        android:drawableTop="@drawable/ic_alert"
+        android:text="@string/alerts"/>
+
+
+
+    <TextView
+        android:id="@+id/tvDashboard"
+        style="?attr/homeNormalBottomTabTextStyle"
+
+        android:drawableTop="@drawable/ic_dashboard"
+        android:text="@string/dashboard" />
+
+    <TextView
+        android:id="@+id/tvLiveChat"
+        style="?attr/homeNormalBottomTabTextStyle"
+
+        android:drawableTop="@drawable/ic_live_chat"
+        android:text="@string/live_chat"/>
+
+    <TextView
+        android:id="@+id/tvFavourites"
+        style="?attr/homeNormalBottomTabTextStyle"
+
+        android:drawableTop="@drawable/ic_favourite"
+        android:text="@string/favourites"/>
+
+
+</LinearLayout>

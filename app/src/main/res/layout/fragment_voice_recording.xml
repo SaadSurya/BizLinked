@@ -1,0 +1,176 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="?attr/supportCenterInfoBgStyle"
+    android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:orientation="vertical">
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:drawableStart="@drawable/ic_mic"
+            android:text="@string/voice_recording" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/x15">
+
+
+            <!-- Recording Table List -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x240"
+                android:background="@drawable/recording_list_bg_drawable"
+                android:orientation="vertical">
+
+
+
+                <!-- Table For Document  -->
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/swipeRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvRecording"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"/>
+
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+
+            </LinearLayout>
+
+
+            <!-- Audio Play View -->
+            <LinearLayout
+                android:id="@+id/llAudioPlayerControllerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                android:visibility="invisible">
+
+                <!-- Recording Table List -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x10"
+                    android:orientation="horizontal"
+                    android:animateLayoutChanges="true">
+
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/x5"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/record_button_bg_drawable"
+                            android:padding="@dimen/x12"
+
+                            android:id="@+id/ivPauseButton"
+                            android:src="@drawable/ic_pause"/>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/record_button_bg_drawable"
+                            android:padding="@dimen/x12"
+
+                            android:id="@+id/ivPlayButton"
+                            android:src="@drawable/ic_play" />
+
+                    </FrameLayout>
+
+
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/record_button_bg_drawable"
+                        android:padding="@dimen/x12"
+
+                        android:id="@+id/ivStopButton"
+                        android:src="@drawable/ic_stop" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x10"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvRecordingStartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?attr/documentRequestTableInfoTextStyle"
+                        android:text="00:00"/>
+
+                    <SeekBar
+                        android:id="@+id/seekbarRecording"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="@dimen/x2"
+                        android:progressDrawable="@drawable/recording_seekbar_drawable"
+                        android:thumb="@null"/>
+
+                    <TextView
+                        android:id="@+id/tvRecordingEndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?attr/documentRequestTableInfoTextStyle"
+                        android:text="00:00"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <com.emrekose.recordbutton.RecordButton
+                android:id="@+id/recordBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:buttonColor="?attr/appThemeColor"
+                app:buttonGap="5dp"
+                app:buttonRadius="@dimen/x25"
+                app:maxMilisecond="11000"
+                app:progressColor="?attr/appThemeColor"
+                app:progressStroke="5"
+                app:recordIcon="@drawable/ic_mic" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:id="@+id/progreessBar"
+        android:visibility="gone"/>
+
+</FrameLayout>

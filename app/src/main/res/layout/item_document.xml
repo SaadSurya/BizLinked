@@ -1,0 +1,77 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/x7">
+
+        <TextView
+            android:id="@+id/tvDocumentSNo"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="01"/>
+
+        <TextView
+            android:id="@+id/tvDocumentDescription"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:text="Document Description Here"/>
+
+
+        <FrameLayout
+            android:id="@+id/flDocumentStatus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.10"
+            android:layout_gravity="center"
+
+            android:gravity="center">
+
+            <View
+                android:id="@+id/viewDocumentStatus"
+                android:layout_width="@dimen/x5"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+                android:layout_gravity="center"/>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/flDocumentActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnDocumentActionButton"
+                style="?attr/customerComplainButtonStyle"
+                android:padding="@dimen/x3"
+                android:text="@string/action" />
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <View
+        style="?attr/supportCenterInfoSeperaterLineStyle"
+        android:layout_margin="@dimen/x0"/>
+
+</LinearLayout>

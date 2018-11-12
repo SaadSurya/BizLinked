@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/supportCenterInfoBgStyle"
+    android:layout_margin="@dimen/x0"
+    android:padding="@dimen/x0"
+    android:background="@null">
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+
+        <EditText
+            android:id="@+id/et_shop_num"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/shop_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
+        <EditText
+            android:id="@+id/et_market"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/market"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_shop_num" />
+
+
+
+        <EditText
+            android:id="@+id/et_area"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:hint="@string/area"
+            android:imeOptions="actionDone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_market" />
+
+
+
+        <Spinner
+            android:id="@+id/sp_cities"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:entries="@array/cities"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_area"/>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+
+            android:layout_marginBottom="8dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_cities">
+
+
+
+        <FrameLayout
+            android:id="@+id/mapContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+             />
+            <ImageButton
+                android:id="@+id/btn_current_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:src="@drawable/curentlocation"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/x5"/>
+        </FrameLayout>
+        <Button
+            android:id="@+id/btn_save"
+            style="?attr/roundSkyBlueButtonColorStyle"
+
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/x16"
+
+            android:layout_marginEnd="@dimen/x16"
+
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x16"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sp_cities"
+            app:layout_constraintVertical_bias="0.963" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</FrameLayout>

@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flImageDocumnetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/x5"
+    android:background="@drawable/record_button_bg_drawable"
+    android:padding="@dimen/x3">
+
+    <LinearLayout
+        android:id="@+id/llImageContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/x25"
+            android:src="@drawable/ic_capture" />
+
+        <View
+            style="?attr/supportCenterInfoSeperaterLineStyle"
+            android:layout_margin="@dimen/x0" />
+
+        <TextView
+            style="?attr/supportCenterInfoAddressTextStyle"
+
+            android:gravity="center"
+            android:padding="@dimen/x5"
+            android:text="@string/tap_to_capture"
+            android:textSize="@dimen/s10"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <com.application.lumaque.bizlinked.customViews.SquareImageView
+        android:id="@+id/ivDocumentImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:layout_alignTop="@+id/llImageContainerView"
+        android:layout_alignBottom="@+id/llImageContainerView"
+        />
+</RelativeLayout>
+
