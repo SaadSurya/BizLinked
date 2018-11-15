@@ -101,6 +101,13 @@ public class ProfileTabsFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
 
+
+                if(position==1){
+
+
+
+                }
+               String currentTab = "abc";
                 //(viewPager.getCurrentItem() instanceof ProfileAddressTabFragment)
             }
 

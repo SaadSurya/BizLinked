@@ -67,7 +67,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
     Button btSave;
 
 
-
+    ProfileTabsFragment parentFragment;
 
     private String selectedViewName;
     Unbinder unbinder;
@@ -99,6 +99,8 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         unbinder = ButterKnife.bind(this, rootView);
         getStoragePermissions();
         initializeViews();
+
+
         return rootView;
 
     }
@@ -157,6 +159,7 @@ try {
 
                 CompanyProfileModel companyProfileModel = new CompanyProfileModel();
 
+                companyProfileModel.setBusinessNature(preferenceHelper.getCompanyProfile().getBusinessNature());
                 companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
                 companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
                 companyProfileModel.setCompanyName(etUserName.getText().toString());
@@ -165,9 +168,9 @@ try {
                 companyProfileModel.setEmailAddress(etEMail.getText().toString());
                 companyProfileModel.setWebsite(etWebsite.getText().toString());
 
-
-                ProfileTabsFragment frag = ((ProfileTabsFragment)(ProfileDetailTabFragment.this.getParentFragment()));
-                frag.updatedProfile = companyProfileModel;
+             //   parentFragment = ((ProfileTabsFragment)this.getParentFragment());
+                parentFragment  = ((ProfileTabsFragment)(ProfileDetailTabFragment.this.getParentFragment()));
+                parentFragment.updatedProfile = companyProfileModel;
 
 
 
@@ -239,9 +242,9 @@ private void onSave(){
 
 
 
-    ProfileTabsFragment frag = ((ProfileTabsFragment)this.getParentFragment());
-    frag.updatedProfile = companyProfileModel;
-    frag.saveDetailAndNext();
+
+    parentFragment.updatedProfile = companyProfileModel;
+    parentFragment.saveDetailAndNext();
 
 
 
