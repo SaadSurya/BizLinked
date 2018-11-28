@@ -60,6 +60,9 @@ public class AppConstant {
         private static final String COMPANY = "Company/";
         private static final String PARAMETER = "Parameter/";
         private static final String LINK = "Link/";
+        private static final String PRODUCT = "Product/";
+
+
 //For API Calls
 
         public static final String LOGIN_URL = BASE_URL + "Account/Login";
@@ -74,8 +77,7 @@ public class AppConstant {
         public static final String UNLINKED_REQ_URL = BASE_URL + LINK +"Unlink";
         public static final String IGNORE_REQ_URL = BASE_URL + LINK +"IgnoreRequest";
 
-
-        public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLinks";
+public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLinks";
         public static final String LINKED_SUPPLIER_URL = BASE_URL + LINK +"GetSupplierLinks";
         public static final String PRODUCT_CATEGORIES_URL = BASE_URL + PARAMETER +"GetProductMajorCategories";
         public static final String BUSINESS_NATURE_URL = BASE_URL + PARAMETER +"GetBusinessNatures";
@@ -91,6 +93,24 @@ public class AppConstant {
         public static final String SEARCH_COMPANY = BASE_URL + COMPANY +"SearchCompany";
 
         public static final String GET_MEDIA_FILE = BASE_URL + COMPANY +"Logo?companyId=";
+
+
+
+
+
+
+
+
+        public static final String PRODUCT_LISTER = BASE_URL + PRODUCT +"GetProductLister";
+
+
+
+
+
+
+
+
+
 
 
 

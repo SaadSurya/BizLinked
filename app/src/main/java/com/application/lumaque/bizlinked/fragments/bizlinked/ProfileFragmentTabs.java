@@ -63,7 +63,7 @@ public class ProfileFragmentTabs extends BaseFragment {
     ArrayList<CompanyHeadModel> RequestsRecievedList = new ArrayList<>();
     ArrayList<CompanyHeadModel> LinkedList = new ArrayList<>();
     ArrayList<CompanyHeadModel> RequestsSentList = new ArrayList<>();
-    private LinkListAdapter itemAdapter;*/
+    private LinkListAdapter categoryItemAdapter;*/
 
     @Override
     public void onCustomBackPressed() {

@@ -50,6 +50,7 @@ import com.application.lumaque.bizlinked.data_models.bizlinked.FireBaseDataMode;
 import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CustomerFragmentTabs;
+import com.application.lumaque.bizlinked.fragments.bizlinked.ProductListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.SupplierFragmentTabs;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
@@ -1337,6 +1338,14 @@ public void onPageBack() {
                         SupplierFragmentTabs supplierFragment = new SupplierFragmentTabs();
                         addSupportFragment(supplierFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
                     }
+                   // popBackStackTillEntry(1);
+                break;
+
+   case R.id.nav_product:
+
+       ProductListFragment ProductListFragment = new ProductListFragment();
+       addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+
                    // popBackStackTillEntry(1);
                 break;
 
