@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
@@ -72,11 +73,9 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
 
 
                 ((ItemViewHolder) holder).productName.setText(currentObject.getProductCategoryName());
-        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE+"1")
+        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),currentObject.getImageID()))
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
-
-
 
 
     }

@@ -662,4 +662,11 @@ public class Utils {
 
     }
 
+    public static String getProdImgURL(String companyID, String ProductID){
+
+
+        return AppConstant.ServerAPICalls.GET_PRODUCT_IMG+"companyId="+companyID+"&imageId="+ProductID;
+    }
+
+
 }

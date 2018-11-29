@@ -13,6 +13,7 @@ import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
@@ -74,7 +75,16 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 ((ItemViewHolder) holder).productName.setText(currentObject.getProductName());
                 ((ItemViewHolder) holder).productPrice.setText(String.valueOf(currentObject.getPrice()));
                 //((ItemViewHolder) holder).productDesc.setText(currentObject.getProductDescription());
-        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE+"20")
+
+        //String abc = String.valueOf(currentObject.getCompanyID());
+        String abc = "0";
+        if(currentObject.getImages().size()>0){
+
+            abc = currentObject.getImages().get(0);
+        }
+
+
+        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),abc))
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 

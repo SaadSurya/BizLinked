@@ -7,7 +7,16 @@ public class ProductCategory implements Serializable {
     public long CompanyID;
     public long ProductCategoryID ;
     public String ProductCategoryName ;
-    public String Images ;
+
+    public String getImageID() {
+        return ImageID;
+    }
+
+    public void setImageID(String imageID) {
+        ImageID = imageID;
+    }
+
+    public String ImageID ;
     public long  ParentProductCategoryID ;
 
     public long getCompanyID() {
@@ -34,13 +43,7 @@ public class ProductCategory implements Serializable {
         ProductCategoryName = productCategoryName;
     }
 
-    public String getImages() {
-        return Images;
-    }
 
-    public void setImages(String images) {
-        Images = images;
-    }
 
     public long getParentProductCategoryID() {
         return ParentProductCategoryID;

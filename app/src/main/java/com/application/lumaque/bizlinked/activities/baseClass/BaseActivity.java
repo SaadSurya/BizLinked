@@ -1343,8 +1343,17 @@ public void onPageBack() {
 
    case R.id.nav_product:
 
+
+
+
+
+
+       Bundle bundle = new Bundle();
+       bundle.putString(ProductListFragment.companyId,  String.valueOf(prefHelper.getCompanyProfile().getCompanyID()));
+       bundle.putString(ProductListFragment.productCategoryId, "");
        ProductListFragment ProductListFragment = new ProductListFragment();
-       addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+       ProductListFragment.setArguments(bundle);
+       addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
                    // popBackStackTillEntry(1);
                 break;

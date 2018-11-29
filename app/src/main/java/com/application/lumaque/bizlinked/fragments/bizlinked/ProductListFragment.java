@@ -3,6 +3,7 @@ package com.application.lumaque.bizlinked.fragments.bizlinked;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -17,7 +18,11 @@ import com.application.lumaque.bizlinked.fragments.HomeFragment;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.ProductAdapter;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
+import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
+import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -30,6 +35,17 @@ public class ProductListFragment extends BaseFragment {
     CategoryHorizontalAdapter categoryItemAdapter;
     ProductAdapter productItemAdapter;
 
+    public static final String companyId = "companyId";
+    public static final String productCategoryId = "productCategoryId";
+
+    String paramCompanyId = "";
+    String paramProductCategoryId = "";
+
+    Bundle bundle;
+
+
+
+    ProductList ProductList;
 
 
     @BindView(R.id.shimmer_view_container)
@@ -50,7 +66,10 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     public void onCustomBackPressed() {
-        activityReference.addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE,false);
+        /*activityReference.addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE,false);*/
+
+
+        activityReference.onPageBack();
     }
 
     @Override
@@ -62,11 +81,22 @@ public class ProductListFragment extends BaseFragment {
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
 
         getBaseActivity().toolbar.setTitle("Product");
+        setArguments();
         initializeViews();
 
 
     }
 
+
+
+
+    private void setArguments() {
+        bundle = getArguments();
+        if (bundle != null) {
+            paramCompanyId = bundle.getString(companyId);
+            paramProductCategoryId = bundle.getString(productCategoryId);
+        }
+    }
     private void initializeViews() {
         mShimmerViewContainer.startShimmerAnimation();
 
@@ -76,8 +106,16 @@ public class ProductListFragment extends BaseFragment {
 
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+        params.put("companyId",paramCompanyId);
+        params.put("productCategoryId", paramProductCategoryId);
 
+/*
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("companyId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+        params.put("productCategoryId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+
+*/
 
         WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER,false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
@@ -87,7 +125,7 @@ public class ProductListFragment extends BaseFragment {
                 mainlayout.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.setVisibility(View.GONE);
 
-                ProductList ProductList =  GsonHelper.GsonToProductList(activityReference, response);
+                 ProductList =  GsonHelper.GsonToProductList(activityReference, response);
 
 
 
@@ -101,6 +139,61 @@ public class ProductListFragment extends BaseFragment {
                     // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
                     rvCategory.setAdapter(categoryItemAdapter);
                     rvCategory.setNestedScrollingEnabled(false);
+
+                    rvCategory.addOnItemTouchListener(new RecyclerTouchListener(activityReference, rvCategory,
+                            new ClickListenerRecycler() {
+                                @Override
+                                public void onClick(View view, int position) {
+
+                                    if (NetworkUtils.isNetworkAvailable(activityReference)) {
+                                        try {
+
+
+
+
+
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString(ProductListFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
+                                            bundle.putString(ProductListFragment.productCategoryId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
+                                            ProductListFragment ProductListFragment = new ProductListFragment();
+                                            ProductListFragment.setArguments(bundle);
+                                            activityReference.addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+
+
+                                        } catch (Exception e) {
+                                            Utils.showToast(activityReference,activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                            e.printStackTrace();
+                                        }
+
+                                    } else {
+                                        Utils.showSnackBar(activityReference, getContainerLayout(),
+                                                activityReference.getResources().getString(R.string.no_network_available),
+                                                ContextCompat.getColor(activityReference, R.color.grayColor));
+                                    }
+                                }
+
+                                @Override
+                                public void onLongClick(View view, int position) {
+                                }
+                            }
+                    ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
 
 

@@ -93,8 +93,7 @@ public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLi
         public static final String SEARCH_COMPANY = BASE_URL + COMPANY +"SearchCompany";
 
         public static final String GET_MEDIA_FILE = BASE_URL + COMPANY +"Logo?companyId=";
-
-
+        public static final String GET_PRODUCT_IMG = BASE_URL + PRODUCT +"Image?";
 
 
 
