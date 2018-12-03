@@ -39,8 +39,6 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.application.lumaque.bizlinked.BizLinkApplication;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.RegistrationActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
@@ -80,7 +78,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.yovenny.videocompress.MediaController;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -88,7 +85,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-
 import butterknife.ButterKnife;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
