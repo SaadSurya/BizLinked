@@ -86,7 +86,6 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
     ArrayList<CompanyHeadModel> RequestsRecievedList = new ArrayList<>();
     ArrayList<CompanyHeadModel> LinkedList = new ArrayList<>();
     ArrayList<CompanyHeadModel> RequestsSentList = new ArrayList<>();
-    private LinkListAdapter itemAdapter;
 
     @Override
     public void onCustomBackPressed() {
@@ -289,7 +288,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
         private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
         private final ArrayList<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        private ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 
@@ -303,7 +302,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        private void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
@@ -315,13 +314,13 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
 
         private Fragment mCurrentFragment;
 
-        public Fragment getCurrentFragment() {
+        private Fragment getCurrentFragment() {
             return mCurrentFragment;
         }
 
 
         @Override
-        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        public void setPrimaryItem(@NonNull ViewGroup container, int position,@NonNull Object object) {
             if (getCurrentFragment() != object) {
                 mCurrentFragment = ((Fragment) object);
             }
@@ -335,7 +334,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
     protected void onActionBtnClick(CompanyHeadModel companyHeadModel,String tag){
 
 
-        String msgString = null;
+      //  String msgString = null;
         String URL = null;
         switch (companyHeadModel.getLinkStatus()){
 
@@ -471,7 +470,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
 
 
      }
-        itemAdapter = new LinkListAdapter(activityReference, searchedLinkList, this);
+        LinkListAdapter itemAdapter = new LinkListAdapter(activityReference, searchedLinkList, this);
 
 
         linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
@@ -534,7 +533,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
             searchItem.expandActionView();
             searchView.setQuery(strQuery, false);
         }
-        closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+        closeButton = searchView.findViewById(R.id.search_close_btn);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

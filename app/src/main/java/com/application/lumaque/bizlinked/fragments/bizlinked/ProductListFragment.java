@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
-import com.application.lumaque.bizlinked.fragments.HomeFragment;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.ProductAdapter;
@@ -206,6 +205,47 @@ public class ProductListFragment extends BaseFragment {
                 rvProduct.setAdapter(productItemAdapter);
                 rvProduct.setNestedScrollingEnabled(false);
 
+
+
+
+                rvProduct.addOnItemTouchListener(new RecyclerTouchListener(activityReference, rvProduct,
+                        new ClickListenerRecycler() {
+                            @Override
+                            public void onClick(View view, int position) {
+
+                                if (NetworkUtils.isNetworkAvailable(activityReference)) {
+                                    try {
+
+
+
+
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
+                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
+                                        ProductFragment ProductFragment = new ProductFragment();
+                                        ProductFragment.setArguments(bundle);
+                                        activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+
+
+                                    } catch (Exception e) {
+                                        Utils.showToast(activityReference,activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                        e.printStackTrace();
+                                    }
+
+                                } else {
+                                    Utils.showSnackBar(activityReference, getContainerLayout(),
+                                            activityReference.getResources().getString(R.string.no_network_available),
+                                            ContextCompat.getColor(activityReference, R.color.grayColor));
+                                }
+                            }
+
+                            @Override
+                            public void onLongClick(View view, int position) {
+                            }
+                        }
+                ));
 
 
 
