@@ -164,10 +164,7 @@ public class ProductFragment extends BaseFragment {
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
 
-
-
-asdasd
-
+                
             }
 
             @Override
