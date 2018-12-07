@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:shimmer="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     style="?attr/supportCenterInfoBgStyle"
     android:layout_margin="@dimen/x0"
-    android:padding="@dimen/x0"
-    android:background="@null">
-
-
+    android:background="@null"
+    android:padding="@dimen/x0">
 
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-android:visibility="gone"
         android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <View
                 android:id="@+id/thumbnail"
                 android:layout_width="@dimen/x150"
                 android:layout_height="@dimen/x110"
 
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/background"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/nameview"
                 android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/x110"
-android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
 
 
                 android:layout_toRightOf="@+id/thumbnail"
 
-                android:background="@color/background"
-                />
-
+                android:background="@color/background" />
 
 
             <View
@@ -55,32 +51,29 @@ android:layout_marginLeft="@dimen/x10"
                 android:layout_height="@dimen/x150"
 
 
-                android:layout_marginTop="@dimen/x12"
-
                 android:layout_below="@+id/thumbnail"
 
-                android:background="@color/background"
-                />
+                android:layout_marginTop="@dimen/x12"
+
+                android:background="@color/background" />
 
             <View
+
+                android:id="@+id/abc"
 
                 android:layout_width="@dimen/x170"
 
                 android:layout_height="@dimen/x150"
 
-                android:id="@+id/abc"
+                android:layout_below="@+id/thumbnail"
 
                 android:layout_marginLeft="@dimen/x10"
 
                 android:layout_marginTop="@dimen/x12"
 
-                android:layout_below="@+id/thumbnail"
-
                 android:layout_toRightOf="@+id/firstview"
 
-                android:background="@color/background"
-                />
-
+                android:background="@color/background" />
 
 
             <View
@@ -90,12 +83,11 @@ android:layout_marginLeft="@dimen/x10"
                 android:layout_height="@dimen/x150"
 
 
-                android:layout_marginTop="@dimen/x12"
-
                 android:layout_below="@+id/firstview"
 
-                android:background="@color/background"
-                />
+                android:layout_marginTop="@dimen/x12"
+
+                android:background="@color/background" />
 
             <View
 
@@ -104,26 +96,22 @@ android:layout_marginLeft="@dimen/x10"
                 android:layout_height="@dimen/x150"
 
 
+                android:layout_below="@+id/firstview"
 
                 android:layout_marginLeft="@dimen/x10"
 
                 android:layout_marginTop="@dimen/x12"
 
-                android:layout_below="@+id/firstview"
-
                 android:layout_toRightOf="@+id/firstview"
 
-                android:background="@color/background"
-                />
+                android:background="@color/background" />
 
 
         </RelativeLayout>
 
-    </com.facebook.shimmer.ShimmerFrameLayout
-        >
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:id="@+id/mainlayout"
@@ -136,12 +124,12 @@ android:layout_marginLeft="@dimen/x10"
             android:layout_width="match_parent"
 
             android:layout_height="@dimen/x150"
-            app:layout_constraintBottom_toTopOf="@+id/product_rv"
+            app:layout_constraintBottom_toTopOf="@+id/product_desc_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator"
@@ -149,7 +137,7 @@ android:layout_marginLeft="@dimen/x10"
             android:layout_height="48dp"
 
 
-            app:layout_constraintBottom_toTopOf="@+id/product_rv"
+            app:layout_constraintBottom_toTopOf="@+id/product_desc_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -159,8 +147,8 @@ android:layout_marginLeft="@dimen/x10"
             />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/product_rv"
+        <ScrollView
+            android:id="@+id/product_desc_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -171,25 +159,128 @@ android:layout_marginLeft="@dimen/x10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewpager">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+                <EditText
+                    android:id="@+id/pro_name"
+                    style="?attr/roundEditTextNormalColorStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/x16"
+
+                    android:layout_marginStart="@dimen/x16"
+                    android:layout_marginTop="@dimen/x12"
+                    android:hint="@string/product_name" />
+
+                <EditText
+                    android:layout_below="@+id/pro_name"
+                    android:id="@+id/pro_desc"
+                    style="?attr/roundEditTextNormalColorStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/x16"
+                    android:layout_marginStart="@dimen/x16"
+                    android:layout_marginTop="@dimen/x12"
+                    android:gravity="top|left"
+                    android:hint="@string/description"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:maxLines="10"
+                    android:minLines="3"
+                    android:scrollbars="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/pro_price"
+                    style="?attr/roundEditTextNormalColorStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/x16"
+                    android:layout_below="@+id/pro_desc"
+                    android:layout_marginStart="@dimen/x16"
+                    android:layout_marginTop="@dimen/x12"
+                    android:hint="@string/price" />
+
+
+
+            <LinearLayout
+                android:id="@+id/attribute_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/pro_price"
+                >
 
 
 
 
+
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                    android:id="@+id/add_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/attribute_layout"
+
+                    >
+
+                    <TextView
+
+                        style="?attr/roundEditTextNormalColorStyle"
+                        android:layout_width="match_parent"
+                        android:layout_marginEnd="@dimen/x16"
+                      android:text="add attributes"
+                        android:layout_marginStart="@dimen/x16"
+                        android:layout_marginTop="@dimen/x12"
+
+                        android:layout_toLeftOf="@+id/add_att"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/add_att"
+                        style="?attr/roundEditTextNormalColorStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+android:layout_alignParentRight="true"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="true"
+                        android:src="@drawable/addnew" />
+
+                </RelativeLayout>
+
+                <Button
+
+
+                    android:id="@+id/btn_save"
+                    style="?attr/roundSkyBlueButtonColorStyle"
+android:layout_below="@+id/add_layout"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="bottom"
+
+                    android:layout_marginBottom="@dimen/x16"
+                    android:layout_marginEnd="@dimen/x16"
+
+                    android:layout_marginStart="@dimen/x16"
+                    android:layout_marginTop="@dimen/x12"
+                    android:text="@string/save" />
+
+            </RelativeLayout>
+
+
+        </ScrollView>
 
 
     </android.support.constraint.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
 
 
 </FrameLayout>

@@ -35,6 +35,7 @@
     <string name="favourites">Favourites</string>
     <string name="no_network_available">No network available!!!</string>
     <string name="will_be_implemented">Will be implemented in next phase</string>
+    <string name="product_detail_not_found">Product Detail Not Found Please see Configuration</string>
     <string name="customer_support">Customer Support</string>
     <string name="customer_support_number">Customer Support Call Center Number</string>
     <string name="customer_support_address">Customer Support Address:</string>
@@ -239,5 +240,8 @@
     <string name="my_bizlinks">My Links</string>
     <string name="my_sent">Sent</string>
     <string name="my_request">Requests</string>
+    <string name="product_name">Product Name</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
 
 </resources>

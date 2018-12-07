@@ -60,7 +60,7 @@ public class ProductListFragment extends BaseFragment {
     RecyclerView rvCategory;
 
 
-    @BindView(R.id.product_rv)
+    @BindView(R.id.product_desc_view)
     RecyclerView rvProduct;
 
     @Override
@@ -221,8 +221,8 @@ public class ProductListFragment extends BaseFragment {
 
 
                                         Bundle bundle = new Bundle();
-                                        bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
-                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
+                                        bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
+                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductCategoryID()));
                                         ProductFragment ProductFragment = new ProductFragment();
                                         ProductFragment.setArguments(bundle);
                                         activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
@@ -230,7 +230,7 @@ public class ProductListFragment extends BaseFragment {
 
 
                                     } catch (Exception e) {
-                                        Utils.showToast(activityReference,activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                        Utils.showToast(activityReference,activityReference.getString(R.string.product_detail_not_found), AppConstant.TOAST_TYPES.INFO);
                                         e.printStackTrace();
                                     }
 

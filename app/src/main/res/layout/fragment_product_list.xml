@@ -137,7 +137,7 @@ android:layout_marginLeft="@dimen/x10"
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/product_rv"
+            app:layout_constraintBottom_toTopOf="@+id/product_desc_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +149,7 @@ android:layout_marginLeft="@dimen/x10"
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/product_rv"
+            android:id="@+id/product_desc_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"

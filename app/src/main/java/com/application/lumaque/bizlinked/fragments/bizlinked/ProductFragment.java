@@ -4,27 +4,24 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
-import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
-import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.ProductAdapter;
-import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
-import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
-import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
-import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -32,11 +29,12 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ProductFragment extends BaseFragment {
@@ -44,7 +42,7 @@ public class ProductFragment extends BaseFragment {
     Bundle bundle;
 
 
-Product product;
+    Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
 
@@ -52,27 +50,40 @@ Product product;
     String paramProductId = "";
 
 
-  //  int ImageObjectSize;
+    //  int ImageObjectSize;
     @BindView(R.id.shimmer_view_container)
-    ShimmerFrameLayout mShimmerViewContainer ;
+    ShimmerFrameLayout mShimmerViewContainer;
 
 
     @BindView(R.id.mainlayout)
-    ConstraintLayout mainlayout ;
+    ConstraintLayout mainlayout;
 
     @BindView(R.id.viewpager)
-    ViewPager viewpager ;
+    ViewPager viewpager;
 
 
- @BindView(R.id.indicator)
- CircleIndicator indicator ;
+    @BindView(R.id.indicator)
+    CircleIndicator indicator;
 
 
     List<String> ImageList = new ArrayList<>();
 
 
+    @BindView(R.id.pro_name)
+    EditText proName;
+    @BindView(R.id.pro_desc)
+    EditText proDesc;
+    @BindView(R.id.pro_price)
+    EditText proPrice;
+    @BindView(R.id.attribute_layout)
+    LinearLayout attributeLayout;
+    @BindView(R.id.add_att)
+    ImageButton addAtt;
 
-
+    @BindView(R.id.btn_save)
+    Button btnSave;
+    @BindView(R.id.product_desc_view)
+    ScrollView productDescView;
 
 
 
@@ -97,8 +108,6 @@ Product product;
         initializeViews();
 
 
-
-
     }
 
     private void setArguments() {
@@ -108,6 +117,7 @@ Product product;
             paramProductId = bundle.getString(productId);
         }
     }
+
     private void initializeViews() {
         mShimmerViewContainer.startShimmerAnimation();
 
@@ -115,9 +125,8 @@ Product product;
         mShimmerViewContainer.setVisibility(View.VISIBLE);
 
 
-
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId",paramCompanyId);
+        params.put("companyId", paramCompanyId);
         params.put("productCategoryId", paramProductId);
 
 /*
@@ -128,7 +137,7 @@ Product product;
 
 */
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER,false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
@@ -136,23 +145,25 @@ Product product;
                 mainlayout.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.setVisibility(View.GONE);
 
-                product =  GsonHelper.GsonToProduct(activityReference, response);
+                product = GsonHelper.GsonToProduct(activityReference, response);
 
-               // ImageList = product.getImages();
+                // ImageList = product.getImages();
 
-              //  List<String> ImageList;
+                //  List<String> ImageList;
                 ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=1&imageId=1");
                 ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=1&imageId=2");
                 ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=1&imageId=3");
-
 
 
                 viewpager.setAdapter(new CustomPagerAdapter(activityReference));
 
                 indicator.setViewPager(viewpager);
 
-// optional
-             //   adapter.registerDataSetObserver(indicator.getDataSetObserver());
+
+                proName.setText(product.getProductName());
+                proDesc.setText(product.getProductDescription());
+                proPrice.setText(String.valueOf(product.getPrice()));
+
 
 
 
@@ -187,16 +198,14 @@ Product product;
 
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
-           // ModelObject modelObject = ModelObject.values()[position];
+            // ModelObject modelObject = ModelObject.values()[position];
             LayoutInflater inflater = LayoutInflater.from(mContext);
             ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_product_header, collection, false);
-          ImageView headerView  = layout.findViewById(R.id.imageView);
+            ImageView headerView = layout.findViewById(R.id.imageView);
 
             Glide.with(activityReference).load(ImageList.get(position))
                     .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
                     .into(headerView);
-
-
 
 
             collection.addView(layout);
@@ -221,7 +230,7 @@ Product product;
 
         @Override
         public CharSequence getPageTitle(int position) {
-           // ModelObject customPagerEnum = ModelObject.values()[position];
+            // ModelObject customPagerEnum = ModelObject.values()[position];
             return ImageList.get(position);
         }
 
