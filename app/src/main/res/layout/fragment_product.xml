@@ -195,12 +195,23 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+                <AutoCompleteTextView
+                    android:id="@+id/pro_category"
+                    style="?attr/roundEditTextNormalColorStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/x16"
+                    android:layout_below="@+id/pro_desc"
+                    android:layout_marginStart="@dimen/x16"
+                    android:layout_marginTop="@dimen/x12"
+                    android:hint="@string/category" />
+
+
                 <EditText
                     android:id="@+id/pro_price"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
                     android:layout_marginEnd="@dimen/x16"
-                    android:layout_below="@+id/pro_desc"
+                    android:layout_below="@+id/pro_category"
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
                     android:hint="@string/price" />

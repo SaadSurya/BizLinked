@@ -127,7 +127,7 @@ public class ProductFragment extends BaseFragment {
 
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
-        params.put("productCategoryId", paramProductId);
+        params.put("productId", paramProductId);
 
 /*
 
@@ -137,7 +137,7 @@ public class ProductFragment extends BaseFragment {
 
 */
 
-        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_DETAIL, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
@@ -169,6 +169,9 @@ public class ProductFragment extends BaseFragment {
 
             @Override
             public void onError(String response) {
+
+                mShimmerViewContainer.stopShimmerAnimation();
+onCustomBackPressed();
 
             }
 

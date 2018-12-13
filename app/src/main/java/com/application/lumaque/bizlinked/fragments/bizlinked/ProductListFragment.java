@@ -222,7 +222,7 @@ public class ProductListFragment extends BaseFragment {
 
                                         Bundle bundle = new Bundle();
                                         bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
-                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductCategoryID()));
+                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
                                         ProductFragment ProductFragment = new ProductFragment();
                                         ProductFragment.setArguments(bundle);
                                         activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
