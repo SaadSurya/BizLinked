@@ -9,6 +9,7 @@ import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyHeadModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.MajorCategoryModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +37,14 @@ public class GsonHelper {
     }
 
 
+
+
+    public static ArrayList<ProductCategory> GsonToCategoryList(Context context, String recordsArrayString) {
+
+        Type listType = new TypeToken<List<ProductCategory>>() {
+        }.getType();
+        return new Gson().fromJson(recordsArrayString, listType);
+    }
 
 
     public static ArrayList<CitiesModel> GsonToCities(Context context, String recordsArrayString) {

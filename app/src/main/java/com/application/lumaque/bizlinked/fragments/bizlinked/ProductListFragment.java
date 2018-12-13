@@ -22,6 +22,7 @@ import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
+import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -81,6 +82,8 @@ public class ProductListFragment extends BaseFragment {
 
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
+
+
         initializeViews();
 
 
@@ -269,6 +272,8 @@ public class ProductListFragment extends BaseFragment {
 
 
     }
+
+
 
 
 }

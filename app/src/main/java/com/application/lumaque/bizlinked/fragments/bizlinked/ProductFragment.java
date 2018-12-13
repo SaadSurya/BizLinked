@@ -9,19 +9,22 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -33,16 +36,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ProductFragment extends BaseFragment {
 
-    Bundle bundle;
+    private  Bundle bundle;
+    private ArrayList<ProductCategory>   productCategoryList;
 
-
-    Product product;
+    private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
 
@@ -64,6 +65,10 @@ public class ProductFragment extends BaseFragment {
 
     @BindView(R.id.indicator)
     CircleIndicator indicator;
+
+
+    @BindView(R.id.pro_category)
+    AutoCompleteTextView proCate;
 
 
     List<String> ImageList = new ArrayList<>();
@@ -105,6 +110,7 @@ public class ProductFragment extends BaseFragment {
 
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
+        cacheCat();
         initializeViews();
 
 
@@ -160,9 +166,45 @@ public class ProductFragment extends BaseFragment {
                 indicator.setViewPager(viewpager);
 
 
+
+
+
+
+                productCategoryList = preferenceHelper.getCategoryList();
+
+                List categoryName = new ArrayList();
+
+                for (ProductCategory temp : productCategoryList) {
+
+categoryName.add(temp.getProductCategoryName());
+                    //System.out.println(temp);
+                }
+
+                ArrayAdapter<String> adapter =
+                        new ArrayAdapter<String>(activityReference, android.R.layout.simple_list_item_1, categoryName);
+                proCate.setAdapter(adapter);
+
+
+                if(product.getProductCategoryID() > 1)
+                for (ProductCategory temp : productCategoryList) {
+
+                    if(temp.getProductCategoryID() == product.getProductCategoryID()){
+
+                        proCate.setText(temp.ProductCategoryName);
+                    }
+
+                  }
+
+
+
+
                 proName.setText(product.getProductName());
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
+
+
+
+
 
                 
             }
@@ -235,4 +277,19 @@ onCustomBackPressed();
         }
 
     }
+
+
+
+
+    private void cacheCat(){
+
+
+        CompanyHelper companyHelper = new CompanyHelper(activityReference,preferenceHelper);
+
+
+        companyHelper.getCompanyCategoty(paramCompanyId);
+
+
+    }
+
 }

@@ -105,6 +105,8 @@ public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLi
         public static final String PRODUCT_DETAIL = BASE_URL + PRODUCT +"GetProduct";
 
 
+        public static final String PRODUCT_CATEGORY= BASE_URL + PRODUCT +"GetProductCategories";
+
 
 
 

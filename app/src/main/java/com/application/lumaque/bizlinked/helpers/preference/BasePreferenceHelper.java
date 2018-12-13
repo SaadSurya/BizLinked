@@ -5,8 +5,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BasePreferenceHelper extends PreferenceHelper {
@@ -16,7 +22,8 @@ public class BasePreferenceHelper extends PreferenceHelper {
     protected static final String KEY_USER = "user";
     public static final String KEY_DEVICE_TOKEN = "device_token";
     public static final String AUTHENTICATE_USER_TOKEN = "user_token";
-    private static final String FILENAME = "centegy_preferences";
+    private static final String FILENAME = "bizlinked_preferences";
+    public static final String KEY_CATEGORY = "category";
 
 
     public BasePreferenceHelper(Context c) {
@@ -95,6 +102,26 @@ public class BasePreferenceHelper extends PreferenceHelper {
     public CompanyProfileModel getCompanyProfile() {
         return new GsonBuilder().create().fromJson(
                 getStringPreference(context, FILENAME, KEY_USER), CompanyProfileModel.class);
+    }
+
+
+
+    public void putCategory(String categoryArray) {
+        putStringPreference(context,
+                FILENAME,
+                KEY_CATEGORY,
+                categoryArray);
+    }
+
+    public ArrayList<ProductCategory> getCategoryList() {
+
+
+        Type listType = new TypeToken<List<ProductCategory>>() {
+        }.getType();
+
+
+        return new GsonBuilder().create().fromJson(
+                getStringPreference(context, FILENAME, KEY_CATEGORY),listType);
     }
 
     public void removeLoginPreference() {
