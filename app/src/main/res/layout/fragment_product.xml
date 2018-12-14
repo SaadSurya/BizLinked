@@ -218,21 +218,33 @@
 
 
 
-            <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/attribute_layout"
+                    android:layout_below="@+id/pro_price"></android.support.v7.widget.RecyclerView>
+
+
+           <!-- <LinearLayout
                 android:id="@+id/attribute_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_below="@+id/pro_price"
+                android:layout_marginStart="@dimen/x16"
+                android:layout_marginTop="@dimen/x12"
+                android:layout_marginEnd="@dimen/x16"
+                style="?attr/roundEditTextNormalColorStyle"
+                android:padding="@dimen/x2"
                 >
 
 
-
+                <include layout="@layout/attribute_row"/>
 
 
 
             </LinearLayout>
-
+-->
 
 
             <RelativeLayout
@@ -263,9 +275,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
 android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/x12"
                         android:adjustViewBounds="true"
                         android:cropToPadding="true"
-                        android:src="@drawable/addnew" />
+                        android:background="@drawable/addnew" />
 
                 </RelativeLayout>
 

@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +19,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
+import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.LinkListAdapter;
+import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
+import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -38,10 +46,11 @@ import java.util.List;
 import butterknife.BindView;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProductFragment extends BaseFragment {
+public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
     private  Bundle bundle;
-    private ArrayList<ProductCategory>   productCategoryList;
+    private ArrayList<ProductCategory> companyCategoryList;
+    private ArrayList<ProductAttribute>   productAttributes;
 
     private Product product;
     public static final String companyId = "companyId";
@@ -49,6 +58,10 @@ public class ProductFragment extends BaseFragment {
 
     String paramCompanyId = "";
     String paramProductId = "";
+
+
+
+    TagViewAdapter tagItemAdapter;
 
 
     //  int ImageObjectSize;
@@ -80,8 +93,7 @@ public class ProductFragment extends BaseFragment {
     EditText proDesc;
     @BindView(R.id.pro_price)
     EditText proPrice;
-    @BindView(R.id.attribute_layout)
-    LinearLayout attributeLayout;
+
     @BindView(R.id.add_att)
     ImageButton addAtt;
 
@@ -89,6 +101,10 @@ public class ProductFragment extends BaseFragment {
     Button btnSave;
     @BindView(R.id.product_desc_view)
     ScrollView productDescView;
+
+
+ @BindView(R.id.attribute_layout)
+ RecyclerView attributeLayout;
 
 
 
@@ -131,6 +147,24 @@ public class ProductFragment extends BaseFragment {
         mShimmerViewContainer.setVisibility(View.VISIBLE);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
         params.put("productId", paramProductId);
@@ -169,14 +203,16 @@ public class ProductFragment extends BaseFragment {
 
 
 
+                 product.getProductAttributes();
+                companyCategoryList = preferenceHelper.getCategoryList();
 
-                productCategoryList = preferenceHelper.getCategoryList();
+
 
                 List categoryName = new ArrayList();
 
-                for (ProductCategory temp : productCategoryList) {
+                for (ProductCategory temp : companyCategoryList) {
 
-categoryName.add(temp.getProductCategoryName());
+                categoryName.add(temp.getProductCategoryName());
                     //System.out.println(temp);
                 }
 
@@ -186,7 +222,7 @@ categoryName.add(temp.getProductCategoryName());
 
 
                 if(product.getProductCategoryID() > 1)
-                for (ProductCategory temp : productCategoryList) {
+                for (ProductCategory temp : companyCategoryList) {
 
                     if(temp.getProductCategoryID() == product.getProductCategoryID()){
 
@@ -198,6 +234,7 @@ categoryName.add(temp.getProductCategoryName());
 
 
 
+                setTagAdapter();
                 proName.setText(product.getProductName());
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
@@ -213,7 +250,7 @@ categoryName.add(temp.getProductCategoryName());
             public void onError(String response) {
 
                 mShimmerViewContainer.stopShimmerAnimation();
-onCustomBackPressed();
+                onCustomBackPressed();
 
             }
 
@@ -226,8 +263,18 @@ onCustomBackPressed();
 
     }
 
+    @Override
+    public void onImageClick(ProductAttribute productAttribute) {
 
+        Toast.makeText(activityReference, "cancel click :"+productAttribute.getAttributeName(), Toast.LENGTH_SHORT).show();
+        // TODO: 12/14/2018 perfome cancel button
+    }
 
+    @Override
+    public void onRowClick(ProductAttribute productAttribute) {
+        Toast.makeText(activityReference, "row Click item : "+productAttribute.getAttributeName(), Toast.LENGTH_SHORT).show();
+
+    }
 
 
     public class CustomPagerAdapter extends PagerAdapter {
@@ -292,4 +339,32 @@ onCustomBackPressed();
 
     }
 
+
+    private void setTagAdapter(){
+
+
+
+        tagItemAdapter = new TagViewAdapter(activityReference, product.getProductAttributes(),this);
+        attributeLayout.setLayoutManager(new LinearLayoutManager(activityReference));
+        attributeLayout.setAdapter(tagItemAdapter);
+        attributeLayout.setNestedScrollingEnabled(false);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

@@ -9,6 +9,21 @@
     </style>
 
     <!-- Splash Image Element Style-->
+    <style name="tag_view_tag_style">
+
+
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:padding">@dimen/x3</item>
+        <item name="android:layout_marginRight">@dimen/x5</item>
+
+        <item name="android:background">@drawable/tag_view_bg</item>
+
+    </style>
+
+
+    <!-- Splash Image Element Style-->
     <style name="splash_logo_image_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

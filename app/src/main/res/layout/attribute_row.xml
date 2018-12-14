@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/row"
+    >
+<FrameLayout
+
+
+    android:padding="@dimen/x2"
+
+    style="?attr/roundEditTextNormalColorStyle"
+    android:layout_width="match_parent"
+    android:layout_marginEnd="@dimen/x16"
+    android:layout_marginStart="@dimen/x16"
+    android:layout_marginTop="@dimen/x12"
+    >
+
+
+
+<ImageButton
+    android:id="@+id/delete_attribute"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/close"
+    android:layout_gravity="right"
+
+    android:padding="@dimen/x15"
+
+
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <TextView
+
+        android:clickable="true"
+        android:id="@+id/pro_attribute_name"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+
+
+        android:text="color"
+        />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/x5"
+        android:layout_marginBottom="@dimen/x5"
+
+        >
+        <LinearLayout
+
+            android:id="@+id/tag_div"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+
+        </LinearLayout>
+
+
+
+    </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+</FrameLayout>
+</RelativeLayout>

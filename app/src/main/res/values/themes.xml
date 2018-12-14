@@ -10,7 +10,12 @@
         <item name="appThemeColor">@color/appThemeColor</item>
 
 
+
+        <item name="tagViewBackgroundImageStyle">@style/tag_view_tag_style</item>
+
+
         <!-- Splash Page Style-->
+
         <item name="splashBackgroundImageStyle">@style/splash_bg_style</item>
         <item name="splashLogoImageStyle">@style/splash_logo_image_style</item>
         <item name="splashQRIconStyle">@style/splash_qr_icon_style</item>

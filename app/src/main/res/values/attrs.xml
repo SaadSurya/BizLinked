@@ -3,6 +3,7 @@
 
     <attr name="appThemeColor" format="reference" />
 
+    <attr name="tagViewBackgroundImageStyle" format="reference" />
 
     <!-- Registration Page Attributes -->
     <attr name="splashBackgroundImageStyle" format="reference" />
