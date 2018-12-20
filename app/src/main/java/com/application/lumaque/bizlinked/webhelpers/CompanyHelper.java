@@ -56,5 +56,38 @@ public class CompanyHelper {
 
     }
 
+    public   void getCompanyAttributes(String CompanyId){
+
+
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("companyId",CompanyId);
+
+
+
+        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_ATTRIBUTES,false, new WebAppManager.APIStringRequestDataCallBack() {
+            @Override
+            public void onSuccess(String response) {
+
+                preferenceHelper.putAttributes(response);
+
+
+            }
+
+            @Override
+            public void onError(String response) {
+
+            }
+
+            @Override
+            public void onNoNetwork() {
+
+            }
+        });
+
+
+
+    }
+
 
 }

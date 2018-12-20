@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,7 @@ public class BasePreferenceHelper extends PreferenceHelper {
     public static final String AUTHENTICATE_USER_TOKEN = "user_token";
     private static final String FILENAME = "bizlinked_preferences";
     public static final String KEY_CATEGORY = "category";
+    public static final String KEY_ATTRIBUTES = "attributes";
 
 
     public BasePreferenceHelper(Context c) {
@@ -117,6 +119,26 @@ public class BasePreferenceHelper extends PreferenceHelper {
 
 
         Type listType = new TypeToken<List<ProductCategory>>() {
+        }.getType();
+
+
+        return new GsonBuilder().create().fromJson(
+                getStringPreference(context, FILENAME, KEY_CATEGORY),listType);
+    }
+
+
+
+    public void putAttributes(String AttributesArray) {
+        putStringPreference(context,
+                FILENAME,
+                KEY_ATTRIBUTES,
+                AttributesArray);
+    }
+
+    public ArrayList<ProductAttribute> getAttributesList() {
+
+
+        Type listType = new TypeToken<List<ProductAttribute>>() {
         }.getType();
 
 

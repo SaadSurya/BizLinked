@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.customViews.AttributesDialog;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
@@ -148,23 +150,6 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
         params.put("productId", paramProductId);
@@ -272,7 +257,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
-        Toast.makeText(activityReference, "row Click item : "+productAttribute.getAttributeName(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(activityReference, "row Click item : "+productAttribute.getAttributeName(), Toast.LENGTH_SHORT).show();
+
+        showAttributeDialog(productAttribute);
+
 
     }
 
@@ -332,9 +320,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
 
         CompanyHelper companyHelper = new CompanyHelper(activityReference,preferenceHelper);
-
-
         companyHelper.getCompanyCategoty(paramCompanyId);
+       // companyHelper.getCompanyAttributes(paramCompanyId);
 
 
     }
@@ -351,20 +338,16 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
+
+
+    private void showAttributeDialog(ProductAttribute attribute) {
+        FragmentManager fm = activityReference.getSupportFragmentManager();
+        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute);
+        editNameDialogFragment.show(fm, "fragment_attribute_dialog");
+    }
+
+
 }
