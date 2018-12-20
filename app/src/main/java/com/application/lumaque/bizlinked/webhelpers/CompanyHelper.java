@@ -2,9 +2,7 @@ package com.application.lumaque.bizlinked.webhelpers;
 
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
-import com.application.lumaque.bizlinked.data_models.bizlinked.BusinessNatureModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 
 import java.util.ArrayList;

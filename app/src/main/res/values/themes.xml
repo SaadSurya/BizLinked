@@ -9,6 +9,7 @@
         <item name="colorAccent">@color/appPrimaryColor</item>
         <item name="appThemeColor">@color/appThemeColor</item>
 
+        <item name="android:dialogTheme">@style/CustomDialog</item>
 
 
         <item name="tagViewBackgroundImageStyle">@style/tag_view_tag_style</item>

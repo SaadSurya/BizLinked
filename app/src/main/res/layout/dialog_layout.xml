@@ -2,24 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center_horizontal"
-    android:background="@color/appThemeColor">
-    <EditText
+    android:orientation="vertical"
+    style="?attr/supportCenterInfoBgStyle"
+    android:layout_margin="@dimen/x0">
+
+    <AutoCompleteTextView
         android:id="@+id/att_type"
         android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="?attr/roundEditTextNormalColorStyle"
         android:text="@string/category"
-        android:textColor="@color/white"
+        android:layout_margin="@dimen/x5"
+
         android:paddingStart="@dimen/x10"/>
 
-
-</LinearLayout>
 
     <AutoCompleteTextView
 android:id="@+id/att_name"
@@ -37,16 +32,41 @@ android:id="@+id/att_name"
     </android.support.v7.widget.RecyclerView>
 
 
-    <Button
-        android:id="@+id/attribute_save"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_margin="@dimen/x5"
-        android:layout_marginBottom="@dimen/x10"
-        style="?attr/roundSkyBlueButtonColorStyle"/>
+        android:padding="@dimen/x0"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/attribute_cancel"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="?attr/roundSkyBlueButtonColorStyle"
+            android:text="Cancel"
+            android:layout_margin="@dimen/x5"
+            android:layout_marginBottom="@dimen/x0"
+            android:padding="@dimen/x5"
+            />
+
+        <Button
+            android:id="@+id/attribute_save"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/save"
+
+            style="?attr/roundSkyBlueButtonColorStyle"
+            android:layout_margin="@dimen/x5"
+            android:layout_marginBottom="@dimen/x0"
+            android:padding="@dimen/x5"/>
 
 
+
+
+    </LinearLayout>
 
 </LinearLayout>

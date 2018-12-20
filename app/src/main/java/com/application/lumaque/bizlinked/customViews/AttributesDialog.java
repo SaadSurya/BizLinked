@@ -56,13 +56,15 @@ public class AttributesDialog extends DialogFragment {
     public void setAttribute(ProductAttribute attribute) {
         this.ProductAttribute = attribute;
     }
-    @Override
+    /*@Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         // request a window without the title
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        dialog.getWindow().requestFeature(Window.FEATURE_OPTIONS_PANEL);
         return dialog;
-    }
+    }*/
+
 
     public static AttributesDialog newInstance(ProductAttribute attribute) {
         AttributesDialog frag = new AttributesDialog();
@@ -72,14 +74,33 @@ public class AttributesDialog extends DialogFragment {
     }
 
 
+    /*@Override
+    public void onStart() {
+        super.onStart();
+
+        // safety check
+        if (getDialog() == null) {
+            return;
+        }
+
+        int dialogWidth = 1000; // specify a value here
+        int dialogHeight = 750; // specify a value here
+
+        getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
+
+        // ... other stuff you want to do in your onStart() method
+    }*/
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_layout, container);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
         unbinder = ButterKnife.bind(this, view);
 
 
         attType.setText(ProductAttribute.getAttributeName());
+        getDialog().setTitle("Add Attributes");
 
         itemAttributes = new ArrayList();
         Collections.addAll(itemAttributes, ProductAttribute.getProductAttributeValueName());
@@ -87,7 +108,7 @@ public class AttributesDialog extends DialogFragment {
 
         AttributeItemAdapter = new TagsHorizontalAdapter(getActivity(), itemAttributes);
         StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         rvAttributes.setLayoutManager(gridLayoutManager);
         // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
         rvAttributes.setAdapter(AttributeItemAdapter);

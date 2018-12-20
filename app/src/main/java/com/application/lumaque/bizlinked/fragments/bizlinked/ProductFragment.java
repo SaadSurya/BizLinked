@@ -179,6 +179,15 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
                 ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=1&imageId=2");
                 ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=1&imageId=3");
 
+                String companyId = "companyId="+product.getCompanyID();
+for (int a = 0;a < product.getImages().size();a++){
+
+
+    ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId="+product.CompanyID+"&imageId="+product.getImages().get(a));
+
+
+
+}
 
                 viewpager.setAdapter(new CustomPagerAdapter(activityReference));
 
@@ -321,7 +330,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack{
 
         CompanyHelper companyHelper = new CompanyHelper(activityReference,preferenceHelper);
         companyHelper.getCompanyCategoty(paramCompanyId);
-       // companyHelper.getCompanyAttributes(paramCompanyId);
+        companyHelper.getCompanyAttributes(paramCompanyId);
 
 
     }

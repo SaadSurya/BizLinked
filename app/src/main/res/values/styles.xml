@@ -1,5 +1,36 @@
 <resources>
 
+
+
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+    </style>
+
+
+
+    <style name="dialog_title_style" parent="android:Widget.TextView">
+        <item name="android:background">@color/appColor</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@color/blue_chat_time_color</item>
+        <item name="android:windowBackground">@color/appColor</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@color/appColor</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+
+
+
     <!-- Splash Screen Style -->
     <style name="splash_footer_logo_style">
         <item name="android:layout_width">wrap_content</item>
