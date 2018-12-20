@@ -1,6 +1,5 @@
 package com.application.lumaque.bizlinked.customViews;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,7 +9,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +16,7 @@ import android.widget.EditText;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagsHorizontalAdapter;
+import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 
@@ -32,6 +31,9 @@ import io.reactivex.annotations.Nullable;
 
 
 public class AttributesDialog extends DialogFragment {
+
+    private BasePreferenceHelper prefHelper;
+private ArrayList<ProductAttribute> productAttributes ;
 
     //   protected BaseActivity activityReference;
     @BindView(R.id.att_type)
@@ -97,6 +99,9 @@ public class AttributesDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_layout, container);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
         unbinder = ButterKnife.bind(this, view);
+        prefHelper = new BasePreferenceHelper(getActivity());
+        productAttributes =       prefHelper.getAttributesList();
+
 
 
         attType.setText(ProductAttribute.getAttributeName());

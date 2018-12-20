@@ -143,7 +143,7 @@ public class BasePreferenceHelper extends PreferenceHelper {
 
 
         return new GsonBuilder().create().fromJson(
-                getStringPreference(context, FILENAME, KEY_CATEGORY),listType);
+                getStringPreference(context, FILENAME, KEY_ATTRIBUTES),listType);
     }
 
     public void removeLoginPreference() {
