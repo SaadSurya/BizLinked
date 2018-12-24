@@ -37,7 +37,7 @@ private ArrayList<ProductAttribute> productAttributes ;
 
     //   protected BaseActivity activityReference;
     @BindView(R.id.att_type)
-    EditText attType;
+    AutoCompleteTextView attType;
     @BindView(R.id.att_name)
     AutoCompleteTextView attName;
     @BindView(R.id.rv_attributes)
@@ -58,15 +58,6 @@ private ArrayList<ProductAttribute> productAttributes ;
     public void setAttribute(ProductAttribute attribute) {
         this.ProductAttribute = attribute;
     }
-    /*@Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        // request a window without the title
-
-        dialog.getWindow().requestFeature(Window.FEATURE_OPTIONS_PANEL);
-        return dialog;
-    }*/
-
 
     public static AttributesDialog newInstance(ProductAttribute attribute) {
         AttributesDialog frag = new AttributesDialog();
@@ -76,22 +67,6 @@ private ArrayList<ProductAttribute> productAttributes ;
     }
 
 
-    /*@Override
-    public void onStart() {
-        super.onStart();
-
-        // safety check
-        if (getDialog() == null) {
-            return;
-        }
-
-        int dialogWidth = 1000; // specify a value here
-        int dialogHeight = 750; // specify a value here
-
-        getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
-
-        // ... other stuff you want to do in your onStart() method
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,11 +75,13 @@ private ArrayList<ProductAttribute> productAttributes ;
         setStyle(DialogFragment.STYLE_NORMAL, R.style.MyDialog);
         unbinder = ButterKnife.bind(this, view);
         prefHelper = new BasePreferenceHelper(getActivity());
-        productAttributes =       prefHelper.getAttributesList();
+        productAttributes = prefHelper.getAttributesList();
+
 
 
 
         attType.setText(ProductAttribute.getAttributeName());
+
         getDialog().setTitle("Add Attributes");
 
         itemAttributes = new ArrayList();
