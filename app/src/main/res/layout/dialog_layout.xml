@@ -19,7 +19,7 @@
         style="?attr/roundEditTextNormalColorStyle"
         android:layout_width="match_parent"
         android:layout_marginEnd="@dimen/x16"
-
+android:completionThreshold="1"
         android:layout_marginStart="@dimen/x16"
         android:layout_marginTop="@dimen/x12"
 
@@ -28,7 +28,7 @@
         <ImageButton
             android:id="@+id/btn_add"
             android:layout_gravity="center_vertical|right"
-
+android:visibility="gone"
             android:layout_marginRight="@dimen/x10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,13 +42,13 @@
     <AutoCompleteTextView
 android:id="@+id/att_name"
         style="?attr/roundEditTextNormalColorStyle"
-        android:text="attributeList"
+        android:completionThreshold="1"
         android:layout_margin="@dimen/x5"
         />
         <ImageButton
             android:id="@+id/btn_add_tag"
             android:layout_gravity="center_vertical|right"
-
+            android:visibility="gone"
             android:layout_marginRight="@dimen/x10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

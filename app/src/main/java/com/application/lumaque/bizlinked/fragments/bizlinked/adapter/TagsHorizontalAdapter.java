@@ -53,6 +53,13 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }
 
+    public void addItem(String item) {
+
+
+        productCategoryList.add(item);
+        notifyDataSetChanged();
+    }
+
     public void addAllList(String[] attValues) {
         Collections.addAll(productCategoryList, attValues);
         notifyDataSetChanged();

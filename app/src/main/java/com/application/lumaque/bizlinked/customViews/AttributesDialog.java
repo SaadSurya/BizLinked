@@ -31,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.annotations.Nullable;
 
@@ -42,6 +43,8 @@ public class AttributesDialog extends DialogFragment {
 
     @BindView(R.id.btn_add_tag)
     ImageButton tagBtnAdd;
+    @BindView(R.id.attribute_cancel)
+    Button attributeCancel;
     private BasePreferenceHelper prefHelper;
     private ArrayList<ProductAttribute> companyAttributesList;
 
@@ -49,7 +52,7 @@ public class AttributesDialog extends DialogFragment {
     @BindView(R.id.att_type)
     AutoCompleteTextView attType;
     @BindView(R.id.att_name)
-    AutoCompleteTextView attName;
+    AutoCompleteTextView attTag;
     @BindView(R.id.rv_attributes)
     RecyclerView rvAttributes;
     Unbinder unbinder;
@@ -59,10 +62,11 @@ public class AttributesDialog extends DialogFragment {
     private TagsHorizontalAdapter AttributeItemAdapter;
 
     List itemAttributes;
-    String [] tags = new String[0];
+    String[] tags = new String[0];
 
     AttributesAdapter attributeNameAdapter;
     AttributesTagAdapter attributeTagNameAdapter;
+
     public AttributesDialog() {
 
     }
@@ -92,20 +96,8 @@ public class AttributesDialog extends DialogFragment {
         attType.setText(SelectedProductAttribute.getAttributeName());
 
         getDialog().setTitle("Add Attributes");
+        setCancelable(false);
 
-        itemAttributes = new ArrayList();
-        Collections.addAll(itemAttributes, SelectedProductAttribute.getProductAttributeValueName());
-
-
-        AttributeItemAdapter = new TagsHorizontalAdapter(getActivity(), itemAttributes);
-        StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
-        rvAttributes.setLayoutManager(gridLayoutManager);
-        // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
-        rvAttributes.setAdapter(AttributeItemAdapter);
-        rvAttributes.setNestedScrollingEnabled(false);
-
-        setTextAdapter();
 
         return view;
     }
@@ -115,7 +107,95 @@ public class AttributesDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
 
+        setSavedAttributes();
+        setAutoTextAdapter();
+    }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+
+    private void setAutoTextAdapter() {
+
+        attributeNameAdapter = new AttributesAdapter(getContext(), companyAttributesList, attBtnAdd);
+        attType.setAdapter(attributeNameAdapter);
+        attType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
+                Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        attBtnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "new attribute added :" + attType.getText(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+/**
+ * get attributes tag for selected attributes
+ */
+        for (int a = 0; a < companyAttributesList.size(); a++) {
+
+            if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
+                tags = companyAttributesList.get(a).getProductAttributeValueName();
+            }
+
+
+        }
+        //  List<String> newList=new ArrayList<>(list);
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(tags));
+        attributeTagNameAdapter = new AttributesTagAdapter(getContext(), list, tagBtnAdd);
+        attTag.setAdapter(attributeTagNameAdapter);
+
+
+        attTag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
+
+
+                Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        tagBtnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+             //   Toast.makeText(getContext(), "new tag added :" + attTag.getText(), Toast.LENGTH_SHORT).show();
+                AttributeItemAdapter.addItem(attTag.getText().toString());
+                attTag.setText("");
+                tagBtnAdd.setVisibility(View.GONE);
+
+            }
+        });
+
+    }
+
+    private void setSavedAttributes() {
+
+
+        itemAttributes = new ArrayList();
+        Collections.addAll(itemAttributes, SelectedProductAttribute.getProductAttributeValueName());
+
+        AttributeItemAdapter = new TagsHorizontalAdapter(getActivity(), itemAttributes);
+        StaggeredGridLayoutManager gridLayoutManager =
+                new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL);
+        rvAttributes.setLayoutManager(gridLayoutManager);
+        // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
+        rvAttributes.setAdapter(AttributeItemAdapter);
+        rvAttributes.setNestedScrollingEnabled(false);
         rvAttributes.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), rvAttributes,
                 new ClickListenerRecycler() {
                     @Override
@@ -147,110 +227,16 @@ public class AttributesDialog extends DialogFragment {
 
     }
 
+    @OnClick({R.id.attribute_cancel, R.id.attribute_save})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.attribute_cancel:
+               dismiss();
+                break;
+            case R.id.attribute_save:
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-
-    private void setTextAdapter() {
-
-        attributeNameAdapter = new AttributesAdapter(getContext(), companyAttributesList, attBtnAdd);
-        attType.setAdapter(attributeNameAdapter);
-
-
-        attType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView < ? > arg0, View arg1, int position, long arg3) {
-                ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
-
-
-                Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        attBtnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                Toast.makeText(getContext(), "new attribute added :" + attType.getText(), Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
-
-
-       // ArrayList<String> tags = new ArrayList<>();
-
-        for(int a = 0; a < companyAttributesList.size();a++){
-
-
-            if(companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID){
-                tags = companyAttributesList.get(a).getProductAttributeValueName();
-
-            }
-
-
+                dismiss();
+                break;
         }
-      //  List<String> newList=new ArrayList<>(list);
-        ArrayList<String> list =  new ArrayList<>(Arrays.asList(tags));
-        attributeTagNameAdapter = new AttributesTagAdapter(getContext(),list, tagBtnAdd);
-        attName.setAdapter(attributeTagNameAdapter);
-
-
-        attName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView < ? > arg0, View arg1, int position, long arg3) {
-                ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
-
-
-                Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        tagBtnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                Toast.makeText(getContext(), "new tag added :" + attType.getText(), Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
     }
-
-
-
-
-  /*  public void setAttAddVisibility(boolean isVisible) {
-
-
-        if (isVisible)
-            attBtnAdd.setVisibility(View.VISIBLE);
-        else
-            attBtnAdd.setVisibility(View.GONE);
-
-    }*/
-
-
- /*   public void setTagAddVisibility(boolean isVisible) {
-
-
-        if (isVisible)
-            tagAddButton.setVisibility(View.VISIBLE);
-        else
-            tagAddButton.setVisibility(View.GONE);
-
-    }
-*/
-
 }

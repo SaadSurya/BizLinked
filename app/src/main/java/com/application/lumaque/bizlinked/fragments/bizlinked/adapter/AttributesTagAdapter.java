@@ -63,14 +63,14 @@ public class AttributesTagAdapter extends ArrayAdapter<String> {
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            setAttAddVisibility(true);
+          //  setAttAddVisibility(true);
             if (constraint != null) {
                 suggestions.clear();
-                setAttAddVisibility(true);
+             //   setAttAddVisibility(true);
                 for (String people : tempCustomer) {
                     if (people.toLowerCase().contains(constraint.toString().toLowerCase())) {
                         suggestions.add(people);
-                        setAttAddVisibility(false);
+                   //     setAttAddVisibility(false);
 
 
                     }
