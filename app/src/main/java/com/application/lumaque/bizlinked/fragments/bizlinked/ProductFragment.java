@@ -1,6 +1,8 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -9,6 +11,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,12 +51,12 @@ import java.util.List;
 import butterknife.BindView;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProductFragment extends BaseFragment implements TagCloseCallBack {
+public class ProductFragment extends BaseFragment implements TagCloseCallBack,ResponceCallBack {
 
     private Bundle bundle;
     private ArrayList<ProductCategory> companyCategoryList;
     private ArrayList<ProductAttribute> productAttributes;
-
+    public static final int DATEPICKER_FRAGMENT = 1;
     private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
@@ -120,10 +123,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
 
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
-      //  cacheCat();
+        cacheCat();
 
         initializeViews();
-        setCatAdapter();
+
     }
 
     private void setArguments() {
@@ -209,6 +212,14 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
 
     }
 
+    @Override
+    public void onResponce(boolean isCached) {
+        if(isCached){
+            setCatAdapter();
+        }
+
+    }
+
 
     public class CustomPagerAdapter extends PagerAdapter {
 
@@ -259,7 +270,15 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
     }
 
 
+    private void cacheCat() {
 
+
+        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper,this);
+        companyHelper.getCompanyCategoty(paramCompanyId);
+        companyHelper.getCompanyAttributes(paramCompanyId);
+
+
+    }
 
 
     private void setTagAdapter() {
@@ -279,10 +298,33 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
         AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute);
         if ( editNameDialogFragment.getDialog() != null )
             editNameDialogFragment.getDialog().setCanceledOnTouchOutside(false);
+      //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
+
+
+
+        editNameDialogFragment.setTargetFragment(this, DATEPICKER_FRAGMENT);
         editNameDialogFragment.show(fm, "fragment_attribute_dialog");
+
+
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case DATEPICKER_FRAGMENT:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle bundle = data.getExtras();
 
+                 //   ProductAttribute returnedAtt= (ProductAttribute) data.getExtras().getSerializable("attr");
+
+tagItemAdapter.notifyChangeData();
+Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+
+                }
+                break;
+        }
+    }
     private void setCatAdapter() {
 
         companyCategoryList = preferenceHelper.getCategoryList();

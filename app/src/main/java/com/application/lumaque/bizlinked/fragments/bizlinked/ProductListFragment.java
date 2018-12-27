@@ -220,8 +220,8 @@ public class ProductListFragment extends BaseFragment {
                                     try {
 
 
-                                        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper);
-                                        companyHelper.cacheCat(String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
+                                       // CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper);
+                                        //companyHelper.cacheCat(String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
 
                                         Bundle bundle = new Bundle();
                                         bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProduct().get(position).getCompanyID()));

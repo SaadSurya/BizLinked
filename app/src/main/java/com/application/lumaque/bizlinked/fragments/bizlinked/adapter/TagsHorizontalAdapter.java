@@ -25,7 +25,7 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     final LayoutInflater inflater;
     Context context;
 
-    List productCategoryList;
+   public List productCategoryList;
 
 
 

@@ -56,6 +56,20 @@ public class TagViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
 
+public void notifyChangeData(){
+    notifyDataSetChanged();
+
+}
+    public void addItem(ProductAttribute item) {
+        this.productAttributesList.add(item);
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<ProductAttribute> getAttributeLIst(){
+
+        return productAttributesList;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -145,7 +159,7 @@ public class TagViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void showInfo(LinearLayout linearLayout, String[] names){
         LayoutInflater layoutInfralte=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
+linearLayout.removeAllViews();
         for (int a=0;a<names.length;a++){
             View view=layoutInfralte.inflate(R.layout.tag_layout, null);
             TextView tv=view.findViewById(R.id.att_name);

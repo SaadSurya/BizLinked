@@ -1,6 +1,8 @@
 package com.application.lumaque.bizlinked.customViews;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -236,7 +238,20 @@ public class AttributesDialog extends DialogFragment {
                 break;
             case R.id.attribute_save:
 
+
+                String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
+                AttributeItemAdapter.productCategoryList.toArray(array);
+                //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
+                SelectedProductAttribute.setProductAttributeValueName(array);
+
+                Intent i = new Intent()
+                        .putExtra("attr", SelectedProductAttribute);
+                     //   .putExtra("year", getYearInt());
+                getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
                 dismiss();
+
+
+//                dismiss();
                 break;
         }
     }

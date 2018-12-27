@@ -3,6 +3,7 @@ package com.application.lumaque.bizlinked.webhelpers;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
+import com.application.lumaque.bizlinked.fragments.bizlinked.ResponceCallBack;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 
 import java.util.ArrayList;
@@ -14,10 +15,13 @@ public class CompanyHelper {
     private BasePreferenceHelper preferenceHelper;
     private ArrayList<ProductCategory> categoryLIst;
 
-    public CompanyHelper(BaseActivity activityReference,BasePreferenceHelper preferenceHelper) {
+
+    private ResponceCallBack responceCallBack;
+    public CompanyHelper(BaseActivity activityReference,BasePreferenceHelper preferenceHelper,ResponceCallBack responceCallBack) {
 
         this.activityReference = activityReference;
         this.preferenceHelper = preferenceHelper;
+        this.responceCallBack = responceCallBack;
 
     }
 
@@ -36,12 +40,13 @@ public class CompanyHelper {
 
                 preferenceHelper.putCategory(response);
 
-
+                responceCallBack.onResponce(true);
             }
 
             @Override
             public void onError(String response) {
 
+                responceCallBack.onResponce(false);
             }
 
             @Override
@@ -86,26 +91,6 @@ public class CompanyHelper {
 
 
     }
-
-
-
-    public void cacheCat(String paramCompanyId) {
-
-
-
-        getCompanyCategoty(paramCompanyId);
-        getCompanyAttributes(paramCompanyId);
-
-
-    }
-
-
-
-
-
-
-
-
 
 
 }
