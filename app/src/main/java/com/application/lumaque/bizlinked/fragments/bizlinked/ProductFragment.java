@@ -120,10 +120,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
 
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
-        cacheCat();
-        setCatAdapter();
-        initializeViews();
+      //  cacheCat();
 
+        initializeViews();
+        setCatAdapter();
     }
 
     private void setArguments() {
@@ -259,15 +259,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack {
     }
 
 
-    private void cacheCat() {
 
-
-        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper);
-        companyHelper.getCompanyCategoty(paramCompanyId);
-        companyHelper.getCompanyAttributes(paramCompanyId);
-
-
-    }
 
 
     private void setTagAdapter() {

@@ -88,4 +88,24 @@ public class CompanyHelper {
     }
 
 
+
+    public void cacheCat(String paramCompanyId) {
+
+
+
+        getCompanyCategoty(paramCompanyId);
+        getCompanyAttributes(paramCompanyId);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
 }

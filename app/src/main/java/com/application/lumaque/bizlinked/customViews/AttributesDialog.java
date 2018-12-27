@@ -78,7 +78,6 @@ public class AttributesDialog extends DialogFragment {
     public static AttributesDialog newInstance(ProductAttribute attribute) {
         AttributesDialog frag = new AttributesDialog();
         frag.setAttribute(attribute);
-        // this.activityReference = activityReference;
         return frag;
     }
 
@@ -161,10 +160,12 @@ public class AttributesDialog extends DialogFragment {
         attTag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
+          //      ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
 
-
-                Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
+                AttributeItemAdapter.addItem((String) arg0.getItemAtPosition(position));
+                attTag.setText("");
+                tagBtnAdd.setVisibility(View.GONE);
+               // Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
             }
 
         });

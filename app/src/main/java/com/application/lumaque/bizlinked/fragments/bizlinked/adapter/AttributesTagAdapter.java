@@ -100,6 +100,10 @@ public class AttributesTagAdapter extends ArrayAdapter<String> {
                 setAttAddVisibility(true);
                 notifyDataSetChanged();
             }
+            if(constraint == null){
+                setAttAddVisibility(false);
+            }
+
         }
     };
     public void setAttAddVisibility(boolean isVisible) {

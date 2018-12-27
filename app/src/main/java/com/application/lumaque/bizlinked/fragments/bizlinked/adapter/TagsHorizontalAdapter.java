@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
@@ -55,9 +56,13 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public void addItem(String item) {
 
-
-        productCategoryList.add(item);
-        notifyDataSetChanged();
+        if(!containsCaseInsensitive(item,productCategoryList))
+        {
+            productCategoryList.add(item);
+        notifyDataSetChanged();}
+        else {
+            Toast.makeText(context, "Already in the list", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void addAllList(String[] attValues) {
@@ -125,6 +130,13 @@ private TextView att_name;
 
 
     }
-
+    public boolean containsCaseInsensitive(String s, List<String> l){
+        for (String string : l){
+            if (string.equalsIgnoreCase(s.trim())){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
