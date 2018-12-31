@@ -62,8 +62,8 @@ public class AttributesDialog extends DialogFragment {
     Button attributeSave;
     private ProductAttribute SelectedProductAttribute;
     private TagsHorizontalAdapter AttributeItemAdapter;
-
-    List itemAttributes;
+    boolean isNew;
+    List itemAttributes = new ArrayList();
     String[] tags = new String[0];
 
     AttributesAdapter attributeNameAdapter;
@@ -77,9 +77,11 @@ public class AttributesDialog extends DialogFragment {
         this.SelectedProductAttribute = attribute;
     }
 
-    public static AttributesDialog newInstance(ProductAttribute attribute) {
+    public static AttributesDialog newInstance(ProductAttribute attribute,boolean isNew) {
         AttributesDialog frag = new AttributesDialog();
         frag.setAttribute(attribute);
+        frag.isNew = isNew;
+
         return frag;
     }
 
@@ -92,10 +94,8 @@ public class AttributesDialog extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
         prefHelper = new BasePreferenceHelper(getActivity());
         companyAttributesList = prefHelper.getAttributesList();
-
-
+        if(!isNew)
         attType.setText(SelectedProductAttribute.getAttributeName());
-
         getDialog().setTitle("Add Attributes");
         setCancelable(false);
 
@@ -108,8 +108,9 @@ public class AttributesDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
 
-        setSavedAttributes();
         setAutoTextAdapter();
+        if(!isNew)
+        setSavedAttributes();
     }
 
 
@@ -129,6 +130,21 @@ public class AttributesDialog extends DialogFragment {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
                 Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
+                for (int a = 0; a < companyAttributesList.size(); a++) {
+
+                    if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
+                        tags = companyAttributesList.get(a).getProductAttributeValueName();
+                    }
+
+
+                }
+
+
+                //  List<String> newList=new ArrayList<>(list);
+                ArrayList<String> list = new ArrayList<>(Arrays.asList(tags));
+                attributeTagNameAdapter = new AttributesTagAdapter(getContext(), list, tagBtnAdd);
+                attTag.setAdapter(attributeTagNameAdapter);
+
             }
 
         });
@@ -137,14 +153,24 @@ public class AttributesDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "new attribute added :" + attType.getText(), Toast.LENGTH_SHORT).show();
-
+                SelectedProductAttribute = new ProductAttribute();
+                SelectedProductAttribute.setAttributeName(attType.getText().toString());
+                attBtnAdd.setVisibility(View.GONE);
+             //   SelectedProductAttribute = abc;
 
             }
         });
 
+
+
+
+
+
+
 /**
  * get attributes tag for selected attributes
  */
+if(!isNew)
         for (int a = 0; a < companyAttributesList.size(); a++) {
 
             if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
@@ -153,6 +179,8 @@ public class AttributesDialog extends DialogFragment {
 
 
         }
+
+
         //  List<String> newList=new ArrayList<>(list);
         ArrayList<String> list = new ArrayList<>(Arrays.asList(tags));
         attributeTagNameAdapter = new AttributesTagAdapter(getContext(), list, tagBtnAdd);
@@ -183,14 +211,6 @@ public class AttributesDialog extends DialogFragment {
 
             }
         });
-
-    }
-
-    private void setSavedAttributes() {
-
-
-        itemAttributes = new ArrayList();
-        Collections.addAll(itemAttributes, SelectedProductAttribute.getProductAttributeValueName());
 
         AttributeItemAdapter = new TagsHorizontalAdapter(getActivity(), itemAttributes);
         StaggeredGridLayoutManager gridLayoutManager =
@@ -226,6 +246,14 @@ public class AttributesDialog extends DialogFragment {
                     }
                 }
         ));
+    }
+
+    private void setSavedAttributes() {
+
+
+      //  itemAttributes = new ArrayList();
+        Collections.addAll(itemAttributes, SelectedProductAttribute.getProductAttributeValueName());
+        AttributeItemAdapter.addAllList(itemAttributes);
 
 
     }
@@ -245,8 +273,8 @@ public class AttributesDialog extends DialogFragment {
                 SelectedProductAttribute.setProductAttributeValueName(array);
 
                 Intent i = new Intent()
-                        .putExtra("attr", SelectedProductAttribute);
-                     //   .putExtra("year", getYearInt());
+                        .putExtra("attr", SelectedProductAttribute)
+                        .putExtra("isNew", isNew);
                 getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
                 dismiss();
 

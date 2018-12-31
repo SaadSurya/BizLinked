@@ -65,8 +65,9 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public void addAllList(String[] attValues) {
-        Collections.addAll(productCategoryList, attValues);
+    public void addAllList(List attValues) {
+        //Collections.addAll(productCategoryList, attValues);
+        productCategoryList.addAll(attValues);
         notifyDataSetChanged();
     }
 

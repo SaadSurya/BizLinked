@@ -213,9 +213,6 @@ public class WebAppManager {
 
 
 
-
-
-
         WebAPIRequestHelper.getInstance(activity, true)
                // .setHeaderUserPreference(preferenceHelper)
                 .setCustomJsonBody(jsonString)

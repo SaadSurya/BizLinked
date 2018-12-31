@@ -49,6 +49,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ProductFragment extends BaseFragment implements TagCloseCallBack,ResponceCallBack {
@@ -207,7 +208,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
-        showAttributeDialog(productAttribute);
+        showAttributeDialog(productAttribute,false);
 
 
     }
@@ -293,9 +294,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     }
 
 
-    private void showAttributeDialog(ProductAttribute attribute) {
+    private void showAttributeDialog(ProductAttribute attribute,boolean isNew) {
         FragmentManager fm = activityReference.getSupportFragmentManager();
-        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute);
+        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute,isNew);
         if ( editNameDialogFragment.getDialog() != null )
             editNameDialogFragment.getDialog().setCanceledOnTouchOutside(false);
       //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
@@ -315,7 +316,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
 
-                 //   ProductAttribute returnedAtt= (ProductAttribute) data.getExtras().getSerializable("attr");
+                    ProductAttribute returnedAtt= (ProductAttribute) data.getExtras().getSerializable("attr");
+
+                  if(data.getBooleanExtra("isNew",false))
+                      tagItemAdapter.addItem(returnedAtt);
 
 tagItemAdapter.notifyChangeData();
 Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
@@ -344,6 +348,32 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
 
 
     }
+
+
+    @OnClick({R.id.add_att,R.id.btn_save})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_save:
+                product.setProductAttributes(tagItemAdapter.getAttributeLIst());
+
+//todo api call
+            String abc = new String();
+               // getCurrentLocation();
+                break;
+            case R.id.add_att:
+                //onSave();
+                showAttributeDialog(null,true);
+
+                break;
+
+        }
+    }
+
+
+
+
+
+
     private void startShimerAnimation() {
         mShimmerViewContainer.startShimmerAnimation();
         mainlayout.setVisibility(View.GONE);
