@@ -25,15 +25,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.customViews.AttributesDialog;
+import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.LinkListAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
@@ -43,6 +46,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +65,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
-
+    Gson g = new Gson();
     String paramCompanyId = "";
     String paramProductId = "";
 
@@ -356,9 +360,13 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
             case R.id.btn_save:
                 product.setProductAttributes(tagItemAdapter.getAttributeLIst());
 
+
+                String jsonString = g.toJson(product);
+
+                prodSaveReq(jsonString);
 //todo api call
             String abc = new String();
-               // getCurrentLocation();
+
                 break;
             case R.id.add_att:
                 //onSave();
@@ -370,7 +378,42 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
     }
 
 
+    private void prodSaveReq(String jsonString){
 
+        WebAppManager.getInstance(activityReference, preferenceHelper).saveDetailsJson(
+                Request.Method.POST,
+                jsonString, AppConstant.ServerAPICalls.PRODUCT_SAVE, new WebAppManager.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+                        String anc = response;
+
+                        Utils.showToast(activityReference,"save Successfully",AppConstant.TOAST_TYPES.SUCCESS);
+                        onCustomBackPressed();
+                    /*    CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
+
+                        preferenceHelper.putCompany(companyprofile);
+                        Utils.showToast(activityReference, "Profile Updater", AppConstant.TOAST_TYPES.SUCCESS);
+                        activityReference.updateDrawer();*/
+
+                    }
+
+                    @Override
+                    public void onError(String response) {
+                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
+
+
+
+
+
+    }
 
 
 

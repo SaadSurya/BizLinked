@@ -49,7 +49,7 @@ public class ProfileAddressTabFragment extends Fragment {
 
     MapFragment mapFragment;
     ArrayList<CitiesModel> citiesList;
-
+    Gson g = new Gson();
 
      @BindView(R.id.mapContainer)
      FrameLayout mpFrameLayout;
@@ -218,14 +218,14 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
 
        // frag.updatedProfile.setBusinessNature(BN);
 
-        Gson g = new Gson();
+
         String jsonString = g.toJson( frag.updatedProfile);
 
-        Type type = new TypeToken<Map<String,String>>() {}.getType();
+    //    Type type = new TypeToken<Map<String,String>>() {}.getType();
 
 /*        Map<String,String> result =  new Gson().fromJson(jsonString, type);
         HashMap<String,String> params = new HashMap<>(result);*/
-       sendSaveReq(jsonString);
+       profileSaveReq(jsonString);
 
     }
 
@@ -247,11 +247,7 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
 
     }
 
-    private void sendSaveReq(String jsonString){
-
-
-
-
+    private void profileSaveReq(String jsonString){
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetailsJson(
                 Request.Method.POST,
