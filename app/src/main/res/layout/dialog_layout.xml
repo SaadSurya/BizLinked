@@ -14,7 +14,7 @@
     <AutoCompleteTextView
         android:id="@+id/att_type"
         android:layout_gravity="center"
-        android:text="@string/category"
+        android:text=""
         android:layout_margin="@dimen/x5"
         style="?attr/roundEditTextNormalColorStyle"
         android:layout_width="match_parent"

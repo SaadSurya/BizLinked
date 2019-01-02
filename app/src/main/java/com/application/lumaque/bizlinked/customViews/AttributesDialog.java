@@ -18,10 +18,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
+import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.AttributesAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.AttributesTagAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagsHorizontalAdapter;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
@@ -266,19 +268,22 @@ if(!isNew)
                 break;
             case R.id.attribute_save:
 
+if(SelectedProductAttribute == null){
 
-                String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
-                AttributeItemAdapter.productCategoryList.toArray(array);
-                //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
-                SelectedProductAttribute.setProductAttributeValueName(array);
+    Utils.showToast(getContext(),"select attribute name", AppConstant.TOAST_TYPES.ERROR);
+}else {
+    String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
+    AttributeItemAdapter.productCategoryList.toArray(array);
+    //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
+    SelectedProductAttribute.setProductAttributeValueName(array);
 
-                Intent i = new Intent()
-                        .putExtra("attr", SelectedProductAttribute)
-                        .putExtra("isNew", isNew);
-                getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
-                dismiss();
+    Intent i = new Intent()
+            .putExtra("attr", SelectedProductAttribute)
+            .putExtra("isNew", isNew);
+    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
+    dismiss();
 
-
+}
 //                dismiss();
                 break;
         }
