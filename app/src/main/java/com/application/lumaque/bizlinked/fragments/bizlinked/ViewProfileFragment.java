@@ -1,5 +1,6 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -48,7 +49,7 @@ private String strReqType;
 
     CompanyProfileModel companyProfileModel;
     @BindView(R.id.flCaptureImage)
-    FrameLayout flCaptureImage1;
+    ImageView flCaptureImage1;
 
 
 
@@ -126,11 +127,11 @@ ConstraintLayout mainLayout;
 
 
 
-        ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
-        setVisibilityOfImageView(true,ivDocumentImage);
+//        ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
+//        setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(this).load(URL)
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
-                .into(ivDocumentImage);
+                .into(flCaptureImage1);
 
 
 
