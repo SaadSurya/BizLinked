@@ -224,7 +224,7 @@ public class ProductListFragment extends BaseFragment {
                                         //companyHelper.cacheCat(String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
 
                                         Bundle bundle = new Bundle();
-                                        bundle.putString(ProductFragment.companyId, String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
+                                        bundle.putInt(ProductFragment.companyId, (ProductList.getProduct().get(position).getCompanyID()));
                                         bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
                                         ProductFragment ProductFragment = new ProductFragment();
                                         ProductFragment.setArguments(bundle);

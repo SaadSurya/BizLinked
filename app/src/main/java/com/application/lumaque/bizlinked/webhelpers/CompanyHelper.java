@@ -4,6 +4,7 @@ import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ResponceCallBack;
+import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 
 import java.util.ArrayList;
@@ -25,12 +26,12 @@ public class CompanyHelper {
 
     }
 
-    public   void getCompanyCategoty(String CompanyId){
+    public   void getCompanyCategoty(int CompanyId){
 
 
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId",CompanyId);
+        params.put("companyId", String.valueOf(CompanyId));
 
 
 
@@ -38,15 +39,18 @@ public class CompanyHelper {
             @Override
             public void onSuccess(String response) {
 
-                preferenceHelper.putCategory(response);
+            //    preferenceHelper.putCategory(response);
 
-                responceCallBack.onResponce(true);
+                GsonHelper gsonHelper = new GsonHelper();
+
+
+                responceCallBack.onCategoryResponce(gsonHelper.GsonToCategoryList(activityReference,response));
             }
 
             @Override
             public void onError(String response) {
 
-                responceCallBack.onResponce(false);
+                responceCallBack.onCategoryResponce(null);
             }
 
             @Override
@@ -59,12 +63,12 @@ public class CompanyHelper {
 
     }
 
-    public   void getCompanyAttributes(String CompanyId){
+    public   void getCompanyAttributes(int CompanyId){
 
 
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId",CompanyId);
+        params.put("companyId", String.valueOf(CompanyId));
 
 
 

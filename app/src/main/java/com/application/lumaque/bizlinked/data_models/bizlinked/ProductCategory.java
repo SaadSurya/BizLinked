@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class ProductCategory implements Serializable {
 
-    public long CompanyID;
-    public long ProductCategoryID ;
+    public int CompanyID;
+    public int ProductCategoryID ;
     public String ProductCategoryName ;
 
     public String getImageID() {
@@ -17,21 +17,21 @@ public class ProductCategory implements Serializable {
     }
 
     public String ImageID ;
-    public long  ParentProductCategoryID ;
+    public int  ParentProductCategoryID ;
 
-    public long getCompanyID() {
+    public int getCompanyID() {
         return CompanyID;
     }
 
-    public void setCompanyID(long companyID) {
+    public void setCompanyID(int companyID) {
         CompanyID = companyID;
     }
 
-    public long getProductCategoryID() {
+    public int getProductCategoryID() {
         return ProductCategoryID;
     }
 
-    public void setProductCategoryID(long productCategoryID) {
+    public void setProductCategoryID(int productCategoryID) {
         ProductCategoryID = productCategoryID;
     }
 
@@ -45,11 +45,11 @@ public class ProductCategory implements Serializable {
 
 
 
-    public long getParentProductCategoryID() {
+    public int getParentProductCategoryID() {
         return ParentProductCategoryID;
     }
 
-    public void setParentProductCategoryID(long parentProductCategoryID) {
+    public void setParentProductCategoryID(int parentProductCategoryID) {
         ParentProductCategoryID = parentProductCategoryID;
     }
 }

@@ -24,6 +24,7 @@
     <string name="create_new_account">Create New Account</string>
     <string name="error_password">Password should be 6 characters long</string>
     <string name="error_user_name">Username should be 3 characters long</string>
+    <string name="error_category_name">Category name should be at-least 3 characters long</string>
     <string name="error_fname">First Name should be 3 characters long</string>
     <string name="error_lname">Last Name should be 3 characters long</string>
 
@@ -170,7 +171,6 @@
     <string name="quit">Quit</string>
 
 
-
     <string name="coverage">Coverage</string>
 
     <!--Font Awsome Codes-->
@@ -178,11 +178,6 @@
     <string name="dropdown">&#xf0d7;</string>
     <string name="edit">&#xf044;</string>
     <string name="pdf_file">&#xf1c1;</string>
-
-
-
-
-
 
 
     <string-array name="busines_nature">
@@ -196,7 +191,6 @@
         <item>Lahore</item>
         <item>Islamabad</item>
     </string-array>
-
 
 
     <string name="title_activity_home">HomeActivity</string>
@@ -243,5 +237,7 @@
     <string name="product_name">Product Name</string>
     <string name="description">Description</string>
     <string name="price">Price</string>
+    <string name="select_image">Select Image</string>
+    <string name="category_name">Category Name</string>
 
 </resources>

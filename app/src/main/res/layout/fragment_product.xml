@@ -168,21 +168,21 @@
                     android:id="@+id/pro_name"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
-                    android:layout_marginEnd="@dimen/x16"
-
                     android:layout_marginStart="@dimen/x16"
+
                     android:layout_marginTop="@dimen/x12"
+                    android:layout_marginEnd="@dimen/x16"
                     android:hint="@string/product_name" />
 
                 <EditText
-                    android:layout_below="@+id/pro_name"
                     android:id="@+id/pro_desc"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/x16"
+                    android:layout_below="@+id/pro_name"
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
+                    android:layout_marginEnd="@dimen/x16"
                     android:gravity="top|left"
                     android:hint="@string/description"
                     android:inputType="textMultiLine"
@@ -199,10 +199,10 @@
                     android:id="@+id/pro_category"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
-                    android:layout_marginEnd="@dimen/x16"
                     android:layout_below="@+id/pro_desc"
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
+                    android:layout_marginEnd="@dimen/x16"
                     android:hint="@string/category" />
 
 
@@ -210,49 +210,48 @@
                     android:id="@+id/pro_price"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
-                    android:layout_marginEnd="@dimen/x16"
                     android:layout_below="@+id/pro_category"
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
+                    android:layout_marginEnd="@dimen/x16"
                     android:hint="@string/price" />
 
 
-
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/attribute_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/attribute_layout"
                     android:layout_below="@+id/pro_price"></android.support.v7.widget.RecyclerView>
 
 
-           <!-- <LinearLayout
-                android:id="@+id/attribute_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@+id/pro_price"
-                android:layout_marginStart="@dimen/x16"
-                android:layout_marginTop="@dimen/x12"
-                android:layout_marginEnd="@dimen/x16"
-                style="?attr/roundEditTextNormalColorStyle"
-                android:padding="@dimen/x2"
-                >
+                <!-- <LinearLayout
+                     android:id="@+id/attribute_layout"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:layout_below="@+id/pro_price"
+                     android:layout_marginStart="@dimen/x16"
+                     android:layout_marginTop="@dimen/x12"
+                     android:layout_marginEnd="@dimen/x16"
+                     style="?attr/roundEditTextNormalColorStyle"
+                     android:padding="@dimen/x2"
+                     >
 
 
-                <include layout="@layout/attribute_row"/>
+                     <include layout="@layout/attribute_row"/>
 
 
 
-            </LinearLayout>
--->
+                 </LinearLayout>
+     -->
 
 
-            <RelativeLayout
+                <RelativeLayout
                     android:id="@+id/add_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@+id/attribute_layout"
+                    android:orientation="horizontal"
 
                     >
 
@@ -260,25 +259,24 @@
 
                         style="?attr/roundEditTextNormalColorStyle"
                         android:layout_width="match_parent"
-                        android:layout_marginEnd="@dimen/x16"
-                      android:text="add attributes"
                         android:layout_marginStart="@dimen/x16"
                         android:layout_marginTop="@dimen/x12"
-
+                        android:layout_marginEnd="@dimen/x16"
                         android:layout_toLeftOf="@+id/add_att"
-                        />
+
+                        android:text="add attributes" />
 
                     <ImageButton
                         android:id="@+id/add_att"
                         style="?attr/roundEditTextNormalColorStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
                         android:layout_gravity="right"
-android:layout_alignParentRight="true"
                         android:layout_marginTop="@dimen/x12"
                         android:adjustViewBounds="true"
-                        android:cropToPadding="true"
-                        android:background="@drawable/addnew" />
+                        android:background="@drawable/addnew"
+                        android:cropToPadding="true" />
 
                 </RelativeLayout>
 
@@ -287,15 +285,15 @@ android:layout_alignParentRight="true"
 
                     android:id="@+id/btn_save"
                     style="?attr/roundSkyBlueButtonColorStyle"
-android:layout_below="@+id/add_layout"
                     android:layout_width="match_parent"
+                    android:layout_below="@+id/add_layout"
                     android:layout_gravity="bottom"
-
-                    android:layout_marginBottom="@dimen/x16"
-                    android:layout_marginEnd="@dimen/x16"
 
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
+
+                    android:layout_marginEnd="@dimen/x16"
+                    android:layout_marginBottom="@dimen/x16"
                     android:text="@string/save" />
 
             </RelativeLayout>

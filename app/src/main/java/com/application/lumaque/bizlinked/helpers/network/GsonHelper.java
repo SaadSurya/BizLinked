@@ -82,7 +82,13 @@ public class GsonHelper {
     }
 
 
+public String getJsonString(Object object){
 
+
+Gson gson = new Gson();
+    return  gson.toJson(object);
+
+}
 
 //    public static Class getGSONConvertedClass(Context context, String recordsArrayString, Class<T> convertedClass){
 //
