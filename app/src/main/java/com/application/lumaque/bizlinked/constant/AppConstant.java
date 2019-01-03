@@ -6,7 +6,7 @@ public class AppConstant {
     public static final int HOME_ITEM_COUNT = 3;
 
     public static final int SELECT_IMAGE_COUNT = 1;
-    public static final int SELECT_MAX_FILE_COUNT = 10;
+    public static final int SELECT_MAX_FILE_COUNT = 1;
     public static final int SELECT_DOC_FILE_COUNT = 1;
     public static final int SELECT_MAX_DOC_FILE_COUNT = 10;
     public static final int GOOGLE_PLACE_CODE = 501;

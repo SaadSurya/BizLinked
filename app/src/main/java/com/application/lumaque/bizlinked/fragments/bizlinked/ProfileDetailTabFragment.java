@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +33,13 @@ import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.listener.OnImageDownload;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -48,8 +56,10 @@ import butterknife.Unbinder;
 public class ProfileDetailTabFragment extends Fragment implements MediaTypePicker {
     ArrayList<BusinessNatureModel>  BusinessNatureList;
 
-    @BindView(R.id.flCaptureImage)
-    FrameLayout flCaptureImage1;
+
+    boolean isImageSet = false;
+    @BindView(R.id.profile_picture)
+    ImageView profilePic;
 
      @BindView(R.id.et_user_name)
      EditText etUserName;
@@ -74,8 +84,8 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
     BaseActivity activityReference;
     BasePreferenceHelper preferenceHelper;
     private static ProfileDetailTabFragment profileDetailTabFragment;
-    private int position;
-    private View currentImageContainerView;
+   // private int position;
+   // private View currentImageContainerView;
     @SuppressLint("ValidFragment")
     private ProfileDetailTabFragment() {
     }
@@ -94,6 +104,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
 
         View rootView = inflater.inflate(R.layout.fragment_profile_detail, container, false);
         unbinder = ButterKnife.bind(this, rootView);
@@ -129,7 +140,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
                 ArrayAdapter arrayAdapter = new ArrayAdapter(activityReference, android.R.layout.simple_spinner_dropdown_item, majorCat);
                 arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spBusinesType.setAdapter(arrayAdapter);
-                  getImages(AppConstant.ServerAPICalls.GET_MEDIA_FILE+preferenceHelper.getCompanyProfile().getCompanyID());
+                  getImages();
 
                 etUserName.setText(preferenceHelper.getCompanyProfile().getCompanyName());
                 etPhone.setText(preferenceHelper.getCompanyProfile().getContactNo());
@@ -200,12 +211,12 @@ try {
     }
 
 
-    @OnClick({R.id.flCaptureImage,R.id.btn_save})
+    @OnClick({R.id.profile_picture,R.id.btn_save})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.flCaptureImage:
+            case R.id.profile_picture:
                 selectedViewName = AppConstant.SCAN_DOCUMENT_TYPES.IMAGE_0;
-                openImagePicker(0, view);
+                openImagePicker( view);
                 break;
             case R.id.btn_save:
                 onSave();
@@ -249,13 +260,13 @@ private void onSave(){
 
 
 }
-    private void openImagePicker(int position, View view) {
-        if (isImageSet(view))
-            openOptionsList(position, view);
+    private void openImagePicker( View view) {
+        if (isImageSet)
+            openOptionsList( view);
         else
-            takePicture(position, view);
+            takePicture( view);
     }
-    private void openOptionsList(final int position, final View view) {
+    private void openOptionsList( final View view) {
         final ArrayList<String> optionsList = new ArrayList<>();
         optionsList.add(activityReference.getString(R.string.preview));
         optionsList.add(activityReference.getString(R.string.update));
@@ -266,31 +277,31 @@ private void onSave(){
                 dialog.dismiss();
 
                 if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.preview))) {
-                    openImagePreview((ImageView) view.findViewById(R.id.ivDocumentImage));
+                    openImagePreview((ImageView) view);
                 } else if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.delete))) {
                     deleteCurrentProfileImage();
 
                 } else if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.update))) {
-                    takePicture(position, view);
+                    takePicture( view);
                 }
 
             }
         }, activityReference.getString(R.string.select_options), optionsList);
     }
 
-    private boolean isImageSet(View imageContainerView) {
+   /* private boolean isImageSet(View imageContainerView) {
         return ((ImageView) imageContainerView.findViewById(R.id.ivDocumentImage)).getVisibility() == View.VISIBLE;
-    }
+    }*/
 
-    private void takePicture(int position, View view) {
+    private void takePicture(View view) {
         activityReference.openMediaPicker(ProfileDetailTabFragment.this);
-        this.position = position;
-        this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
+
+      //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
     private void getStoragePermissions() {
         if (TedPermission.isGranted(activityReference, Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-           // getImages();
+            getImages();
         } else {
             TedPermission.with(activityReference)
                     .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -299,7 +310,7 @@ private void onSave(){
                     .setPermissionListener(new PermissionListener() {
                         @Override
                         public void onPermissionGranted() {
-                          //  getImages();
+                            getImages();
                         }
 
                         @Override
@@ -313,26 +324,27 @@ private void onSave(){
 
 
 
+    private void getImages() {
 
-    private void getImages(String URL) {
-
-
-
-        ImageLoader imageLoader = new ImageLoader(  activityReference, flCaptureImage1,preferenceHelper);
-        imageLoader.loadScanDocumentImages(false,URL
-                , new OnImageDownload() {
+      String URL =   AppConstant.ServerAPICalls.GET_MEDIA_FILE+preferenceHelper.getCompanyProfile().getCompanyID();
+      ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
+      //  setVisibilityOfImageView(true,ivDocumentImage);
+        Glide.with(this).load(URL)
+                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
+                .listener(new RequestListener<Drawable>() {
                     @Override
-                    public void onImageDownload(View currentView, String filePath) {
-                        if (isAdded() && isVisible())
-                            setImageFromPath(false, currentView, filePath);
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        isImageSet = false;
+                        return false;
                     }
 
                     @Override
-                    public void onImageError(View currentView) {
-
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                       isImageSet = true;
+                        return false;
                     }
-                }
-        );
+                })
+                .into(profilePic);
 
 
 
@@ -378,7 +390,8 @@ private void onSave(){
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
-                        setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
+                        //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
+                        getImages();
                         activityReference.updateDrawer();
                     }
 
@@ -449,7 +462,7 @@ private void onSave(){
             @Override
             public void onSuccess(String response) {
                 // Utils.showToast(activityReference, response, AppConstant.TOAST_TYPES.SUCCESS);
-                getImages(AppConstant.ServerAPICalls.GET_MEDIA_FILE+preferenceHelper.getCompanyProfile().getCompanyID());
+                getImages();
                 activityReference.updateDrawer();
 
 
