@@ -5,34 +5,40 @@
         android:id="@+id/nav_item1"
         android:title="">
         <menu>
-          <!--  <item
-                android:id="@+id/nav_profile"
-                android:title="@string/profile"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
--->
-           <!-- <item
-                android:id="@+id/nav_biz_links"
-                android:title="@string/my_bizlinks"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
--->
+            <!--  <item
+                  android:id="@+id/nav_profile"
+                  android:title="@string/profile"
+                  android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+  -->
+            <!-- <item
+                 android:id="@+id/nav_biz_links"
+                 android:title="@string/my_bizlinks"
+                 android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+ -->
             <item
-                app:actionViewClass="android.widget.TextView"
                 android:id="@+id/nav_customers"
+                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
                 android:title="@string/customer"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+                app:actionViewClass="android.widget.TextView" />
 
             <item
-                app:actionViewClass="android.widget.TextView"
                 android:id="@+id/nav_supplier"
+                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
                 android:title="@string/supplier"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+                app:actionViewClass="android.widget.TextView" />
 
 
-   <item
-                app:actionViewClass="android.widget.TextView"
+            <item
                 android:id="@+id/nav_product"
+                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
                 android:title="Product"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+                app:actionViewClass="android.widget.TextView" />
+
+            <item
+                android:id="@+id/nav_category"
+                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
+                android:title="Category"
+                app:actionViewClass="android.widget.TextView" />
 
 
         </menu>
@@ -44,8 +50,8 @@
         <menu>
             <item
                 android:id="@+id/nav_logout"
-                android:title="@string/logout"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"/>
+                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
+                android:title="@string/logout" />
         </menu>
     </item>
 </menu>

@@ -66,7 +66,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     public static final String companyId = "companyId";
     public static final String productId = "productId";
     Gson g = new Gson();
-    String paramCompanyId = "";
+    int paramCompanyId ;
     String paramProductId = "";
 
 
@@ -137,7 +137,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     private void setArguments() {
         bundle = getArguments();
         if (bundle != null) {
-            paramCompanyId = bundle.getString(companyId);
+            paramCompanyId = bundle.getInt(companyId);
             paramProductId = bundle.getString(productId);
         }
     }
@@ -147,7 +147,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
 
         startShimerAnimation();
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId", paramCompanyId);
+        params.put("companyId", String.valueOf(paramCompanyId));
         params.put("productId", paramProductId);
 
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_DETAIL, false, new WebAppManager.APIStringRequestDataCallBack() {
@@ -218,9 +218,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     }
 
     @Override
-    public void onResponce(boolean isCached) {
-        if(isCached){
-            setCatAdapter();
+    public void onCategoryResponce(ArrayList<ProductCategory> categoryList) {
+        if(categoryList!= null){
+            setCatAdapter(categoryList);
         }
 
     }
@@ -333,9 +333,9 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-    private void setCatAdapter() {
+    private void setCatAdapter(ArrayList<ProductCategory> categoryList) {
 
-        companyCategoryList = preferenceHelper.getCategoryList();
+        companyCategoryList = categoryList;
 
 
         List categoryName = new ArrayList();

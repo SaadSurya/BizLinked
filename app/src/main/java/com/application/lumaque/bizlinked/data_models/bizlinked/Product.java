@@ -7,7 +7,7 @@ public class Product implements Serializable {
 
 
 
-    public long CompanyID ;
+    public int CompanyID ;
     public long ProductID ;
     public String ProductName ;
     public String ProductDescription ;
@@ -17,11 +17,11 @@ public class Product implements Serializable {
     public List<String> Images ;
     public List<ProductAttribute> ProductAttributes;
 
-    public long getCompanyID() {
+    public int getCompanyID() {
         return CompanyID;
     }
 
-    public void setCompanyID(long companyID) {
+    public void setCompanyID(int companyID) {
         CompanyID = companyID;
     }
 

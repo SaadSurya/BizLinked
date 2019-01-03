@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_category"
+        android:layout_width="@dimen/x200"
+        android:contentDescription="@string/select_image"
+        android:layout_height="@dimen/x200"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_add_a_photo_black_200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_category_name"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x16"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="@dimen/x16"
+        android:hint="@string/category_name"
+        android:inputType="textAutoComplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_category" />
+
+
+    <AutoCompleteTextView
+        android:id="@+id/att_type_cat"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x16"
+        android:layout_marginTop="@dimen/x12"
+        android:layout_marginEnd="@dimen/x16"
+        android:completionThreshold="1"
+        android:hint="Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_category_name" />
+
+    <Button
+        android:id="@+id/btn_save"
+        style="?attr/roundSkyBlueButtonColorStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x16"
+        android:layout_marginTop="@dimen/x12"
+        android:layout_marginEnd="@dimen/x16"
+        android:layout_marginBottom="@dimen/x16"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

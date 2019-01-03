@@ -39,6 +39,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.RegistrationActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
@@ -48,6 +49,7 @@ import com.application.lumaque.bizlinked.data_models.bizlinked.FireBaseDataMode;
 import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CustomerFragmentTabs;
+import com.application.lumaque.bizlinked.fragments.bizlinked.NewCategoryFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ProductListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.SupplierFragmentTabs;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
@@ -78,6 +80,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.yovenny.videocompress.MediaController;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -85,6 +88,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+
 import butterknife.ButterKnife;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
@@ -95,17 +99,12 @@ import id.zelory.compressor.Compressor;
 import static com.google.android.gms.location.LocationSettingsRequest.Builder;
 
 
-public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
-
+public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
 
     public Toolbar toolbar;
 
-    TextView supplier,customer;
-
-
-
-
+    TextView supplier, customer, category;
 
 
     private ActionBarDrawerToggle toggle;
@@ -138,7 +137,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     final int FASTEST_INTERVAL = 500;
 
     TextView Username;
-    de.hdodenhof.circleimageview.CircleImageView    profileImage;
+    de.hdodenhof.circleimageview.CircleImageView profileImage;
 
 
     //For Places
@@ -199,12 +198,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             public void onBackStackChanged() {
 
                 Fragment currentFragment = getSupportFragmentManager().findFragmentById(getFragmentFrameLayoutId());
-              //  Toast.makeText(BaseActivity.this,"before frag",Toast.LENGTH_LONG).show();
+                //  Toast.makeText(BaseActivity.this,"before frag",Toast.LENGTH_LONG).show();
                 if (currentFragment != null) {
-               //     Toast.makeText(BaseActivity.this,currentFragment.getClass().getSimpleName(),Toast.LENGTH_LONG).show();
+                    //     Toast.makeText(BaseActivity.this,currentFragment.getClass().getSimpleName(),Toast.LENGTH_LONG).show();
                     Log.e("fragment=", currentFragment.getClass().getSimpleName());
                     baseFragment = (BaseFragment) currentFragment;
-                }else {
+                } else {
                     onBackPressed();
                 }
             }
@@ -219,11 +218,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
 
-    public void setFireBase(){
-      //  addMenuBadge(true);
+    public void setFireBase() {
+        //  addMenuBadge(true);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference().child("notifications").child("comp_"+prefHelper.getCompanyProfile().getCompanyID());
+        reference = firebaseDatabase.getReference().child("notifications").child("comp_" + prefHelper.getCompanyProfile().getCompanyID());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -233,15 +232,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     list.add(child.getValue(FireBaseDataMode.class));
                 }
-                if (list.size() != 0){
+                if (list.size() != 0) {
                     badgeDrawable.setEnabled(true);
                     badgeDrawable.setText("");
 
-                    addMenuBadge(list.get(list.size()-1).getText().toLowerCase().contains("supplier"));
+                    addMenuBadge(list.get(list.size() - 1).getText().toLowerCase().contains("supplier"));
 
                 }
 
-              //  dataSnapshot.getRef().removeValue();
+                //  dataSnapshot.getRef().removeValue();
 
 
                 //    isForeground("com.application.lumaque.bizlinked");
@@ -256,17 +255,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     }
 
-public void addMenuBadge(boolean isSupplier){
+    public void addMenuBadge(boolean isSupplier) {
 
-
-        if(!isSupplier) {
+        if (!isSupplier) {
             supplier.setGravity(Gravity.CENTER_VERTICAL);
             supplier.setTypeface(null, Typeface.BOLD);
             supplier.setTextColor(getResources().getColor(R.color.red));
             supplier.setText("1");
 
-        }else {
-
+        } else {
             customer.setGravity(Gravity.CENTER_VERTICAL);
             customer.setTypeface(null, Typeface.BOLD);
             customer.setTextColor(getResources().getColor(R.color.red));
@@ -274,43 +271,37 @@ public void addMenuBadge(boolean isSupplier){
 
         }
 
-}
-    public void removeReadFireBaseNotification(){
+    }
 
+    public void removeReadFireBaseNotification() {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference().child("notifications").child("comp_"+prefHelper.getCompanyProfile().getCompanyID());
-
-
-
-
+        reference = firebaseDatabase.getReference().child("notifications").child("comp_" + prefHelper.getCompanyProfile().getCompanyID());
 
 
     }
 
-    public void setUpDrowerMenu(){
+    public void setUpDrowerMenu() {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-
-        if(toolbar!= null){
+        if (toolbar != null) {
             toolbar.setVisibility(View.VISIBLE);
             setSupportActionBar(toolbar);
-           final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-             toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
                 public void onDrawerClosed(View view) {
                     super.onDrawerClosed(view);
                     // Do whatever you want here
                 }
+
                 public void onDrawerOpened(View drawerView) {
                     super.onDrawerOpened(drawerView);
                     // Do whatever you want here
                 }
             };
-
-
 
 
             badgeDrawable = new BadgeDrawerArrowDrawable(getSupportActionBar().getThemedContext());
@@ -325,14 +316,14 @@ public void addMenuBadge(boolean isSupplier){
             navigationView.setNavigationItemSelectedListener(this);
 
             View headerLayout = navigationView.getHeaderView(0);
-             profileImage = (de.hdodenhof.circleimageview.CircleImageView) headerLayout.findViewById(R.id.profile_image);
+            profileImage = (de.hdodenhof.circleimageview.CircleImageView) headerLayout.findViewById(R.id.profile_image);
 
             profileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
-                    viewprofilefragment.setViewID(String.valueOf(prefHelper.getCompanyProfile().getCompanyID()),"self");
-                    addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                    viewprofilefragment.setViewID(String.valueOf(prefHelper.getCompanyProfile().getCompanyID()), "self");
+                    addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
 
                     drawer.closeDrawer(GravityCompat.START);
@@ -340,57 +331,39 @@ public void addMenuBadge(boolean isSupplier){
             });
 
 
-             Username = headerLayout.findViewById(R.id.userName);
+            Username = headerLayout.findViewById(R.id.userName);
 
-            Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE+prefHelper.getCompanyProfile().getCompanyID())
+            Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE + prefHelper.getCompanyProfile().getCompanyID())
                     .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
                     .into(profileImage);
             Username.setText(prefHelper.getCompanyProfile().getCompanyName());
 
-            supplier=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+            supplier = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
                     findItem(R.id.nav_supplier));
-            customer=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+            customer = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
                     findItem(R.id.nav_customers));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            category = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                    findItem(R.id.nav_category));
 
 
         }
     }
 
 
+    public void updateDrawer() {
 
-
-    public void updateDrawer(){
-
-        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE+prefHelper.getCompanyProfile().getCompanyID())
+        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE + prefHelper.getCompanyProfile().getCompanyID())
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())))
                 .into(profileImage);
         Username.setText(prefHelper.getCompanyProfile().getCompanyName());
     }
+
     private void openRequiredFragment(ArrayList<OptionMenuModal> optionList, MenuItem item) {
         for (OptionMenuModal object : optionList) {
             if (object.getId() == item.getItemId()) {
                 BaseFragment className = Utils.getFragmentByName(context, object.getClassName());
-                addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE, true);
             }
         }
     }
@@ -400,7 +373,7 @@ public void addMenuBadge(boolean isSupplier){
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 prefHelper.removeLoginPreference();
-               // clearBackstack();
+                // clearBackstack();
 
                 StopBackgroundService(BackgroundService.class);
 /*
@@ -430,23 +403,21 @@ public void addMenuBadge(boolean isSupplier){
     public <T> void StartBackgroundService(Class<T> cls) {
 
 
-
         Intent intent = new Intent(this, cls);
-        intent.putExtra("msgID", "comp_"+prefHelper.getCompanyProfile().getCompanyID());
+        intent.putExtra("msgID", "comp_" + prefHelper.getCompanyProfile().getCompanyID());
         intent.putExtra("islogin", prefHelper.getLoginStatus());
-       // startService(new Intent(SelectSigningFragment.this,BackgroundService.class));
+        // startService(new Intent(SelectSigningFragment.this,BackgroundService.class));
         startService(intent);
 
 
     }
 
-  public <T> void StopBackgroundService(Class<T> cls) {
-
+    public <T> void StopBackgroundService(Class<T> cls) {
 
 
         Intent intent = new Intent(this, cls);
-       // startService(new Intent(SelectSigningFragment.this,BackgroundService.class));
-      stopService(intent);
+        // startService(new Intent(SelectSigningFragment.this,BackgroundService.class));
+        stopService(intent);
 
 
     }
@@ -481,13 +452,12 @@ public void addMenuBadge(boolean isSupplier){
     }
 
 
-    public void addSupportFragment(BaseFragment frag, int transition,boolean addToStack) {
-
+    public void addSupportFragment(BaseFragment frag, int transition, boolean addToStack) {
 
 
         baseFragment = frag;
         FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction =manager.beginTransaction();
+        FragmentTransaction transaction = manager.beginTransaction();
 
         if (transition == AppConstant.TRANSITION_TYPES.FADE)
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -496,23 +466,20 @@ public void addMenuBadge(boolean isSupplier){
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
 
-
-
         transaction.replace(getFragmentFrameLayoutId(), frag, frag.getClass().getName());
-        if(addToStack){
-        transaction.addToBackStack(frag.getClass().getName()).commit();// AllowingStateLoss();
-             }
-             else
-             transaction.commit();
+        if (addToStack) {
+            transaction.addToBackStack(frag.getClass().getName()).commit();// AllowingStateLoss();
+        } else
+            transaction.commit();
     }
 
     public void addSupportFragmentWithContainerView(Fragment frag, int layoutId) {
 
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(layoutId, frag, frag.getClass().getName());
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(layoutId, frag, frag.getClass().getName());
 
-            transaction.commit();
+        transaction.commit();
 
 
 //       transaction.addToBackStack(getSupportFragmentManager().getBackStackEntryCount() == 0 ?
@@ -572,13 +539,12 @@ public void addMenuBadge(boolean isSupplier){
         getSupportFragmentManager().executePendingTransactions();
 
     }
-    public void removeFragment( String tag) {
+
+    public void removeFragment(String tag) {
 
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.remove(getSupportFragmentManager().findFragmentByTag(tag)).commit();
-
-
 
 
     }
@@ -594,7 +560,7 @@ public void addMenuBadge(boolean isSupplier){
 
     }
 
-//    public void addAndShowDialogFragment(DialogFragment dialog) {
+    //    public void addAndShowDialogFragment(DialogFragment dialog) {
 //        FragmentTransaction transaction = getSupportFragmentManager()
 //                .beginTransaction();
 //        dialog.show(transaction, "tag");
@@ -613,16 +579,16 @@ public void addMenuBadge(boolean isSupplier){
 //
 //        frag.show(transaction, TAG);
 //    }
-public void onPageBack() {
-    if (!loading) {
+    public void onPageBack() {
+        if (!loading) {
 
 
-        super.onBackPressed();
+            super.onBackPressed();
 
-    } else {
-        Utils.showToast(context, context.getString(R.string.please_wait_data_is_loading), AppConstant.TOAST_TYPES.INFO);
+        } else {
+            Utils.showToast(context, context.getString(R.string.please_wait_data_is_loading), AppConstant.TOAST_TYPES.INFO);
+        }
     }
-}
 
 
     @Override
@@ -637,9 +603,9 @@ public void onPageBack() {
         } else {
             Utils.showToast(context, context.getString(R.string.please_wait_data_is_loading), AppConstant.TOAST_TYPES.INFO);
         }*/
-  if (!loading) {
+        if (!loading) {
 
-                baseFragment.onCustomBackPressed();
+            baseFragment.onCustomBackPressed();
 
         } else {
             Utils.showToast(context, context.getString(R.string.please_wait_data_is_loading), AppConstant.TOAST_TYPES.INFO);
@@ -1296,8 +1262,8 @@ public void onPageBack() {
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         String s = "";
-        if(baseFragment !=null)
-            s =  baseFragment.getClass().getName();
+        if (baseFragment != null)
+            s = baseFragment.getClass().getName();
         switch (id) {
           /*  case R.id.nav_profile:
                 ProfileTabsFragment ProfileTabsFragment = new ProfileTabsFragment();
@@ -1309,49 +1275,52 @@ public void onPageBack() {
                 addSupportFragment(LinksTabsFragment, AppConstant.TRANSITION_TYPES.SLIDE,false);
                 break;*/
 
-                case R.id.nav_customers:
-                    // TODO: 10/1/2018 change to supplier frag
-                    badgeDrawable.setEnabled(false);
-                    supplier.setText("");
-                    customer.setText("");
-                    if(!s .contains("CustomerFragmentTabs")){
+            case R.id.nav_customers:
+                // TODO: 10/1/2018 change to supplier frag
+                badgeDrawable.setEnabled(false);
+                supplier.setText("");
+                customer.setText("");
+                if (!s.contains("CustomerFragmentTabs")) {
 
 
                     CustomerFragmentTabs customerFragment = new CustomerFragmentTabs();
-                addSupportFragment(customerFragment, AppConstant.TRANSITION_TYPES.SLIDE,false);
-                    }
-                  //  popBackStackTillEntry(1);
+                    addSupportFragment(customerFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+                }
+                //  popBackStackTillEntry(1);
                 break;
 
-                case R.id.nav_supplier:
-                    // TODO: 10/1/2018 change to customer frag
-                    badgeDrawable.setEnabled(false);
-                    supplier.setText("");
-                    customer.setText("");
-                    if(!s .contains("SupplierFragmentTabs")) {
+            case R.id.nav_supplier:
+                // TODO: 10/1/2018 change to customer frag
+                badgeDrawable.setEnabled(false);
+                supplier.setText("");
+                customer.setText("");
+                if (!s.contains("SupplierFragmentTabs")) {
 
 
-                        SupplierFragmentTabs supplierFragment = new SupplierFragmentTabs();
-                        addSupportFragment(supplierFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
-                    }
-                   // popBackStackTillEntry(1);
+                    SupplierFragmentTabs supplierFragment = new SupplierFragmentTabs();
+                    addSupportFragment(supplierFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+                }
+                // popBackStackTillEntry(1);
                 break;
 
-   case R.id.nav_product:
+            case R.id.nav_product:
 
 
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductListFragment.companyId, String.valueOf(prefHelper.getCompanyProfile().getCompanyID()));
+                bundle.putString(ProductListFragment.productCategoryId, "");
+                ProductListFragment ProductListFragment = new ProductListFragment();
+                ProductListFragment.setArguments(bundle);
+                addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+                // popBackStackTillEntry(1);
+                break;
 
 
-
-
-       Bundle bundle = new Bundle();
-       bundle.putString(ProductListFragment.companyId,  String.valueOf(prefHelper.getCompanyProfile().getCompanyID()));
-       bundle.putString(ProductListFragment.productCategoryId, "");
-       ProductListFragment ProductListFragment = new ProductListFragment();
-       ProductListFragment.setArguments(bundle);
-       addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-
-                   // popBackStackTillEntry(1);
+            case R.id.nav_category:
+                NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                // popBackStackTillEntry(1);
                 break;
 
 
