@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,6 +30,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.HashMap;
 
 import butterknife.BindView;
+import io.github.yavski.fabspeeddial.FabSpeedDial;
+import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 public class ProductListFragment extends BaseFragment {
 
@@ -44,17 +47,25 @@ public class ProductListFragment extends BaseFragment {
     Bundle bundle;
 
 
-
     ProductList ProductList;
 
 
+
+
+
+  //  FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
+
+
+    @BindView(R.id.fab_speed_dial)
+    FabSpeedDial fabSpeedDial;
+
+
     @BindView(R.id.shimmer_view_container)
-    ShimmerFrameLayout mShimmerViewContainer ;
+    ShimmerFrameLayout mShimmerViewContainer;
 
 
- @BindView(R.id.mainlayout)
- ConstraintLayout mainlayout ;
-
+    @BindView(R.id.mainlayout)
+    ConstraintLayout mainlayout;
 
 
     @BindView(R.id.category_rv)
@@ -90,8 +101,6 @@ public class ProductListFragment extends BaseFragment {
     }
 
 
-
-
     private void setArguments() {
         bundle = getArguments();
         if (bundle != null) {
@@ -99,6 +108,7 @@ public class ProductListFragment extends BaseFragment {
             paramProductCategoryId = bundle.getString(productCategoryId);
         }
     }
+
     private void initializeViews() {
         mShimmerViewContainer.startShimmerAnimation();
 
@@ -106,9 +116,8 @@ public class ProductListFragment extends BaseFragment {
         mShimmerViewContainer.setVisibility(View.VISIBLE);
 
 
-
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId",paramCompanyId);
+        params.put("companyId", paramCompanyId);
         params.put("productCategoryId", paramProductCategoryId);
 
 /*
@@ -119,7 +128,7 @@ public class ProductListFragment extends BaseFragment {
 
 */
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER,false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
@@ -127,14 +136,48 @@ public class ProductListFragment extends BaseFragment {
                 mainlayout.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.setVisibility(View.GONE);
 
-                 ProductList =  GsonHelper.GsonToProductList(activityReference, response);
+                ProductList = GsonHelper.GsonToProductList(activityReference, response);
 
 
 
-                if(ProductList.getProductCategory().size()==0){
+
+                fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
+                    @Override
+                    public boolean onMenuItemSelected(MenuItem menuItem) {
+                        //TODO: Start some activity
+
+                        int id = menuItem.getItemId();
+                        switch (id) {
+
+
+
+                            case R.id.add_category:
+                          Utils.showToast(activityReference,"ye hai new Style",AppConstant.TOAST_TYPES.INFO);
+                            break;
+
+                            case R.id.add_product:
+                                Bundle bundleParam = new Bundle();
+                                bundleParam.putString(ProductFragment.companyId, String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+                                //bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
+                                ProductFragment ProductFragment = new ProductFragment();
+                                ProductFragment.setArguments(bundleParam);
+                                activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                            break;
+
+                        }
+
+                        return false;
+                    }
+                });
+
+
+
+
+
+                if (ProductList.getProductCategory().size() == 0) {
 
                     rvCategory.setVisibility(View.GONE);
-                }else {
+                } else {
                     categoryItemAdapter = new CategoryHorizontalAdapter(activityReference, ProductList.getProductCategory());
                     rvCategory.setHasFixedSize(true);
                     rvCategory.setLayoutManager(new LinearLayoutManager(activityReference, LinearLayoutManager.HORIZONTAL, false));
@@ -151,9 +194,6 @@ public class ProductListFragment extends BaseFragment {
                                         try {
 
 
-
-
-
                                             Bundle bundle = new Bundle();
                                             bundle.putString(ProductListFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
                                             bundle.putString(ProductListFragment.productCategoryId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
@@ -162,9 +202,8 @@ public class ProductListFragment extends BaseFragment {
                                             activityReference.addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
 
-
                                         } catch (Exception e) {
-                                            Utils.showToast(activityReference,activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                            Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
                                             e.printStackTrace();
                                         }
 
@@ -182,33 +221,16 @@ public class ProductListFragment extends BaseFragment {
                     ));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 }
 
 
-
-                productItemAdapter= new ProductAdapter(activityReference, ProductList.getProduct());
+                productItemAdapter = new ProductAdapter(activityReference, ProductList.getProduct());
                 StaggeredGridLayoutManager gridLayoutManager =
                         new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 rvProduct.setLayoutManager(gridLayoutManager);
                 // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
                 rvProduct.setAdapter(productItemAdapter);
                 rvProduct.setNestedScrollingEnabled(false);
-
-
 
 
                 rvProduct.addOnItemTouchListener(new RecyclerTouchListener(activityReference, rvProduct,
@@ -220,7 +242,7 @@ public class ProductListFragment extends BaseFragment {
                                     try {
 
 
-                                       // CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper);
+                                        // CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper);
                                         //companyHelper.cacheCat(String.valueOf(ProductList.getProduct().get(position).getCompanyID()));
 
                                         Bundle bundle = new Bundle();
@@ -231,9 +253,8 @@ public class ProductListFragment extends BaseFragment {
                                         activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
 
-
                                     } catch (Exception e) {
-                                        Utils.showToast(activityReference,activityReference.getString(R.string.product_detail_not_found), AppConstant.TOAST_TYPES.INFO);
+                                        Utils.showToast(activityReference, activityReference.getString(R.string.product_detail_not_found), AppConstant.TOAST_TYPES.INFO);
                                         e.printStackTrace();
                                     }
 
@@ -251,12 +272,6 @@ public class ProductListFragment extends BaseFragment {
                 ));
 
 
-
-
-
-
-
-
             }
 
             @Override
@@ -272,8 +287,6 @@ public class ProductListFragment extends BaseFragment {
 
 
     }
-
-
 
 
 }
