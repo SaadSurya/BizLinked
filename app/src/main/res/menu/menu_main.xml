@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add_category"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="add Category" />
+    <item
+        android:id="@+id/add_product"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="add product"/>
+
+</menu>
