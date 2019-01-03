@@ -147,10 +147,7 @@ dependencies {
 
    // implementation 'me.relex:circleindicator:2.1.0'
     implementation 'me.relex:circleindicator:1.2.2'
-
-
-
-
+    implementation 'io.github.yavski:fab-speed-dial:1.0.6'
 
 }
 

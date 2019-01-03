@@ -126,11 +126,25 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
 
+        startShimerAnimation();
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
         cacheCat();
+if(paramProductId !=null && paramProductId.length() > 0){
+startShimerAnimation();
+    initializeViews();
+}else {
+    stopShimerAnimation();
+    product = new Product();
+    product.setProductAttributes(new ArrayList<ProductAttribute>());
+    product.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
+    setTagAdapter();
 
-        initializeViews();
+
+}
+
+
+
 
     }
 
@@ -173,13 +187,14 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
 
                 //product.getProductAttributes();
 
-                if (product.getProductCategoryID() > 1)
+              /*  if (product.getProductCategoryID() > 1)
                     for (ProductCategory temp : companyCategoryList) {
                         if (temp.getProductCategoryID() == product.getProductCategoryID()) {
                             proCate.setText(temp.ProductCategoryName);
                         }
-                    }
+                    }*/
                 setTagAdapter();
+                proCate.setText(product.getProductCategoryName());
                 proName.setText(product.getProductName());
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
@@ -358,6 +373,14 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
+
+
+                product.setProductCategoryName(proCate.getText().toString());
+                product.setProductName(proName.getText().toString());
+                product.setProductDescription(proDesc.getText().toString());
+                product.setPrice(Double.parseDouble(proPrice.getText().toString()));
+
+
                 product.setProductAttributes(tagItemAdapter.getAttributeLIst());
 
 
@@ -365,7 +388,6 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
 
                 prodSaveReq(jsonString);
 //todo api call
-            String abc = new String();
 
                 break;
             case R.id.add_att:
