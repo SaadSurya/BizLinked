@@ -152,7 +152,9 @@ public class ProductListFragment extends BaseFragment {
 
 
                             case R.id.add_category:
-                          Utils.showToast(activityReference,"ye hai new Style",AppConstant.TOAST_TYPES.INFO);
+//                          Utils.showToast(activityReference,"ye hai new Style",AppConstant.TOAST_TYPES.INFO);
+                                NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                                activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                             break;
 
                             case R.id.add_product:

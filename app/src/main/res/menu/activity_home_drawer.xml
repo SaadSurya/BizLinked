@@ -37,7 +37,7 @@
             <item
                 android:id="@+id/nav_category"
                 android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
-                android:title="Category"
+                android:title="Add Category"
                 app:actionViewClass="android.widget.TextView" />
 
 

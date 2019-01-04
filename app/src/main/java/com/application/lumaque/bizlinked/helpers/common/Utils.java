@@ -49,7 +49,10 @@ import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.helpers.ui.dialogs.DateFormatHelper;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -182,7 +185,21 @@ public class Utils {
 
 
     }
+    public static byte[] getBytes(File file) {
 
+        byte[] fileByteArray = new byte[(int) file.length()];
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(fileByteArray);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileByteArray;
+    }
     public static void makeLinks(CheckBox checkBox, String[] links, ClickableSpan[] clickableSpans) {
         Spannable mySpannable = (Spannable) checkBox.getText();
         for (int i = 0; i < links.length; i++) {

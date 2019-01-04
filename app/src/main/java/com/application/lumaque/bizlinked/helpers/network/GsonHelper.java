@@ -21,7 +21,7 @@ import java.util.List;
 public class GsonHelper {
 
 
-    public static ProductList GsonToProductList (Context context, String recordsArrayString) {
+    public static ProductList GsonToProductList(Context context, String recordsArrayString) {
 
         Type listType = new TypeToken<ProductList>() {
         }.getType();
@@ -29,7 +29,7 @@ public class GsonHelper {
     }
 
 
-  public static Product GsonToProduct (Context context, String recordsArrayString) {
+    public static Product GsonToProduct(Context context, String recordsArrayString) {
 
         Type listType = new TypeToken<Product>() {
         }.getType();
@@ -37,11 +37,16 @@ public class GsonHelper {
     }
 
 
-
-
     public static ArrayList<ProductCategory> GsonToCategoryList(Context context, String recordsArrayString) {
 
         Type listType = new TypeToken<List<ProductCategory>>() {
+        }.getType();
+        return new Gson().fromJson(recordsArrayString, listType);
+    }
+
+    public static ProductCategory GsonToProductCategory(Context context, String recordsArrayString) {
+
+        Type listType = new TypeToken<ProductCategory>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
@@ -60,6 +65,7 @@ public class GsonHelper {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
+
     public static ArrayList<MajorCategoryModel> GsonToMajorCategory(Context context, String recordsArrayString) {
 
         Type listType = new TypeToken<List<MajorCategoryModel>>() {
@@ -82,13 +88,13 @@ public class GsonHelper {
     }
 
 
-public String getJsonString(Object object){
+    public String getJsonString(Object object) {
 
 
-Gson gson = new Gson();
-    return  gson.toJson(object);
+        Gson gson = new Gson();
+        return gson.toJson(object);
 
-}
+    }
 
 //    public static Class getGSONConvertedClass(Context context, String recordsArrayString, Class<T> convertedClass){
 //

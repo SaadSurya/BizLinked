@@ -1,7 +1,13 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,11 +29,24 @@ import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.SaveCategoryAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
+import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
+import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.Order;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,24 +54,27 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
-public class NewCategoryFragment extends BaseFragment implements ResponceCallBack {
+import static com.application.lumaque.bizlinked.helpers.common.Utils.getBytes;
+
+public class NewCategoryFragment extends BaseFragment implements ResponceCallBack, MediaTypePicker {
 
     @Order(1)
     @Length(min = AppConstant.VALIDATION_RULES.USER_NAME_MIN_LENGTH, messageResId = R.string.error_category_name)
     @BindView(R.id.et_category_name)
     EditText catNameEditText;
 
+    boolean isImageSet = false;
 
     @BindView(R.id.att_type_cat)
     AutoCompleteTextView parentProductEditText;
 
     @BindView(R.id.iv_category)
     ImageView categoryImageView;
-
+    File imageFile;
     private GsonHelper gsonHelper;
     private int companyId;
     private int postionAdapter;
-
+    private ProductCategory productCategory;
     @Override
     public void onCustomBackPressed() {
         activityReference.onPageBack();
@@ -112,6 +134,9 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                         String anc = response;
                         Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
                         onCustomBackPressed();
+                        GsonHelper gsonHelper = new GsonHelper();
+                        productCategory = gsonHelper.GsonToProductCategory(activityReference, response);
+                        uploadMedia(imageFile,"1");
                     }
 
                     @Override
@@ -124,11 +149,15 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                 });
     }
 
-    @OnClick({R.id.btn_save})
+    @OnClick({R.id.btn_save, R.id.iv_category})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
                 validateFields();
+                break;
+
+            case R.id.iv_category:
+                openImagePicker(view);
                 break;
         }
     }
@@ -167,4 +196,167 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
             }
         });
     }
+
+    private void openImagePicker(View view) {
+        if (isImageSet)
+            openOptionsList(view);
+        else
+            takePicture(view);
+    }
+
+
+    private void getImages() {
+
+        String URL = AppConstant.ServerAPICalls.GET_MEDIA_FILE + preferenceHelper.getCompanyProfile().getCompanyID();
+        ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
+        //  setVisibilityOfImageView(true,ivDocumentImage);
+        Glide.with(activityReference).load(URL)
+                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        isImageSet = false;
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        isImageSet = true;
+                        return false;
+                    }
+                })
+                .into(categoryImageView);
+    }
+
+    private void openOptionsList(final View view) {
+        final ArrayList<String> optionsList = new ArrayList<>();
+        optionsList.add(activityReference.getString(R.string.preview));
+        optionsList.add(activityReference.getString(R.string.update));
+        optionsList.add(activityReference.getString(R.string.delete));
+        DialogFactory.listDialog(activityReference, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichOptionPosition) {
+                dialog.dismiss();
+
+                if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.preview))) {
+                    openImagePreview((ImageView) view);
+                } else if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.delete))) {
+                    deleteCurrentProfileImage();
+
+                } else if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.update))) {
+                    takePicture(view);
+                }
+
+            }
+        }, activityReference.getString(R.string.select_options), optionsList);
+    }
+
+    private void takePicture(View view) {
+        activityReference.openMediaPicker(NewCategoryFragment.this);
+
+        //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
+    }
+
+    private void openImagePreview(ImageView imageView) {
+        final ImagePopup imagePopup = new ImagePopup(activityReference);
+        imagePopup.setWindowWidth(800); // Optional
+        imagePopup.setWindowHeight(800); // Optional
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(true);  // Optional
+        imagePopup.setImageOnClickClose(true);  // Optional
+        imagePopup.initiatePopup(imageView.getDrawable());
+        imagePopup.viewPopup();
+    }
+
+
+    private void deleteCurrentProfileImage() {
+
+
+        final HashMap<String, String> params = new HashMap<>();
+
+        params.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+
+
+        WebAppManager.getInstance(activityReference, preferenceHelper).deleteDetails(params, AppConstant.ServerAPICalls.DELETE_COMPANY_PROFILE_PIC, true, new WebAppManager.APIStringRequestDataCallBack() {
+            @Override
+            public void onSuccess(String response) {
+                // Utils.showToast(activityReference, response, AppConstant.TOAST_TYPES.SUCCESS);
+                getImages();
+//                activityReference.updateDrawer();
+            }
+
+            @Override
+            public void onError(String response) {
+            }
+
+            @Override
+            public void onNoNetwork() {
+            }
+        });
+
+
+    }
+
+    @Override
+    public void onPhotoClicked(ArrayList<File> file) {
+        if (file.get(0) != null) {
+            categoryImageView.setAdjustViewBounds(true);
+            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageFile = file.get(0);
+            Bitmap bitmap = BitmapFactory.decodeFile(file.get(0).getPath());
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Glide.with(this)
+                    .load(stream.toByteArray())
+                    .into(categoryImageView);
+            Log.d("FileTag", "File is not null");
+        }
+    }
+
+    @Override
+    public void onDocClicked(ArrayList<File> files) {
+
+    }
+
+
+
+
+
+
+
+    private void uploadMedia(final File file, final String fileName) {
+        HashMap<String, String> parameters = new HashMap<>();
+
+        parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE+"/"+preferenceHelper.getCompanyProfile().getCompanyID()+ "/"+productCategory.getProductCategoryID();
+
+        //upload image to server
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL,file
+                , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+                        //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
+                    //    getImages();
+//                        activityReference.updateDrawer();
+                    }
+
+                    @Override
+                    public void onError(String response) {
+
+
+
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
+    }
+
+
 }

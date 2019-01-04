@@ -125,6 +125,9 @@ public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLi
 
         public static final String DELETE_MEDIA = BASE_URL + "files";
 
+
+        public static final String UPLOAD_CATEGORY_IMAGE = BASE_URL + PRODUCT +"SaveProductCategoryImage";
+
     }
 
 }

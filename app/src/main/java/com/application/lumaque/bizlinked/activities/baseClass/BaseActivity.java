@@ -789,7 +789,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
     public void openMediaPicker(final MediaTypePicker listener) {
-
         TedPermission.with(this)
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)

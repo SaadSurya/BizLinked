@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+import static com.application.lumaque.bizlinked.helpers.common.Utils.getBytes;
+
 public class WebAppManager {
 
     private static Activity activity;
@@ -247,7 +249,7 @@ public class WebAppManager {
                 );
     }
 
-    public void uploadImage(String fileName, HashMap<String, String> extraParams, File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void uploadImage(String fileName, HashMap<String, String> extraParams,String URL, File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
 
 
 
@@ -255,7 +257,7 @@ public class WebAppManager {
                // .setHeaderUserPreference(preferenceHelper)
                 //.setCustomBody(extraParams)
                 .postRequestMultipart(getBytes(file),
-                        fileName, AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelper.getCompanyProfile().getCompanyID()
+                        fileName, URL
 
                         , apiRequestDataCallBack
                 );
@@ -380,20 +382,6 @@ public class WebAppManager {
 
 
 
-    private byte[] getBytes(File file) {
 
-        byte[] fileByteArray = new byte[(int) file.length()];
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(fileByteArray);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return fileByteArray;
-    }
 
 }

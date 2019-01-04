@@ -383,10 +383,10 @@ private void onSave(){
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-
+String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelper.getCompanyProfile().getCompanyID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL,file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
