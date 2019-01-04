@@ -10,6 +10,7 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
@@ -81,7 +82,9 @@ import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.yovenny.videocompress.MediaController;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -965,13 +968,20 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                         file.toString().endsWith(".gif")) {
                     try {
                         File compressedImageFile = new Compressor(BaseActivity.this).compressToFile(file, "compressed_" + file.getName());
+                        Bitmap bitmap = BitmapFactory.decodeFile(compressedImageFile.getPath());
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50 , bos);
+                        byte[] bitmapdata = bos.toByteArray();
+//write the bytes in file
+                        FileOutputStream fos = new FileOutputStream(compressedImageFile);
+                        fos.write(bitmapdata);
+                        fos.flush();
+                        fos.close();
                         compressedAndVideoImageFileList.add(compressedImageFile);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
-
-
                     if (!file.toString().endsWith(".3gp")) {
                         createCompressDir();
                         String compressVideoPath = Environment.getExternalStorageDirectory()
