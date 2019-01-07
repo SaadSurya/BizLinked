@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appThemeColor"
+    tools:context=".activities.ErrorScreen">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/sad_face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_frown"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s55" />
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/error_heading"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x20"
+            android:text="@string/error_occurred"
+            android:textColor="@color/white"
+            android:textSize="@dimen/s20"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/error_text"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/x20"
+            android:layout_marginStart="@dimen/x20"
+            android:layout_marginTop="@dimen/x30"
+            android:text="@string/error_text"
+            android:textColor="@color/white"
+             />
+
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/btn_retry"
+            style="?attr/roundHoveredButtonColorStyle"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginEnd="@dimen/x10"
+            android:layout_marginStart="@dimen/x5"
+            android:layout_marginTop="@dimen/x20"
+            android:text="@string/try_again"
+             />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

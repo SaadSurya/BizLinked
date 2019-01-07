@@ -42,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
+import com.application.lumaque.bizlinked.activities.ErrorScreen;
 import com.application.lumaque.bizlinked.activities.RegistrationActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.customViews.BadgeDrawerArrowDrawable;
@@ -195,7 +196,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
         onViewReady();
-
+      //  setDefaultErrorHandler();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
@@ -220,7 +221,25 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         //super.onRestoreInstanceState(savedInstanceState);
     }
 
+    private void setDefaultErrorHandler() {
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
+                paramThrowable.printStackTrace();
+                startErrorScreen(paramThrowable);
 
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
+            }
+        });
+    }
+
+    protected void startErrorScreen(Throwable throwable) {
+        ErrorScreen screen = new ErrorScreen();
+        Intent intent = new Intent(this, screen.getClass());
+        intent.putExtra(ErrorScreen.STACK_TRACE, throwable.toString());
+        startActivity(intent);
+    }
     public void setFireBase() {
         //  addMenuBadge(true);
 

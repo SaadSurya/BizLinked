@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     style="?attr/supportCenterInfoBgStyle"
     android:layout_margin="@dimen/x0"
     android:padding="@dimen/x0"
@@ -18,19 +19,20 @@
 
 
 
-        <EditText
+        <com.application.lumaque.bizlinked.customViews.CustomEditText
             android:id="@+id/et_shop_num"
-            style="?attr/roundEditTextNormalColorStyle"
+
+
+            tools:text="asdasd"
+            tools:hint="asdasd"
             android:layout_width="match_parent"
             android:layout_marginEnd="@dimen/x16"
-
             android:layout_marginStart="@dimen/x16"
             android:layout_marginTop="@dimen/x12"
-            android:hint="@string/shop_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_height="wrap_content" />
 
 
         <EditText

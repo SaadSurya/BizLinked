@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
 
     android:orientation="vertical">
 
 
-    <EditText
+    <com.application.lumaque.bizlinked.customViews.CustomEditText
         android:id="@+id/et_user_name"
         style="?attr/roundEditTextNormalColorStyle"
-        android:hint="@string/user_name_here"
-        android:text=""
-        android:visibility="invisible"/>
+        tool:hint="@string/user_name_here"
+        tool:text="asasasddd"
+       />
 
     <EditText
         android:id="@+id/et_password"

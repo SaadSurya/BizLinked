@@ -21,6 +21,7 @@ import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.customViews.CustomEditText;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CitiesModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.fragments.map.MapFragment;
@@ -47,32 +48,23 @@ import butterknife.Unbinder;
 
 public class ProfileAddressTabFragment extends Fragment {
 
-    MapFragment mapFragment;
-    ArrayList<CitiesModel> citiesList;
-    Gson g = new Gson();
-
+     MapFragment mapFragment;
+     ArrayList<CitiesModel> citiesList;
+     Gson g = new Gson();
      @BindView(R.id.mapContainer)
      FrameLayout mpFrameLayout;
-
-
      @BindView(R.id.et_shop_num)
-     EditText etShopNum;
-             @BindView(R.id.et_market)
-    EditText etMarket;
+     CustomEditText etShopNum;
+     @BindView(R.id.et_market)
+     EditText etMarket;
      @BindView(R.id.et_area)
-                     EditText etArea;
-             @BindView(R.id.sp_cities)
-    Spinner spCities;
-
- @BindView(R.id.btn_current_location)
- ImageButton btnCurrentLocation;
-
-
-
-
-
-    @BindView(R.id.btn_save)
-    Button btSave;
+     EditText etArea;
+     @BindView(R.id.sp_cities)
+     Spinner spCities;
+     @BindView(R.id.btn_current_location)
+     ImageButton btnCurrentLocation;
+     @BindView(R.id.btn_save)
+     Button btSave;
 
     View rootView;
 
@@ -116,36 +108,22 @@ getCurrentLocation();
         }
     }
 
-
-
-
-
-
-
-
     private void getCurrentLocation(){
-
 
         DialogFactory.createMessageDialog(getActivity(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 if (activityReference.getLastLocation() != null) {
-
-
                     ProfileTabsFragment frag = ((ProfileTabsFragment)ProfileAddressTabFragment.this.getParentFragment());
                     frag.updatedProfile.setLatitude(activityReference.getLastLocation().getLatitude());
                     frag.updatedProfile.setLongitude(activityReference.getLastLocation().getLongitude());
                     //frag.saveDetailAndNext();
                     mapFragment.addMarkerWithLatLong(activityReference.getLastLocation().getLatitude(),activityReference.getLastLocation().getLongitude());
-
-
-
-                }
+                    }
 
             }
         }, getString(R.string.get_gps)).show();
-
 
     }
 
@@ -157,12 +135,9 @@ getCurrentLocation();
         unbinder = ButterKnife.bind(this, rootView);
         onMapReady();
         activityReference.addSupportFragmentWithContainerView(mapFragment, R.id.mapContainer);
-
         initializeViews();
        // setupAnimation(rootView);
-
         return rootView;
-
     }
 
 
@@ -171,25 +146,19 @@ getCurrentLocation();
         mapFragment = new MapFragment(activityReference, new MapReadyListener() {
             @Override
             public void onMapReady(final GoogleMap googleMap) {
-
                 /*settings.setAllGesturesEnabled(false);
                 settings.setMyLocationButtonEnabled(false);
                 settings.setZoomControlsEnabled(false);
                 */if(isAdded()&&isVisible()) {
-
-
-if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.getCompanyProfile().getLongitude()!=0)
+                    if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.getCompanyProfile().getLongitude()!=0)
                     mapFragment.addMarkerWithLatLong(preferenceHelper.getCompanyProfile().getLatitude(),preferenceHelper.getCompanyProfile().getLongitude());
                 }
-
 
             }
 
 
 
         });
-
-
     }
     private void setupAnimation(final View rootView) {
         new Handler().postDelayed(new Runnable() {
@@ -205,46 +174,22 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
     }
 
     private void onSave(){
-
-
         ProfileTabsFragment frag = ((ProfileTabsFragment)this.getParentFragment());
-
-
-
         frag.updatedProfile.setShopNo(etShopNum.getText().toString());
         frag.updatedProfile.setMarket(etMarket.getText().toString());
         frag.updatedProfile.setArea(etArea.getText().toString());
         frag.updatedProfile.setCityID(citiesList.get(spCities.getSelectedItemPosition()).getCityID());
-
-       // frag.updatedProfile.setBusinessNature(BN);
-
-
+        // frag.updatedProfile.setBusinessNature(BN);
         String jsonString = g.toJson( frag.updatedProfile);
-
     //    Type type = new TypeToken<Map<String,String>>() {}.getType();
-
 /*        Map<String,String> result =  new Gson().fromJson(jsonString, type);
         HashMap<String,String> params = new HashMap<>(result);*/
        profileSaveReq(jsonString);
-
     }
 
-
-
-
-
-
-
     public void doBack() {
-
-
-            ProfileTabsFragment frag = ((ProfileTabsFragment)this.getParentFragment());
-
-            frag.selectFirstFrag();
-
-
-
-
+        ProfileTabsFragment frag = ((ProfileTabsFragment)this.getParentFragment());
+        frag.selectFirstFrag();
     }
 
     private void profileSaveReq(String jsonString){
@@ -254,75 +199,43 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
                 jsonString, AppConstant.ServerAPICalls.SAVE_COMPANY_PROFILE, new WebAppManager.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
-
-
                         CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
-
                         preferenceHelper.putCompany(companyprofile);
                         Utils.showToast(activityReference, "Profile Updater", AppConstant.TOAST_TYPES.SUCCESS);
                         activityReference.updateDrawer();
-
-                    }
-
+                        }
                     @Override
                     public void onError(String response) {
                         //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
-
                     }
-
                     @Override
                     public void onNoNetwork() {
-
                     }
                 });
-
-
-
-
-
     }
 
 
     @Override
     public void onDestroyView() {
-
-
-
         unbinder.unbind();
-
         super.onDestroyView();
     }
-
-
-
 
     private void initializeViews() {
 
         WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.CITIES_URL,true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
-
-
                 citiesList = GsonHelper.GsonToCities(activityReference, response);
-
-
-
                 String[] majorCat = new String[citiesList.size() <= 0 ? 0 : citiesList.size()];
 
                 for (int i = 0; i < majorCat.length; i++) {
                     majorCat[i] = citiesList.get(i).getCityName();
-
-                }
-
-
+                    }
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(activityReference, android.R.layout.simple_spinner_dropdown_item, majorCat);
                 arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spCities.setAdapter(arrayAdapter);
-
-
-
-
 
                 int defaultPos = 0;
                 for(int i = 0; i < citiesList.size(); i ++){
@@ -330,22 +243,11 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
                         defaultPos = i;
                     spCities.setSelection(defaultPos);
                 }
-
-
-
                 etShopNum.setText(preferenceHelper.getCompanyProfile().getShopNo());
                 etMarket.setText(preferenceHelper.getCompanyProfile().getMarket());
                 etArea.setText(preferenceHelper.getCompanyProfile().getArea());
              //   spCities.setText(preferenceHelper.getCompanyProfile().getWebsite());
-
-
-
-
-
                 ProfileTabsFragment frag = ((ProfileTabsFragment)(ProfileAddressTabFragment.this.getParentFragment()));
-
-
-
                 frag.updatedProfile.setShopNo(etShopNum.getText().toString());
                 frag.updatedProfile.setMarket(etMarket.getText().toString());
                 frag.updatedProfile.setArea(etArea.getText().toString());
@@ -353,28 +255,17 @@ if(preferenceHelper.getCompanyProfile().getLatitude()!=0 && preferenceHelper.get
                 frag.updatedProfile.setLatitude(preferenceHelper.getCompanyProfile().getLatitude());
                 frag.updatedProfile.setLongitude(preferenceHelper.getCompanyProfile().getLongitude());
 
-
-
-
-
-
-
-
             }
 
             @Override
             public void onError(String response) {
-
-            }
+                }
 
             @Override
             public void onNoNetwork() {
 
             }
         });
-
-
-
     }
 
 

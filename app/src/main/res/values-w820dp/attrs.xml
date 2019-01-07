@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+        <declare-styleable name="CustomEditText">
+            <attr name="text" format="string" />
+            <attr name="hint" format="string" />
+
+        </declare-styleable>
+
     <declare-styleable name="PinEntryEditText">
         <attr name="pinAnimationType" format="enum">
             <enum name="popIn" value="0" />

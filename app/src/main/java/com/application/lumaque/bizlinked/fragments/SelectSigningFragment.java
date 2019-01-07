@@ -17,6 +17,7 @@ import com.application.lumaque.bizlinked.BizLinkApplication;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.HomeActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.customViews.CustomEditText;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
@@ -42,7 +43,7 @@ public class SelectSigningFragment extends BaseFragment {
     @Order(1)
     @Length(min = AppConstant.VALIDATION_RULES.USER_NAME_MIN_LENGTH, messageResId = R.string.error_user_name)
     @BindView(R.id.et_user_name)
-    EditText etUserName;
+    CustomEditText etUserName;
 
     @Order(2)
     @Length(min = AppConstant.VALIDATION_RULES.PASSWORD_MIN_LENGTH, messageResId = R.string.error_password)
