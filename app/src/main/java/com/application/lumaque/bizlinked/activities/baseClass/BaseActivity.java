@@ -196,7 +196,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
         onViewReady();
-      //  setDefaultErrorHandler();
+        setDefaultErrorHandler();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {

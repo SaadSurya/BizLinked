@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="CustomEditText">
+        <attr name="hint" format="string" />
+        <attr name="text" format="string" />
 
+    </declare-styleable>
     <attr name="appThemeColor" format="reference" />
 
     <attr name="tagViewBackgroundImageStyle" format="reference" />
