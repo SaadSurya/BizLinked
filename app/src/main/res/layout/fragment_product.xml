@@ -119,34 +119,6 @@
         android:layout_height="match_parent">
 
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-
-            android:layout_height="@dimen/x150"
-            app:layout_constraintBottom_toTopOf="@+id/product_desc_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-
-
-            app:layout_constraintBottom_toTopOf="@+id/product_desc_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9"
-
-            />
-
-
         <ScrollView
             android:id="@+id/product_desc_view"
             android:layout_width="match_parent"
@@ -157,19 +129,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewpager">
+            app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:id="@+id/pager_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentTop="true">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x150" />
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+
                 <EditText
                     android:id="@+id/pro_name"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
+                    android:layout_below="@+id/pager_holder"
                     android:layout_marginStart="@dimen/x16"
-
                     android:layout_marginTop="@dimen/x12"
                     android:layout_marginEnd="@dimen/x16"
                     android:hint="@string/product_name" />

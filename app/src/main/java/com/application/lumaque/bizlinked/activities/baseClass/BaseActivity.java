@@ -50,6 +50,7 @@ import com.application.lumaque.bizlinked.data_models.OptionMenuModal;
 import com.application.lumaque.bizlinked.data_models.bizlinked.FireBaseDataMode;
 import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
+import com.application.lumaque.bizlinked.fragments.bizlinked.CategoryListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CustomerFragmentTabs;
 import com.application.lumaque.bizlinked.fragments.bizlinked.NewCategoryFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ProductListFragment;
@@ -108,7 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     public Toolbar toolbar;
 
-    TextView supplier, customer, category;
+    TextView supplier, customer, addCategory, categoryList;
 
 
     private ActionBarDrawerToggle toggle;
@@ -196,7 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
         onViewReady();
-        setDefaultErrorHandler();
+//        setDefaultErrorHandler();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
@@ -365,8 +366,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             customer = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
                     findItem(R.id.nav_customers));
 
-            category = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                    findItem(R.id.nav_category));
+            addCategory = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                    findItem(R.id.nav_add_category));
+
+            categoryList = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                    findItem(R.id.nav_category_list));
 
 
         }
@@ -988,7 +992,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                         File compressedImageFile = new Compressor(BaseActivity.this).compressToFile(file, "compressed_" + file.getName());
                         Bitmap bitmap = BitmapFactory.decodeFile(compressedImageFile.getPath());
                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50 , bos);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
                         byte[] bitmapdata = bos.toByteArray();
 //write the bytes in file
                         FileOutputStream fos = new FileOutputStream(compressedImageFile);
@@ -1345,9 +1349,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
 
 
-            case R.id.nav_category:
+            case R.id.nav_add_category:
                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
                 addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                // popBackStackTillEntry(1);
+                break;
+
+            case R.id.nav_category_list:
+                CategoryListFragment categoryListFragment = new CategoryListFragment();
+                addSupportFragment(categoryListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                 // popBackStackTillEntry(1);
                 break;
 

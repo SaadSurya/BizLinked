@@ -74,7 +74,9 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     private GsonHelper gsonHelper;
     private int companyId;
     private int postionAdapter;
+    private Bundle bundle;
     private ProductCategory productCategory;
+
     @Override
     public void onCustomBackPressed() {
         activityReference.onPageBack();
@@ -106,11 +108,36 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     }
 
+    public void setArguments(Bundle bundle) {
+//        bundle = getArguments();
+        if (bundle != null) {
+            productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+        }
+    }
+
     @Override
     public void onValidationSuccess() {
         saveCategory();
     }
 
+    private void setFields(ArrayList<ProductCategory> categoryList) {
+        String parentCategoryName = "";
+        if (productCategory != null) {
+            catNameEditText.setText(productCategory.getProductCategoryName());
+            // parentProductEditText.setText(productCategory.getParentProductCategoryID());
+            for (ProductCategory item : categoryList) {
+                if (productCategory.getParentProductCategoryID() == item.getProductCategoryID()) {
+                    parentCategoryName = item.ProductCategoryName;
+                    break;
+                }
+            }
+            parentProductEditText.setText(parentCategoryName);
+            selectedParentCagetory = productCategory.getParentProductCategoryID();
+            getImages();
+        } else {
+            productCategory = new ProductCategory();
+        }
+    }
 
     @Override
     public void onValidationFail() {
@@ -118,7 +145,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     private void saveCategory() {
         gsonHelper = new GsonHelper();
-        ProductCategory productCategory = new ProductCategory();
+        //  productCategory = new ProductCategory();
         productCategory.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
         productCategory.setProductCategoryName(catNameEditText.getText().toString());
         productCategory.setParentProductCategoryID(selectedParentCagetory);
@@ -136,7 +163,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                         onCustomBackPressed();
                         GsonHelper gsonHelper = new GsonHelper();
                         productCategory = gsonHelper.GsonToProductCategory(activityReference, response);
-                        uploadMedia(imageFile,"1");
+                        uploadMedia(imageFile, "1.jpg");
                     }
 
                     @Override
@@ -195,6 +222,11 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
             }
         });
+
+
+        setFields(categoryList);
+
+
     }
 
     private void openImagePicker(View view) {
@@ -207,7 +239,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     private void getImages() {
 
-        String URL = AppConstant.ServerAPICalls.GET_MEDIA_FILE + preferenceHelper.getCompanyProfile().getCompanyID();
+        String URL =Utils.getProdImgURL(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()),productCategory.getImageID());
         ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
         //  setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(activityReference).load(URL)
@@ -304,15 +336,18 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
             categoryImageView.setAdjustViewBounds(true);
             categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageFile = file.get(0);
-            Bitmap bitmap = BitmapFactory.decodeFile(file.get(0).getPath());
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
 //            Bitmap photo = (Bitmap) data.getExtras().get("data");
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             Glide.with(this)
                     .load(stream.toByteArray())
                     .into(categoryImageView);
             Log.d("FileTag", "File is not null");
         }
+
+        if(productCategory.getProductCategoryID() != 0)
+            uploadMedia(imageFile, "1.jpg");
     }
 
     @Override
@@ -321,32 +356,25 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     }
 
 
-
-
-
-
-
     private void uploadMedia(final File file, final String fileName) {
         HashMap<String, String> parameters = new HashMap<>();
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE+"/"+preferenceHelper.getCompanyProfile().getCompanyID()+ "/"+productCategory.getProductCategoryID();
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "/" + preferenceHelper.getCompanyProfile().getCompanyID() + "/" + productCategory.getProductCategoryID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL,file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
                         //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
-                    //    getImages();
+                        //    getImages();
 //                        activityReference.updateDrawer();
                     }
 
                     @Override
                     public void onError(String response) {
-
-
 
 
                     }

@@ -3,56 +3,58 @@ package com.application.lumaque.bizlinked.data_models.bizlinked;
 import java.io.Serializable;
 import java.util.List;
 
-public class ProductCategory implements Serializable {
+public class SubProductCategory implements Serializable {
 
-    public int CompanyID;
-    public int ProductCategoryID ;
-    public String ProductCategoryName ;
-    public List<ProductCategory> SubProductCategories;
+     int companyID;
 
-    public String getImageID() {
-        return ImageID;
-    }
+     int productCategoryID;
 
-    public void setImageID(String imageID) {
-        ImageID = imageID;
-    }
+     String productCategoryName;
 
-    public String ImageID ;
-    public int  ParentProductCategoryID ;
+     String imageID;
+
+     int parentProductCategoryID;
+
+     List<ProductCategory> SubProductCategories;
 
     public int getCompanyID() {
-        return CompanyID;
+        return companyID;
     }
 
     public void setCompanyID(int companyID) {
-        CompanyID = companyID;
+        this.companyID = companyID;
     }
 
     public int getProductCategoryID() {
-        return ProductCategoryID;
+        return productCategoryID;
     }
 
     public void setProductCategoryID(int productCategoryID) {
-        ProductCategoryID = productCategoryID;
+        this.productCategoryID = productCategoryID;
     }
 
     public String getProductCategoryName() {
-        return ProductCategoryName;
+        return productCategoryName;
     }
 
     public void setProductCategoryName(String productCategoryName) {
-        ProductCategoryName = productCategoryName;
+        this.productCategoryName = productCategoryName;
     }
 
+    public String getImageID() {
+        return imageID;
+    }
 
+    public void setImageID(String imageID) {
+        this.imageID = imageID;
+    }
 
     public int getParentProductCategoryID() {
-        return ParentProductCategoryID;
+        return parentProductCategoryID;
     }
 
     public void setParentProductCategoryID(int parentProductCategoryID) {
-        ParentProductCategoryID = parentProductCategoryID;
+        this.parentProductCategoryID = parentProductCategoryID;
     }
 
     public List<ProductCategory> getSubProductCategories() {
