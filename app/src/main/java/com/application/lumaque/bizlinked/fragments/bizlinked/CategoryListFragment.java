@@ -19,6 +19,7 @@ import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.data_models.bizlinked.SubProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
+import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryListAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
@@ -53,7 +54,8 @@ public class CategoryListFragment extends BaseFragment {
     FloatingActionButton fabCatList;
     private int companyId;
     private ArrayList<ProductCategory> productCategoriesList;
-    private CategoryHorizontalAdapter categoryItemAdapter;
+    private CategoryListAdapter categoryItemAdapter;
+    private boolean isFromCatList = false;
 
     @Override
     public void onCustomBackPressed() {
@@ -74,16 +76,26 @@ public class CategoryListFragment extends BaseFragment {
     }
 
     private void initializeViews() {
+        ProductCategory productCategory = new ProductCategory();
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            isFromCatList = bundle.getBoolean("FROMCATLIST");
+            productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+        }
         companyId = preferenceHelper.getCompanyProfile().getCompanyID();
 //        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper, this);
 //        companyHelper.getCompanyCategoty(companyId);
-        HashMap<String, String> params = new HashMap<>();
-        params.put("companyId", String.valueOf(companyId));
-
-        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_HEIRARCHY_CATEGORY, false, new WebAppManager.APIStringRequestDataCallBack() {
-            @Override
-            public void onSuccess(String response) {
-                ArrayList<ProductCategory> categoryList = new ArrayList<>();
+        if (isFromCatList) {
+            assert productCategory != null;
+            productCategoriesList = productCategory.getSubProductCategories();
+            setAdapter(productCategoriesList);
+        } else {
+            HashMap<String, String> params = new HashMap<>();
+            params.put("companyId", String.valueOf(companyId));
+            WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_HEIRARCHY_CATEGORY, false, new WebAppManager.APIStringRequestDataCallBack() {
+                @Override
+                public void onSuccess(String response) {
+                    ArrayList<ProductCategory> categoryList = new ArrayList<>();
                 /*ArrayList<ProductCategory> categoryList2 = new ArrayList<>();
                 Gson gson = new Gson();
                 Type typeOfT = new TypeToken<List<SubProductCategory>>() {
@@ -91,30 +103,31 @@ public class CategoryListFragment extends BaseFragment {
                 JsonParser parser = new JsonParser();
                 JsonArray jo = (JsonArray) parser.parse(response);
                 categoryList2 = gson.fromJson(jo, typeOfT);*/
-                GsonHelper gsonHelper = new GsonHelper();
-                categoryList = gsonHelper.GsonToCategoryList(activityReference, response);
-                productCategoriesList = categoryList;
-                setAdapter(productCategoriesList);
-            }
+                    GsonHelper gsonHelper = new GsonHelper();
+                    categoryList = gsonHelper.GsonToCategoryList(activityReference, response);
+                    productCategoriesList = categoryList;
+                    setAdapter(productCategoriesList);
+                }
 
-            @Override
-            public void onError(String response) {
+                @Override
+                public void onError(String response) {
 //                mShimmerViewContainer.stopShimmerAnimation();
-                Log.d("CAT_SUB_LIST", response);
-                onCustomBackPressed();
+                    Log.d("CAT_SUB_LIST", response);
+                    onCustomBackPressed();
 
-            }
+                }
 
-            @Override
-            public void onNoNetwork() {
+                @Override
+                public void onNoNetwork() {
 
-            }
-        });
+                }
+            });
 
-
+        }
     }
+
     private void setAdapter(final ArrayList<ProductCategory> productCategoriesList) {
-        categoryItemAdapter = new CategoryHorizontalAdapter(activityReference, productCategoriesList);
+        categoryItemAdapter = new CategoryListAdapter(activityReference,activityReference, productCategoriesList);
         categoryListRV.setHasFixedSize(true);
         categoryListRV.setLayoutManager(new GridLayoutManager(activityReference, 2, GridLayoutManager.VERTICAL, false));
         // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
@@ -123,20 +136,39 @@ public class CategoryListFragment extends BaseFragment {
                 new ClickListenerRecycler() {
                     @Override
                     public void onClick(View view, int position) {
-
+                        ProductCategory currentObject = productCategoriesList.get(position);
                         if (NetworkUtils.isNetworkAvailable(activityReference)) {
-                            try {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("CAT_OBJ", productCategoriesList.get(position));
-                                NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
-                                newCategoryFragment.setArguments(bundle);
-                                activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                            if (currentObject.getSubProductCategories() != null && !currentObject.getSubProductCategories().isEmpty()) {
+                               /* try {
+//                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("CAT_OBJ", currentObject);
+                                    bundle.putBoolean("FROMCATLIST", true);
+                                    CategoryListFragment categoryListFragment = new CategoryListFragment();
+                                    categoryListFragment.setArguments(bundle);
+                                    activityReference.addSupportFragment(categoryListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
-                            } catch (Exception e) {
-                                Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
-                                e.printStackTrace();
+
+//                                    activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                                } catch (Exception e) {
+                                    Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                    e.printStackTrace();
+                                }*/
+                            } else {
+
+
+                                try {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("CAT_OBJ", productCategoriesList.get(position));
+                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                                    newCategoryFragment.setArguments(bundle);
+                                    activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+                                } catch (Exception e) {
+                                    Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                    e.printStackTrace();
+                                }
                             }
-
                         } else {
                             Utils.showSnackBar(activityReference, getContainerLayout(),
                                     activityReference.getResources().getString(R.string.no_network_available),
@@ -152,6 +184,12 @@ public class CategoryListFragment extends BaseFragment {
 
     }
 
+    //    public void setArguments(Bundle bundle) {
+////        bundle = getArguments();
+//        if (bundle != null) {
+//            productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+//        }
+//    }
     @OnClick({R.id.fab_cat_list})
     public void onViewClicked(View view) {
         switch (view.getId()) {

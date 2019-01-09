@@ -193,7 +193,9 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     public void onCategoryResponce(ArrayList<ProductCategory> categoryList) {
 
         SaveCategoryAdapter saveCategoryAdapter = new SaveCategoryAdapter(activityReference, categoryList);
+        //TODO check why app crashing here
         parentProductEditText.setAdapter(saveCategoryAdapter);
+        //to here
         parentProductEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -1,14 +1,14 @@
 package com.application.lumaque.bizlinked.data_models.bizlinked;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class ProductCategory implements Serializable {
 
     public int CompanyID;
     public int ProductCategoryID ;
     public String ProductCategoryName ;
-    public List<ProductCategory> SubProductCategories;
+    public ArrayList<ProductCategory> SubProductCategories;
 
     public String getImageID() {
         return ImageID;
@@ -55,11 +55,11 @@ public class ProductCategory implements Serializable {
         ParentProductCategoryID = parentProductCategoryID;
     }
 
-    public List<ProductCategory> getSubProductCategories() {
+    public ArrayList<ProductCategory> getSubProductCategories() {
         return SubProductCategories;
     }
 
-    public void setSubProductCategories(List<ProductCategory> SubProductCategories) {
+    public void setSubProductCategories(ArrayList<ProductCategory> SubProductCategories) {
         this.SubProductCategories = SubProductCategories;
     }
 

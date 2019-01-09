@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:id="@+id/rootView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-android:background="@drawable/shadow_image_new_small"
-
-
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    android:background="@drawable/shadow_image_new_small">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:orientation="vertical"
         android:layout_height="wrap_content">
-<ImageView
-    android:id="@+id/category_img"
-    android:layout_width="@dimen/x150"
-    android:layout_height="@dimen/x90" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/x160"
+            android:layout_height="wrap_content">
 
 
 
-    <TextView
-        android:id="@+id/product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/product"
-        android:textStyle="bold"
-        android:padding="5dp"
-        android:layout_gravity="center_horizontal"
-        />
+            <LinearLayout
+                android:id="@+id/view_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/category_img"
+                    android:layout_width="@dimen/x160"
+                    android:layout_height="@dimen/x90" />
+
+
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="5dp"
+                    android:text="@string/product"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_edit_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:drawableLeft="@drawable/ic_edit_black_24dp"
+                android:text="Edit"
+                android:visibility="gone"
+                android:textSize="@dimen/s16" />
+        </RelativeLayout>
     </LinearLayout>
 </FrameLayout>
