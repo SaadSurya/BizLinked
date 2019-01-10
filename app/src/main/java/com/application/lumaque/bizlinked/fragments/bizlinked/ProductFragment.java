@@ -3,6 +3,8 @@ package com.application.lumaque.bizlinked.fragments.bizlinked;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -40,7 +42,9 @@ import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
+import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
+import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -48,6 +52,8 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +62,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.relex.circleindicator.CircleIndicator;
 
-public class ProductFragment extends BaseFragment implements TagCloseCallBack,ResponceCallBack {
+public class ProductFragment extends BaseFragment implements TagCloseCallBack, ResponceCallBack, MediaTypePicker {
 
     private Bundle bundle;
     private ArrayList<ProductCategory> companyCategoryList;
@@ -66,9 +72,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     public static final String companyId = "companyId";
     public static final String productId = "productId";
     Gson g = new Gson();
-    int paramCompanyId ;
+    int paramCompanyId;
     String paramProductId = "";
 
+    File imageFile;
 
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
@@ -103,6 +110,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
     @BindView(R.id.add_att)
     ImageButton addAtt;
 
+    @BindView(R.id.fab_add_image)
+    ImageButton fabAddImage;
+
     @BindView(R.id.btn_save)
     Button btnSave;
 
@@ -130,20 +140,18 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack,Re
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
         cacheCat();
-if(paramProductId !=null && paramProductId.length() > 0){
-startShimerAnimation();
-    initializeViews();
-}else {
-    stopShimerAnimation();
-    product = new Product();
-    product.setProductAttributes(new ArrayList<ProductAttribute>());
-    product.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-    setTagAdapter();
+        if (paramProductId != null && paramProductId.length() > 0) {
+            startShimerAnimation();
+            initializeViews();
+        } else {
+            stopShimerAnimation();
+            product = new Product();
+            product.setProductAttributes(new ArrayList<ProductAttribute>());
+            product.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
+            setTagAdapter();
 
 
-}
-
-
+        }
 
 
     }
@@ -227,16 +235,75 @@ startShimerAnimation();
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
-        showAttributeDialog(productAttribute,false);
+        showAttributeDialog(productAttribute, false);
 
 
     }
 
     @Override
     public void onCategoryResponce(ArrayList<ProductCategory> categoryList) {
-        if(categoryList!= null){
+        if (categoryList != null) {
             setCatAdapter(categoryList);
         }
+
+    }
+    private void takePicture(View view) {
+        activityReference.openMediaPicker(ProductFragment.this);
+
+        //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
+    }
+    @Override
+    public void onPhotoClicked(ArrayList<File> file) {
+        if (file.get(0) != null) {
+//            categoryImageView.setAdjustViewBounds(true);
+//            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageFile = file.get(0);
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//            Glide.with(this)
+//                    .load(stream.toByteArray())
+//                    .into(categoryImageView);
+            Log.d("FileTag", "File is not null");
+        }
+
+//        if(productCategory.getProductCategoryID() != 0)
+            uploadMedia(imageFile, "1.jpg");
+    }
+    private void uploadMedia(final File file, final String fileName) {
+        HashMap<String, String> parameters = new HashMap<>();
+
+        parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_PRODUCT_IMAGE + "?" +"companyId="+ paramCompanyId + "&productId=" + product.getProductID();
+
+        //upload image to server
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file
+                , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+                        //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
+                        //    getImages();
+//                        activityReference.updateDrawer();
+                        Utils.showToast(activityReference,"Successfull",AppConstant.TOAST_TYPES.SUCCESS);
+                    }
+
+                    @Override
+                    public void onError(String response) {
+
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onDocClicked(ArrayList<File> files) {
 
     }
 
@@ -293,7 +360,7 @@ startShimerAnimation();
     private void cacheCat() {
 
 
-        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper,this);
+        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper, this);
         companyHelper.getCompanyCategoty(paramCompanyId);
         companyHelper.getCompanyAttributes(paramCompanyId);
 
@@ -313,13 +380,12 @@ startShimerAnimation();
     }
 
 
-    private void showAttributeDialog(ProductAttribute attribute,boolean isNew) {
+    private void showAttributeDialog(ProductAttribute attribute, boolean isNew) {
         FragmentManager fm = activityReference.getSupportFragmentManager();
-        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute,isNew);
-        if ( editNameDialogFragment.getDialog() != null )
+        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute, isNew);
+        if (editNameDialogFragment.getDialog() != null)
             editNameDialogFragment.getDialog().setCanceledOnTouchOutside(false);
-      //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
-
+        //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
 
 
         editNameDialogFragment.setTargetFragment(this, DATEPICKER_FRAGMENT);
@@ -335,19 +401,20 @@ startShimerAnimation();
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle bundle = data.getExtras();
 
-                    ProductAttribute returnedAtt= (ProductAttribute) data.getExtras().getSerializable("attr");
+                    ProductAttribute returnedAtt = (ProductAttribute) data.getExtras().getSerializable("attr");
 
-                  if(data.getBooleanExtra("isNew",false))
-                      tagItemAdapter.addItem(returnedAtt);
+                    if (data.getBooleanExtra("isNew", false))
+                        tagItemAdapter.addItem(returnedAtt);
 
-tagItemAdapter.notifyChangeData();
-Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
+                    tagItemAdapter.notifyChangeData();
+                    Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
 
                 }
                 break;
         }
     }
+
     private void setCatAdapter(ArrayList<ProductCategory> categoryList) {
 
         companyCategoryList = categoryList;
@@ -369,7 +436,7 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
     }
 
 
-    @OnClick({R.id.add_att,R.id.btn_save})
+    @OnClick({R.id.add_att, R.id.btn_save, R.id.fab_add_image})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
@@ -392,15 +459,19 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.add_att:
                 //onSave();
-                showAttributeDialog(null,true);
+                showAttributeDialog(null, true);
 
                 break;
+
+            case R.id.fab_add_image:
+                takePicture(view);
+
 
         }
     }
 
 
-    private void prodSaveReq(String jsonString){
+    private void prodSaveReq(String jsonString) {
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetailsJson(
                 Request.Method.POST,
@@ -409,7 +480,7 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                     public void onSuccess(String response) {
                         String anc = response;
 
-                        Utils.showToast(activityReference,"save Successfully",AppConstant.TOAST_TYPES.SUCCESS);
+                        Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
                         onCustomBackPressed();
                     /*    CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
 
@@ -432,11 +503,7 @@ Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 });
 
 
-
-
-
     }
-
 
 
     private void startShimerAnimation() {

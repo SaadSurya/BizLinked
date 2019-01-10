@@ -7,11 +7,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
@@ -20,6 +25,7 @@ import com.application.lumaque.bizlinked.data_models.bizlinked.SubProductCategor
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryListAdapter;
+import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
@@ -45,22 +51,30 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CategoryListFragment extends BaseFragment {
+public class CategoryListFragment extends BaseFragment implements SearchView.OnQueryTextListener {
 
     @BindView(R.id.rv_category_list)
     RecyclerView categoryListRV;
+    private String strQuery = "";
+    SearchView searchView;
+    ;
+    MenuItem searchItem;
+    ImageView closeButton;
 
     @BindView(R.id.fab_cat_list)
     FloatingActionButton fabCatList;
     private int companyId;
     private ArrayList<ProductCategory> productCategoriesList;
+    private ArrayList<ProductCategory> productCategoriesListSearched;
     private CategoryListAdapter categoryItemAdapter;
     private boolean isFromCatList = false;
 
     @Override
     public void onCustomBackPressed() {
+        searchView.setQuery("", false);
+        searchView.onActionViewCollapsed();
+        strQuery = "";
         activityReference.onPageBack();
-
     }
 
     @Override
@@ -71,8 +85,14 @@ public class CategoryListFragment extends BaseFragment {
 
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
+        setHasOptionsMenu(true);
         getBaseActivity().toolbar.setTitle("Categories");
-        initializeViews();
+
+        if (strQuery.length() > 0) {
+            searchView.setQuery(strQuery, false);
+            searchFromServer(strQuery);
+        } else
+            initializeViews();
     }
 
     private void initializeViews() {
@@ -127,7 +147,7 @@ public class CategoryListFragment extends BaseFragment {
     }
 
     private void setAdapter(final ArrayList<ProductCategory> productCategoriesList) {
-        categoryItemAdapter = new CategoryListAdapter(activityReference,activityReference, productCategoriesList);
+        categoryItemAdapter = new CategoryListAdapter(activityReference, activityReference, productCategoriesList);
         categoryListRV.setHasFixedSize(true);
         categoryListRV.setLayoutManager(new GridLayoutManager(activityReference, 2, GridLayoutManager.VERTICAL, false));
         // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
@@ -200,5 +220,82 @@ public class CategoryListFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_ex7, menu);
 
+        searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+
+        if (strQuery.length() > 0) {
+            searchView.onActionViewExpanded();
+            searchItem.expandActionView();
+            searchView.setQuery(strQuery, false);
+        }
+        closeButton = (ImageView) searchView.findViewById(R.id.search_close_btn);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!strQuery.equalsIgnoreCase("")) {
+                    searchView.setQuery("", false);
+                    searchView.onActionViewCollapsed();
+                    searchItem.collapseActionView();
+                    initializeViews();
+                    strQuery = "";
+                } else {
+                    strQuery = "";
+                    searchView.setQuery("", false);
+                    searchView.onActionViewCollapsed();
+                    searchItem.collapseActionView();
+                }
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        KeyboardHelper.hideSoftKeyboard(activityReference);
+        searchFromServer(query);
+
+        strQuery = query;
+        return false;
+    }
+
+    private void searchFromServer(String query) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("companyId", String.valueOf(companyId));
+        params.put("productcategoryname", query);
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_HEIRARCHY_CATEGORY, false, new WebAppManager.APIStringRequestDataCallBack() {
+            @Override
+            public void onSuccess(String response) {
+                ArrayList<ProductCategory> categoryList = new ArrayList<>();
+                GsonHelper gsonHelper = new GsonHelper();
+                categoryList = gsonHelper.GsonToCategoryList(activityReference, response);
+                productCategoriesListSearched = categoryList;
+                categoryItemAdapter.clearAllList();
+                categoryItemAdapter.addAllList(productCategoriesListSearched);
+            }
+
+            @Override
+            public void onError(String response) {
+//                mShimmerViewContainer.stopShimmerAnimation();
+                Log.d("CAT_SUB_LIST", response);
+                onCustomBackPressed();
+
+            }
+
+            @Override
+            public void onNoNetwork() {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        return false;
+    }
 }

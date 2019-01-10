@@ -89,7 +89,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (NetworkUtils.isNetworkAvailable(activityReference)) {
                     try {
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("CAT_OBJ", currentObject.getSubProductCategories().get(position));
+//                        bundle.putSerializable("CAT_OBJ", currentObject.getSubProductCategories().get(position));
+                        bundle.putSerializable("CAT_OBJ", currentObject);
                         NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
                         newCategoryFragment.setArguments(bundle);
                         ((BaseActivity) activityReference).addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
@@ -109,7 +110,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((ItemViewHolder) holder).viewLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentObject.getSubProductCategories() != null || !currentObject.getSubProductCategories().isEmpty()) {
+                if (currentObject.getSubProductCategories() != null && !currentObject.getSubProductCategories().isEmpty()) {
                     try {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("CAT_OBJ", currentObject);
@@ -121,8 +122,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
                         e.printStackTrace();
                     }
-                } else {
-
                 }
             }
         });

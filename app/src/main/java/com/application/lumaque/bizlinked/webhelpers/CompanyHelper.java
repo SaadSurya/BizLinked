@@ -35,7 +35,7 @@ public class CompanyHelper {
 
 
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_CATEGORY,false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_CATEGORY,true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 

@@ -193,9 +193,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     public void onCategoryResponce(ArrayList<ProductCategory> categoryList) {
 
         SaveCategoryAdapter saveCategoryAdapter = new SaveCategoryAdapter(activityReference, categoryList);
-        //TODO check why app crashing here
         parentProductEditText.setAdapter(saveCategoryAdapter);
-        //to here
         parentProductEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -363,7 +361,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "/" + preferenceHelper.getCompanyProfile().getCompanyID() + "/" + productCategory.getProductCategoryID();
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "?" +"companyId="+ preferenceHelper.getCompanyProfile().getCompanyID() + "&productCategoryId=" + productCategory.getProductCategoryID();
 
         //upload image to server
         WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file

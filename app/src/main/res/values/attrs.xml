@@ -16,6 +16,10 @@
     <attr name="roundPrimaryColorStyle" format="reference" />
     <attr name="roundSkyBlueButtonColorStyle" format="reference" />
     <attr name="roundEditTextNormalColorStyle" format="reference" />
+
+
+    <attr name="floatingHintEditTextLayout" format="reference" />
+    <attr name="floatingHintEditText" format="reference" />
     <!-- Registration Page Attributes -->
 
 

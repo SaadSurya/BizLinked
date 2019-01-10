@@ -152,10 +152,49 @@
                         android:id="@+id/indicator"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_alignParentBottom="true" />
+
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/fab_add_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="@dimen/x15"
+                        android:layout_marginBottom="@dimen/x5"
+                        android:src="@drawable/ic_add_white_24dp" />
                 </RelativeLayout>
 
-                <EditText
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/pro_name_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pager_holder"
+                    style="?attr/floatingHintEditTextLayout"
+                    >
+
+                    <EditText
+                        android:id="@+id/pro_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        style="?attr/floatingHintEditText"
+
+
+                        android:layout_marginStart="@dimen/x16"
+                        android:layout_marginTop="@dimen/x12"
+                        android:layout_marginEnd="@dimen/x16"
+                        android:hint="@string/product_name"
+
+
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
+
+               <!-- <EditText
                     android:id="@+id/pro_name"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
@@ -163,14 +202,14 @@
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
                     android:layout_marginEnd="@dimen/x16"
-                    android:hint="@string/product_name" />
+                    android:hint="@string/product_name" />-->
 
                 <EditText
                     android:id="@+id/pro_desc"
                     style="?attr/roundEditTextNormalColorStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/pro_name"
+                    android:layout_below="@+id/pro_name_layout"
                     android:layout_marginStart="@dimen/x16"
                     android:layout_marginTop="@dimen/x12"
                     android:layout_marginEnd="@dimen/x16"

@@ -23,6 +23,11 @@
         <item name="roundPrimaryColorStyle">@style/round_button_skyblue_color_style</item>
         <item name="roundSkyBlueButtonColorStyle">@style/round_button_style</item>
         <item name="roundEditTextNormalColorStyle">@style/round_edittext_style</item>
+
+
+
+        <item name="floatingHintEditTextLayout">@style/floating_hint_edit_text_layout</item>
+        <item name="floatingHintEditText">@style/floating_hint_edit_text</item>
         <!-- Splash Page Style-->
 
         <!-- Titlebar Color Style-->
@@ -114,4 +119,7 @@
         <!--Hovered button style for Quotation Fragments-->
 
     </style>
+
+
+
 </resources>
