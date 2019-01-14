@@ -96,6 +96,20 @@
     <!--<item name="android:drawableStart">@drawable/ic_tablet</item>-->
     <style name="floating_hint_edit_text" >
 
+
+
+        <item name="android:layout_marginStart">@dimen/x16</item>
+        <item name="android:layout_marginTop">@dimen/x12</item>
+        <item name="android:layout_marginEnd">@dimen/x16</item>
+
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+
+
+
+
         <item name="android:imeOptions">actionNext</item>
         <item name="android:inputType">text</item>
 
@@ -105,7 +119,14 @@
     <!--<item name="android:drawableStart">@drawable/ic_tablet</item>-->
     <style name="floating_hint_edit_text_layout" >
 
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
+
         <item name="android:padding">@dimen/x8</item>
+
+
         <item name="android:layout_marginTop">@dimen/x5</item>
         <item name="android:layout_marginBottom">@dimen/x5</item>
         <item name="android:drawablePadding">@dimen/x10</item>
