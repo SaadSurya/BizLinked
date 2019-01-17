@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 
 android {
@@ -148,9 +149,13 @@ dependencies {
    // implementation 'me.relex:circleindicator:2.1.0'
     implementation 'me.relex:circleindicator:1.2.2'
     implementation 'io.github.yavski:fab-speed-dial:1.0.6'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
 
 apply plugin: 'com.google.gms.google-services'
+repositories {
+    mavenCentral()
+}
 
 

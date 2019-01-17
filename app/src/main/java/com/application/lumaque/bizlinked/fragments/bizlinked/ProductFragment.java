@@ -247,11 +247,13 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         }
 
     }
+
     private void takePicture(View view) {
         activityReference.openMediaPicker(ProductFragment.this);
 
         //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
+
     @Override
     public void onPhotoClicked(ArrayList<File> file) {
         if (file.get(0) != null) {
@@ -269,14 +271,15 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         }
 
 //        if(productCategory.getProductCategoryID() != 0)
-            uploadMedia(imageFile, "1.jpg");
+        uploadMedia(imageFile, "1.jpg");
     }
+
     private void uploadMedia(final File file, final String fileName) {
         HashMap<String, String> parameters = new HashMap<>();
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_PRODUCT_IMAGE + "?" +"companyId="+ paramCompanyId + "&productId=" + product.getProductID();
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_PRODUCT_IMAGE + "?" + "companyId=" + paramCompanyId + "&productId=" + product.getProductID();
 
         //upload image to server
         WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file
@@ -286,7 +289,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                         //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
                         //    getImages();
 //                        activityReference.updateDrawer();
-                        Utils.showToast(activityReference,"Successfull",AppConstant.TOAST_TYPES.SUCCESS);
+                        Utils.showToast(activityReference, "Successfull", AppConstant.TOAST_TYPES.SUCCESS);
                     }
 
                     @Override
@@ -326,7 +329,17 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
             Glide.with(activityReference).load(ImageList.get(position))
                     .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
                     .into(headerView);
+            headerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageSliderFragment imageSliderFragment = new ImageSliderFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("IMAGELINKS", new ArrayList<String>(ImageList));
+                    imageSliderFragment.setArguments(bundle);
+                    activityReference.addSupportFragment(imageSliderFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
+                }
+            });
 
             collection.addView(layout);
             return layout;
