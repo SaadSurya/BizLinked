@@ -74,9 +74,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     Gson g = new Gson();
     int paramCompanyId;
     String paramProductId = "";
-
+    private String newItemFilePath;
     File imageFile;
-
+private CustomPagerAdapter viewpagerAdapter;
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
 
@@ -189,7 +189,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 for (int a = 0; a < product.getImages().size(); a++) {
                     ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=" + product.CompanyID + "&imageId=" + product.getImages().get(a));
                 }
-                viewpager.setAdapter(new CustomPagerAdapter(activityReference));
+                viewpagerAdapter = new CustomPagerAdapter(activityReference);
+                viewpager.setAdapter(viewpagerAdapter);
                 indicator.setViewPager(viewpager);
 
 
@@ -289,6 +290,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                         //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
                         //    getImages();
 //                        activityReference.updateDrawer();
+                        newItemFilePath = file.getPath();
+                        ImageList.add(newItemFilePath);
+                        viewpagerAdapter.notifyDataSetChanged();
                         Utils.showToast(activityReference, "Successfull", AppConstant.TOAST_TYPES.SUCCESS);
                     }
 
@@ -318,7 +322,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         public CustomPagerAdapter(Context context) {
             mContext = context;
         }
+        public void addItem(){
 
+        }
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
             // ModelObject modelObject = ModelObject.values()[position];

@@ -249,5 +249,8 @@
     <string name="price">Price</string>
     <string name="select_image">Select Image</string>
     <string name="category_name">Category Name</string>
+    <string name="delete_image">Delete Image</string>
+    <string name="change_image">Change Image</string>
+    <string name="information">Info</string>
 
 </resources>

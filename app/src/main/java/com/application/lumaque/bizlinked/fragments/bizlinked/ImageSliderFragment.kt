@@ -6,11 +6,15 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 
 import com.application.lumaque.bizlinked.R
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment
@@ -24,6 +28,8 @@ class ImageSliderFragment : BaseFragment() {
     private var imageList = ArrayList<String>()
 
     private lateinit var vpImageSlider: ViewPager
+    private lateinit var menuButton: ImageButton
+    private lateinit var popup: PopupMenu
 
     override fun onCustomBackPressed() {
         activityReference.onPageBack()
@@ -38,14 +44,52 @@ class ImageSliderFragment : BaseFragment() {
         bundle.let {
             imageList = it.getStringArrayList("IMAGELINKS")
         }
+        init(rootView)
         container?.let {
-            vpImageSlider = rootView!!.findViewById(R.id.vp_slider)
             if (imageList.isNotEmpty()) {
                 val adapter = ImagePagerAdapter(activityReference, imageList)
                 vpImageSlider.adapter = adapter
             }
         }
 
+
+    }
+
+    private fun init(rootView: View?) {
+        findViewById(rootView)
+        val popup = PopupMenu(activityReference, menuButton)
+        val menu = popup.menu
+        popup.menuInflater.inflate(R.menu.menu_image_slide, menu)
+        menuButton.setOnClickListener { _ ->
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.info -> {
+                        Toast.makeText(activityReference, "info Clicked", Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.delete_image -> {
+                        Toast.makeText(activityReference, "delete Clicked", Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.change_image -> {
+                        Toast.makeText(activityReference, "changeClicked", Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        Toast.makeText(activityReference, "nothing Clicked", Toast.LENGTH_SHORT).show()
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+            }
+            popup.show()
+        }
+    }
+
+    private fun findViewById(rootView: View?) {
+        rootView?.let {
+            vpImageSlider = it.findViewById(R.id.vp_slider)
+            menuButton = it.findViewById(R.id.menu_button)
+        }
     }
 
     override fun onResume() {
