@@ -159,7 +159,8 @@ public class ProductListFragment extends BaseFragment {
 
                             case R.id.add_product:
                                 Bundle bundleParam = new Bundle();
-                                bundleParam.putString(ProductFragment.companyId, String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
+
+                                bundleParam.putInt(ProductFragment.companyId,(preferenceHelper.getCompanyProfile().getCompanyID()));
                                 //bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
                                 ProductFragment ProductFragment = new ProductFragment();
                                 ProductFragment.setArguments(bundleParam);
