@@ -284,7 +284,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     }
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(NewCategoryFragment.this);
+        activityReference.openMediaPicker(NewCategoryFragment.this,1);
 
         //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }

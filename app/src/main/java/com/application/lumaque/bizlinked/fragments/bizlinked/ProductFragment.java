@@ -74,12 +74,12 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     Gson g = new Gson();
     int paramCompanyId;
     String paramProductId = "";
-    private String newItemFilePath;
-    File imageFile;
-private CustomPagerAdapter viewpagerAdapter;
+//    private String newItemFilePath;
+    ArrayList<File> imageFile;
+    private CustomPagerAdapter viewpagerAdapter;
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
-
+    private boolean isInEditMode = false;
 
     //  int ImageObjectSize;
     @BindView(R.id.shimmer_view_container)
@@ -140,12 +140,19 @@ private CustomPagerAdapter viewpagerAdapter;
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
         cacheCat();
+        viewpagerAdapter = new CustomPagerAdapter(activityReference);
+        viewpager.setAdapter(viewpagerAdapter);
+        indicator.setViewPager(viewpager);
+        imageFile = new ArrayList<>();
+
         if (paramProductId != null && paramProductId.length() > 0) {
             startShimerAnimation();
             initializeViews();
+            isInEditMode = true;
         } else {
             stopShimerAnimation();
             product = new Product();
+            isInEditMode = false;
             product.setProductAttributes(new ArrayList<ProductAttribute>());
             product.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
             setTagAdapter();
@@ -166,7 +173,6 @@ private CustomPagerAdapter viewpagerAdapter;
 
 
     private void initializeViews() {
-
         startShimerAnimation();
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(paramCompanyId));
@@ -182,6 +188,7 @@ private CustomPagerAdapter viewpagerAdapter;
                  */
                 product = GsonHelper.GsonToProduct(activityReference, response);
 
+
                 /**
                  * produt images
                  */
@@ -189,9 +196,8 @@ private CustomPagerAdapter viewpagerAdapter;
                 for (int a = 0; a < product.getImages().size(); a++) {
                     ImageList.add("http://api.bizlinked.lumaque.pk/rest/Product/Image?companyId=" + product.CompanyID + "&imageId=" + product.getImages().get(a));
                 }
-                viewpagerAdapter = new CustomPagerAdapter(activityReference);
-                viewpager.setAdapter(viewpagerAdapter);
-                indicator.setViewPager(viewpager);
+                viewpagerAdapter.notifyDataSetChanged();
+
 
 
                 //product.getProductAttributes();
@@ -250,7 +256,7 @@ private CustomPagerAdapter viewpagerAdapter;
     }
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(ProductFragment.this);
+        activityReference.openMediaPicker(ProductFragment.this,10);
 
         //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
@@ -260,19 +266,29 @@ private CustomPagerAdapter viewpagerAdapter;
         if (file.get(0) != null) {
 //            categoryImageView.setAdjustViewBounds(true);
 //            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageFile = file.get(0);
-            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
-//            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//            Glide.with(this)
-//                    .load(stream.toByteArray())
-//                    .into(categoryImageView);
+            imageFile.addAll(file);
+//            newItemFilePath = file.getPath();
+            for (int i = 0; i < file.size(); i++) {
+                ImageList.add(file.get(i).getPath());
+            }
+            viewpagerAdapter.notifyDataSetChanged();
             Log.d("FileTag", "File is not null");
+            if (isInEditMode){
+                uploadImages(file);
+            }
         }
 
 //        if(productCategory.getProductCategoryID() != 0)
-        uploadMedia(imageFile, "1.jpg");
+
+    }
+
+    private void uploadImages(ArrayList<File> files) {
+        for (int i = 0; i < files.size(); i++) {
+            uploadMedia(files.get(i), "1.jpg");
+        }
+        imageFile.clear();
+
+
     }
 
     private void uploadMedia(final File file, final String fileName) {
@@ -290,9 +306,8 @@ private CustomPagerAdapter viewpagerAdapter;
                         //setImageFromPath(true, currentImageContainerView,file.getAbsolutePath());
                         //    getImages();
 //                        activityReference.updateDrawer();
-                        newItemFilePath = file.getPath();
-                        ImageList.add(newItemFilePath);
-                        viewpagerAdapter.notifyDataSetChanged();
+
+
                         Utils.showToast(activityReference, "Successfull", AppConstant.TOAST_TYPES.SUCCESS);
                     }
 
@@ -322,9 +337,11 @@ private CustomPagerAdapter viewpagerAdapter;
         public CustomPagerAdapter(Context context) {
             mContext = context;
         }
-        public void addItem(){
+
+        public void addItem() {
 
         }
+
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
             // ModelObject modelObject = ModelObject.values()[position];
@@ -499,8 +516,17 @@ private CustomPagerAdapter viewpagerAdapter;
                     public void onSuccess(String response) {
                         String anc = response;
 
+                        product = GsonHelper.GsonToProduct(activityReference, response);
+
                         Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
+                        if (!isInEditMode) {
+                            uploadImages(imageFile);
+                        } else {
+
+                        }
                         onCustomBackPressed();
+
+
                     /*    CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
 
                         preferenceHelper.putCompany(companyprofile);

@@ -294,7 +294,7 @@ private void onSave(){
     }*/
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(ProfileDetailTabFragment.this);
+        activityReference.openMediaPicker(ProfileDetailTabFragment.this,1);
 
       //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }

@@ -811,7 +811,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     }
 
-    public void openMediaPicker(final MediaTypePicker listener) {
+    public void openMediaPicker(final MediaTypePicker listener, final int maxImageCount) {
         TedPermission.with(this)
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
@@ -820,7 +820,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                     public void onPermissionGranted() {
                         mediaPickerListener = listener;
                         FilePickerBuilder.getInstance()
-                                .setMaxCount(AppConstant.SELECT_IMAGE_COUNT)
+                                .setMaxCount(maxImageCount)
                                 //.setSelectedFiles(photoPaths)
                                 //.setActivityTheme(R.style.Theme_Holo_Light)
                                 .enableVideoPicker(false)
