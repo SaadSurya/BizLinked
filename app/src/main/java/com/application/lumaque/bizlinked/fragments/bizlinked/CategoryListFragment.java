@@ -57,7 +57,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
     RecyclerView categoryListRV;
     private String strQuery = "";
     SearchView searchView;
-    ;
+
     MenuItem searchItem;
     ImageView closeButton;
 

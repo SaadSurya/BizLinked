@@ -74,12 +74,13 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     Gson g = new Gson();
     int paramCompanyId;
     String paramProductId = "";
-//    private String newItemFilePath;
+    //    private String newItemFilePath;
     ArrayList<File> imageFile;
     private CustomPagerAdapter viewpagerAdapter;
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
     private boolean isInEditMode = false;
+    HashMap<String, Integer> hMap = new HashMap<>();
 
     //  int ImageObjectSize;
     @BindView(R.id.shimmer_view_container)
@@ -199,7 +200,6 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 viewpagerAdapter.notifyDataSetChanged();
 
 
-
                 //product.getProductAttributes();
 
               /*  if (product.getProductCategoryID() > 1)
@@ -256,7 +256,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     }
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(ProductFragment.this,10);
+        activityReference.openMediaPicker(ProductFragment.this, 10);
 
         //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
@@ -273,7 +273,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
             }
             viewpagerAdapter.notifyDataSetChanged();
             Log.d("FileTag", "File is not null");
-            if (isInEditMode){
+            if (isInEditMode) {
                 uploadImages(file);
             }
         }
@@ -455,19 +455,18 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
         companyCategoryList = categoryList;
 
-
         List categoryName = new ArrayList();
 
         for (ProductCategory temp : companyCategoryList) {
 
             categoryName.add(temp.getProductCategoryName());
+            hMap.put(temp.getProductCategoryName(), temp.getProductCategoryID());
             //System.out.println(temp);
         }
 
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<String>(activityReference, android.R.layout.simple_list_item_1, categoryName);
         proCate.setAdapter(adapter);
-
 
     }
 
@@ -477,12 +476,12 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         switch (view.getId()) {
             case R.id.btn_save:
 
-
+               String catName=  proCate.getText().toString();
                 product.setProductCategoryName(proCate.getText().toString());
                 product.setProductName(proName.getText().toString());
                 product.setProductDescription(proDesc.getText().toString());
                 product.setPrice(Double.parseDouble(proPrice.getText().toString()));
-
+                product.setProductCategoryID(hMap.get(catName));
 
                 product.setProductAttributes(tagItemAdapter.getAttributeLIst());
 

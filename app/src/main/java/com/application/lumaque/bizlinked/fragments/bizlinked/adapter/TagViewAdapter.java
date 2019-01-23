@@ -96,7 +96,12 @@ public void notifyChangeData(){
                  currentObject.getProductAttributeValueName();
 
                  showInfo(((ItemViewHolder) holder).tagDiv,currentObject.getProductAttributeValueName());
-
+        ((ItemViewHolder) holder).Row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tagcallbacks.onRowClick(productAttributesList.get(position));
+            }
+        });
 
     }
 
@@ -115,7 +120,7 @@ public void notifyChangeData(){
 
 
         ImageButton deleteRow;
-        RelativeLayout Row;
+        LinearLayout Row;
 
         TextView  attributeName;
 
@@ -129,7 +134,7 @@ public void notifyChangeData(){
             attributeName = view.findViewById(R.id.pro_attribute_name);
             tagDiv  = view.findViewById(R.id.tag_div);
             deleteRow.setOnClickListener(this);
-            Row.setOnClickListener(this);
+//            Row.setOnClickListener(this);
         }
 
         @Override
@@ -144,12 +149,12 @@ public void notifyChangeData(){
 
                 }
                 break;
-                case R.id.row: {
+               /* case R.id.row: {
 
                     tagcallbacks.onRowClick(productAttributesList.get(position));
 
                 }
-                break;
+                break;*/
 
             }
         }

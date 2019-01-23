@@ -79,7 +79,7 @@ public class AttributesDialog extends DialogFragment {
         this.SelectedProductAttribute = attribute;
     }
 
-    public static AttributesDialog newInstance(ProductAttribute attribute,boolean isNew) {
+    public static AttributesDialog newInstance(ProductAttribute attribute, boolean isNew) {
         AttributesDialog frag = new AttributesDialog();
         frag.setAttribute(attribute);
         frag.isNew = isNew;
@@ -96,8 +96,8 @@ public class AttributesDialog extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
         prefHelper = new BasePreferenceHelper(getActivity());
         companyAttributesList = prefHelper.getAttributesList();
-        if(!isNew)
-        attType.setText(SelectedProductAttribute.getAttributeName());
+        if (!isNew)
+            attType.setText(SelectedProductAttribute.getAttributeName());
         getDialog().setTitle("Add Attributes");
         setCancelable(false);
 
@@ -111,8 +111,8 @@ public class AttributesDialog extends DialogFragment {
         // Get field from view
 
         setAutoTextAdapter();
-        if(!isNew)
-        setSavedAttributes();
+        if (!isNew)
+            setSavedAttributes();
     }
 
 
@@ -133,12 +133,15 @@ public class AttributesDialog extends DialogFragment {
                 ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
                 Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
                 for (int a = 0; a < companyAttributesList.size(); a++) {
-
-                    if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
+                    //todo check this condition
+                    if (SelectedProductAttribute == null) {
+                        SelectedProductAttribute = companyAttributesList.get(a);
                         tags = companyAttributesList.get(a).getProductAttributeValueName();
                     }
-
-
+                    //todo till here
+//                    if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
+//                        tags = companyAttributesList.get(a).getProductAttributeValueName();
+//                    }
                 }
 
 
@@ -158,29 +161,24 @@ public class AttributesDialog extends DialogFragment {
                 SelectedProductAttribute = new ProductAttribute();
                 SelectedProductAttribute.setAttributeName(attType.getText().toString());
                 attBtnAdd.setVisibility(View.GONE);
-             //   SelectedProductAttribute = abc;
+                //   SelectedProductAttribute = abc;
 
             }
         });
 
 
-
-
-
-
-
 /**
  * get attributes tag for selected attributes
  */
-if(!isNew)
-        for (int a = 0; a < companyAttributesList.size(); a++) {
+        if (!isNew)
+            for (int a = 0; a < companyAttributesList.size(); a++) {
 
-            if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
-                tags = companyAttributesList.get(a).getProductAttributeValueName();
+                if (companyAttributesList.get(a).AttributeID == SelectedProductAttribute.AttributeID) {
+                    tags = companyAttributesList.get(a).getProductAttributeValueName();
+                }
+
+
             }
-
-
-        }
 
 
         //  List<String> newList=new ArrayList<>(list);
@@ -192,12 +190,12 @@ if(!isNew)
         attTag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-          //      ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
+                //      ProductAttribute selectedItem = (ProductAttribute) arg0.getItemAtPosition(position);
 
                 AttributeItemAdapter.addItem((String) arg0.getItemAtPosition(position));
                 attTag.setText("");
                 tagBtnAdd.setVisibility(View.GONE);
-               // Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), selectedItem.getAttributeName(), Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -206,7 +204,7 @@ if(!isNew)
             @Override
             public void onClick(View view) {
 
-             //   Toast.makeText(getContext(), "new tag added :" + attTag.getText(), Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(getContext(), "new tag added :" + attTag.getText(), Toast.LENGTH_SHORT).show();
                 AttributeItemAdapter.addItem(attTag.getText().toString());
                 attTag.setText("");
                 tagBtnAdd.setVisibility(View.GONE);
@@ -253,7 +251,7 @@ if(!isNew)
     private void setSavedAttributes() {
 
 
-      //  itemAttributes = new ArrayList();
+        //  itemAttributes = new ArrayList();
         Collections.addAll(itemAttributes, SelectedProductAttribute.getProductAttributeValueName());
         AttributeItemAdapter.addAllList(itemAttributes);
 
@@ -264,26 +262,26 @@ if(!isNew)
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.attribute_cancel:
-               dismiss();
+                dismiss();
                 break;
             case R.id.attribute_save:
 
-if(SelectedProductAttribute == null){
+                if (SelectedProductAttribute == null) {
 
-    Utils.showToast(getContext(),"select attribute name", AppConstant.TOAST_TYPES.ERROR);
-}else {
-    String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
-    AttributeItemAdapter.productCategoryList.toArray(array);
-    //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
-    SelectedProductAttribute.setProductAttributeValueName(array);
+                    Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
+                } else {
+                    String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
+                    AttributeItemAdapter.productCategoryList.toArray(array);
+                    //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
+                    SelectedProductAttribute.setProductAttributeValueName(array);
 
-    Intent i = new Intent()
-            .putExtra("attr", SelectedProductAttribute)
-            .putExtra("isNew", isNew);
-    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
-    dismiss();
+                    Intent i = new Intent()
+                            .putExtra("attr", SelectedProductAttribute)
+                            .putExtra("isNew", isNew);
+                    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
+                    dismiss();
 
-}
+                }
 //                dismiss();
                 break;
         }
