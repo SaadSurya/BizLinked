@@ -3,8 +3,6 @@ package com.application.lumaque.bizlinked.fragments.bizlinked;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -24,26 +22,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.customViews.AttributesDialog;
-import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
-import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.LinkListAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
-import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
-import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
@@ -54,7 +46,6 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,9 +64,11 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
+    public static final String categoryId = "categoryId";
     Gson g = new Gson();
     int paramCompanyId;
     String paramProductId = "";
+    String paramCategoryId = "";
     //    private String newItemFilePath;
     ArrayList<File> imageFile;
     private CustomPagerAdapter viewpagerAdapter;
@@ -151,16 +144,27 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         catArrayAdapter = new CatArrayAdapter(activityReference, newList);
         catArrayAdapter.setNotifyOnChange(true);
         proCate.setAdapter(catArrayAdapter);*/
+
+        /**
+         * update product
+         */
         if (paramProductId != null && paramProductId.length() > 0) {
             startShimerAnimation();
             initializeViews();
             isInEditMode = true;
-        } else {
+        }
+        /**
+         * new product
+         */
+        else {
             stopShimerAnimation();
             product = new Product();
             isInEditMode = false;
             product.setProductAttributes(new ArrayList<ProductAttribute>());
             product.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
+            if (!paramCategoryId.equals(""))
+                product.setProductCategoryID(Long.parseLong(paramCategoryId));
+
             setTagAdapter();
 
 
@@ -174,6 +178,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         if (bundle != null) {
             paramCompanyId = bundle.getInt(companyId);
             paramProductId = bundle.getString(productId);
+            paramCategoryId = bundle.getString(categoryId);
         }
     }
 
@@ -463,6 +468,11 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         List categoryName = new ArrayList();
 
         for (ProductCategory temp : companyCategoryList) {
+
+            if (paramCategoryId != null && paramCategoryId.equals(String.valueOf(temp.getProductCategoryID()))) {
+                proCate.setText(temp.getProductCategoryName());
+                product.setProductCategoryName(temp.getProductCategoryName());
+            }
             categoryName.add(temp.getProductCategoryName());
 //            hMap.put(temp.getProductCategoryName(), temp.getProductCategoryID());
             //System.out.println(temp);

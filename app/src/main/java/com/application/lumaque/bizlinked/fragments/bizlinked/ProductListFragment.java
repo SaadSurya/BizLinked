@@ -205,7 +205,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
                                 Bundle bundleParam = new Bundle();
 
                                 bundleParam.putInt(ProductFragment.companyId, (preferenceHelper.getCompanyProfile().getCompanyID()));
-                                //bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
+                                bundleParam.putString(ProductFragment.categoryId, paramProductCategoryId);
                                 ProductFragment ProductFragment = new ProductFragment();
                                 ProductFragment.setArguments(bundleParam);
                                 activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);

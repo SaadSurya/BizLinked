@@ -34,11 +34,6 @@
                 android:title="Product"
                 app:actionViewClass="android.widget.TextView" />
 
-            <item
-                android:id="@+id/nav_add_category"
-                android:icon="@drawable/ic_keyboard_arrow_right_black_18dp"
-                android:title="Add Category"
-                app:actionViewClass="android.widget.TextView" />
 
             <item
                 android:id="@+id/nav_category_list"

@@ -52,7 +52,6 @@ import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CategoryListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CustomerFragmentTabs;
-import com.application.lumaque.bizlinked.fragments.bizlinked.NewCategoryFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ProductListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.SupplierFragmentTabs;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
@@ -366,8 +365,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             customer = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
                     findItem(R.id.nav_customers));
 
-            addCategory = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                    findItem(R.id.nav_add_category));
 
             categoryList = (TextView) MenuItemCompat.getActionView(navigationView.getMenu().
                     findItem(R.id.nav_category_list));
@@ -1348,12 +1345,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 // popBackStackTillEntry(1);
                 break;
 
-
-            case R.id.nav_add_category:
-                NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
-                addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-                // popBackStackTillEntry(1);
-                break;
 
             case R.id.nav_category_list:
                 CategoryListFragment categoryListFragment = new CategoryListFragment();
