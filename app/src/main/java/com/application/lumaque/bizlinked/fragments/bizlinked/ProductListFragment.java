@@ -6,34 +6,41 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.ProductAdapter;
+import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
-import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.BindView;
 import io.github.yavski.fabspeeddial.FabSpeedDial;
 import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
-public class ProductListFragment extends BaseFragment {
+public class ProductListFragment extends BaseFragment implements SearchView.OnQueryTextListener {
 
     CategoryHorizontalAdapter categoryItemAdapter;
     ProductAdapter productItemAdapter;
@@ -50,10 +57,7 @@ public class ProductListFragment extends BaseFragment {
     ProductList ProductList;
 
 
-
-
-
-  //  FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
+    //  FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
 
 
     @BindView(R.id.fab_speed_dial)
@@ -67,6 +71,11 @@ public class ProductListFragment extends BaseFragment {
     @BindView(R.id.mainlayout)
     ConstraintLayout mainlayout;
 
+    private String strQuery = "";
+    SearchView searchView;
+
+    MenuItem searchItem;
+    ImageView closeButton;
 
     @BindView(R.id.category_rv)
     RecyclerView rvCategory;
@@ -78,7 +87,9 @@ public class ProductListFragment extends BaseFragment {
     @Override
     public void onCustomBackPressed() {
         /*activityReference.addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE,false);*/
-
+        searchView.setQuery("", false);
+        searchView.onActionViewCollapsed();
+        strQuery = "";
 
         activityReference.onPageBack();
     }
@@ -90,16 +101,52 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
-
+        setHasOptionsMenu(true);
         getBaseActivity().toolbar.setTitle("Product");
         setArguments();
-
-
-        initializeViews();
+        if (strQuery.length() > 0) {
+            searchView.setQuery(strQuery, false);
+            searchFromServer(strQuery);
+        } else
+            initializeViews();
 
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_ex7, menu);
+
+        searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+
+        if (strQuery.length() > 0) {
+            searchView.onActionViewExpanded();
+            searchItem.expandActionView();
+            searchView.setQuery(strQuery, false);
+        }
+        closeButton = (ImageView) searchView.findViewById(R.id.search_close_btn);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!strQuery.equalsIgnoreCase("")) {
+                    searchView.setQuery("", false);
+                    searchView.onActionViewCollapsed();
+                    searchItem.collapseActionView();
+                    initializeViews();
+                    strQuery = "";
+                } else {
+                    strQuery = "";
+                    searchView.setQuery("", false);
+                    searchView.onActionViewCollapsed();
+                    searchItem.collapseActionView();
+                }
+
+            }
+        });
+    }
 
     private void setArguments() {
         bundle = getArguments();
@@ -131,14 +178,12 @@ public class ProductListFragment extends BaseFragment {
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
-
+//todo app crash here
                 mShimmerViewContainer.stopShimmerAnimation();
                 mainlayout.setVisibility(View.VISIBLE);
                 mShimmerViewContainer.setVisibility(View.GONE);
 
                 ProductList = GsonHelper.GsonToProductList(activityReference, response);
-
-
 
 
                 fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
@@ -150,31 +195,27 @@ public class ProductListFragment extends BaseFragment {
                         switch (id) {
 
 
-
                             case R.id.add_category:
 //                          Utils.showToast(activityReference,"ye hai new Style",AppConstant.TOAST_TYPES.INFO);
                                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
                                 activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-                            break;
+                                break;
 
                             case R.id.add_product:
                                 Bundle bundleParam = new Bundle();
 
-                                bundleParam.putInt(ProductFragment.companyId,(preferenceHelper.getCompanyProfile().getCompanyID()));
+                                bundleParam.putInt(ProductFragment.companyId, (preferenceHelper.getCompanyProfile().getCompanyID()));
                                 //bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
                                 ProductFragment ProductFragment = new ProductFragment();
                                 ProductFragment.setArguments(bundleParam);
                                 activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-                            break;
+                                break;
 
                         }
 
                         return false;
                     }
                 });
-
-
-
 
 
                 if (ProductList.getProductCategory().size() == 0) {
@@ -292,4 +333,58 @@ public class ProductListFragment extends BaseFragment {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        KeyboardHelper.hideSoftKeyboard(activityReference);
+        searchFromServer(query);
+
+        strQuery = query;
+        return false;
+    }
+
+    private void searchFromServer(String query) {
+        mShimmerViewContainer.startShimmerAnimation();
+        mainlayout.setVisibility(View.GONE);
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("companyId", paramCompanyId);
+        params.put("searchTerm", query);
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
+            @Override
+            public void onSuccess(String response) {
+
+                mShimmerViewContainer.stopShimmerAnimation();
+                mainlayout.setVisibility(View.VISIBLE);
+                mShimmerViewContainer.setVisibility(View.GONE);
+
+                ProductList = GsonHelper.GsonToProductList(activityReference, response);
+
+              /*  ArrayList<ProductCategory> categoryList = new ArrayList<>();
+                GsonHelper gsonHelper = new GsonHelper();
+                categoryList = gsonHelper.GsonToCategoryList(activityReference, response);*/
+                productItemAdapter.clearAllList();
+                productItemAdapter.addAllList(new ArrayList(ProductList.getProduct()));
+            }
+
+            @Override
+            public void onError(String response) {
+//                mShimmerViewContainer.stopShimmerAnimation();
+                Log.d("CAT_SUB_LIST", response);
+                onCustomBackPressed();
+
+            }
+
+            @Override
+            public void onNoNetwork() {
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
+    }
 }

@@ -240,6 +240,7 @@
                     <AutoCompleteTextView
                         android:id="@+id/pro_category"
                         style="?attr/floatingHintEditText"
+                        android:completionThreshold="1"
                         android:hint="@string/category" />
                 </android.support.design.widget.TextInputLayout>
 

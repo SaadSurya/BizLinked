@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -80,8 +82,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
     private boolean isInEditMode = false;
-    HashMap<String, Integer> hMap = new HashMap<>();
-
+    //    HashMap<String, Integer> hMap = new HashMap<>();
+//    private CatArrayAdapter catArrayAdapter;
     //  int ImageObjectSize;
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout mShimmerViewContainer;
@@ -145,7 +147,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         viewpager.setAdapter(viewpagerAdapter);
         indicator.setViewPager(viewpager);
         imageFile = new ArrayList<>();
-
+       /* ArrayList<String> newList = new ArrayList<>();
+        catArrayAdapter = new CatArrayAdapter(activityReference, newList);
+        catArrayAdapter.setNotifyOnChange(true);
+        proCate.setAdapter(catArrayAdapter);*/
         if (paramProductId != null && paramProductId.length() > 0) {
             startShimerAnimation();
             initializeViews();
@@ -458,15 +463,22 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         List categoryName = new ArrayList();
 
         for (ProductCategory temp : companyCategoryList) {
-
             categoryName.add(temp.getProductCategoryName());
-            hMap.put(temp.getProductCategoryName(), temp.getProductCategoryID());
+//            hMap.put(temp.getProductCategoryName(), temp.getProductCategoryID());
             //System.out.println(temp);
         }
 
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<String>(activityReference, android.R.layout.simple_list_item_1, categoryName);
         proCate.setAdapter(adapter);
+        proCate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                product.setProductCategoryID(companyCategoryList.get(position).getProductCategoryID());
+            }
+        });
+//      catArrayAdapter.updateAdapter(new ArrayList<String>(categoryName));
+//        proCate.setAdapter(catArrayAdapter);
 
     }
 
@@ -476,13 +488,14 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         switch (view.getId()) {
             case R.id.btn_save:
 
-               String catName=  proCate.getText().toString();
+                String catName = proCate.getText().toString();
                 product.setProductCategoryName(proCate.getText().toString());
                 product.setProductName(proName.getText().toString());
                 product.setProductDescription(proDesc.getText().toString());
                 product.setPrice(Double.parseDouble(proPrice.getText().toString()));
-                product.setProductCategoryID(hMap.get(catName));
-
+//                if (hMap.get(catName) != null) {
+//                    product.setProductCategoryID(hMap.get(catName));
+//                }
                 product.setProductAttributes(tagItemAdapter.getAttributeLIst());
 
 
