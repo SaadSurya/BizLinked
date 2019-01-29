@@ -229,14 +229,14 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
             @Override
             public void onError(String response) {
-                mShimmerViewContainer.stopShimmerAnimation();
+               stopShimerAnimation();
                 onCustomBackPressed();
 
             }
 
             @Override
             public void onNoNetwork() {
-
+stopShimerAnimation();
             }
         });
 
@@ -469,7 +469,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
         for (ProductCategory temp : companyCategoryList) {
 
-            if (paramCategoryId != null && paramCategoryId.equals(String.valueOf(temp.getProductCategoryID()))) {
+            if (paramCategoryId != null && paramCategoryId.equals(String.valueOf(temp.getProductCategoryID())) && proCate != null) {
                 proCate.setText(temp.getProductCategoryName());
                 product.setProductCategoryName(temp.getProductCategoryName());
             }
@@ -574,6 +574,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
 
     private void startShimerAnimation() {
+        isLoading = true;
         mShimmerViewContainer.startShimmerAnimation();
         mainlayout.setVisibility(View.GONE);
         mShimmerViewContainer.setVisibility(View.VISIBLE);
@@ -581,6 +582,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     }
 
     private void stopShimerAnimation() {
+        isLoading = false;
         mShimmerViewContainer.stopShimmerAnimation();
         mainlayout.setVisibility(View.VISIBLE);
         mShimmerViewContainer.setVisibility(View.GONE);

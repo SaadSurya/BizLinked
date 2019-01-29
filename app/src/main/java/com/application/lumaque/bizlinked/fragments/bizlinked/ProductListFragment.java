@@ -162,32 +162,44 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         }
     }
 
-    private void initializeViews() {
+
+    private void stopShimerAnimation(){
+
+        isLoading = false;
+        mShimmerViewContainer.stopShimmerAnimation();
+        mainlayout.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.setVisibility(View.GONE);
+
+
+    }
+    private void startShimerAnimation(){
+
+        isLoading = true;
         mShimmerViewContainer.startShimmerAnimation();
 
         mainlayout.setVisibility(View.GONE);
         mShimmerViewContainer.setVisibility(View.VISIBLE);
 
 
+    }
+    private void initializeViews() {
+        startShimerAnimation();
+
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
         params.put("productCategoryId", paramProductCategoryId);
 
 /*
+
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
         params.put("productCategoryId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
 */
-
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
-//todo app crash here
-                mShimmerViewContainer.stopShimmerAnimation();
-                mainlayout.setVisibility(View.VISIBLE);
-                mShimmerViewContainer.setVisibility(View.GONE);
-
+                stopShimerAnimation();
                 ProductList = GsonHelper.GsonToProductList(activityReference, response);
 
 
@@ -324,12 +336,12 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
             @Override
             public void onError(String response) {
-
+                stopShimerAnimation();
             }
 
             @Override
             public void onNoNetwork() {
-
+                stopShimerAnimation();
             }
         });
 
@@ -347,10 +359,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
     }
 
     private void searchFromServer(String query) {
-        mShimmerViewContainer.startShimmerAnimation();
-        mainlayout.setVisibility(View.GONE);
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-
+        startShimerAnimation();
 
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
@@ -358,11 +367,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
-
-                mShimmerViewContainer.stopShimmerAnimation();
-                mainlayout.setVisibility(View.VISIBLE);
-                mShimmerViewContainer.setVisibility(View.GONE);
-
+stopShimerAnimation();
                 ProductList = GsonHelper.GsonToProductList(activityReference, response);
 
               /*  ArrayList<ProductCategory> categoryList = new ArrayList<>();
@@ -374,7 +379,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
             @Override
             public void onError(String response) {
-//                mShimmerViewContainer.stopShimmerAnimation();
+                stopShimerAnimation();
                 Log.d("CAT_SUB_LIST", response);
                 onCustomBackPressed();
 
@@ -382,7 +387,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
             @Override
             public void onNoNetwork() {
-
+                stopShimerAnimation();
             }
         });
     }
