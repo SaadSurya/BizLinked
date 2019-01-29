@@ -364,7 +364,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
         String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "?" +"companyId="+ preferenceHelper.getCompanyProfile().getCompanyID() + "&productCategoryId=" + productCategory.getProductCategoryID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL,true, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {

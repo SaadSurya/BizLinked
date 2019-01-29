@@ -249,11 +249,11 @@ public class WebAppManager {
                 );
     }
 
-    public void uploadImage(String fileName, HashMap<String, String> extraParams,String URL, File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void uploadImage(String fileName, HashMap<String, String> extraParams,String URL, Boolean showProgress,File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
 
 
 
-        WebAPIRequestHelper.getInstance(activity, true)
+        WebAPIRequestHelper.getInstance(activity, showProgress)
                // .setHeaderUserPreference(preferenceHelper)
                 //.setCustomBody(extraParams)
                 .postRequestMultipart(getBytes(file),

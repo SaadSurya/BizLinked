@@ -365,7 +365,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE + "/" + preferenceHelper.getCompanyProfile().getCompanyID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL,true, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {

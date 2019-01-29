@@ -229,14 +229,14 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
             @Override
             public void onError(String response) {
-               stopShimerAnimation();
+                stopShimerAnimation();
                 onCustomBackPressed();
 
             }
 
             @Override
             public void onNoNetwork() {
-stopShimerAnimation();
+                stopShimerAnimation();
             }
         });
 
@@ -309,7 +309,7 @@ stopShimerAnimation();
         String catImageURL = AppConstant.ServerAPICalls.UPLOAD_PRODUCT_IMAGE + "?" + "companyId=" + paramCompanyId + "&productId=" + product.getProductID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, false, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
