@@ -47,9 +47,11 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     public static final String companyId = "companyId";
     public static final String productCategoryId = "productCategoryId";
+    public static final String productCategoryName = "productCategoryName";
 
     String paramCompanyId = "";
     String paramProductCategoryId = "";
+    String paramProductCategoryName = "";
 
     Bundle bundle;
 
@@ -153,6 +155,10 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         if (bundle != null) {
             paramCompanyId = bundle.getString(companyId);
             paramProductCategoryId = bundle.getString(productCategoryId);
+            paramProductCategoryName = bundle.getString(productCategoryName);
+            if (paramProductCategoryName != null && !paramProductCategoryName.isEmpty())
+                getBaseActivity().toolbar.setTitle(paramProductCategoryName);
+
         }
     }
 
@@ -168,7 +174,6 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         params.put("productCategoryId", paramProductCategoryId);
 
 /*
-
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
         params.put("productCategoryId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
@@ -236,11 +241,10 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
                                     if (NetworkUtils.isNetworkAvailable(activityReference)) {
                                         try {
-
-
                                             Bundle bundle = new Bundle();
                                             bundle.putString(ProductListFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
                                             bundle.putString(ProductListFragment.productCategoryId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
+                                            bundle.putString(ProductListFragment.productCategoryName, ProductList.getProductCategory().get(position).getProductCategoryName());
                                             ProductListFragment ProductListFragment = new ProductListFragment();
                                             ProductListFragment.setArguments(bundle);
                                             activityReference.addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);

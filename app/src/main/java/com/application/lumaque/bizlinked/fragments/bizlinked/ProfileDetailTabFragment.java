@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -25,12 +24,10 @@ import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.BusinessNatureModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
-import com.application.lumaque.bizlinked.helpers.ImageLoader;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
-import com.application.lumaque.bizlinked.listener.OnImageDownload;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -54,26 +51,26 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ProfileDetailTabFragment extends Fragment implements MediaTypePicker {
-    ArrayList<BusinessNatureModel>  BusinessNatureList;
+    ArrayList<BusinessNatureModel> BusinessNatureList;
 
 
     boolean isImageSet = false;
     @BindView(R.id.profile_picture)
     ImageView profilePic;
 
-     @BindView(R.id.et_user_name)
-     EditText etUserName;
-             @BindView(R.id.sp_busines_type)
+    @BindView(R.id.et_user_name)
+    EditText etUserName;
+    @BindView(R.id.sp_busines_type)
     Spinner spBusinesType;
-     @BindView(R.id.et_phone)
-     EditText etPhone;
-             @BindView(R.id.et_phone2)
-             EditText etPhone2;
-     @BindView(R.id.et_email)
-     EditText etEMail;
-             @BindView(R.id.et_website)
-             EditText etWebsite;
-     @BindView(R.id.btn_save)
+    @BindView(R.id.et_phone)
+    EditText etPhone;
+    @BindView(R.id.et_phone2)
+    EditText etPhone2;
+    @BindView(R.id.et_email)
+    EditText etEMail;
+    @BindView(R.id.et_website)
+    EditText etWebsite;
+    @BindView(R.id.btn_save)
     Button btSave;
 
 
@@ -84,11 +81,13 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
     BaseActivity activityReference;
     BasePreferenceHelper preferenceHelper;
     private static ProfileDetailTabFragment profileDetailTabFragment;
-   // private int position;
-   // private View currentImageContainerView;
+
+    // private int position;
+    // private View currentImageContainerView;
     @SuppressLint("ValidFragment")
     private ProfileDetailTabFragment() {
     }
+
     public static ProfileDetailTabFragment getInstance(BaseActivity activityReference, BasePreferenceHelper preferenceHelper) {
         if (profileDetailTabFragment == null) {
             profileDetailTabFragment = new ProfileDetailTabFragment();
@@ -118,14 +117,12 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
 
     private void initializeViews() {
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.BUSINESS_NATURE_URL,true, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.BUSINESS_NATURE_URL, true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
 
-
                 BusinessNatureList = GsonHelper.GsonToBusinessNature(activityReference, response);
-
 
 
                 String[] majorCat = new String[BusinessNatureList.size() <= 0 ? 0 : BusinessNatureList.size()];
@@ -136,36 +133,33 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
                 }
 
 
-
                 ArrayAdapter arrayAdapter = new ArrayAdapter(activityReference, android.R.layout.simple_spinner_dropdown_item, majorCat);
                 arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                 spBusinesType.setAdapter(arrayAdapter);
-                  getImages();
+                getImages();
 
                 etUserName.setText(preferenceHelper.getCompanyProfile().getCompanyName());
                 etPhone.setText(preferenceHelper.getCompanyProfile().getContactNo());
-                        etPhone2.setText(preferenceHelper.getCompanyProfile().getPhoneNo());
+                etPhone2.setText(preferenceHelper.getCompanyProfile().getPhoneNo());
                 etEMail.setText(preferenceHelper.getCompanyProfile().getEmailAddress());
-                        etWebsite.setText(preferenceHelper.getCompanyProfile().getWebsite());
-              //  preferenceHelper.getCompanyProfile();
+                etWebsite.setText(preferenceHelper.getCompanyProfile().getWebsite());
+                //  preferenceHelper.getCompanyProfile();
 
 
-try {
+                try {
 
 
-    int defaultPos = 0;
-    for(int i = 0; i < BusinessNatureList.size(); i ++){
-        if(BusinessNatureList.get(i).getBusinessNatureID().equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getBusinessNature()[0])))
-            defaultPos = i;
-        spBusinesType.setSelection(defaultPos);
-    }
+                    int defaultPos = 0;
+                    for (int i = 0; i < BusinessNatureList.size(); i++) {
+                        if (BusinessNatureList.get(i).getBusinessNatureID().equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getBusinessNature()[0])))
+                            defaultPos = i;
+                        spBusinesType.setSelection(defaultPos);
+                    }
 
-}catch (Exception e){
+                } catch (Exception e) {
 
 
-
-}
-
+                }
 
 
                 CompanyProfileModel companyProfileModel = new CompanyProfileModel();
@@ -179,10 +173,9 @@ try {
                 companyProfileModel.setEmailAddress(etEMail.getText().toString());
                 companyProfileModel.setWebsite(etWebsite.getText().toString());
 
-             //   parentFragment = ((ProfileTabsFragment)this.getParentFragment());
-                parentFragment  = ((ProfileTabsFragment)(ProfileDetailTabFragment.this.getParentFragment()));
+                //   parentFragment = ((ProfileTabsFragment)this.getParentFragment());
+                parentFragment = ((ProfileTabsFragment) (ProfileDetailTabFragment.this.getParentFragment()));
                 parentFragment.updatedProfile = companyProfileModel;
-
 
 
             }
@@ -199,24 +192,23 @@ try {
         });
 
 
-
     }
+
     public void doBack() {
 
 
         activityReference.onPageBack();
 
 
-
     }
 
 
-    @OnClick({R.id.profile_picture,R.id.btn_save})
+    @OnClick({R.id.profile_picture, R.id.btn_save})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.profile_picture:
                 selectedViewName = AppConstant.SCAN_DOCUMENT_TYPES.IMAGE_0;
-                openImagePicker( view);
+                openImagePicker(view);
                 break;
             case R.id.btn_save:
                 onSave();
@@ -227,46 +219,39 @@ try {
     }
 
 
+    private void onSave() {
+
+        CompanyProfileModel companyProfileModel = new CompanyProfileModel();
 
 
+        int BN[] = {Integer.parseInt(BusinessNatureList.get(spBusinesType.getSelectedItemPosition()).getBusinessNatureID())};
 
-private void onSave(){
-
-    CompanyProfileModel companyProfileModel = new CompanyProfileModel();
-
-
-    int BN[] = {Integer.parseInt(BusinessNatureList.get(spBusinesType.getSelectedItemPosition()).getBusinessNatureID())};
-
-    companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-    companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
-    companyProfileModel.setCompanyName(etUserName.getText().toString());
-    companyProfileModel.setContactNo(etPhone.getText().toString());
-    companyProfileModel.setPhoneNo(etPhone2.getText().toString());
-    companyProfileModel.setEmailAddress(etEMail.getText().toString());
-    companyProfileModel.setWebsite(etWebsite.getText().toString());
+        companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
+        companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
+        companyProfileModel.setCompanyName(etUserName.getText().toString());
+        companyProfileModel.setContactNo(etPhone.getText().toString());
+        companyProfileModel.setPhoneNo(etPhone2.getText().toString());
+        companyProfileModel.setEmailAddress(etEMail.getText().toString());
+        companyProfileModel.setWebsite(etWebsite.getText().toString());
 
 
-    companyProfileModel.setBusinessNature(BN);
+        companyProfileModel.setBusinessNature(BN);
 
 
+        parentFragment.updatedProfile = companyProfileModel;
+        parentFragment.saveDetailAndNext();
 
 
-
-
-
-    parentFragment.updatedProfile = companyProfileModel;
-    parentFragment.saveDetailAndNext();
-
-
-
-}
-    private void openImagePicker( View view) {
-        if (isImageSet)
-            openOptionsList( view);
-        else
-            takePicture( view);
     }
-    private void openOptionsList( final View view) {
+
+    private void openImagePicker(View view) {
+        if (isImageSet)
+            openOptionsList(view);
+        else
+            takePicture(view);
+    }
+
+    private void openOptionsList(final View view) {
         final ArrayList<String> optionsList = new ArrayList<>();
         optionsList.add(activityReference.getString(R.string.preview));
         optionsList.add(activityReference.getString(R.string.update));
@@ -282,7 +267,7 @@ private void onSave(){
                     deleteCurrentProfileImage();
 
                 } else if (optionsList.get(whichOptionPosition).equalsIgnoreCase(activityReference.getString(R.string.update))) {
-                    takePicture( view);
+                    takePicture(view);
                 }
 
             }
@@ -294,10 +279,11 @@ private void onSave(){
     }*/
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(ProfileDetailTabFragment.this,1);
+        activityReference.openMediaPicker(ProfileDetailTabFragment.this, 1);
 
-      //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
+        //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
+
     private void getStoragePermissions() {
         if (TedPermission.isGranted(activityReference, Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -315,7 +301,7 @@ private void onSave(){
 
                         @Override
                         public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                          //  setupAnimation(glImageContainer);
+                            //  setupAnimation(glImageContainer);
                         }
                     }).check();
 
@@ -323,12 +309,11 @@ private void onSave(){
     }
 
 
-
     private void getImages() {
 
-      String URL =   AppConstant.ServerAPICalls.GET_MEDIA_FILE+preferenceHelper.getCompanyProfile().getCompanyID();
-      ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
-      //  setVisibilityOfImageView(true,ivDocumentImage);
+        String URL = AppConstant.ServerAPICalls.GET_MEDIA_FILE + preferenceHelper.getCompanyProfile().getCompanyID();
+        ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
+        //  setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(this).load(URL)
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
                 .listener(new RequestListener<Drawable>() {
@@ -340,17 +325,14 @@ private void onSave(){
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                       isImageSet = true;
+                        isImageSet = true;
                         return false;
                     }
                 })
                 .into(profilePic);
 
 
-
     }
-
-
 
 
     private void openImagePreview(ImageView imageView) {
@@ -375,18 +357,15 @@ private void onSave(){
     }
 
 
-
-
-
     private void uploadMedia(final File file, final String fileName) {
         HashMap<String, String> parameters = new HashMap<>();
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelper.getCompanyProfile().getCompanyID();
+        String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE + "/" + preferenceHelper.getCompanyProfile().getCompanyID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL,file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
@@ -399,8 +378,6 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
                     public void onError(String response) {
 
 
-
-
                     }
 
                     @Override
@@ -411,11 +388,11 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
     }
 
 
-
     @Override
     public void onDocClicked(ArrayList<File> files) {
 
     }
+
     public void setImageFromPath(final boolean uploadFromGallery, final View currentImageContainerView, final String filePath) {
 
         ImageView ivDocumentImage = currentImageContainerView.findViewById(R.id.ivDocumentImage);
@@ -431,6 +408,7 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
         //  ivDocumentImage.requestLayout();
 
     }
+
     private void setVisibilityOfImageView(boolean isVisible, View view) {
         //ImageView imageView = view.findViewById(R.id.ivDocumentImage);
         if (isVisible) {
@@ -448,9 +426,7 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
     }
 
 
-    private void deleteCurrentProfileImage(){
-
-
+    private void deleteCurrentProfileImage() {
 
 
         final HashMap<String, String> params = new HashMap<>();
@@ -458,7 +434,7 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
         params.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).deleteDetails(params, AppConstant.ServerAPICalls.DELETE_COMPANY_PROFILE_PIC,true, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).deleteDetails(params, AppConstant.ServerAPICalls.DELETE_COMPANY_PROFILE_PIC, true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
                 // Utils.showToast(activityReference, response, AppConstant.TOAST_TYPES.SUCCESS);
@@ -478,7 +454,6 @@ String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE+"/"+preferenceHelp
 
             }
         });
-
 
 
     }

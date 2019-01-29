@@ -101,6 +101,8 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
         if (bundle != null) {
             isFromCatList = bundle.getBoolean("FROMCATLIST");
             productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+            getBaseActivity().toolbar.setTitle(productCategory.getProductCategoryName());
+
         }
         companyId = preferenceHelper.getCompanyProfile().getCompanyID();
 //        CompanyHelper companyHelper = new CompanyHelper(activityReference, preferenceHelper, this);
