@@ -5,88 +5,99 @@
 
     style="?attr/supportCenterInfoBgStyle"
     android:layout_margin="@dimen/x0"
-    android:padding="@dimen/x0"
-    android:background="@null">
+    android:background="@null"
+    android:padding="@dimen/x0">
 
 
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-
-
-
-        <com.application.lumaque.bizlinked.customViews.CustomEditText
-            android:id="@+id/et_shop_num"
-
-
-            tools:text="asdasd"
-            tools:hint="asdasd"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/x16"
-            android:layout_marginStart="@dimen/x16"
+        <!--   <com.application.lumaque.bizlinked.customViews.CustomEditText
+               android:id="@+id/et_shop_num"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/x16"
+               android:layout_marginTop="@dimen/x12"
+               android:layout_marginEnd="@dimen/x16"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               tools:hint="asdasd"
+               tools:text="asdasd" />-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_shop_num_layout"
+            style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
+            android:hint="Shop Number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content" />
+            app:layout_constraintTop_toTopOf="parent">
 
+            <EditText
+                android:id="@+id/et_shop_num"
+                style="?attr/floatingHintEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="asdasd" />
 
-        <EditText
-            android:id="@+id/et_market"
-            style="?attr/roundEditTextNormalColorStyle"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/x16"
+        </android.support.design.widget.TextInputLayout>
 
-            android:layout_marginStart="@dimen/x16"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_market_layout"
+            style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
             android:hint="@string/market"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_shop_num" />
+            app:layout_constraintTop_toBottomOf="@+id/et_shop_num_layout">
 
+            <EditText
+                android:id="@+id/et_market"
+                style="?attr/floatingHintEditText"
+                android:layout_width="match_parent" />
 
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/et_area"
-            style="?attr/roundEditTextNormalColorStyle"
-            android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/x16"
-
-            android:layout_marginStart="@dimen/x16"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_area_layout"
+            style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
             android:hint="@string/area"
-            android:imeOptions="actionDone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_market" />
+            app:layout_constraintTop_toBottomOf="@+id/et_market_layout">
 
-
+            <EditText
+                android:id="@+id/et_area"
+                style="?attr/floatingHintEditText"
+                android:layout_width="match_parent"
+                android:imeOptions="actionDone" />
+        </android.support.design.widget.TextInputLayout>
 
         <Spinner
             android:id="@+id/sp_cities"
-            style="?attr/roundEditTextNormalColorStyle"
+            style="?attr/floatingHintEditText"
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/x16"
-android:layout_height="@dimen/x36"
+            android:layout_height="@dimen/x36"
             android:layout_marginStart="@dimen/x16"
             android:layout_marginTop="@dimen/x12"
+            android:layout_marginEnd="@dimen/x16"
             android:entries="@array/cities"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_area"/>
+            app:layout_constraintTop_toBottomOf="@+id/et_area_layout" />
 
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/x16"
-
             android:layout_marginStart="@dimen/x16"
+
             android:layout_marginTop="@dimen/x12"
+            android:layout_marginEnd="@dimen/x16"
 
             android:layout_marginBottom="8dp"
 
@@ -96,33 +107,34 @@ android:layout_height="@dimen/x36"
             app:layout_constraintTop_toBottomOf="@+id/sp_cities">
 
 
+            <FrameLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-        <FrameLayout
-            android:id="@+id/mapContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+                />
 
-             />
             <ImageButton
                 android:id="@+id/btn_current_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:src="@drawable/curentlocation"
                 android:layout_gravity="right"
-                android:layout_margin="@dimen/x5"/>
+                android:layout_margin="@dimen/x5"
+                android:background="@color/transparent"
+                android:src="@drawable/curentlocation" />
         </FrameLayout>
+
         <Button
             android:id="@+id/btn_save"
             style="?attr/roundSkyBlueButtonColorStyle"
 
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/x16"
+            android:layout_marginStart="@dimen/x16"
+
+            android:layout_marginTop="@dimen/x12"
 
             android:layout_marginEnd="@dimen/x16"
-
-            android:layout_marginStart="@dimen/x16"
-            android:layout_marginTop="@dimen/x12"
+            android:layout_marginBottom="@dimen/x16"
             android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +143,6 @@ android:layout_height="@dimen/x36"
             app:layout_constraintTop_toBottomOf="@+id/sp_cities"
             app:layout_constraintVertical_bias="0.963" />
     </android.support.constraint.ConstraintLayout>
-
 
 
 </FrameLayout>

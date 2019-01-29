@@ -184,7 +184,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //todo app crash here
         super.onCreate(savedInstanceState);
+
         setContentView(getMainLayoutId());
         ButterKnife.bind(this);
         context = BaseActivity.this;

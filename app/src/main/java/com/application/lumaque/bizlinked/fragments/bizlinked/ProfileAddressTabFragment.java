@@ -53,8 +53,10 @@ public class ProfileAddressTabFragment extends Fragment {
      Gson g = new Gson();
      @BindView(R.id.mapContainer)
      FrameLayout mpFrameLayout;
+//     @BindView(R.id.et_shop_num)
+//     CustomEditText etShopNum;
      @BindView(R.id.et_shop_num)
-     CustomEditText etShopNum;
+     EditText etShopNum;
      @BindView(R.id.et_market)
      EditText etMarket;
      @BindView(R.id.et_area)
