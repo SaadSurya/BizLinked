@@ -122,7 +122,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
             public void onSuccess(String response) {
 
 
-                BusinessNatureList = GsonHelper.GsonToBusinessNature(activityReference, response);
+                BusinessNatureList = GsonHelper.GsonToBusinessNature(response);
 
 
                 String[] majorCat = new String[BusinessNatureList.size() <= 0 ? 0 : BusinessNatureList.size()];
@@ -365,7 +365,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         String logoURL = AppConstant.ServerAPICalls.UPLOAD_FILE_IMAGE + "/" + preferenceHelper.getCompanyProfile().getCompanyID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL,true, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, logoURL, true, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {

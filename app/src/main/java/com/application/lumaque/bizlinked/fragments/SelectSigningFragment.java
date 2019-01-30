@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.application.lumaque.bizlinked.BizLinkApplication;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.HomeActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
@@ -26,6 +25,7 @@ import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.daimajia.androidanimations.library.Techniques;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.Order;
+
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -127,7 +127,7 @@ public class SelectSigningFragment extends BaseFragment {
                     @Override
                     public void onSuccess(String response) {
 
-                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
+                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(response);
 
                         preferenceHelper.putCompany(companyprofile);
 

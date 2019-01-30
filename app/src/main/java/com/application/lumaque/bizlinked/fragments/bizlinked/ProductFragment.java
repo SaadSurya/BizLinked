@@ -197,7 +197,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 /**
                  * product detail
                  */
-                product = GsonHelper.GsonToProduct(activityReference, response);
+                product = GsonHelper.GsonToProduct(response);
 
 
                 /**
@@ -538,7 +538,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                     public void onSuccess(String response) {
                         String anc = response;
 
-                        product = GsonHelper.GsonToProduct(activityReference, response);
+                        product = GsonHelper.GsonToProduct(response);
 
                         Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
                         if (!isInEditMode) {

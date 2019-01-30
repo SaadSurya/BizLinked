@@ -106,22 +106,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_cities">
 
-
-            <FrameLayout
-                android:id="@+id/mapContainer"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="match_parent">
 
-                />
+                <FrameLayout
+                    android:id="@+id/mapContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/x24"
+                    android:layout_height="@dimen/x24"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/marker_icon"/>
 
-            <ImageButton
-                android:id="@+id/btn_current_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_margin="@dimen/x5"
-                android:background="@color/transparent"
-                android:src="@drawable/curentlocation" />
+                <ImageButton
+                    android:id="@+id/btn_current_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="@dimen/x5"
+                    android:background="@color/transparent"
+                    android:src="@drawable/curentlocation" />
+
+            </RelativeLayout>
         </FrameLayout>
 
         <Button

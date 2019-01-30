@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -197,9 +196,9 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
                     String RequestsSentArrayString = RequestsSentArray.toString();
 
 
-                    RequestsSentList = GsonHelper.GsonToCompanyProfileList(getActivity(),RequestsSentArrayString);
-                    LinkedList =  GsonHelper.GsonToCompanyProfileList(getActivity(),LinkedArrayString);
-                    RequestsRecievedList =  GsonHelper.GsonToCompanyProfileList(getActivity(),RequestsRecievedArrayString);
+                    RequestsSentList = GsonHelper.GsonToCompanyProfileList(RequestsSentArrayString);
+                    LinkedList =  GsonHelper.GsonToCompanyProfileList(LinkedArrayString);
+                    RequestsRecievedList =  GsonHelper.GsonToCompanyProfileList(RequestsRecievedArrayString);
                     setupTabLayout();
 
                     if(strSelectedTab != -1)
@@ -428,7 +427,7 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
                 searchViewLayout.setVisibility(View.VISIBLE);
                 tabViewLayout.setVisibility(View.GONE);
                 mShimmerViewContainer.setVisibility(View.GONE);
-                searchedLinkList =  GsonHelper.GsonToCompanyProfileList(getActivity(),response);
+                searchedLinkList =  GsonHelper.GsonToCompanyProfileList(response);
 
 
                 noRecord.setVisibility(View.GONE);
@@ -603,9 +602,9 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
                     String RequestsSentArrayString = RequestsSentArray.toString();
 
 
-                    RequestsSentList = GsonHelper.GsonToCompanyProfileList(getActivity(),RequestsSentArrayString);
-                    LinkedList =  GsonHelper.GsonToCompanyProfileList(getActivity(),LinkedArrayString);
-                    RequestsRecievedList =  GsonHelper.GsonToCompanyProfileList(getActivity(),RequestsRecievedArrayString);
+                    RequestsSentList = GsonHelper.GsonToCompanyProfileList(RequestsSentArrayString);
+                    LinkedList =  GsonHelper.GsonToCompanyProfileList(LinkedArrayString);
+                    RequestsRecievedList =  GsonHelper.GsonToCompanyProfileList(RequestsRecievedArrayString);
 
 
 

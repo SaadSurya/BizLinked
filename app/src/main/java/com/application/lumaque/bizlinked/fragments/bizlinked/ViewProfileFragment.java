@@ -1,6 +1,5 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -12,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -160,7 +158,7 @@ ConstraintLayout mainLayout;
             @Override
             public void onSuccess(String response) {
                 // Utils.showToast(activityReference, "Logged in successfully...", AppConstant.TOAST_TYPES.SUCCESS);
-                companyProfileModel =  GsonHelper.GsonToCompanyProfile(activityReference, response);
+                companyProfileModel =  GsonHelper.GsonToCompanyProfile(response);
                 //JSONArray recordsArray = responseObj.getJSONArray("records");
                 // String recordsArrayString = recordsArray.toString();
 

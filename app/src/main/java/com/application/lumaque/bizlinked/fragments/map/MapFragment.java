@@ -56,10 +56,12 @@ public void setmMap(GoogleMap Map){
         }
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mapListener.onMapReady(googleMap);
+//        googleMap.setMyLocationEnabled(true);
         setUpMap();
     }
 
@@ -80,7 +82,7 @@ public void setmMap(GoogleMap Map){
         mMap.getUiSettings().setZoomControlsEnabled(false);
         //mMap.setMinZoomPreference(17f);
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(false);
+            mMap.setMyLocationEnabled(true);
             return;
         }
 
