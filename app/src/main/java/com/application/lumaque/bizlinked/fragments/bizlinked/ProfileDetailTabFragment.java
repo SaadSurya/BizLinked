@@ -166,7 +166,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
 
                 companyProfileModel.setBusinessNature(preferenceHelper.getCompanyProfile().getBusinessNature());
                 companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-                companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
+            //    companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
                 companyProfileModel.setCompanyName(etUserName.getText().toString());
                 companyProfileModel.setContactNo(etPhone.getText().toString());
                 companyProfileModel.setPhoneNo(etPhone2.getText().toString());
@@ -227,7 +227,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         int BN[] = {Integer.parseInt(BusinessNatureList.get(spBusinesType.getSelectedItemPosition()).getBusinessNatureID())};
 
         companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-        companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
+       // companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
         companyProfileModel.setCompanyName(etUserName.getText().toString());
         companyProfileModel.setContactNo(etPhone.getText().toString());
         companyProfileModel.setPhoneNo(etPhone2.getText().toString());

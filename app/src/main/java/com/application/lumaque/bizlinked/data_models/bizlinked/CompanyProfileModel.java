@@ -45,7 +45,7 @@ public class CompanyProfileModel implements Serializable {
 
     String CityName;
     String CompanyLogo;
-    int ProductMajorCategoryID;
+    //int ProductMajorCategoryID;
     String ContactNo;
     String PhoneNo;
 
@@ -107,6 +107,7 @@ public class CompanyProfileModel implements Serializable {
     public void setCompanyLogo(String companyLogo) {
         CompanyLogo = companyLogo;
     }
+/*
 
     public int getProductMajorCategoryID() {
         return ProductMajorCategoryID;
@@ -115,6 +116,7 @@ public class CompanyProfileModel implements Serializable {
     public void setProductMajorCategoryID(int productMajorCategoryID) {
         ProductMajorCategoryID = productMajorCategoryID;
     }
+*/
 
 
 

@@ -40,12 +40,14 @@
         android:hint="@string/create_password"
         android:visibility="invisible"/>
 
+<!--
     <Spinner
         android:id="@+id/et_user_category"
         style="?attr/roundEditTextNormalColorStyle"
         android:drawableStart="@drawable/ic_email"
         android:hint="@string/category"
         android:visibility="invisible"/>
+-->
 
 
 

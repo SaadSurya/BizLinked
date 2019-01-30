@@ -46,9 +46,11 @@ public class SignupFragment extends BaseFragment {
     @BindView(R.id.et_user_lname)
     EditText etUserName;
 
+/*
 
     @BindView(R.id.et_user_category)
     Spinner etProductCategory;
+*/
 
     @Order(3)
     @Password
@@ -73,7 +75,7 @@ public class SignupFragment extends BaseFragment {
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
 
-        initializeViews();
+        //initializeViews();
 
         setupAnimation(rootView);
     }
@@ -91,7 +93,7 @@ public class SignupFragment extends BaseFragment {
             }
         },500);
     }
-    private void initializeViews() {
+  /*  private void initializeViews() {
 
         WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.PRODUCT_CATEGORIES_URL,true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
@@ -132,7 +134,7 @@ public class SignupFragment extends BaseFragment {
 
 
     }
-
+*/
 
 
     @Override
@@ -166,7 +168,7 @@ public class SignupFragment extends BaseFragment {
         params.put("CompanyName", etCompanyName.getText().toString());
         params.put("Username",  etUserName.getText().toString());
         params.put("Password",  etUserPassword.getText().toString());
-        params.put("ProductMajorCategoryID", majorCategories.get(etProductCategory.getSelectedItemPosition()).getMajorCategoryID());
+     //   params.put("ProductMajorCategoryID", majorCategories.get(etProductCategory.getSelectedItemPosition()).getMajorCategoryID());
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetails(
                 Request.Method.POST,

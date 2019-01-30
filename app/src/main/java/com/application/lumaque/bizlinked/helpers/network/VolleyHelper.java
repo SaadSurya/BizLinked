@@ -67,7 +67,7 @@ public class VolleyHelper {
                 case 500:
                     try {
                         jsonObj = new JSONObject(respData);
-                        ret = jsonObj.getString("description");
+                        ret = jsonObj.getString("ExceptionMessage");
                     } catch (JSONException e) {
                         try {
                             ret = context.getResources().getString(R.string.server_error);
@@ -75,8 +75,9 @@ public class VolleyHelper {
                             e1.printStackTrace();
                             ret = context.getResources().getString(R.string.ws_error_general);
                         }
-                    }
 
+                    }
+break;
                 default:
                     try {
                         jsonObj = new JSONObject(respData);
