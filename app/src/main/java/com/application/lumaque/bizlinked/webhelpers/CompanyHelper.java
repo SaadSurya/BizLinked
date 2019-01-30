@@ -18,7 +18,8 @@ public class CompanyHelper {
 
 
     private ResponceCallBack responceCallBack;
-    public CompanyHelper(BaseActivity activityReference,BasePreferenceHelper preferenceHelper,ResponceCallBack responceCallBack) {
+
+    public CompanyHelper(BaseActivity activityReference, BasePreferenceHelper preferenceHelper, ResponceCallBack responceCallBack) {
 
         this.activityReference = activityReference;
         this.preferenceHelper = preferenceHelper;
@@ -26,25 +27,23 @@ public class CompanyHelper {
 
     }
 
-    public   void getCompanyCategoty(int CompanyId){
-
+    public void getCompanyCategoty(int CompanyId) {
 
 
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(CompanyId));
 
 
-
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_CATEGORY,true, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_CATEGORY, true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
-            //    preferenceHelper.putCategory(response);
+                //    preferenceHelper.putCategory(response);
 
                 GsonHelper gsonHelper = new GsonHelper();
 
 
-                responceCallBack.onCategoryResponce(gsonHelper.GsonToCategoryList(activityReference,response));
+                responceCallBack.onCategoryResponce(gsonHelper.GsonToCategoryList(response));
             }
 
             @Override
@@ -60,19 +59,16 @@ public class CompanyHelper {
         });
 
 
-
     }
 
-    public   void getCompanyAttributes(int CompanyId){
-
+    public void getCompanyAttributes(int CompanyId) {
 
 
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(CompanyId));
 
 
-
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_ATTRIBUTES,false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_ATTRIBUTES, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
@@ -91,7 +87,6 @@ public class CompanyHelper {
 
             }
         });
-
 
 
     }

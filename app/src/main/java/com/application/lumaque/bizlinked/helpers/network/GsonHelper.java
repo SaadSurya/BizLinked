@@ -1,8 +1,6 @@
 package com.application.lumaque.bizlinked.helpers.network;
 
 
-import android.content.Context;
-
 import com.application.lumaque.bizlinked.data_models.bizlinked.BusinessNatureModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CitiesModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyHeadModel;
@@ -21,7 +19,7 @@ import java.util.List;
 public class GsonHelper {
 
 
-    public static ProductList GsonToProductList(Context context, String recordsArrayString) {
+    public static ProductList GsonToProductList(String recordsArrayString) {
 
         Type listType = new TypeToken<ProductList>() {
         }.getType();
@@ -29,7 +27,7 @@ public class GsonHelper {
     }
 
 
-    public static Product GsonToProduct(Context context, String recordsArrayString) {
+    public static Product GsonToProduct(String recordsArrayString) {
 
         Type listType = new TypeToken<Product>() {
         }.getType();
@@ -37,14 +35,14 @@ public class GsonHelper {
     }
 
 
-    public static ArrayList<ProductCategory> GsonToCategoryList(Context context, String recordsArrayString) {
+    public static ArrayList<ProductCategory> GsonToCategoryList(String recordsArrayString) {
 
         Type listType = new TypeToken<List<ProductCategory>>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
 
-    public static ProductCategory GsonToProductCategory(Context context, String recordsArrayString) {
+    public static ProductCategory GsonToProductCategory(String recordsArrayString) {
 
         Type listType = new TypeToken<ProductCategory>() {
         }.getType();
@@ -52,35 +50,35 @@ public class GsonHelper {
     }
 
 
-    public static ArrayList<CitiesModel> GsonToCities(Context context, String recordsArrayString) {
+    public static ArrayList<CitiesModel> GsonToCities(String recordsArrayString) {
 
         Type listType = new TypeToken<List<CitiesModel>>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
 
-    public static ArrayList<BusinessNatureModel> GsonToBusinessNature(Context context, String recordsArrayString) {
+    public static ArrayList<BusinessNatureModel> GsonToBusinessNature(String recordsArrayString) {
 
         Type listType = new TypeToken<List<BusinessNatureModel>>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
 
-    public static ArrayList<MajorCategoryModel> GsonToMajorCategory(Context context, String recordsArrayString) {
+    public static ArrayList<MajorCategoryModel> GsonToMajorCategory(String recordsArrayString) {
 
         Type listType = new TypeToken<List<MajorCategoryModel>>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
 
-    public static CompanyProfileModel GsonToCompanyProfile(Context context, String recordsArrayString) {
+    public static CompanyProfileModel GsonToCompanyProfile(String recordsArrayString) {
 
         Type listType = new TypeToken<CompanyProfileModel>() {
         }.getType();
         return new Gson().fromJson(recordsArrayString, listType);
     }
 
-    public static ArrayList<CompanyHeadModel> GsonToCompanyProfileList(Context context, String recordsArrayString) {
+    public static ArrayList<CompanyHeadModel> GsonToCompanyProfileList(String recordsArrayString) {
 
         Type listType = new TypeToken<List<CompanyHeadModel>>() {
         }.getType();

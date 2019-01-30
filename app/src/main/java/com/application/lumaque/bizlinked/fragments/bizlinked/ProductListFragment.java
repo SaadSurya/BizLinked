@@ -19,7 +19,6 @@ import android.widget.ImageView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
@@ -163,16 +162,16 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
     }
 
 
-    private void stopShimerAnimation(){
+    private void stopShimerAnimation() {
 
         isLoading = false;
+        //todo app crash here
         mShimmerViewContainer.stopShimmerAnimation();
         mainlayout.setVisibility(View.VISIBLE);
         mShimmerViewContainer.setVisibility(View.GONE);
-
-
     }
-    private void startShimerAnimation(){
+
+    private void startShimerAnimation() {
 
         isLoading = true;
         mShimmerViewContainer.startShimmerAnimation();
@@ -182,6 +181,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
 
     }
+
     private void initializeViews() {
         startShimerAnimation();
 
@@ -200,7 +200,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
             @Override
             public void onSuccess(String response) {
                 stopShimerAnimation();
-                ProductList = GsonHelper.GsonToProductList(activityReference, response);
+                ProductList = GsonHelper.GsonToProductList(response);
 
 
                 fabSpeedDial.setMenuListener(new SimpleMenuListenerAdapter() {
@@ -367,8 +367,8 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_LISTER, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
-stopShimerAnimation();
-                ProductList = GsonHelper.GsonToProductList(activityReference, response);
+                stopShimerAnimation();
+                ProductList = GsonHelper.GsonToProductList(response);
 
               /*  ArrayList<ProductCategory> categoryList = new ArrayList<>();
                 GsonHelper gsonHelper = new GsonHelper();

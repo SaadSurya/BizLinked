@@ -59,7 +59,7 @@ public class SignupFragment extends BaseFragment {
     @BindView(R.id.btn_create_account)
     Button btnCreateAccount;
 
-    ArrayList<MajorCategoryModel>   majorCategories;
+    ArrayList<MajorCategoryModel> majorCategories;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -84,31 +84,30 @@ public class SignupFragment extends BaseFragment {
             @Override
             public void run() {
                 int duration = 300;
-                for (int index = 0; index < ((ViewGroup)rootView).getChildCount(); index++) {
+                for (int index = 0; index < ((ViewGroup) rootView).getChildCount(); index++) {
                     AnimationHelpers.animation(Techniques.SlideInDown, duration, ((ViewGroup) rootView).getChildAt(index));
-                    duration+=50;
+                    duration += 50;
                 }
             }
-        },500);
+        }, 500);
     }
+
     private void initializeViews() {
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.PRODUCT_CATEGORIES_URL,true, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(null, AppConstant.ServerAPICalls.PRODUCT_CATEGORIES_URL, true, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
 
 
-                majorCategories = GsonHelper.GsonToMajorCategory(activityReference, response);
-
+                majorCategories = GsonHelper.GsonToMajorCategory(response);
 
 
                 String[] majorCat = new String[majorCategories.size() <= 0 ? 0 : majorCategories.size()];
 
-                    for (int i = 0; i < majorCat.length; i++) {
-                        majorCat[i] = majorCategories.get(i).getMajorCategoryName();
+                for (int i = 0; i < majorCat.length; i++) {
+                    majorCat[i] = majorCategories.get(i).getMajorCategoryName();
 
-                    }
-
+                }
 
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(activityReference, android.R.layout.simple_spinner_dropdown_item, majorCat);
@@ -130,17 +129,14 @@ public class SignupFragment extends BaseFragment {
         });
 
 
-
     }
-
 
 
     @Override
     public void onCustomBackPressed() {
-        activityReference.addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE,false);
-       // activityReference.onPageBack();
+        activityReference.addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE, false);
+        // activityReference.onPageBack();
     }
-
 
 
     @OnClick(R.id.btn_create_account)
@@ -148,7 +144,6 @@ public class SignupFragment extends BaseFragment {
         //activityReference.changeActivity(HomeActivity.class,true);
         validateFields();
     }
-
 
 
     @Override
@@ -161,11 +156,10 @@ public class SignupFragment extends BaseFragment {
     private void SignUp() {
 
 
-
         final HashMap<String, String> params = new HashMap<>();
         params.put("CompanyName", etCompanyName.getText().toString());
-        params.put("Username",  etUserName.getText().toString());
-        params.put("Password",  etUserPassword.getText().toString());
+        params.put("Username", etUserName.getText().toString());
+        params.put("Password", etUserPassword.getText().toString());
         params.put("ProductMajorCategoryID", majorCategories.get(etProductCategory.getSelectedItemPosition()).getMajorCategoryID());
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetails(
@@ -174,7 +168,7 @@ public class SignupFragment extends BaseFragment {
                     @Override
                     public void onSuccess(String response) {
 
-                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
+                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(response);
 
                         preferenceHelper.putCompany(companyprofile);
 
@@ -185,7 +179,7 @@ public class SignupFragment extends BaseFragment {
 
                     @Override
                     public void onError(String response) {
-                            Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+                        Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
 
                     }
 

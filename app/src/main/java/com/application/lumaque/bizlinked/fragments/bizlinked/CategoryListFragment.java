@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -16,14 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.application.lumaque.bizlinked.data_models.bizlinked.SubProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
-import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryListAdapter;
 import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
@@ -31,22 +28,10 @@ import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
-import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,6 +53,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
     private ArrayList<ProductCategory> productCategoriesListSearched;
     private CategoryListAdapter categoryItemAdapter;
     private boolean isFromCatList = false;
+    private ProductCategory productSubCategory;
 
     @Override
     public void onCustomBackPressed() {
@@ -97,10 +83,12 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
 
     private void initializeViews() {
         ProductCategory productCategory = new ProductCategory();
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             isFromCatList = bundle.getBoolean("FROMCATLIST");
             productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+            productSubCategory = productCategory;
             getBaseActivity().toolbar.setTitle(productCategory.getProductCategoryName());
 
         }
@@ -126,7 +114,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                 JsonArray jo = (JsonArray) parser.parse(response);
                 categoryList2 = gson.fromJson(jo, typeOfT);*/
                     GsonHelper gsonHelper = new GsonHelper();
-                    categoryList = gsonHelper.GsonToCategoryList(activityReference, response);
+                    categoryList = gsonHelper.GsonToCategoryList(response);
                     productCategoriesList = categoryList;
                     setAdapter(productCategoriesList);
                 }
@@ -217,6 +205,16 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
         switch (view.getId()) {
             case R.id.fab_cat_list:
                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                if (isFromCatList) {
+//                    ProductCategory category = new ProductCategory();
+                    Bundle bundle = new Bundle();
+//                        bundle.putSerializable("CAT_OBJ", currentObject.getSubProductCategories().get(position));
+                    if (productSubCategory != null){
+                        bundle.putSerializable("CAT_OBJ", productSubCategory);
+                        bundle.putBoolean("isFromNestedCAT", true);
+                    }
+                    newCategoryFragment.setArguments(bundle);
+                }
                 activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                 break;
         }
@@ -275,7 +273,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
             public void onSuccess(String response) {
                 ArrayList<ProductCategory> categoryList = new ArrayList<>();
                 GsonHelper gsonHelper = new GsonHelper();
-                categoryList = gsonHelper.GsonToCategoryList(activityReference, response);
+                categoryList = gsonHelper.GsonToCategoryList(response);
                 productCategoriesListSearched = categoryList;
                 categoryItemAdapter.clearAllList();
                 categoryItemAdapter.addAllList(productCategoriesListSearched);

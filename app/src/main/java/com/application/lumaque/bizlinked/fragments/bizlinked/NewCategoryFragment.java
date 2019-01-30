@@ -18,12 +18,10 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 
 import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.SaveCategoryAdapter;
@@ -52,9 +50,6 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
-
-import static com.application.lumaque.bizlinked.helpers.common.Utils.getBytes;
 
 public class NewCategoryFragment extends BaseFragment implements ResponceCallBack, MediaTypePicker {
 
@@ -76,6 +71,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     private int postionAdapter;
     private Bundle bundle;
     private ProductCategory productCategory;
+    private Boolean isFromNestedCat = false;
 
     @Override
     public void onCustomBackPressed() {
@@ -112,6 +108,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 //        bundle = getArguments();
         if (bundle != null) {
             productCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+            isFromNestedCat = bundle.getBoolean("isFromNestedCAT", false);
         }
     }
 
@@ -122,7 +119,9 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     private void setFields(ArrayList<ProductCategory> categoryList) {
         String parentCategoryName = "";
-        if (productCategory != null) {
+        if (isFromNestedCat) {
+            parentProductEditText.setText(productCategory.getProductCategoryName());
+        } else if (productCategory != null) {
             catNameEditText.setText(productCategory.getProductCategoryName());
             // parentProductEditText.setText(productCategory.getParentProductCategoryID());
             for (ProductCategory item : categoryList) {
@@ -162,7 +161,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                         Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
                         onCustomBackPressed();
                         GsonHelper gsonHelper = new GsonHelper();
-                        productCategory = gsonHelper.GsonToProductCategory(activityReference, response);
+                        productCategory = gsonHelper.GsonToProductCategory(response);
                         uploadMedia(imageFile, "1.jpg");
                     }
 
@@ -239,7 +238,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     private void getImages() {
 
-        String URL =Utils.getProdImgURL(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()),productCategory.getImageID());
+        String URL = Utils.getProdImgURL(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()), productCategory.getImageID());
         ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
         //  setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(activityReference).load(URL)
@@ -284,7 +283,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     }
 
     private void takePicture(View view) {
-        activityReference.openMediaPicker(NewCategoryFragment.this,1);
+        activityReference.openMediaPicker(NewCategoryFragment.this, 1);
 
         //  this.currentImageContainerView = view.findViewById(R.id.flImageDocumnetContainer);
     }
@@ -346,7 +345,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
             Log.d("FileTag", "File is not null");
         }
 
-        if(productCategory.getProductCategoryID() != 0)
+        if (productCategory.getProductCategoryID() != 0)
             uploadMedia(imageFile, "1.jpg");
     }
 
@@ -361,10 +360,10 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
         parameters.put("id", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "?" +"companyId="+ preferenceHelper.getCompanyProfile().getCompanyID() + "&productCategoryId=" + productCategory.getProductCategoryID();
+        String catImageURL = AppConstant.ServerAPICalls.UPLOAD_CATEGORY_IMAGE + "?" + "companyId=" + preferenceHelper.getCompanyProfile().getCompanyID() + "&productCategoryId=" + productCategory.getProductCategoryID();
 
         //upload image to server
-        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL,true, file
+        WebAppManager.getInstance(activityReference, preferenceHelper).uploadImage(fileName, parameters, catImageURL, true, file
                 , new WebAPIRequestHelper.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
