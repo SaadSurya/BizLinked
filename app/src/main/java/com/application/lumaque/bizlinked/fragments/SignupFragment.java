@@ -176,7 +176,7 @@ public class SignupFragment extends BaseFragment {
                     @Override
                     public void onSuccess(String response) {
 
-                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(activityReference, response);
+                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile( response);
 
                         preferenceHelper.putCompany(companyprofile);
 
