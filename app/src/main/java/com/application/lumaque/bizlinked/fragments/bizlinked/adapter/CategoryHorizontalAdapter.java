@@ -74,7 +74,7 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
 
                 ((ItemViewHolder) holder).productName.setText(currentObject.getProductCategoryName());
         Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),currentObject.getImageID()))
-                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
+                .apply(new RequestOptions().centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 
 

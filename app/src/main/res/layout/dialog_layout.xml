@@ -1,66 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/homeNormalBgColorStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    style="?attr/homeNormalBgColorStyle"
-
     android:layout_marginBottom="0dp"
+
+    android:orientation="vertical"
     android:paddingBottom="0dp">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <AutoCompleteTextView
-        android:id="@+id/att_type"
-        android:layout_gravity="center"
-        android:text=""
-        android:layout_margin="@dimen/x5"
-        style="?attr/roundEditTextNormalColorStyle"
-        android:layout_width="match_parent"
-        android:layout_marginEnd="@dimen/x16"
-android:completionThreshold="1"
-        android:layout_marginStart="@dimen/x16"
-        android:layout_marginTop="@dimen/x12"
 
+        <AutoCompleteTextView
+            android:id="@+id/att_type"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/x5"
+            android:layout_marginStart="@dimen/x16"
+            android:layout_marginTop="@dimen/x12"
+            android:layout_marginEnd="@dimen/x16"
+            android:completionThreshold="1"
+            android:hint="Attribute name"
+            android:text="" />
 
-        />
         <ImageButton
             android:id="@+id/btn_add"
-            android:layout_gravity="center_vertical|right"
-android:visibility="gone"
-            android:layout_marginRight="@dimen/x10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/ic_input_add"/>
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@android:drawable/ic_input_add"
+            android:visibility="gone" />
 
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <AutoCompleteTextView
-android:id="@+id/att_name"
-        style="?attr/roundEditTextNormalColorStyle"
-        android:completionThreshold="1"
-        android:layout_margin="@dimen/x5"
-        />
+
+        <AutoCompleteTextView
+            android:id="@+id/att_name"
+            style="?attr/roundEditTextNormalColorStyle"
+            android:layout_margin="@dimen/x5"
+            android:hint="Attribute value"
+            android:completionThreshold="1" />
+
         <ImageButton
             android:id="@+id/btn_add_tag"
-            android:layout_gravity="center_vertical|right"
-            android:visibility="gone"
-            android:layout_marginRight="@dimen/x10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/ic_input_add"/>
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@android:drawable/ic_input_add"
+            android:visibility="gone" />
 
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_attributes"
-        android:layout_margin="@dimen/x5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x5">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -68,36 +70,34 @@ android:id="@+id/att_name"
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/x0"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/x0">
+
         <Button
             android:id="@+id/attribute_cancel"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             style="?attr/roundSkyBlueButtonColorStyle"
-            android:text="Cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/x5"
             android:layout_marginBottom="@dimen/x0"
+            android:layout_weight="1"
             android:padding="@dimen/x5"
-            />
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/attribute_save"
-            android:layout_gravity="center_horizontal"
-            android:layout_height="wrap_content"
-
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/save"
-
             style="?attr/roundSkyBlueButtonColorStyle"
+            android:layout_width="0dp"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/x5"
+
             android:layout_marginBottom="@dimen/x0"
-            android:padding="@dimen/x5"/>
-
-
+            android:layout_weight="1"
+            android:padding="@dimen/x5"
+            android:text="@string/save" />
 
 
     </LinearLayout>

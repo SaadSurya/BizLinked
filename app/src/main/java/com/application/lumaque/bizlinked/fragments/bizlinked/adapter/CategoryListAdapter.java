@@ -80,7 +80,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()), currentObject.getImageID()))
-                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
+                .apply(new RequestOptions().centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 
         ((ItemViewHolder) holder).editCat.setOnClickListener(new View.OnClickListener() {

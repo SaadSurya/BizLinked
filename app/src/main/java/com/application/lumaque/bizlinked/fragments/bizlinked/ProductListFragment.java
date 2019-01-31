@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryHorizontalAdapter;
@@ -51,10 +52,10 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
     String paramCompanyId = "";
     String paramProductCategoryId = "";
     String paramProductCategoryName = "";
-
+    ProductCategory paramProductCategory = new ProductCategory();
     Bundle bundle;
 
-
+    Boolean isFromNestedCat;
     ProductList ProductList;
 
 
@@ -155,9 +156,12 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
             paramCompanyId = bundle.getString(companyId);
             paramProductCategoryId = bundle.getString(productCategoryId);
             paramProductCategoryName = bundle.getString(productCategoryName);
-            if (paramProductCategoryName != null && !paramProductCategoryName.isEmpty())
+            isFromNestedCat = bundle.getBoolean("isFromNestedCAT", false);
+            if (paramProductCategoryName != null && !paramProductCategoryName.isEmpty()) {
                 getBaseActivity().toolbar.setTitle(paramProductCategoryName);
-
+                paramProductCategory = (ProductCategory) bundle.getSerializable("CAT_OBJ");
+                isFromNestedCat = true;
+            }
         }
     }
 
@@ -214,7 +218,14 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
                             case R.id.add_category:
 //                          Utils.showToast(activityReference,"ye hai new Style",AppConstant.TOAST_TYPES.INFO);
+                                Bundle bundleParam2 = new Bundle();
+                                bundleParam2.putInt(ProductFragment.companyId, (preferenceHelper.getCompanyProfile().getCompanyID()));
+                                if (isFromNestedCat) {
+                                    bundleParam2.putSerializable("CAT_OBJ", paramProductCategory);
+                                    bundleParam2.putBoolean("isFromNestedCAT", true);
+                                }
                                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                                newCategoryFragment.setArguments(bundleParam2);
                                 activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                                 break;
 
@@ -257,6 +268,10 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
                                             bundle.putString(ProductListFragment.companyId, String.valueOf(ProductList.getProductCategory().get(position).getCompanyID()));
                                             bundle.putString(ProductListFragment.productCategoryId, String.valueOf(ProductList.getProductCategory().get(position).getProductCategoryID()));
                                             bundle.putString(ProductListFragment.productCategoryName, ProductList.getProductCategory().get(position).getProductCategoryName());
+//                                            if (isFromNestedCat)
+                                            bundle.putSerializable("CAT_OBJ", ProductList.getProductCategory().get(position));
+                                            bundle.putBoolean("isFromNestedCAT", true);
+
                                             ProductListFragment ProductListFragment = new ProductListFragment();
                                             ProductListFragment.setArguments(bundle);
                                             activityReference.addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);

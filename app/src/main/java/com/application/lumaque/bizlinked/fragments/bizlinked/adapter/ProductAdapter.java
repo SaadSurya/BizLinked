@@ -85,7 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
         Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),abc))
-                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
+                .apply(new RequestOptions().centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 
 
