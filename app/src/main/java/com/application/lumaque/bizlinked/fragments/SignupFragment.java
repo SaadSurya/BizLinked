@@ -23,6 +23,8 @@ import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.daimajia.androidanimations.library.Techniques;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.Order;
 import com.mobsandgeeks.saripaar.annotation.Password;
@@ -42,6 +44,7 @@ public class SignupFragment extends BaseFragment {
     EditText etCompanyName;
 
     @Order(2)
+    @Email( messageResId = R.string.error_email)
     @Length(min = AppConstant.VALIDATION_RULES.NAME_MIN_LENGTH, messageResId = R.string.error_lname)
     @BindView(R.id.et_user_lname)
     EditText etUserName;
@@ -57,6 +60,12 @@ public class SignupFragment extends BaseFragment {
     @Length(min = AppConstant.VALIDATION_RULES.PASSWORD_MIN_LENGTH, messageResId = R.string.error_password)
     @BindView(R.id.et_user_password)
     EditText etUserPassword;
+
+
+   @Order(4)
+    @ConfirmPassword
+    @BindView(R.id.et_confirm_password)
+    EditText etConfirmPassword;
 
     @BindView(R.id.btn_create_account)
     Button btnCreateAccount;
