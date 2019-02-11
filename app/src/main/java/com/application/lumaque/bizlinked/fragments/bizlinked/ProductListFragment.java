@@ -104,8 +104,14 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
         setHasOptionsMenu(true);
-        getBaseActivity().toolbar.setTitle("Product");
+        getBaseActivity().toolbar.setTitle("Products");
         setArguments();
+        if(!paramCompanyId.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID())))
+        {
+            fabSpeedDial.setVisibility(View.GONE);
+        }
+
+
         if (strQuery.length() > 0) {
             searchView.setQuery(strQuery, false);
             searchFromServer(strQuery);

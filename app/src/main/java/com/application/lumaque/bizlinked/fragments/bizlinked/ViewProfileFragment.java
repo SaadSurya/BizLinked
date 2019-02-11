@@ -51,6 +51,10 @@ private String strReqType;
 
 
 
+    @BindView(R.id.products)
+    TextView tvproducts;
+
+
     @BindView(R.id.et_user_link)
     TextView tvLink;
 
@@ -328,7 +332,7 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
         });
 
     }
-    @OnClick({R.id.et_user_link,R.id.et_user_un_link})
+    @OnClick({R.id.et_user_link,R.id.et_user_un_link,R.id.products})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.et_user_link:
@@ -336,6 +340,16 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
                 break;
             case R.id.et_user_un_link:
                 onActionBtnClick(companyProfileModel,view.getTag().toString());
+
+                break; case R.id.products:
+
+                Bundle bundle = new Bundle();
+                bundle.putString(ProductListFragment.companyId, profileID);
+                bundle.putString(ProductListFragment.productCategoryId, "");
+                ProductListFragment ProductListFragment = new ProductListFragment();
+                ProductListFragment.setArguments(bundle);
+                activityReference.addSupportFragment(ProductListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
 
                 break;
 
