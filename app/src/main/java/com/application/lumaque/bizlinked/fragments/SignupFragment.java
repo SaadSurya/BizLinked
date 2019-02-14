@@ -196,7 +196,7 @@ public class SignupFragment extends BaseFragment {
 
                     @Override
                     public void onError(String response) {
-                            Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+                          //  Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
 
                     }
 
