@@ -269,7 +269,7 @@ public class AttributesDialog extends DialogFragment {
                 if (SelectedProductAttribute == null) {
 
                     Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
-                } else if (attTag.getText().toString()!= ""){
+                } else if (attTag.getText().toString()== ""){
 
                     Utils.showToast(getContext(), "Add tag first", AppConstant.TOAST_TYPES.ERROR);
                 }

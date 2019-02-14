@@ -162,6 +162,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                         onCustomBackPressed();
                         GsonHelper gsonHelper = new GsonHelper();
                         productCategory = gsonHelper.GsonToProductCategory(response);
+                       if(imageFile != null)
                         uploadMedia(imageFile, "1.jpg");
                     }
 
@@ -340,7 +341,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             Glide.with(this)
-                    .load(stream.toByteArray())
+                    .load(imageFile)
                     .into(categoryImageView);
             Log.d("FileTag", "File is not null");
         }
