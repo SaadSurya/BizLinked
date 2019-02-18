@@ -157,6 +157,7 @@
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/fab_add_image"
                         android:layout_width="wrap_content"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
@@ -176,7 +177,8 @@
                         android:id="@+id/pro_name"
                         style="?attr/floatingHintEditText"
                         android:hint="@string/product_name"
-
+                        android:enabled="false"
+                        android:clickable="false"
 
                         />
                 </android.support.design.widget.TextInputLayout>
@@ -200,6 +202,8 @@
                     android:gravity="top|left">
 
                     <EditText
+                        android:enabled="false"
+                        android:clickable="false"
                         android:id="@+id/pro_desc"
                         style="?attr/floatingHintEditText"
                         android:hint="@string/description"
@@ -238,6 +242,8 @@
                     android:layout_below="@+id/pro_desc1">
 
                     <AutoCompleteTextView
+                        android:enabled="false"
+                        android:clickable="false"
                         android:id="@+id/pro_category"
                         style="?attr/floatingHintEditText"
                         android:completionThreshold="1"
@@ -250,6 +256,8 @@
                     android:layout_below="@+id/pro_desc2">
 
                     <EditText
+                        android:enabled="false"
+                        android:clickable="false"
                         android:id="@+id/pro_price"
                         style="?attr/floatingHintEditText"
                         android:hint="@string/price" />
@@ -284,7 +292,8 @@
      -->
 
 
-                <RelativeLayout
+          <!--      <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/add_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -318,9 +327,10 @@
 
                 </RelativeLayout>
 
+-->
 
-
-                <LinearLayout
+       <!--         <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -357,7 +367,7 @@
 
 
                 </LinearLayout>
-
+-->
 
             </RelativeLayout>
 

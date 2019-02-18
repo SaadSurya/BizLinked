@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout
-
+    android:background="@drawable/shadow_image_new_small"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/x16"
+    android:layout_marginRight="@dimen/x16">
 
     <FrameLayout
 
 
         style="?attr/roundEditTextNormalColorStyle"
-
+        android:background="@color/transparent"
         android:layout_width="match_parent"
-        android:layout_marginStart="@dimen/x16"
-        android:layout_marginTop="@dimen/x12"
-        android:layout_marginEnd="@dimen/x16"
+        android:layout_marginStart="@dimen/x0"
+        android:layout_marginTop="@dimen/x0"
+        android:layout_marginEnd="@dimen/x0"
         android:padding="@dimen/x2">
 
 
@@ -24,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="@drawable/close"
-            android:padding="@dimen/x15" />
+            android:padding="@dimen/x15"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/row"
@@ -33,6 +36,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:background="@color/transparent"
                 android:id="@+id/pro_attribute_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

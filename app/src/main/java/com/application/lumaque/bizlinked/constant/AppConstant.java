@@ -112,6 +112,10 @@ public static final String LINKED_CUSTOMER_URL = BASE_URL + LINK +"GetCustomerLi
         public static final String PRODUCT_SAVE= BASE_URL + PRODUCT +"SaveProduct";
 
 
+        public static final String PRODUCT_PUBLISH= BASE_URL + PRODUCT +"PublishProduct";
+        public static final String PRODUCT_UNPUBLISH= BASE_URL + PRODUCT +"UnpublishProduct";
+
+
         public static final String CATEGORY_SAVE= BASE_URL + PRODUCT +"SaveProductCategory";
 
 

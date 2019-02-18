@@ -97,9 +97,18 @@ public class WebAPIRequestHelper {
 
 
     public WebAPIRequestHelper setHeaderUserPreference(BasePreferenceHelper preference) {
-       /* headerParams = new HashMap<>();
-        headerParams.put("username", preference.getUser().getUserName());
-        headerParams.put("usertoken", preference.getUserToken());*/
+        headerParams = new HashMap<>();
+
+        headerParams.put   ("currentCompanyId", (preference.getCompanyProfile())== null ? "" :String.valueOf(preference.getCompanyProfile().getCompanyID()) );;
+
+        return this;
+
+    }
+ public WebAPIRequestHelper setPutHeaderUserPreference(BasePreferenceHelper preference) {
+        headerParams = new HashMap<>();
+
+        headerParams.put   ("currentCompanyId", (preference.getCompanyProfile())== null ? "" :String.valueOf(preference.getCompanyProfile().getCompanyID()) );;
+
         return this;
 
     }

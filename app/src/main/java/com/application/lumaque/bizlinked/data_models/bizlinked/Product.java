@@ -12,6 +12,16 @@ public class Product implements Serializable {
     public String ProductName ;
     public String ProductDescription ;
     public double Price ;
+
+    public boolean isPublished() {
+        return IsPublished;
+    }
+
+    public void setPublished(boolean published) {
+        IsPublished = published;
+    }
+
+    public boolean IsPublished;
     public long ProductCategoryID ;
     public String ProductCategoryName ;
     public List<String> Images ;

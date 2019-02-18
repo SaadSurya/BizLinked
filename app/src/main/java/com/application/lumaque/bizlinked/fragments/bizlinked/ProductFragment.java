@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,12 +33,14 @@ import com.application.lumaque.bizlinked.customViews.AttributesDialog;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
+import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
+import com.application.lumaque.bizlinked.webhelpers.ProductHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -111,6 +114,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @BindView(R.id.btn_save)
     Button btnSave;
+
+ @BindView(R.id.btn_publish)
+    Button btnPublish;
 
     @BindView(R.id.product_desc_view)
     ScrollView productDescView;
@@ -224,6 +230,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
 
+                if(product.IsPublished){
+
+                    btnPublish.setText("UNPUBLISH");
+                }
 
             }
 
@@ -245,8 +255,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @Override
     public void onImageClick(ProductAttribute productAttribute) {
-
-        Toast.makeText(activityReference, "cancel click :" + productAttribute.getAttributeName(), Toast.LENGTH_SHORT).show();
+        Utils.showToast(activityReference, "doesnot delete", AppConstant.TOAST_TYPES.ERROR);
         // TODO: 12/14/2018 perfome cancel button
     }
 
@@ -493,26 +502,23 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     }
 
 
-    @OnClick({R.id.add_att, R.id.btn_save, R.id.fab_add_image})
+    @OnClick({R.id.add_att, R.id.btn_save, R.id.fab_add_image,R.id.btn_publish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_save:
+            case R.id.btn_publish:
+               if(isInEditMode) {
+                   //todo api call of publish
 
-                String catName = proCate.getText().toString();
-                product.setProductCategoryName(proCate.getText().toString());
-                product.setProductName(proName.getText().toString());
-                product.setProductDescription(proDesc.getText().toString());
-                product.setPrice(Double.parseDouble(proPrice.getText().toString()));
-//                if (hMap.get(catName) != null) {
-//                    product.setProductCategoryID(hMap.get(catName));
-//                }
-                product.setProductAttributes(tagItemAdapter.getAttributeLIst());
+                   if(((Button)view).getText().toString().equalsIgnoreCase("Publish"))
+                   publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
+                   else
+                       publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+               }else
+                saveClick(true);
 
-
-                String jsonString = g.toJson(product);
-
-                prodSaveReq(jsonString);
-//todo api call
+                break;
+                case R.id.btn_save:
+                saveClick(false);
 
                 break;
             case R.id.add_att:
@@ -529,6 +535,63 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     }
 
 
+    private void publishUnpublishProduct(String URL){
+        final HashMap<String, String> params = new HashMap<>();
+
+        //params.put("productId", String.valueOf(product.getProductID()));
+URL= URL + "?productId="+product.getProductID();
+
+        WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
+                Request.Method.PUT,
+                params,URL, new WebAppManager.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+
+                        Utils.showToast(activityReference, "Status Updated", AppConstant.TOAST_TYPES.SUCCESS);
+
+
+                        if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
+                            activityReference.clearStackTillFragment(
+                                    ProductViewFragment.class.getName()
+                            );
+                        } else {
+                            onCustomBackPressed();
+                        }
+
+
+
+
+                    }
+
+                    @Override
+                    public void onError(String response) {
+                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
+
+    }
+ private void saveClick(boolean publish){
+     String catName = proCate.getText().toString();
+     product.setProductCategoryName(proCate.getText().toString());
+     product.setProductName(proName.getText().toString());
+     product.setProductDescription(proDesc.getText().toString());
+     product.setPrice(Double.parseDouble(proPrice.getText().toString()));
+//                if (hMap.get(catName) != null) {
+//                    product.setProductCategoryID(hMap.get(catName));
+//                }
+     product.setProductAttributes(tagItemAdapter.getAttributeLIst());
+     product.setPublished(publish);
+
+     String jsonString = g.toJson(product);
+
+     prodSaveReq(jsonString);
+ }
     private void prodSaveReq(String jsonString) {
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetailsJson(

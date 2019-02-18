@@ -329,9 +329,18 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
                                         Bundle bundle = new Bundle();
                                         bundle.putInt(ProductFragment.companyId, (ProductList.getProduct().get(position).getCompanyID()));
                                         bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
-                                        ProductFragment ProductFragment = new ProductFragment();
+                                        ProductViewFragment ProductViewFragment = new ProductViewFragment();
+                                        ProductViewFragment.setArguments(bundle);
+                                        activityReference.addSupportFragment(ProductViewFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+/*
+   Bundle bundle = new Bundle();
+                                        bundle.putInt(ProductFragment.companyId, (ProductList.getProduct().get(position).getCompanyID()));
+                                        bundle.putString(ProductFragment.productId, String.valueOf(ProductList.getProduct().get(position).getProductID()));
+
+ ProductFragment ProductFragment = new ProductFragment();
                                         ProductFragment.setArguments(bundle);
                                         activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+*/
 
 
                                     } catch (Exception e) {

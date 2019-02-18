@@ -675,12 +675,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
-    public Fragment isFragmentPresent(String tag) {
+    public boolean isFragmentPresent(String tag) {
         Fragment frag = getSupportFragmentManager().findFragmentByTag(tag);
-        if (frag != null) {
-            return frag;
-        } else
-            return null;
+        return frag != null;
+
     }
 
 

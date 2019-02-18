@@ -44,7 +44,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
-                //.setHeaderUserPreference(preferenceHelper)
+                .setHeaderUserPreference(preferenceHelper)
                // .setCustomBody(type == AppConstant.ServerAPICalls.HTTP_VERBS.POST ? extraParams : null)
                 .mediaRequest(
                         extraParams,
@@ -80,7 +80,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
-                //.setHeaderUserPreference(preferenceHelper)
+                .setHeaderUserPreference(preferenceHelper)
                 .getStringRequest(
                         url +
                                 CommonNetworksUtils.getRequestURI(extraParams),
@@ -121,7 +121,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
-                //.setHeaderUserPreference(preferenceHelper)
+                .setHeaderUserPreference(preferenceHelper)
                 .deleteRequest(
                         url +
                                 CommonNetworksUtils.getDeleteURI(extraParams),
@@ -157,6 +157,8 @@ public class WebAppManager {
             LogHelper.getLogger().log("Post Request" + url + extraParams.toString());
 
 
+       /* HashMap<String, String> headerParams = new HashMap<>();
+        headerParams.put("currentCompanyId", (preferenceHelper.getCompanyProfile())== null ? "" :String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()) );*/
         HashMap<String, String> params = new HashMap<>();
        /* params.put("appCode", preferenceHelper.getUser().getAppCode());
         params.put("clientid", preferenceHelper.getUser().getClientid());
@@ -176,7 +178,72 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, true)
-               // .setHeaderUserPreference(preferenceHelper)
+               .setHeaderUserPreference(preferenceHelper)
+                .setCustomBody(params)
+                .postRequest(
+                        requestType,
+                        url,
+                        new WebAPIRequestHelper.APIStringRequestDataCallBack() {
+                            @Override
+                            public void onSuccess(String response) {
+
+
+                                    LogHelper.getLogger().log("Post Response " + response);
+                                    apiRequestDataCallBack.onSuccess(response);
+
+
+
+
+                            }
+
+                            @Override
+                            public void onError(String response) {
+                                LogHelper.getLogger().log("Post Response Error " + response);
+
+                                apiRequestDataCallBack.onError(response);
+                            }
+
+                            @Override
+                            public void onNoNetwork() {
+                                apiRequestDataCallBack.onNoNetwork();
+                            }
+                        }
+                );
+    }
+
+
+
+
+   public void putDetails(int requestType, HashMap<String, String> extraParams, String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
+
+        if (extraParams == null)
+            LogHelper.getLogger().log("Post Request" + url);
+        else
+            LogHelper.getLogger().log("Post Request" + url + extraParams.toString());
+
+
+       /* HashMap<String, String> headerParams = new HashMap<>();
+        headerParams.put("currentCompanyId", (preferenceHelper.getCompanyProfile())== null ? "" :String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()) );*/
+        HashMap<String, String> params = new HashMap<>();
+       /* params.put("appCode", preferenceHelper.getUser().getAppCode());
+        params.put("clientid", preferenceHelper.getUser().getClientid());
+        params.put("currpage", "1");
+        params.put("orgacode", preferenceHelper.getUser().getOrgacode());
+        params.put("pagesize", "1000");
+        if (!Utils.isEmptyOrNull(preferenceHelper.getUser().getQei()))
+            params.put("qei", preferenceHelper.getUser().getQei());
+        else
+            params.put("qei", "");
+
+        params.put("userType", preferenceHelper.getUser().getClienttype());
+        params.put("totalpages", "0");*/
+
+        if (extraParams != null)
+            params.putAll(extraParams);
+
+
+        WebAPIRequestHelper.getInstance(activity, true)
+               .setPutHeaderUserPreference(preferenceHelper)
                 .setCustomBody(params)
                 .postRequest(
                         requestType,
@@ -216,7 +283,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, true)
-               // .setHeaderUserPreference(preferenceHelper)
+                .setHeaderUserPreference(preferenceHelper)
                 .setCustomJsonBody(jsonString)
                 .postJsonRequest(
                         requestType,
