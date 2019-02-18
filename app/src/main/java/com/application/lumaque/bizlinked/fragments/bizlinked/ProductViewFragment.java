@@ -199,7 +199,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
 
-
+                getBaseActivity().toolbar.setTitle(product.getProductName());
 
             }
 
