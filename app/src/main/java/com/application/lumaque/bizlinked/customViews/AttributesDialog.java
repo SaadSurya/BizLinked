@@ -214,7 +214,7 @@ public class AttributesDialog extends DialogFragment {
 
         AttributeItemAdapter = new TagsHorizontalAdapter(getActivity(), itemAttributes);
         StaggeredGridLayoutManager gridLayoutManager =
-                new StaggeredGridLayoutManager(5, StaggeredGridLayoutManager.VERTICAL);
+                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
         rvAttributes.setLayoutManager(gridLayoutManager);
         // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
         rvAttributes.setAdapter(AttributeItemAdapter);
