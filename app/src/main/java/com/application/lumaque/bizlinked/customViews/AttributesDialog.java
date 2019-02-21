@@ -226,9 +226,15 @@ public class AttributesDialog extends DialogFragment {
 
 
                         new AlertDialog.Builder(getActivity())
-                                .setTitle("Your Alert")
+                                .setTitle("Alert")
                                 .setMessage("This Tag Will Be Deleted")
                                 .setCancelable(true)
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dismiss();
+                            }
+                        })
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

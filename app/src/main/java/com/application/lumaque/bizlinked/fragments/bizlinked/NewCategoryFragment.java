@@ -120,7 +120,18 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     private void setFields(ArrayList<ProductCategory> categoryList) {
         String parentCategoryName = "";
         if (isFromNestedCat) {
-            parentProductEditText.setText(productCategory.getProductCategoryName());
+            String parentName="";
+            int parentID = 0;
+                    // parentProductEditText.setText(productCategory.getProductCategoryName());
+           if(productCategory != null){
+            parentName = productCategory.getProductCategoryName();
+            parentID  = productCategory.getProductCategoryID();
+           }
+
+            productCategory = new ProductCategory();
+            parentProductEditText.setText(parentName);
+            productCategory.setParentProductCategoryID(parentID);
+            selectedParentCagetory =parentID;
         } else if (productCategory != null) {
             catNameEditText.setText(productCategory.getProductCategoryName());
             // parentProductEditText.setText(productCategory.getParentProductCategoryID());
@@ -133,8 +144,6 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
             parentProductEditText.setText(parentCategoryName);
             selectedParentCagetory = productCategory.getParentProductCategoryID();
             getImages();
-        } else {
-            productCategory = new ProductCategory();
         }
     }
 

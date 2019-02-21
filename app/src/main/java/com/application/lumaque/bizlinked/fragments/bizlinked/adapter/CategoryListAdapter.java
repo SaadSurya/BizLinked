@@ -73,11 +73,11 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final ProductCategory currentObject = productCategoryList.get(position);
         ((ItemViewHolder) holder).productName.setText(currentObject.getProductCategoryName());
 
-        if (currentObject.getSubProductCategories() == null || currentObject.getSubProductCategories().isEmpty()) {
+      /*  if (currentObject.getSubProductCategories() == null || currentObject.getSubProductCategories().isEmpty()) {
             ((ItemViewHolder) holder).editCat.setVisibility(View.GONE);
         } else {
             ((ItemViewHolder) holder).editCat.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()), currentObject.getImageID()))
                 .apply(new RequestOptions().centerCrop())

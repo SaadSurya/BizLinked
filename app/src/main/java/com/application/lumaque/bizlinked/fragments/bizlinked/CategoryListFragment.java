@@ -148,8 +148,26 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                     public void onClick(View view, int position) {
                         ProductCategory currentObject = productCategoriesList.get(position);
                         if (NetworkUtils.isNetworkAvailable(activityReference)) {
+
+                            try {
+//                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("CAT_OBJ", currentObject);
+                                bundle.putBoolean("FROMCATLIST", true);
+                                CategoryListFragment categoryListFragment = new CategoryListFragment();
+                                categoryListFragment.setArguments(bundle);
+                                activityReference.addSupportFragment(categoryListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+
+//                                    activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+                            } catch (Exception e) {
+                                Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                e.printStackTrace();
+                            }
+
+                            /*
                             if (currentObject.getSubProductCategories() != null && !currentObject.getSubProductCategories().isEmpty()) {
-                               /* try {
+                                try {
 //                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable("CAT_OBJ", currentObject);
@@ -163,7 +181,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                                 } catch (Exception e) {
                                     Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
                                     e.printStackTrace();
-                                }*/
+                                }
                             } else {
 
 
@@ -178,7 +196,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                                     Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
                                     e.printStackTrace();
                                 }
-                            }
+                            }*/
                         } else {
                             Utils.showSnackBar(activityReference, getContainerLayout(),
                                     activityReference.getResources().getString(R.string.no_network_available),
@@ -205,16 +223,17 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
         switch (view.getId()) {
             case R.id.fab_cat_list:
                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
-                if (isFromCatList) {
+
 //                    ProductCategory category = new ProductCategory();
                     Bundle bundle = new Bundle();
 //                        bundle.putSerializable("CAT_OBJ", currentObject.getSubProductCategories().get(position));
                     if (productSubCategory != null){
                         bundle.putSerializable("CAT_OBJ", productSubCategory);
-                        bundle.putBoolean("isFromNestedCAT", true);
+
                     }
+                    bundle.putBoolean("isFromNestedCAT", true);
                     newCategoryFragment.setArguments(bundle);
-                }
+
                 activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                 break;
         }
