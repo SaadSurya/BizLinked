@@ -41,9 +41,9 @@ import io.reactivex.annotations.Nullable;
 
 
 public class AttributesDialog extends DialogFragment {
-
+/*
     @BindView(R.id.btn_add)
-    ImageButton attBtnAdd;
+  //  ImageButton attBtnAdd;*/
 
     @BindView(R.id.btn_add_tag)
     ImageButton tagBtnAdd;
@@ -51,6 +51,7 @@ public class AttributesDialog extends DialogFragment {
     Button attributeCancel;
     private BasePreferenceHelper prefHelper;
     private ArrayList<ProductAttribute> companyAttributesList;
+    private ArrayList<ProductAttribute> productAttributeArrayList;
 
     //   protected BaseActivity activityReference;
     @BindView(R.id.att_type)
@@ -75,13 +76,14 @@ public class AttributesDialog extends DialogFragment {
 
     }
 
-    public void setAttribute(ProductAttribute attribute) {
+    public void setAttribute(ProductAttribute attribute,ArrayList<ProductAttribute> productAttributeArrayList) {
         this.SelectedProductAttribute = attribute;
+        this.productAttributeArrayList = productAttributeArrayList;
     }
 
-    public static AttributesDialog newInstance(ProductAttribute attribute, boolean isNew) {
+    public static AttributesDialog newInstance(ProductAttribute attribute, boolean isNew,ArrayList<ProductAttribute> productAttributeArrayList) {
         AttributesDialog frag = new AttributesDialog();
-        frag.setAttribute(attribute);
+        frag.setAttribute(attribute,productAttributeArrayList);
         frag.isNew = isNew;
 
         return frag;
@@ -96,6 +98,7 @@ public class AttributesDialog extends DialogFragment {
         unbinder = ButterKnife.bind(this, view);
         prefHelper = new BasePreferenceHelper(getActivity());
         companyAttributesList = prefHelper.getAttributesList();
+
         if (!isNew)
             attType.setText(SelectedProductAttribute.getAttributeName());
         getDialog().setTitle("Add Attributes");
@@ -125,7 +128,7 @@ public class AttributesDialog extends DialogFragment {
 
     private void setAutoTextAdapter() {
 
-        attributeNameAdapter = new AttributesAdapter(getContext(), companyAttributesList, attBtnAdd);
+        attributeNameAdapter = new AttributesAdapter(getContext(), companyAttributesList);
         attType.setAdapter(attributeNameAdapter);
         attType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -154,7 +157,7 @@ public class AttributesDialog extends DialogFragment {
 
         });
 
-        attBtnAdd.setOnClickListener(new View.OnClickListener() {
+      /*  attBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "new attribute added :" + attType.getText(), Toast.LENGTH_SHORT).show();
@@ -164,7 +167,7 @@ public class AttributesDialog extends DialogFragment {
                 //   SelectedProductAttribute = abc;
 
             }
-        });
+        });*/
 
 
 /**
@@ -271,30 +274,76 @@ public class AttributesDialog extends DialogFragment {
                 dismiss();
                 break;
             case R.id.attribute_save:
+                saveDialog();
 
-                if (SelectedProductAttribute == null) {
 
-                    Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
-                } else if (attTag.getText().toString()== ""){
-
-                    Utils.showToast(getContext(), "Add tag first", AppConstant.TOAST_TYPES.ERROR);
-                }
-
-                else {
-                    String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
-                    AttributeItemAdapter.productCategoryList.toArray(array);
-                    //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
-                    SelectedProductAttribute.setProductAttributeValueName(array);
-
-                    Intent i = new Intent()
-                            .putExtra("attr", SelectedProductAttribute)
-                            .putExtra("isNew", isNew);
-                    getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
-                    dismiss();
-
-                }
-//                dismiss();
                 break;
         }
+    }
+
+
+
+
+    private void saveDialog(){
+
+        if(attType.getText().toString().isEmpty()){
+            Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
+
+        }else
+        if (SelectedProductAttribute == null ) {
+
+            SelectedProductAttribute = new ProductAttribute();
+            SelectedProductAttribute.setAttributeName(attType.getText().toString());
+            // Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
+
+        }else {
+            SelectedProductAttribute.setAttributeName(attType.getText().toString());
+
+
+        }
+
+        if(isNew && isSelectedBefore()){
+            Utils.showToast(getContext(), "attribute already selected kindly updated old one", AppConstant.TOAST_TYPES.ERROR);
+        } else if (attTag.getText().toString()== ""){
+
+            Utils.showToast(getContext(), "Add tag first", AppConstant.TOAST_TYPES.ERROR);
+        }
+
+        else {
+            String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
+            AttributeItemAdapter.productCategoryList.toArray(array);
+            //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
+            SelectedProductAttribute.setProductAttributeValueName(array);
+
+            //add in cache
+
+
+
+            Intent i = new Intent()
+                    .putExtra("attr", SelectedProductAttribute)
+                    .putExtra("isNew", isNew);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, i);
+            dismiss();
+
+        }
+
+
+    }
+    private boolean isSelectedBefore(){
+
+boolean alreadySelected = false;
+
+for(int a = 0; a<productAttributeArrayList.size() ;a++){
+
+    if( attType.getText().toString().equalsIgnoreCase(productAttributeArrayList.get(a).AttributeName))
+    {
+        alreadySelected = true;
+
+    }
+
+}
+
+
+        return alreadySelected;
     }
 }

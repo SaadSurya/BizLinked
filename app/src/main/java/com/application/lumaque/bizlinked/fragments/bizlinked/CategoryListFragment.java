@@ -142,7 +142,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
         categoryListRV.setLayoutManager(new GridLayoutManager(activityReference, 2, GridLayoutManager.VERTICAL, false));
         // linkRecycler.setLayoutManager(new LinearLayoutManager(activityReference));
         categoryListRV.setAdapter(categoryItemAdapter);
-        categoryListRV.addOnItemTouchListener(new RecyclerTouchListener(activityReference, categoryListRV,
+      /*  categoryListRV.addOnItemTouchListener(new RecyclerTouchListener(activityReference, categoryListRV,
                 new ClickListenerRecycler() {
                     @Override
                     public void onClick(View view, int position) {
@@ -165,38 +165,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                                 e.printStackTrace();
                             }
 
-                            /*
-                            if (currentObject.getSubProductCategories() != null && !currentObject.getSubProductCategories().isEmpty()) {
-                                try {
-//                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("CAT_OBJ", currentObject);
-                                    bundle.putBoolean("FROMCATLIST", true);
-                                    CategoryListFragment categoryListFragment = new CategoryListFragment();
-                                    categoryListFragment.setArguments(bundle);
-                                    activityReference.addSupportFragment(categoryListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
-
-//                                    activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-                                } catch (Exception e) {
-                                    Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
-                                    e.printStackTrace();
-                                }
-                            } else {
-
-
-                                try {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("CAT_OBJ", productCategoriesList.get(position));
-                                    NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
-                                    newCategoryFragment.setArguments(bundle);
-                                    activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-
-                                } catch (Exception e) {
-                                    Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
-                                    e.printStackTrace();
-                                }
-                            }*/
                         } else {
                             Utils.showSnackBar(activityReference, getContainerLayout(),
                                     activityReference.getResources().getString(R.string.no_network_available),
@@ -208,7 +177,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                     public void onLongClick(View view, int position) {
                     }
                 }
-        ));
+        ));*/
 
     }
 

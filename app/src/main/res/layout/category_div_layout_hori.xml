@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
-    android:layout_width="@dimen/x160"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_image_new_small">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="@dimen/x160"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x5">
 
 
             <LinearLayout
@@ -21,8 +28,7 @@
                 <ImageView
                     android:id="@+id/category_img"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:src="@drawable/anonymous_bg"/>
+                    android:layout_height="@dimen/x90" />
 
 
                 <TextView
@@ -36,21 +42,19 @@
 
             </LinearLayout>
             <!--android:background="@drawable/texview_edit_cat_rect"-->
+            <TextView
+                android:id="@+id/tv_edit_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/view_layout"
+                android:layout_alignTop="@+id/view_layout"
+                android:layout_marginStart="0dp"
 
-    <TextView
-        android:id="@+id/tv_edit_cat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/appThemeColor"
-        android:textStyle="bold"
-        android:layout_marginStart="0dp"
-        android:background="#80000000"
-        android:gravity="center"
-
-        android:drawableStart="@drawable/ic_edit_black_24dp"
-        android:text="Edit"
-        android:textSize="@dimen/s12" />
-
-
-
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/ic_edit_black_24dp"
+                android:text="Edit"
+                android:textSize="@dimen/s12"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 </FrameLayout>

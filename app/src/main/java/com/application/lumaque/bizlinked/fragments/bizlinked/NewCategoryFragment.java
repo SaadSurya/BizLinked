@@ -157,6 +157,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
         productCategory.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
         productCategory.setProductCategoryName(catNameEditText.getText().toString());
         productCategory.setParentProductCategoryID(selectedParentCagetory);
+        productCategory.setImageID("");
         saveNewCategory(gsonHelper.getJsonString(productCategory));
     }
 

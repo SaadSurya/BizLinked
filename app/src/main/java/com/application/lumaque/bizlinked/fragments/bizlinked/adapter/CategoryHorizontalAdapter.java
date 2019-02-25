@@ -58,7 +58,7 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
         int columnCount = 0;
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.category_div_layout, parent, false);
+                .inflate(R.layout.category_div_layout_hori, parent, false);
 
         return new ItemViewHolder(itemView);
 

@@ -261,7 +261,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
-        showAttributeDialog(productAttribute, false);
+        showAttributeDialog(productAttribute, false,tagItemAdapter.getAttributeLIst());
 
 
     }
@@ -435,9 +435,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     }
 
 
-    private void showAttributeDialog(ProductAttribute attribute, boolean isNew) {
+    private void showAttributeDialog(ProductAttribute attribute, boolean isNew,ArrayList<ProductAttribute> productAttributeArrayList) {
         FragmentManager fm = activityReference.getSupportFragmentManager();
-        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute, isNew);
+        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute, isNew,productAttributeArrayList);
         if (editNameDialogFragment.getDialog() != null)
             editNameDialogFragment.getDialog().setCanceledOnTouchOutside(false);
         //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
@@ -462,7 +462,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                         tagItemAdapter.addItem(returnedAtt);
 
                     tagItemAdapter.notifyChangeData();
-                    Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
 
                 }
@@ -523,7 +523,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 break;
             case R.id.add_att:
                 //onSave();
-                showAttributeDialog(null, true);
+                showAttributeDialog(null, true,tagItemAdapter.getAttributeLIst());
 
                 break;
 

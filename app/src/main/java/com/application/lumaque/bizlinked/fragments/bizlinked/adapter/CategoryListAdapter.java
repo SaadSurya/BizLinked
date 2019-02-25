@@ -107,7 +107,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             }
         });
-        ((ItemViewHolder) holder).viewLayout.setOnClickListener(new View.OnClickListener() {
+        ((ItemViewHolder) holder).categoryImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentObject.getSubProductCategories() != null && !currentObject.getSubProductCategories().isEmpty()) {

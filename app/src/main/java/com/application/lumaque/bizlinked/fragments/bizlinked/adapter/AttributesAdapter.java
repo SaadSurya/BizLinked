@@ -17,12 +17,12 @@ public class AttributesAdapter extends ArrayAdapter<ProductAttribute> {
     ArrayList<ProductAttribute> customers, tempCustomer, suggestions;
 
     Context context;
-    ImageButton imageButton;
-    public AttributesAdapter(Context context, ArrayList<ProductAttribute> objects, ImageButton imageButton) {
+ //   ImageButton imageButton;
+    public AttributesAdapter(Context context, ArrayList<ProductAttribute> objects) {
         super(context, android.R.layout.simple_list_item_1, objects);
         this.context = context;
         this.customers = objects;
-        this.imageButton = imageButton;
+     //   this.imageButton = imageButton;
         this.tempCustomer = new ArrayList<ProductAttribute>(objects);
         this.suggestions = new ArrayList<ProductAttribute>(objects);
 
@@ -89,26 +89,18 @@ public class AttributesAdapter extends ArrayAdapter<ProductAttribute> {
             ArrayList<ProductAttribute> c = (ArrayList<ProductAttribute>) results.values;
             if (results != null && results.count > 0) {
                 clear();
-                setAttAddVisibility(false);
+               // setAttAddVisibility(false);
                 for (ProductAttribute cust : c) {
                     add(cust);
                     notifyDataSetChanged();
                 }
             } else {
                 clear();
-                setAttAddVisibility(true);
+             //   setAttAddVisibility(true);
                 notifyDataSetChanged();
 
             }
         }
     };
-    public void setAttAddVisibility(boolean isVisible) {
 
-
-        if (isVisible)
-            imageButton.setVisibility(View.VISIBLE);
-        else
-            imageButton.setVisibility(View.GONE);
-
-    }
 }
