@@ -74,13 +74,18 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
         setHasOptionsMenu(true);
         getBaseActivity().toolbar.setTitle("Categories");
 
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
         if (strQuery.length() > 0) {
             searchView.setQuery(strQuery, false);
             searchFromServer(strQuery);
         } else
             initializeViews();
-    }
 
+    }
     private void initializeViews() {
         ProductCategory productCategory = new ProductCategory();
 

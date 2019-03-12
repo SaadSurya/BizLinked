@@ -7,7 +7,7 @@ public class CitiesModel implements Serializable {
 
 
   String CityID;
-  String         CityName;
+  String CityName;
 
     public String getCityID() {
         return CityID;

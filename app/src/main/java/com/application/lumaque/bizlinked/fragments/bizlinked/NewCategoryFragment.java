@@ -169,11 +169,12 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
                     public void onSuccess(String response) {
                         String anc = response;
                         Utils.showToast(activityReference, "save Successfully", AppConstant.TOAST_TYPES.SUCCESS);
-                        onCustomBackPressed();
+
                         GsonHelper gsonHelper = new GsonHelper();
                         productCategory = gsonHelper.GsonToProductCategory(response);
                        if(imageFile != null)
                         uploadMedia(imageFile, "1.jpg");
+                        onCustomBackPressed();
                     }
 
                     @Override
@@ -253,7 +254,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
         ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
         //  setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(activityReference).load(URL)
-                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
+                .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.ic_add_a_photo_black_200dp))
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

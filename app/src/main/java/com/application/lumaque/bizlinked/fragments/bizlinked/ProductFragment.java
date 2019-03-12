@@ -194,7 +194,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(paramCompanyId));
         params.put("productId", paramProductId);
-
+        ImageList = new ArrayList<>();
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_DETAIL, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
@@ -231,8 +231,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 proPrice.setText(String.valueOf(product.getPrice()));
 
                 if(product.IsPublished){
-
-                    btnPublish.setText("UNPUBLISH");
+                    btnPublish.setVisibility(View.GONE);
+                   // btnPublish.setText("UNPUBLISH");
                 }
 
             }
@@ -371,7 +371,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
             Glide.with(activityReference).load(ImageList.get(position))
                     .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
                     .into(headerView);
-            headerView.setOnClickListener(new View.OnClickListener() {
+                    headerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ImageSliderFragment imageSliderFragment = new ImageSliderFragment();

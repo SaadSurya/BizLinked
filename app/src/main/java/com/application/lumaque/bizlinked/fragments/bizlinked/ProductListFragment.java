@@ -57,6 +57,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     Boolean isFromNestedCat;
     ProductList ProductList;
+   // ProductList searchProductList;
 
 
     //  FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
@@ -85,15 +86,24 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     @BindView(R.id.product_desc_view)
     RecyclerView rvProduct;
+    private boolean isSearchView = false;
 
     @Override
     public void onCustomBackPressed() {
         /*activityReference.addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE,false);*/
+
+
         searchView.setQuery("", false);
         searchView.onActionViewCollapsed();
         strQuery = "";
 
-        activityReference.onPageBack();
+        if(isSearchView)
+        {
+            initializeViews();
+        }else {
+
+            activityReference.onPageBack();
+        }
     }
 
     @Override
@@ -194,7 +204,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     private void initializeViews() {
         startShimerAnimation();
-
+        isSearchView = false;
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
         params.put("productCategoryId", paramProductCategoryId);
@@ -390,7 +400,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     private void searchFromServer(String query) {
         startShimerAnimation();
-
+        isSearchView = true;
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", paramCompanyId);
         params.put("searchTerm", query);
@@ -398,13 +408,22 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
             @Override
             public void onSuccess(String response) {
                 stopShimerAnimation();
+
                 ProductList = GsonHelper.GsonToProductList(response);
 
               /*  ArrayList<ProductCategory> categoryList = new ArrayList<>();
                 GsonHelper gsonHelper = new GsonHelper();
                 categoryList = gsonHelper.GsonToCategoryList(activityReference, response);*/
+
+
+
                 productItemAdapter.clearAllList();
                 productItemAdapter.addAllList(new ArrayList(ProductList.getProduct()));
+
+
+
+                categoryItemAdapter.clearAllList();
+                categoryItemAdapter.addAllList(new ArrayList(ProductList.getProductCategory()));
             }
 
             @Override

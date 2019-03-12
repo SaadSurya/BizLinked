@@ -23,12 +23,14 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
+import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -135,7 +137,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.view_profile_menu, menu);
+        inflater.inflate(R.menu.view_product_menu, menu);
 
         final MenuItem item = menu.findItem(R.id.action_view_profile);
         final TextView viewProfile = (TextView) MenuItemCompat.getActionView(item);
@@ -156,6 +158,36 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
             }
         });
 
+
+
+         final MenuItem item2 = menu.findItem(R.id.action_view_profile);
+        final TextView pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
+
+        if(product.IsPublished){
+            pubUnPub.setText("unpublish");
+        }else {
+            pubUnPub.setText("Publish");
+        }
+
+        pubUnPub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(product.IsPublished)
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
+                else
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+
+
+            }
+        });
+
+
+
+
+
+
+
     }
 
     private void initializeViews() {
@@ -163,7 +195,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
         HashMap<String, String> params = new HashMap<>();
         params.put("companyId", String.valueOf(paramCompanyId));
         params.put("productId", paramProductId);
-
+        ImageList = new ArrayList<>();
         WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.PRODUCT_DETAIL, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
@@ -319,13 +351,53 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
     }
 
     private void setTagAdapter() {
-
-
         tagItemAdapter = new TagViewAdapter(activityReference, product.getProductAttributes(), this);
         attributeLayout.setLayoutManager(new LinearLayoutManager(activityReference));
         attributeLayout.setAdapter(tagItemAdapter);
         attributeLayout.setNestedScrollingEnabled(false);
+        }
 
+    private void publishUnpublishProduct(String URL){
+        final HashMap<String, String> params = new HashMap<>();
+
+        //params.put("productId", String.valueOf(product.getProductID()));
+        URL= URL + "?productId="+product.getProductID();
+
+        WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
+                Request.Method.PUT,
+                params,URL, new WebAppManager.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+
+                        Utils.showToast(activityReference, "Status Updated", AppConstant.TOAST_TYPES.SUCCESS);
+
+
+                        if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
+                            activityReference.clearStackTillFragment(
+                                    ProductViewFragment.class.getName()
+                            );
+                        } else {
+                            onCustomBackPressed();
+                        }
+
+
+
+
+                    }
+
+                    @Override
+                    public void onError(String response) {
+                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
 
     }
+
+
 }
