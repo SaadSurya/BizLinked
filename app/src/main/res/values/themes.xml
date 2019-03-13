@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+   <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
+    </style>
 
+    <style name="MyActionButtonStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:minWidth">20dip</item>
+        <item name="android:padding">0dip</item>
+        <item name="android:layout_marginRight">10dip</item>
+    </style>-->
     <!-- Normal Theme -->
     <style name="NormalTheme" parent="Theme.AppCompat.Light.NoActionBar">
 

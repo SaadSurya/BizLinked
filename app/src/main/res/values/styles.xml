@@ -1,7 +1,14 @@
 <resources>
 
+    <style name="AppTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
+    </style>
 
-
+    <style name="MyActionButtonStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:minWidth">20dip</item>
+        <item name="android:padding">0dip</item>
+           <item name="android:layout_marginRight">10dip</item>
+    </style>
     <style name="CustomDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">false</item>
         <item name="android:windowTitleStyle">@style/dialog_title_style</item>

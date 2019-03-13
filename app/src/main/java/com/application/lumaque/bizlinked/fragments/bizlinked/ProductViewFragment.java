@@ -1,6 +1,7 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -85,7 +87,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
 
     @BindView(R.id.attribute_layout)
     RecyclerView attributeLayout;
-
+    TextView pubUnPub;
 
     private Bundle bundle;
     private Product product;
@@ -138,14 +140,34 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.view_product_menu, menu);
+       // super.onCreateOptionsMenu(menu);
+        //getMenuInflater().inflate(R.menu.activity_main, menu);
+      //  return true;
 
-        final MenuItem item = menu.findItem(R.id.action_view_profile);
-        final TextView viewProfile = (TextView) MenuItemCompat.getActionView(item);
-        viewProfile.setText("Edit");
-        viewProfile.setOnClickListener(new View.OnClickListener() {
+        final MenuItem item2 = menu.findItem(R.id.action_view_publish);
+        pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
+
+        pubUnPub.setTextSize(22);
+        pubUnPub.setTypeface(null, Typeface.BOLD);
+
+
+
+        pubUnPub.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                if(product.IsPublished)
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+                else
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
+            }
+        });
+    }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_profile:
                 Bundle bundle = new Bundle();
                 bundle.putInt(companyId, paramCompanyId);
                 bundle.putString(productId,paramProductId);
@@ -154,39 +176,18 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 ProductFragment.setArguments(bundle);
                 activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
+                return true;
+        case R.id.action_view_publish:
+            if(product.IsPublished)
+                publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+            else
+                publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
 
-            }
-        });
+            return true;
 
-
-
-         final MenuItem item2 = menu.findItem(R.id.action_view_profile);
-        final TextView pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
-
-        if(product.IsPublished){
-            pubUnPub.setText("unpublish");
-        }else {
-            pubUnPub.setText("Publish");
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        pubUnPub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(product.IsPublished)
-                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
-                else
-                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
-
-
-            }
-        });
-
-
-
-
-
-
 
     }
 
@@ -232,6 +233,15 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 proPrice.setText(String.valueOf(product.getPrice()));
 
                 getBaseActivity().toolbar.setTitle(product.getProductName());
+
+
+                if(product.IsPublished){
+                    pubUnPub.setText("unpublish");
+                }else {
+                    pubUnPub.setText("Publish");
+                }
+
+
 
             }
 
@@ -372,14 +382,14 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                         Utils.showToast(activityReference, "Status Updated", AppConstant.TOAST_TYPES.SUCCESS);
 
 
-                        if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
+                       /* if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
                             activityReference.clearStackTillFragment(
                                     ProductViewFragment.class.getName()
                             );
                         } else {
                             onCustomBackPressed();
                         }
-
+*/
 
 
 
