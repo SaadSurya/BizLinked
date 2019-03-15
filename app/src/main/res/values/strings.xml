@@ -149,6 +149,7 @@
     <string name="cancel">Cancel</string>
     <string name="logout_confirmation">Are you sure you want to logout?</string>
     <string name="logout">Logout</string>
+    <string name="settings">settings</string>
     <string name="get_gps">Are you sure you want to select current location?</string>
     <string name="location_not_found">Location not found yet. Please wait to get user current position!</string>
     <string name="select_options">Select Options</string>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+
+<!--
+    <CheckBox
+        android:id="@+id/Cb_notify"
+        android:text="do you want to notify customers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />-->
+
+    <CheckBox
+        android:id="@+id/Cb_save"
+        android:text="save setting and do not show this message again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -26,6 +26,8 @@ public class BasePreferenceHelper extends PreferenceHelper {
     private static final String FILENAME = "bizlinked_preferences";
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_ATTRIBUTES = "attributes";
+    public static final String KEY_SAVE_NOTIFY = "save_notify";
+    public static final String KEY_NOTIFY = "notify";
 
 
     public BasePreferenceHelper(Context c) {
@@ -133,6 +135,32 @@ public class BasePreferenceHelper extends PreferenceHelper {
                 FILENAME,
                 KEY_ATTRIBUTES,
                 AttributesArray);
+    }
+
+
+    public void putsaveNotify(Boolean saveNotify) {
+        putBooleanPreference(context,
+                FILENAME,
+                KEY_SAVE_NOTIFY,
+                saveNotify);
+    }
+
+
+    public boolean getSaveNotiy() {
+        return getBooleanPrefrence(KEY_SAVE_NOTIFY);
+    }
+
+
+ public void putNotify(Boolean Notify) {
+        putBooleanPreference(context,
+                FILENAME,
+                KEY_NOTIFY,
+                Notify);
+    }
+
+
+    public boolean getNotiy() {
+        return getBooleanPrefrence(KEY_NOTIFY);
     }
 
     public ArrayList<ProductAttribute> getAttributesList() {

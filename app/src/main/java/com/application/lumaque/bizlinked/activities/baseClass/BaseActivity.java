@@ -52,6 +52,7 @@ import com.application.lumaque.bizlinked.fireBase.BackgroundService;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CategoryListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.CustomerFragmentTabs;
+import com.application.lumaque.bizlinked.fragments.bizlinked.NotificationSetting;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ProductListFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.SupplierFragmentTabs;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
@@ -1355,6 +1356,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
             case R.id.nav_logout:
                 logoutUser();
+                break;
+
+            case R.id.nav_settings:
+                NotificationSetting notificationsetting = new NotificationSetting();
+                addSupportFragment(notificationsetting, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
                 break;
 
         }

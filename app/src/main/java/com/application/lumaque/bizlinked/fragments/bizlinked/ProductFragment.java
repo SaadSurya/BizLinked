@@ -1,7 +1,9 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,6 +42,7 @@ import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
 import com.application.lumaque.bizlinked.webhelpers.ProductHelper;
@@ -508,11 +513,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
             case R.id.btn_publish:
                if(isInEditMode) {
                    //todo api call of publish
-
-                   if(((Button)view).getText().toString().equalsIgnoreCase("Publish"))
-                   publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
-                   else
-                       publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+                   editPubButClick(view);
                }else
                 saveClick(true);
 
@@ -534,7 +535,19 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         }
     }
 
+private void editPubButClick(View view){
 
+
+
+    if(!product.IsPublished){
+
+        saveClick(true);
+    }
+    else
+        publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+
+
+}
     private void publishUnpublishProduct(String URL){
         final HashMap<String, String> params = new HashMap<>();
 
@@ -576,7 +589,7 @@ URL= URL + "?productId="+product.getProductID();
                 });
 
     }
- private void saveClick(boolean publish){
+ private void saveClick(final boolean publish){
      String catName = proCate.getText().toString();
      product.setProductCategoryName(proCate.getText().toString());
      product.setProductName(proName.getText().toString());
@@ -586,10 +599,62 @@ URL= URL + "?productId="+product.getProductID();
 //                    product.setProductCategoryID(hMap.get(catName));
 //                }
      product.setProductAttributes(tagItemAdapter.getAttributeLIst());
-     product.setPublished(publish);
 
+
+
+
+
+boolean saveNotify =preferenceHelper.getSaveNotiy();
+     if(publish)
+     {
+         final int a = 1 ;
+         product.setPublished(publish);
+        if(!saveNotify) {
+
+            DialogFactory.createInputDialog(getActivity(), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ViewGroup edit = (ViewGroup) ((AlertDialog) dialog).findViewById(a);
+                //    CheckBox notify =  edit.findViewById(R.id.Cb_notify);
+                    CheckBox saveSetting =  edit.findViewById(R.id.Cb_save);
+                    if(saveSetting.isChecked()){
+
+                        preferenceHelper.putsaveNotify(saveSetting.isChecked());
+                        preferenceHelper.putNotify(true);
+
+                    }
+
+                    preferenceHelper.putNotify(true);
+
+                    savbtn();
+
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    preferenceHelper.putNotify(false);
+                    savbtn();
+
+                }
+            },"Your product will be published","do you want to notify your customers? ").show();
+         }else {
+            product.setNotify(preferenceHelper.getNotiy());
+            savbtn();
+
+        }
+
+
+
+
+     }
+     else{
+         savbtn();
+     }
+
+ }
+
+ private  void savbtn(){
      String jsonString = g.toJson(product);
-
      prodSaveReq(jsonString);
  }
     private void prodSaveReq(String jsonString) {

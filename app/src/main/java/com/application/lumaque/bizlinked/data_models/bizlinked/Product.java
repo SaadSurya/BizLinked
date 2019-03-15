@@ -22,6 +22,16 @@ public class Product implements Serializable {
     }
 
     public boolean IsPublished;
+
+    public boolean isNotify() {
+        return Notify;
+    }
+
+    public void setNotify(boolean notify) {
+        Notify = notify;
+    }
+
+    public boolean Notify;
     public long ProductCategoryID ;
     public String ProductCategoryName ;
     public List<String> Images ;

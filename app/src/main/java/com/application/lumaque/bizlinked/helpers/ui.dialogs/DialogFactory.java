@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import com.application.lumaque.bizlinked.R;
 import java.util.List;
@@ -162,12 +165,19 @@ public class DialogFactory {
                                            DialogInterface.OnClickListener dialogPositive,
                                            DialogInterface.OnClickListener dialogNegative, String title,
                                            String message) {
-
+int a = 1 ;
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-        alert.setIcon(android.R.drawable.ic_dialog_alert);
+       // alert.setIcon(android.R.drawable.ic_dialog_alert);
         alert.setTitle(title);
-        alert.setMessage(message);
-        final EditText input = new EditText(activity);
+       alert.setMessage(message);
+
+        LayoutInflater vi = (LayoutInflater) activity.getApplicationContext().getSystemService(activity.LAYOUT_INFLATER_SERVICE);
+        View input = vi.inflate(R.layout.layout_dialog, null);
+
+
+
+       // final CheckBox input = new CheckBox(activity);
+        input.setId(a);
         alert.setView(input);
 
         alert.setPositiveButton("Yes", dialogPositive);
