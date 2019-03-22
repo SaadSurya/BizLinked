@@ -8,6 +8,8 @@ import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.fragments.HomeFragment;
+import com.application.lumaque.bizlinked.fragments.bizlinked.ProductFragment;
+import com.application.lumaque.bizlinked.fragments.bizlinked.ProductViewFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
 
 
@@ -48,10 +50,35 @@ public class HomeActivity extends BaseActivity {
         {
 
          if(prefHelper.getLoginStatus()){
-             String VIEWID =   extras.getString("VIEWID");
-             ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
-             viewprofilefragment.setViewID(VIEWID,"customer");
-             addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE,false);
+
+
+
+             String SCREEN =   extras.getString("SCREEN");
+
+
+             if(SCREEN.equalsIgnoreCase("VIEW_PROFILE")) {
+                 String VIEWID = extras.getString("VIEWID");
+                 ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
+                 viewprofilefragment.setViewID(VIEWID, "customer");
+                 addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+
+             }else if(SCREEN.equalsIgnoreCase("VIEW_PRODUCT")) {
+                 String VIEWID = extras.getString("VIEWID");
+                 String PRODUCT = extras.getString("PRODUCT");
+
+
+
+                 Bundle bundle = new Bundle();
+                 bundle.putInt(ProductFragment.companyId, Integer.parseInt(VIEWID));
+                 bundle.putString(ProductFragment.productId,PRODUCT);
+                 ProductViewFragment ProductViewFragment = new ProductViewFragment();
+                 ProductViewFragment.setArguments(bundle);
+                 addSupportFragment(ProductViewFragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+
+             }
+
+
+
          }
          else {
              changeActivity(RegistrationActivity.class, true);

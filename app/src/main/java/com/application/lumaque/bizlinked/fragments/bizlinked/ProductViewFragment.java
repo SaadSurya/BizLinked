@@ -1,10 +1,13 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -17,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,6 +36,7 @@ import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
+import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -47,7 +52,7 @@ import butterknife.BindView;
 import me.relex.circleindicator.CircleIndicator;
 
 public class ProductViewFragment extends BaseFragment implements TagCloseCallBack {
-
+    private Menu menu;
 
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout mShimmerViewContainer;
@@ -141,16 +146,16 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
        // super.onCreateOptionsMenu(menu);
         //getMenuInflater().inflate(R.menu.activity_main, menu);
       //  return true;
+        this.menu = menu;
+       // final MenuItem item2 = menu.findItem(R.id.action_view_publish);
+       // pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
+           // item2.setIcon(R.drawable.publish);
+       // pubUnPub.setTextSize(22);
+      //  pubUnPub.setTypeface(null, Typeface.BOLD);
 
-        final MenuItem item2 = menu.findItem(R.id.action_view_publish);
-        pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
-
-        pubUnPub.setTextSize(22);
-        pubUnPub.setTypeface(null, Typeface.BOLD);
 
 
-
-        pubUnPub.setOnClickListener(new View.OnClickListener() {
+/*        pubUnPub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(product.IsPublished)
@@ -158,7 +163,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 else
                     publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
             }
-        });
+        });*/
     }
 
 
@@ -237,9 +242,9 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
 
 
                 if(product.IsPublished){
-                    pubUnPub.setText("unpublish");
+                    menu.getItem(0).setIcon(ContextCompat.getDrawable(activityReference, R.drawable.unpublish));
                 }else {
-                    pubUnPub.setText("Publish");
+                    menu.getItem(0).setIcon(ContextCompat.getDrawable(activityReference, R.drawable.publish));
                 }
 
                 }
@@ -368,12 +373,100 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
         attributeLayout.setNestedScrollingEnabled(false);
         }
 
+
+
+
     private void publishUnpublishProduct(String URL){
+
+
+        if(URL.equalsIgnoreCase(AppConstant.ServerAPICalls.PRODUCT_PUBLISH)){
+
+
+            boolean saveNotify =preferenceHelper.getSaveNotiy();
+            final int a = 1 ;
+            if(!saveNotify) {
+
+                DialogFactory.createInputDialog(getActivity(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ViewGroup edit = (ViewGroup) ((AlertDialog) dialog).findViewById(a);
+                        //    CheckBox notify =  edit.findViewById(R.id.Cb_notify);
+                        CheckBox saveSetting =  edit.findViewById(R.id.Cb_save);
+                        if(saveSetting.isChecked()){
+
+                            preferenceHelper.putsaveNotify(saveSetting.isChecked());
+                            preferenceHelper.putNotify(true);
+
+                        }
+
+                        preferenceHelper.putNotify(true);
+
+                        changePublishedStatus(URL,true,true);
+
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ViewGroup edit = (ViewGroup) ((AlertDialog) dialog).findViewById(a);
+                        //    CheckBox notify =  edit.findViewById(R.id.Cb_notify);
+                        CheckBox saveSetting =  edit.findViewById(R.id.Cb_save);
+                        if(saveSetting.isChecked()){
+
+                            preferenceHelper.putsaveNotify(saveSetting.isChecked());
+                            preferenceHelper.putNotify(false);
+
+                        }
+
+                        preferenceHelper.putNotify(false);
+                        changePublishedStatus(URL,false,true);
+
+                    }
+                },"Your product will be published","do you want to notify your customers? ").show();
+            }else {
+              //  product.setNotify(preferenceHelper.getNotiy());
+                changePublishedStatus(URL,preferenceHelper.getNotiy(),true);
+
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+        else {
+
+            changePublishedStatus(URL,false,false);
+
+        }
+
+
+
+
+
+
+    }
+
+
+    private void changePublishedStatus(String URL,boolean ifNotify,boolean publish){
+
+
         final HashMap<String, String> params = new HashMap<>();
 
         //params.put("productId", String.valueOf(product.getProductID()));
         URL= URL + "?productId="+product.getProductID();
+        if(publish){
 
+
+            URL = URL + "&notify="+ifNotify;
+
+
+        }
         WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
                 Request.Method.PUT,
                 params,URL, new WebAppManager.APIStringRequestDataCallBack() {
@@ -409,6 +502,5 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 });
 
     }
-
 
 }

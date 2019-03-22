@@ -108,7 +108,10 @@ public class BackgroundService extends Service {
                     list.add(child.getValue(FireBaseDataMode.class));
                 }
                 if (list.size() != 0 && list.get(list.size()-1).getScreen().equalsIgnoreCase("view_profile")){
-                    showNotification("Request", list.get(list.size()-1).getText(), (String) list.get(list.size()-1).getData().get("companyId").toString());
+                    showNotification("Request", list.get(list.size()-1).getText(), (String) list.get(list.size()-1).getData().get("companyId").toString(),list.get(list.size()-1).getScreen());
+                    dataSnapshot.getRef().removeValue();
+                }else  if (list.size() != 0 && list.get(list.size()-1).getScreen().equalsIgnoreCase("VIEW_PRODUCT")){
+                    showProductNotification("New Product", list.get(list.size()-1).getText(), (String) list.get(list.size()-1).getData().get("companyId").toString(),(String) list.get(list.size()-1).getData().get("productId").toString(),list.get(list.size()-1).getScreen());
                     dataSnapshot.getRef().removeValue();
                 }
 
@@ -127,11 +130,12 @@ public class BackgroundService extends Service {
     }
 
 
-    private void showNotification(String title, String message, String ID) {
+    private void showNotification(String title, String message, String ID,String screen) {
 
 
         Intent viewProfileIntent = new Intent(this, HomeActivity.class);
         viewProfileIntent.putExtra("VIEWID", ID);
+        viewProfileIntent.putExtra("SCREEN", screen);
         viewProfileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 
@@ -157,6 +161,44 @@ public class BackgroundService extends Service {
                 .build();
 
         notificationManagerCompat.notify(Integer.parseInt(ID), notification);
+
+
+    }
+
+
+
+    private void showProductNotification(String title, String message, String CompanyID,String productID,String screen) {
+
+
+        Intent viewProfileIntent = new Intent(this, HomeActivity.class);
+        viewProfileIntent.putExtra("VIEWID", CompanyID);
+        viewProfileIntent.putExtra("PRODUCT", productID);
+        viewProfileIntent.putExtra("SCREEN", screen);
+        viewProfileIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+        //  Intent launcherIntent = new Intent(this , HomeActivity.class);
+        //  launcherIntent.putExtra("VIEWID", ID);
+        // resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,
+                0 /* Request code */, viewProfileIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        //   addBackStack(this,resultIntent);
+
+
+        Notification notification = new NotificationCompat.Builder(this, channel_1_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(1)
+                .setAutoCancel(true)
+                .setCategory(NotificationCompat.CATEGORY_SOCIAL)
+                .setContentIntent(resultPendingIntent)
+                .build();
+
+        notificationManagerCompat.notify(Integer.parseInt(CompanyID), notification);
 
 
     }

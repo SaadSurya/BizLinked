@@ -658,7 +658,7 @@ boolean saveNotify =preferenceHelper.getSaveNotiy();
                     }
 
                     preferenceHelper.putNotify(true);
-
+                    product.setNotify(true);
                     savbtn();
 
                 }
@@ -666,6 +666,7 @@ boolean saveNotify =preferenceHelper.getSaveNotiy();
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     preferenceHelper.putNotify(false);
+                    product.setNotify(false);
                     savbtn();
 
                 }

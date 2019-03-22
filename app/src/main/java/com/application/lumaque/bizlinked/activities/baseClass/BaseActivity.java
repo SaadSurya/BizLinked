@@ -265,7 +265,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                     badgeDrawable.setEnabled(true);
                     badgeDrawable.setText("");
 
-                    addMenuBadge(list.get(list.size() - 1).getText().toLowerCase().contains("supplier"));
+                    //addMenuBadge(list.get(list.size() - 1).getText().toLowerCase().contains("supplier"));
 
                 }
 

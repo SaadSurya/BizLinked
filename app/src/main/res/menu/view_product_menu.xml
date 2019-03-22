@@ -5,13 +5,13 @@
     <item
         android:id="@+id/action_view_publish"
         android:title="publish"
-        app:actionViewClass="android.widget.TextView"
+        android:icon="@drawable/publish"
         app:showAsAction="always"/>
     <item
         android:id="@+id/action_view_profile"
         android:title="@string/action_search"
 
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/edit"
         app:showAsAction="always"/>
 
 
