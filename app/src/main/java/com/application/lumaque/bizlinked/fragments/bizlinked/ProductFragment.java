@@ -5,16 +5,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,16 +29,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
+import com.application.lumaque.bizlinked.activities.ImageCroppingActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.customViews.AttributesDialog;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
@@ -45,7 +45,6 @@ import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
-import com.application.lumaque.bizlinked.webhelpers.ProductHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -81,6 +80,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     ArrayList<File> imageFile;
     private CustomPagerAdapter viewpagerAdapter;
     List<String> ImageList = new ArrayList<>();
+    ArrayList<Uri> imageUriList;
     TagViewAdapter tagItemAdapter;
     private boolean isInEditMode = false;
     //    HashMap<String, Integer> hMap = new HashMap<>();
@@ -287,6 +287,26 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @Override
     public void onPhotoClicked(ArrayList<File> file) {
+
+        imageUriList = new ArrayList<Uri>();
+
+        for(int i=0 ; i < file.size() ; i++){
+            imageUriList.add(Uri.fromFile(file.get(i)));
+        }
+
+        Intent resultIntent = new Intent(activityReference, ImageCroppingActivity.class);
+        resultIntent.putExtra("imageList",imageUriList);
+        startActivity(resultIntent);
+
+//        afterCrop(file);
+
+//        if(productCategory.getProductCategoryID() != 0)
+
+    }
+
+
+    private void afterCrop(ArrayList<File> file){
+
         if (file.get(0) != null) {
 //            categoryImageView.setAdjustViewBounds(true);
 //            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -302,10 +322,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
             }
         }
 
-//        if(productCategory.getProductCategoryID() != 0)
 
     }
-
     private void uploadImages(ArrayList<File> files) {
         for (int i = 0; i < files.size(); i++) {
             uploadMedia(files.get(i), "1.jpg");

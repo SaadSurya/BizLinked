@@ -184,7 +184,6 @@
     <string name="pdf_file">&#xf1c1;</string>
 
 
-
     <string name="fa_frown">&#xf119;</string>
     <string name="fa_trash">&#xf2ed;</string>
 
@@ -254,5 +253,7 @@
     <string name="delete_image">Delete Image</string>
     <string name="change_image">Change Image</string>
     <string name="information">Info</string>
+    <string name="crop">Crop</string>
+    <string name="CropImages">Image Cropping</string>
 
 </resources>

@@ -111,7 +111,7 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
 
         android:id="@+id/mainlayout"
@@ -143,7 +143,7 @@
 
                     android:layout_alignParentTop="true">
 
-                    <android.support.v4.view.ViewPager
+                    <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewpager"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x200" />
@@ -154,7 +154,7 @@
                         android:layout_height="48dp"
                         android:layout_alignParentBottom="true" />
 
-                    <android.support.design.widget.FloatingActionButton
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/fab_add_image"
                         android:layout_width="wrap_content"
                         android:visibility="gone"
@@ -167,7 +167,7 @@
                 </RelativeLayout>
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pro_name_layout"
 
                     style="?attr/floatingHintEditTextLayout"
@@ -181,7 +181,7 @@
                         android:clickable="false"
 
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <!-- <EditText
@@ -195,7 +195,7 @@
                      android:hint="@string/product_name" />-->
 
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pro_desc1"
                     style="?attr/floatingHintEditTextLayout"
                     android:layout_below="@+id/pro_name_layout"
@@ -214,7 +214,7 @@
                         android:scrollbars="vertical"
 
                         />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <!--    <EditText
                         android:id="@+id/pro_desc"
@@ -236,7 +236,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />-->
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pro_desc2"
                     style="?attr/floatingHintEditTextLayout"
                     android:layout_below="@+id/pro_desc1">
@@ -248,9 +248,9 @@
                         style="?attr/floatingHintEditText"
                         android:completionThreshold="1"
                         android:hint="@string/category" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pro_desc3"
                     style="?attr/floatingHintEditTextLayout"
                     android:layout_below="@+id/pro_desc2">
@@ -261,9 +261,9 @@
                         android:id="@+id/pro_price"
                         style="?attr/floatingHintEditText"
                         android:hint="@string/price" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/attribute_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -375,7 +375,7 @@
         </ScrollView>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

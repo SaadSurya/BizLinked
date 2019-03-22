@@ -3,7 +3,7 @@ package com.application.lumaque.bizlinked;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.Color;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.google.firebase.FirebaseApp;
 

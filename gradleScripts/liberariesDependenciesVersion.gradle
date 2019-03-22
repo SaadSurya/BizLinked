@@ -2,21 +2,21 @@ ext{
     //Dependencies Version
 
     junitVersion = '4.12'
-    runnerVersion = '1.0.1'
-    espressoVersion = '3.0.1'
+    runnerVersion = '1.1.0-alpha4'
+    espressoVersion = '3.1.0-alpha4'
     rippleEffectButttonLibVersion = '1.3'
-    butterKnifeLibVersion = '8.8.1'
+    butterKnifeLibVersion = '10.1.0'
     saripaarValidationLibVersion = '2.0.3'
-    glideLibVersion = '4.2.0'
+//    glideLibVersion = '4.8.0'
     progressBarLibVersion = '1.1.0'
     toastyLibVersion = '1.2.8'
 
     filePickerLibVersion = '2.1.0'
-    glideLibVersion = '4.2.0'
+    glideLibVersion = '4.9.0'
     imageCompressionLibVersion = '2.1.0'
     permissionTEDLibVersion = '2.1.0'
-    playServicesMapLibVersion = '15.0.1'
-    playServicesLibVersion = '15.0.1'
+    playServicesMapLibVersion = '16.0.0'
+    playServicesLibVersion = '16.0.0'
 
 
 

@@ -2,8 +2,8 @@ package com.application.lumaque.bizlinked.customViews;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.StyleableRes;
-import android.support.design.widget.TextInputLayout;
+import androidx.annotation.StyleableRes;
+import com.google.android.material.textfield.TextInputLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;

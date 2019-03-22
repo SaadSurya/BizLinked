@@ -1,12 +1,12 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,16 +18,11 @@ import android.widget.ImageView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
-import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryListAdapter;
 import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
-import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
-import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
-import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
-import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 
 import java.util.ArrayList;

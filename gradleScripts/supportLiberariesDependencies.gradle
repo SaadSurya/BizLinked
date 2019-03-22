@@ -1,15 +1,15 @@
 ext{
     //Support Dependencies Version
-    supportLibraryVersion = '28.0.0'
+    supportLibraryVersion = '1.0.0-beta01'
 
     supportDependencies = [
-            design            :         "com.android.support:design:${supportLibraryVersion}",
-            recyclerView      :         "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            design            : "com.google.android.material:material:${supportLibraryVersion}",
+            recyclerView      : "androidx.recyclerview:recyclerview:${supportLibraryVersion}",
             cardView          :         "com.android.support:cardview-v7:${supportLibraryVersion}",
-            appCompat         :         "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            appCompat         : "androidx.appcompat:appcompat:${supportLibraryVersion}",
             supportAnnotation :         "com.android.support:support-annotations:${supportLibraryVersion}",
-            supportV4         :         "com.android.support:support-v4:${supportLibraryVersion}",
-            gridLayout        :         "com.android.support:gridlayout-v7:${supportLibraryVersion}",
+            supportV4         : "androidx.legacy:legacy-support-v4:${supportLibraryVersion}",
+            gridLayout        : "androidx.gridlayout:gridlayout:${supportLibraryVersion}",
 
     ]
 

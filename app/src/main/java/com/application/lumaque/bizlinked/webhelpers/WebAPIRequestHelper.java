@@ -4,7 +4,7 @@ package com.application.lumaque.bizlinked.webhelpers;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;

@@ -1,8 +1,8 @@
 package com.application.lumaque.bizlinked.activities;
 
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.widget.FrameLayout;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;

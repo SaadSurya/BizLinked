@@ -1,7 +1,7 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +11,7 @@ import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class NotificationSetting extends BaseFragment {
     @BindView(R.id.text)

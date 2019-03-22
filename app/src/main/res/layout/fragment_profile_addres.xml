@@ -9,7 +9,7 @@
     android:padding="@dimen/x0">
 
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +27,7 @@
                app:layout_constraintTop_toTopOf="parent"
                tools:hint="asdasd"
                tools:text="asdasd" />-->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_shop_num_layout"
             style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
@@ -43,9 +43,9 @@
                 android:layout_height="wrap_content"
                 tools:text="asdasd" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_market_layout"
             style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
@@ -59,9 +59,9 @@
                 style="?attr/floatingHintEditText"
                 android:layout_width="match_parent" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_area_layout"
             style="?attr/floatingHintEditTextLayout"
             android:layout_marginTop="@dimen/x12"
@@ -75,7 +75,7 @@
                 style="?attr/floatingHintEditText"
                 android:layout_width="match_parent"
                 android:imeOptions="actionDone" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
             android:id="@+id/sp_cities"
@@ -152,7 +152,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_cities"
             app:layout_constraintVertical_bias="0.963" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

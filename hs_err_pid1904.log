@@ -1,0 +1,244 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000005fcd2d12, pid=1904, tid=0x0000000000001110
+#
+# JRE version: OpenJDK Runtime Environment (8.0_152-b01) (build 1.8.0_152-release-1248-b01)
+# Java VM: OpenJDK 64-Bit Server VM (25.152-b01 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0x52d12]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000028c8000):  JavaThread "main" [_thread_in_vm, id=4368, stack(0x00000000029d0000,0x0000000002ad0000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0xffffffffffffffff
+
+Registers:
+RAX=0x00000000028e8840, RBX=0x0800000000000000, RCX=0x00000000028e1a10, RDX=0x0000000000000c61
+RSP=0x0000000002acd970, RBP=0x0000000000000c61, RSI=0x0000000002acda70, RDI=0x0000000000000003
+R8 =0x00000000576181c4, R9 =0x0000000000000002, R10=0x000000005fc80000, R11=0x0000000000000c61
+R12=0x0000000000000002, R13=0x00000000576181c4, R14=0x00000000028e1a10, R15=0x00000000576181c4
+RIP=0x000000005fcd2d12, EFLAGS=0x0000000000010206
+
+Top of Stack: (sp=0x0000000002acd970)
+0x0000000002acd970:   000007feef898d20 0000000000000023
+0x0000000002acd980:   00000000576180c0 0000000000000001
+0x0000000002acd990:   0000000000000026 0000000000000026
+0x0000000002acd9a0:   0000000002ace240 000000005fcd2e04
+0x0000000002acd9b0:   0000000000000002 0000000002acdaf0
+0x0000000002acd9c0:   0000000002acda70 00000000576181c4
+0x0000000002acd9d0:   000007fe00000c61 0000000000000000
+0x0000000002acd9e0:   0000000000000002 000000005fcb0499
+0x0000000002acd9f0:   0000000000000002 00000000028c8000
+0x0000000002acda00:   0000000000000078 000000005fc08d17
+0x0000000002acda10:   0000000000000078 0000000000000080
+0x0000000002acda20:   0000000000000000 000007feef7b7e08
+0x0000000002acda30:   00000000575e0200 0000009700000000
+0x0000000002acda40:   0000000000006900 00000000576180d0
+0x0000000002acda50:   0000000057618b6d 00000000576181c6
+0x0000000002acda60:   00000000028e4780 0735000705002100 
+
+Instructions: (pc=0x000000005fcd2d12)
+0x000000005fcd2cf2:   48 63 d2 33 ff 48 8b 1c d0 45 8b e1 4d 8b e8 4c
+0x000000005fcd2d02:   8b f1 48 85 db 74 4a 8b 6c 24 60 0f 1f 00 ff c7
+0x000000005fcd2d12:   39 2b 75 16 48 8b 73 10 45 8b c4 49 8b d5 48 8b
+0x000000005fcd2d22:   ce e8 38 30 0c 00 84 c0 75 48 48 8b 5b 08 48 83 
+
+
+Register to memory mapping:
+
+RAX=0x00000000028e8840 is an unknown value
+RBX=0x0800000000000000 is an unknown value
+RCX=0x00000000028e1a10 is an unknown value
+RDX=0x0000000000000c61 is an unknown value
+RSP=0x0000000002acd970 is pointing into the stack for thread: 0x00000000028c8000
+RBP=0x0000000000000c61 is an unknown value
+RSI=0x0000000002acda70 is pointing into the stack for thread: 0x00000000028c8000
+RDI=0x0000000000000003 is an unknown value
+R8 =0x00000000576181c4 is an unknown value
+R9 =0x0000000000000002 is an unknown value
+R10=0x000000005fc80000 is an unknown value
+R11=0x0000000000000c61 is an unknown value
+R12=0x0000000000000002 is an unknown value
+R13=0x00000000576181c4 is an unknown value
+R14=0x00000000028e1a10 is an unknown value
+R15=0x00000000576181c4 is an unknown value
+
+
+Stack: [0x00000000029d0000,0x0000000002ad0000],  sp=0x0000000002acd970,  free space=1014k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x52d12]
+V  [jvm.dll+0x52e04]
+V  [jvm.dll+0x30499]
+V  [jvm.dll+0x30899]
+V  [jvm.dll+0x38c40]
+V  [jvm.dll+0x3d360]
+V  [jvm.dll+0x5834d]
+V  [jvm.dll+0x58c24]
+V  [jvm.dll+0x5a2f6]
+V  [jvm.dll+0x5a34d]
+V  [jvm.dll+0xd23c3]
+V  [jvm.dll+0x967f3]
+V  [jvm.dll+0x969af]
+C  0x0000000002dc3f51
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.StringCoding.decode(Ljava/lang/String;[BII)[C+69
+j  java.lang.String.<init>([BIILjava/lang/String;)V+31
+j  java.lang.String.<init>([BLjava/lang/String;)V+6
+j  sun.launcher.LauncherHelper.makePlatformString(Z[B)Ljava/lang/String;+41
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000000005764a800 JavaThread "Service Thread" daemon [_thread_blocked, id=5012, stack(0x0000000057e20000,0x0000000057f20000)]
+  0x0000000057647800 JavaThread "C1 CompilerThread1" daemon [_thread_blocked, id=792, stack(0x0000000057cb0000,0x0000000057db0000)]
+  0x00000000575e7800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=3600, stack(0x0000000057bb0000,0x0000000057cb0000)]
+  0x00000000575e0000 JavaThread "Attach Listener" daemon [_thread_blocked, id=4652, stack(0x0000000057a40000,0x0000000057b40000)]
+  0x000000005678f800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=4820, stack(0x0000000057330000,0x0000000057430000)]
+  0x000000005674c800 JavaThread "Finalizer" daemon [_thread_blocked, id=4068, stack(0x00000000574d0000,0x00000000575d0000)]
+  0x0000000056701000 JavaThread "Reference Handler" daemon [_thread_blocked, id=4868, stack(0x00000000570c0000,0x00000000571c0000)]
+=>0x00000000028c8000 JavaThread "main" [_thread_in_vm, id=4368, stack(0x00000000029d0000,0x0000000002ad0000)]
+
+Other Threads:
+  0x00000000566ed800 VMThread [stack: 0x0000000057200000,0x0000000057300000] [id=1548]
+  0x000000005764b000 WatcherThread [stack: 0x0000000058060000,0x0000000058160000] [id=1012]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 37888K, used 655K [0x00000000e0000000, 0x00000000e2a00000, 0x0000000100000000)
+  eden space 32768K, 2% used [0x00000000e0000000,0x00000000e00a3d80,0x00000000e2000000)
+  from space 5120K, 0% used [0x00000000e2500000,0x00000000e2500000,0x00000000e2a00000)
+  to   space 5120K, 0% used [0x00000000e2000000,0x00000000e2000000,0x00000000e2500000)
+ ParOldGen       total 86016K, used 0K [0x00000000a0000000, 0x00000000a5400000, 0x00000000e0000000)
+  object space 86016K, 0% used [0x00000000a0000000,0x00000000a0000000,0x00000000a5400000)
+ Metaspace       used 2196K, capacity 4480K, committed 4480K, reserved 1056768K
+  class space    used 232K, capacity 384K, committed 384K, reserved 1048576K
+
+Card table byte_map: [0x0000000012160000,0x0000000012470000] byte_map_base: 0x0000000011c60000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000060445aa0
+ Begin Bits: [0x0000000012a90000, 0x0000000014290000)
+ End Bits:   [0x0000000014290000, 0x0000000015a90000)
+
+Polling page: 0x0000000000260000
+
+CodeCache: size=245760Kb used=1060Kb max_used=1060Kb free=244699Kb
+ bounds [0x0000000002da0000, 0x0000000003010000, 0x0000000011da0000]
+ total_blobs=223 nmethods=1 adapters=138
+ compilation: enabled
+
+Compilation events (2 events):
+Event: 0.106 Thread 0x0000000057647800    1       3       java.lang.String::hashCode (55 bytes)
+Event: 0.106 Thread 0x0000000057647800 nmethod 1 0x0000000002ea86d0 code [0x0000000002ea8840, 0x0000000002ea8ad0]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (2 events):
+Event: 0.045 Thread 0x00000000028c8000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000e0007ca8) thrown at [D:\src\AOSP-openjdk-cygwin\jdk8u\hotspot\src\share\vm\prims\jni.cpp, 
+Event: 0.045 Thread 0x00000000028c8000 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000e0007f90) thrown at [D:\src\AOSP-openjdk-cygwin\jdk8u\hotspot\src\share\vm\prims\jni.cpp, line 4011]
+
+Events (10 events):
+Event: 0.106 loading class sun/misc/PostVMInitHook done
+Event: 0.106 loading class sun/launcher/LauncherHelper
+Event: 0.107 loading class sun/launcher/LauncherHelper done
+Event: 0.107 loading class java/lang/StringCoding
+Event: 0.107 loading class java/lang/StringCoding done
+Event: 0.107 loading class java/lang/ThreadLocal$ThreadLocalMap
+Event: 0.107 loading class java/lang/ThreadLocal$ThreadLocalMap done
+Event: 0.107 loading class java/lang/ThreadLocal$ThreadLocalMap$Entry
+Event: 0.107 loading class java/lang/ThreadLocal$ThreadLocalMap$Entry done
+Event: 0.107 loading class java/lang/StringCoding$StringDecoder
+
+
+Dynamic libraries:
+0x000000013f0f0000 - 0x000000013f121000 	C:\Program Files\Android\Android Studio\jre\jre\bin\java.exe
+0x0000000077950000 - 0x0000000077afa000 	C:\Windows\SYSTEM32\ntdll.dll
+0x0000000077830000 - 0x000000007794f000 	C:\Windows\system32\kernel32.dll
+0x000007fefd750000 - 0x000007fefd7ba000 	C:\Windows\system32\KERNELBASE.dll
+0x0000000075330000 - 0x00000000753b8000 	C:\Windows\System32\SYSFER.DLL
+0x000007feffb30000 - 0x000007feffc0b000 	C:\Windows\system32\ADVAPI32.dll
+0x000007fefe590000 - 0x000007fefe62f000 	C:\Windows\system32\msvcrt.dll
+0x000007feffc10000 - 0x000007feffc2f000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007fefe630000 - 0x000007fefe75d000 	C:\Windows\system32\RPCRT4.dll
+0x0000000077730000 - 0x000000007782a000 	C:\Windows\system32\USER32.dll
+0x000007fefdc60000 - 0x000007fefdcc7000 	C:\Windows\system32\GDI32.dll
+0x000007fefe760000 - 0x000007fefe76e000 	C:\Windows\system32\LPK.dll
+0x000007fefe1e0000 - 0x000007fefe2ab000 	C:\Windows\system32\USP10.dll
+0x000007fefc1f0000 - 0x000007fefc3e4000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.18837_none_fa3b1e3d17594757\COMCTL32.dll
+0x000007fefda00000 - 0x000007fefda71000 	C:\Windows\system32\SHLWAPI.dll
+0x000007fefd440000 - 0x000007fefd497000 	C:\Windows\system32\apphelp.dll
+0x000007fef07c0000 - 0x000007fef081a000 	C:\Windows\AppPatch\AppPatch64\AcLayers.DLL
+0x000007fef84e0000 - 0x000007fef8551000 	C:\Windows\system32\WINSPOOL.DRV
+0x000007fef6c60000 - 0x000007fef6c78000 	C:\Windows\system32\MPR.dll
+0x000007feef7b0000 - 0x000007feefc17000 	C:\Windows\AppPatch\AppPatch64\AcXtrnal.DLL
+0x000007fef02d0000 - 0x000007fef0321000 	C:\Windows\AppPatch\AppPatch64\AcGenral.DLL
+0x000007fefd410000 - 0x000007fefd435000 	C:\Windows\system32\SspiCli.dll
+0x000007fefe390000 - 0x000007fefe58c000 	C:\Windows\system32\ole32.dll
+0x000007fefe7a0000 - 0x000007feff52b000 	C:\Windows\system32\SHELL32.dll
+0x0000000075090000 - 0x0000000075093000 	C:\Windows\system32\sfc.dll
+0x000007fefa0e0000 - 0x000007fefa0f0000 	C:\Windows\system32\sfc_os.DLL
+0x000007fefd870000 - 0x000007fefd88e000 	C:\Windows\system32\USERENV.dll
+0x000007fefd650000 - 0x000007fefd65f000 	C:\Windows\system32\profapi.dll
+0x000007fefbc30000 - 0x000007fefbc48000 	C:\Windows\system32\dwmapi.dll
+0x000007fefe770000 - 0x000007fefe79e000 	C:\Windows\system32\IMM32.DLL
+0x000007fefdd50000 - 0x000007fefde59000 	C:\Windows\system32\MSCTF.dll
+0x000000005fba0000 - 0x000000005fc72000 	C:\Program Files\Android\Android Studio\jre\jre\bin\msvcr100.dll
+0x000000005fc80000 - 0x00000000604c1000 	C:\Program Files\Android\Android Studio\jre\jre\bin\server\jvm.dll
+0x000007fefa240000 - 0x000007fefa249000 	C:\Windows\system32\WSOCK32.dll
+0x000007fefdc10000 - 0x000007fefdc5d000 	C:\Windows\system32\WS2_32.dll
+0x000007feffc50000 - 0x000007feffc58000 	C:\Windows\system32\NSI.dll
+0x000007fefacb0000 - 0x000007fefaceb000 	C:\Windows\system32\WINMM.dll
+0x000007fefc7e0000 - 0x000007fefc7ec000 	C:\Windows\system32\VERSION.dll
+0x0000000077b10000 - 0x0000000077b17000 	C:\Windows\system32\PSAPI.DLL
+0x000007fef0d10000 - 0x000007fef0d1f000 	C:\Program Files\Android\Android Studio\jre\jre\bin\verify.dll
+0x000007fef0cd0000 - 0x000007fef0cf9000 	C:\Program Files\Android\Android Studio\jre\jre\bin\java.dll
+0x000007fef07a0000 - 0x000007fef07b6000 	C:\Program Files\Android\Android Studio\jre\jre\bin\zip.dll
+0x000007fef7cb0000 - 0x000007fef7dd5000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Djava.awt.headless=true -Djava.rmi.server.hostname=127.0.0.1 -Xmx1536m -Dkotlin.environment.keepalive 
+java_command: org.jetbrains.kotlin.daemon.KotlinCompileDaemon --daemon-runFilesPath C:\Users\Mohammad.Shuja\AppData\Local\kotlin\daemon --daemon-autoshutdownIdleSeconds=7200 --daemon-compilerClasspath C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compiler-embeddable\1.3.21\677cc9553b8964c895abc76da9b6a0faea8f671d\kotlin-compiler-embeddable-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\1.3.21\d0d5ff2ac2ebd8a42697af41e20fc225a23c5d3b\kotlin-reflect-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.3.21\4bcc2012b84840e19e1e28074284cac908be0295\kotlin-stdlib-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-script-runtime\1.3.21\29363d474ee6fda354900636320a177c7286def9\kotlin-script-runtime-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.intellij.deps\trove4j\1.0.20181211\216c2e14b070f334479d800987affe4054cd563f\trove4j-1.0.20181211.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-common\1.3.21\f30e4a9897913e53d778f564110bafa1fef46643\kotlin-stdlib-common-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar;C:\Program Files\Android\Android Studio\jre\lib\tools.jar
+java_class_path (initial): C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-compiler-embeddable\1.3.21\677cc9553b8964c895abc76da9b6a0faea8f671d\kotlin-compiler-embeddable-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\1.3.21\d0d5ff2ac2ebd8a42697af41e20fc225a23c5d3b\kotlin-reflect-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.3.21\4bcc2012b84840e19e1e28074284cac908be0295\kotlin-stdlib-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-script-runtime\1.3.21\29363d474ee6fda354900636320a177c7286def9\kotlin-script-runtime-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.intellij.deps\trove4j\1.0.20181211\216c2e14b070f334479d800987affe4054cd563f\trove4j-1.0.20181211.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-common\1.3.21\f30e4a9897913e53d778f564110bafa1fef46643\kotlin-stdlib-common-1.3.21.jar;C:\Users\Mohammad.Shuja\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar;C:\Program Files\Android\Android Studio\jre\lib\tools.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Android\Android Studio\jre\
+PATH=C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs\;C:\Program Files\Android\Android Studio\jre\bin;%JAVA_HOME%\bin;C:\Users\Mohammad.Shuja\AppData\Roaming\npm;C:\Users\Mohammad.Shuja\AppData\Local\Android\Sdk\tools;C:\Users\Mohammad.Shuja\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Android\Android Studio\jre\\bin;C:\Program Files\cmake-3.13.2;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files\nodejs\;C:\Program Files\Android\Android Studio\jre\bin;%JAVA_HOME%\bin
+USERNAME=Mohammad.Shuja
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 23 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 , 64 bit Build 7601 (6.1.7601.23807)
+
+CPU:total 2 (initial active 2) (2 cores per cpu, 1 threads per core) family 6 model 23 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, tsc
+
+Memory: 4k page, physical 8220276k(1979332k free), swap 16438692k(10074068k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.152-b01) for windows-amd64 JRE (1.8.0_152-release-1248-b01), built by "builder" with MS VC++ 10.0 (VS2010)
+
+time: Wed Mar 20 11:14:17 2019
+elapsed time: 0 seconds (0d 0h 0m 0s)
+
