@@ -68,6 +68,8 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     private ArrayList<ProductCategory> companyCategoryList;
     private ArrayList<ProductAttribute> productAttributes;
     public static final int DATEPICKER_FRAGMENT = 1;
+    public static final int GET_DATA_FROM_ACTIVITY_CODE = 101;
+
     private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
@@ -128,6 +130,10 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @BindView(R.id.attribute_layout)
     RecyclerView attributeLayout;
+
+    ArrayList<File> imageFileList;
+    ArrayList<Uri> croppedImageUriList;
+
 
 
     @Override
@@ -296,9 +302,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
         Intent resultIntent = new Intent(activityReference, ImageCroppingActivity.class);
         resultIntent.putExtra("imageList",imageUriList);
-        startActivity(resultIntent);
-
-//        afterCrop(file);
+        this.startActivityForResult(resultIntent,GET_DATA_FROM_ACTIVITY_CODE );
 
 //        if(productCategory.getProductCategoryID() != 0)
 
@@ -474,6 +478,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case DATEPICKER_FRAGMENT:
                 if (resultCode == Activity.RESULT_OK) {
@@ -490,6 +495,16 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
                 }
                 break;
+        }
+        if(resultCode == GET_DATA_FROM_ACTIVITY_CODE && data != null){
+            croppedImageUriList = data.getParcelableArrayListExtra("result");
+            imageFileList = new ArrayList<>();
+            if(croppedImageUriList.size() > 0) {
+                for (int i = 0; i < croppedImageUriList.size(); i++) {
+                    imageFileList.add(new File(croppedImageUriList.get(i).getPath()));
+                }
+            }
+            afterCrop(imageFileList);
         }
     }
 

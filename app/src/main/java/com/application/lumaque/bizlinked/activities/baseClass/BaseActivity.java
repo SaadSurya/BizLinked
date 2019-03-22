@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
+
+import com.application.lumaque.bizlinked.fragments.bizlinked.ProductFragment;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
@@ -114,6 +116,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private ActionBarDrawerToggle toggle;
     private BadgeDrawerArrowDrawable badgeDrawable;
+    public static final int GET_DATA_FROM_ACTIVITY_CODE = 101;
+
 
 
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -953,6 +957,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
             default:
                 break;
+        }
+        if(resultCode == GET_DATA_FROM_ACTIVITY_CODE && data != null){
+            Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentByTag(ProductFragment.class.getName());
+            if (fragment != null) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 

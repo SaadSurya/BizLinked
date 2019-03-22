@@ -2,6 +2,7 @@ package com.application.lumaque.bizlinked.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -36,7 +37,8 @@ public class ImageCroppingActivity extends AppCompatActivity implements View.OnC
     ArrayList<Uri> imageUriList;
     ImageAdapter imageAdapter;
 
-    ArrayList<File> imageFile;
+    public static final int GET_DATA_FROM_ACTIVITY_CODE = 101;
+
 
     int clickedPosition = -1;
 
@@ -64,7 +66,6 @@ public class ImageCroppingActivity extends AppCompatActivity implements View.OnC
 
         Intent intent = getIntent();
         imageUriList = intent.getParcelableArrayListExtra("imageList");
-        imageFile = new ArrayList<>();
 
         imageAdapter = new ImageAdapter(this, imageUriList);
 
@@ -101,16 +102,20 @@ public class ImageCroppingActivity extends AppCompatActivity implements View.OnC
 
     private void proceedWithCroppedImages() {
 
-        for (int i=0 ; i<imageUriList.size() ; i++){
-            imageFile.add(i, new File(imageUriList.get(i).getPath()));
-        }
+//        for (int i=0 ; i<imageUriList.size() ; i++){
+//            imageFile.add(i, new File(imageUriList.get(i).getPath()));
+//        }
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result",imageUriList);
+        setResult(GET_DATA_FROM_ACTIVITY_CODE,returnIntent);
+        finish();
 
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
                 && resultCode == Activity.RESULT_OK && null != data) {
 //            imageFile.add(new File(CropImage.getActivityResult(data).getUri().getPath()));
