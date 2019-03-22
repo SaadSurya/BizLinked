@@ -385,8 +385,8 @@ public class CustomerFragmentTabs extends BaseFragment implements SearchView.OnQ
                             getLinks();
 
                         }
-                        Utils.showSnackBar(activityReference,getView(),response,
-                                ContextCompat.getColor(activityReference, R.color.grayColor));
+                       /* Utils.showSnackBar(activityReference,getView(),response,
+                                ContextCompat.getColor(activityReference, R.color.grayColor));*/
 
                     }
 

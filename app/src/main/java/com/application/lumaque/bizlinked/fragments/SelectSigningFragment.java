@@ -138,7 +138,7 @@ public class SelectSigningFragment extends BaseFragment {
 */
 
 
-                        Toast.makeText(activityReference,"afterLogin"+preferenceHelper.getCompanyProfile().getCompanyID(),Toast.LENGTH_LONG).show();
+                       // Toast.makeText(activityReference,"afterLogin"+preferenceHelper.getCompanyProfile().getCompanyID(),Toast.LENGTH_LONG).show();
 
                         activityReference.StartBackgroundService(BackgroundService.class);
                        // Utils.showToast(activityReference, "Logged in successfully...", AppConstant.TOAST_TYPES.SUCCESS);

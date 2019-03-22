@@ -315,6 +315,7 @@
                     android:layout_below="@+id/add_layout">
 
                     <EditText
+                        android:inputType="numberDecimal"
                         android:id="@+id/pro_price"
                         style="?attr/floatingHintEditText"
                         android:hint="@string/price" />

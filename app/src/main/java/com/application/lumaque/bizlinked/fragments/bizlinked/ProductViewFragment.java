@@ -233,13 +233,16 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 getBaseActivity().toolbar.setTitle(product.getProductName());
 
 
+                if(paramCompanyId==((preferenceHelper.getCompanyProfile().getCompanyID()))){
+
+
                 if(product.IsPublished){
                     pubUnPub.setText("unpublish");
                 }else {
                     pubUnPub.setText("Publish");
                 }
 
-
+                }
 
             }
 
