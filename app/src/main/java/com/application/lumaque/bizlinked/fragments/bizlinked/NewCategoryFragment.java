@@ -1,13 +1,17 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,6 +46,7 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.Order;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -120,18 +125,18 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     private void setFields(ArrayList<ProductCategory> categoryList) {
         String parentCategoryName = "";
         if (isFromNestedCat) {
-            String parentName="";
+            String parentName = "";
             int parentID = 0;
-                    // parentProductEditText.setText(productCategory.getProductCategoryName());
-           if(productCategory != null){
-            parentName = productCategory.getProductCategoryName();
-            parentID  = productCategory.getProductCategoryID();
-           }
+            // parentProductEditText.setText(productCategory.getProductCategoryName());
+            if (productCategory != null) {
+                parentName = productCategory.getProductCategoryName();
+                parentID = productCategory.getProductCategoryID();
+            }
 
             productCategory = new ProductCategory();
             parentProductEditText.setText(parentName);
             productCategory.setParentProductCategoryID(parentID);
-            selectedParentCagetory =parentID;
+            selectedParentCagetory = parentID;
         } else if (productCategory != null) {
             catNameEditText.setText(productCategory.getProductCategoryName());
             // parentProductEditText.setText(productCategory.getParentProductCategoryID());
@@ -172,8 +177,8 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
                         GsonHelper gsonHelper = new GsonHelper();
                         productCategory = gsonHelper.GsonToProductCategory(response);
-                       if(imageFile != null)
-                        uploadMedia(imageFile, "1.jpg");
+                        if (imageFile != null)
+                            uploadMedia(imageFile, "1.jpg");
                         onCustomBackPressed();
                     }
 
@@ -344,21 +349,10 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     @Override
     public void onPhotoClicked(ArrayList<File> file) {
         if (file.get(0) != null) {
-            categoryImageView.setAdjustViewBounds(true);
-            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageFile = file.get(0);
-            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
-//            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            Glide.with(this)
-                    .load(imageFile)
-                    .into(categoryImageView);
-            Log.d("FileTag", "File is not null");
+            CropImage.activity(Uri.fromFile(file.get(0)))
+                    .start(activityReference);
         }
 
-        if (productCategory.getProductCategoryID() != 0)
-            uploadMedia(imageFile, "1.jpg");
     }
 
     @Override
@@ -366,6 +360,31 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && data != null) {
+
+            categoryImageView.setAdjustViewBounds(true);
+            categoryImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageFile = new File(CropImage.getActivityResult(data).getUri().getPath());
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            Glide.with(activityReference)
+                    .load(imageFile)
+                    .into(categoryImageView);
+            Log.d("FileTag", "File is not null");
+
+        if (productCategory.getProductCategoryID() != 0)
+            uploadMedia(imageFile, "1.jpg");
+
+
+        }
+
+    }
 
     private void uploadMedia(final File file, final String fileName) {
         HashMap<String, String> parameters = new HashMap<>();

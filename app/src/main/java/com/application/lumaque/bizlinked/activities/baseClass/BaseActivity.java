@@ -19,10 +19,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
 import androidx.annotation.NonNull;
 
+import com.application.lumaque.bizlinked.fragments.bizlinked.NewCategoryFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ProductFragment;
+import com.application.lumaque.bizlinked.fragments.bizlinked.ProfileDetailTabFragment;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
@@ -33,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -84,6 +89,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.theartofdev.edmodo.cropper.CropImage;
 import com.yovenny.videocompress.MediaController;
 
 import java.io.ByteArrayOutputStream;
@@ -117,7 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private ActionBarDrawerToggle toggle;
     private BadgeDrawerArrowDrawable badgeDrawable;
     public static final int GET_DATA_FROM_ACTIVITY_CODE = 101;
-
+    public static final int GET_SINGLE_IMAGE_DATA = 203;
 
 
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -247,6 +253,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         intent.putExtra(ErrorScreen.STACK_TRACE, throwable.toString());
         startActivity(intent);
     }
+
     public void setFireBase() {
         //  addMenuBadge(true);
 
@@ -958,12 +965,24 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             default:
                 break;
         }
-        if(resultCode == GET_DATA_FROM_ACTIVITY_CODE && data != null){
-            Fragment fragment = (Fragment) getSupportFragmentManager().findFragmentByTag(ProductFragment.class.getName());
+        if (resultCode == GET_DATA_FROM_ACTIVITY_CODE && data != null) {
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(ProductFragment.class.getName());
             if (fragment != null) {
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && data != null) {
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag(NewCategoryFragment.class.getName());
+            if (fragment != null) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            } else {
+                Fragment fragmentTab = getSupportFragmentManager().getFragments().get(1).getChildFragmentManager().getFragments().get(0);
+                if (fragmentTab != null) {
+                    fragmentTab.onActivityResult(requestCode, resultCode, data);
+                }
+            }
+        }
+
     }
 
 

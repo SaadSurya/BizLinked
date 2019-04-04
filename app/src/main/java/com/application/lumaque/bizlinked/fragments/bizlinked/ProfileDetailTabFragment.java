@@ -3,9 +3,11 @@ package com.application.lumaque.bizlinked.fragments.bizlinked;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +42,7 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -314,7 +317,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         String URL = AppConstant.ServerAPICalls.GET_MEDIA_FILE + preferenceHelper.getCompanyProfile().getCompanyID();
         ///  ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
         //  setVisibilityOfImageView(true,ivDocumentImage);
-        Glide.with(this).load(URL)
+        Glide.with(activityReference).load(URL)
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).placeholder(R.drawable.profile))
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -350,12 +353,27 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
 
     @Override
     public void onPhotoClicked(ArrayList<File> file) {
-        if (file.size() > 0) {
 
-            uploadMedia(file.get(0), String.format("%s%s", selectedViewName, ".jpg"));
+        if (file.size() > 0) {
+            CropImage.activity(Uri.fromFile(file.get(0)))
+                    .start(activityReference);
         }
+
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && data != null) {
+            File file = new File(CropImage.getActivityResult(data).getUri().getPath());
+            uploadMedia(file, String.format("%s%s", selectedViewName, ".jpg"));
+
+        }
+
+
+    }
 
     private void uploadMedia(final File file, final String fileName) {
         HashMap<String, String> parameters = new HashMap<>();
