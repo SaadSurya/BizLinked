@@ -8,6 +8,7 @@ public class HomeItemDataModel implements Serializable {
     private Integer id;
     private String name;
     private String image;
+    private String className;
 
     public String getClassName() {
         return className;
@@ -16,8 +17,6 @@ public class HomeItemDataModel implements Serializable {
     public void setClassName(String className) {
         this.className = className;
     }
-
-    private String className;
 
     public Integer getId() {
         return id;

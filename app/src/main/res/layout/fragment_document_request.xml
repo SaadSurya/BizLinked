@@ -8,35 +8,34 @@
         android:elevation="@dimen/x10"
         android:orientation="vertical">
 
-        <TextView
-            style="?attr/allPageCardHeaderStyle"
-            android:text="@string/document_requested" />
-
         <LinearLayout
             style="?attr/allPageCardHeaderStyle"
             android:layout_marginTop="@dimen/x2"
             android:orientation="horizontal">
 
             <TextView
+                style="@style/header_text_color_size"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
 
-                style="@style/header_text_color_size"
+                android:layout_weight="0.15"
                 android:gravity="center"
 
 
-                android:text="@string/s_no"/>
+                android:text="@string/s_no" />
 
             <TextView
+                style="@style/header_text_color_size"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.90"
-                style="@style/header_text_color_size"
-                android:text="@string/document_description"/>
+                android:text="@string/document_description" />
 
         </LinearLayout>
 
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/document_requested" />
 
 
         <!-- Table For Document  -->
@@ -51,7 +50,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvDocument"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

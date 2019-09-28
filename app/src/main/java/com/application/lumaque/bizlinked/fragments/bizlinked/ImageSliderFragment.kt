@@ -7,22 +7,16 @@ import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.PopupMenu
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-
 import com.application.lumaque.bizlinked.R
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment
 import com.bumptech.glide.Glide
-
-import java.util.ArrayList
-import butterknife.BindView
-import org.jetbrains.annotations.NotNull
+import java.util.*
 
 class ImageSliderFragment : BaseFragment() {
     private var imageList = ArrayList<String>()

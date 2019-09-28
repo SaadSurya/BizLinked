@@ -3,7 +3,6 @@
     <!-- Multipliers  -->
 
 
-
     <dimen name="x1_">-1dp</dimen>
     <dimen name="x2_">-2dp</dimen>
     <dimen name="x3_">-3dp</dimen>
@@ -44,7 +43,6 @@
     <dimen name="x38_">-38dp</dimen>
     <dimen name="x39_">-39dp</dimen>
     <dimen name="x40_">-40dp</dimen>
-
 
 
     <dimen name="x0">0dp</dimen>

@@ -66,6 +66,7 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     @BindView(R.id.iv_category)
     ImageView categoryImageView;
     File imageFile;
+    int selectedParentCagetory;
     private GsonHelper gsonHelper;
     private int companyId;
     private int postionAdapter;
@@ -77,9 +78,6 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     public void onCustomBackPressed() {
         activityReference.onPageBack();
     }
-
-
-    int selectedParentCagetory;
 
     @Override
     protected int getMainLayout() {
@@ -120,18 +118,18 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
     private void setFields(ArrayList<ProductCategory> categoryList) {
         String parentCategoryName = "";
         if (isFromNestedCat) {
-            String parentName="";
+            String parentName = "";
             int parentID = 0;
-                    // parentProductEditText.setText(productCategory.getProductCategoryName());
-           if(productCategory != null){
-            parentName = productCategory.getProductCategoryName();
-            parentID  = productCategory.getProductCategoryID();
-           }
+            // parentProductEditText.setText(productCategory.getProductCategoryName());
+            if (productCategory != null) {
+                parentName = productCategory.getProductCategoryName();
+                parentID = productCategory.getProductCategoryID();
+            }
 
             productCategory = new ProductCategory();
             parentProductEditText.setText(parentName);
             productCategory.setParentProductCategoryID(parentID);
-            selectedParentCagetory =parentID;
+            selectedParentCagetory = parentID;
         } else if (productCategory != null) {
             catNameEditText.setText(productCategory.getProductCategoryName());
             // parentProductEditText.setText(productCategory.getParentProductCategoryID());
@@ -172,8 +170,8 @@ public class NewCategoryFragment extends BaseFragment implements ResponceCallBac
 
                         GsonHelper gsonHelper = new GsonHelper();
                         productCategory = gsonHelper.GsonToProductCategory(response);
-                       if(imageFile != null)
-                        uploadMedia(imageFile, "1.jpg");
+                        if (imageFile != null)
+                            uploadMedia(imageFile, "1.jpg");
                         onCustomBackPressed();
                     }
 

@@ -6,47 +6,35 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.application.lumaque.bizlinked.R;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.application.lumaque.bizlinked.helpers.common.Utils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.signature.ObjectKey;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     final LayoutInflater inflater;
+    public List productCategoryList;
     Context context;
-
-   public List productCategoryList;
-
-
 
 
     public TagsHorizontalAdapter(Context context, List attValues) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-      //  this.headerData = new ArrayList<>();
+        //  this.headerData = new ArrayList<>();
         this.productCategoryList = new ArrayList<>();
         productCategoryList.addAll(attValues);
 
     }
 
 
-
-
-
     public void clearAllList() {
-      //  headerData.clear();
+        //  headerData.clear();
         productCategoryList.clear();
     }
+
     public void removeItem(int position) {
 
 
@@ -56,11 +44,10 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public void addItem(String item) {
 
-        if(!containsCaseInsensitive(item,productCategoryList))
-        {
+        if (!containsCaseInsensitive(item, productCategoryList)) {
             productCategoryList.add(item);
-        notifyDataSetChanged();}
-        else {
+            notifyDataSetChanged();
+        } else {
             Toast.makeText(context, "Already in the list", Toast.LENGTH_SHORT).show();
         }
     }
@@ -85,19 +72,16 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
-       // ProductCategory currentObject = productCategoryList.get(position);
+        // ProductCategory currentObject = productCategoryList.get(position);
 
 
-                ((ItemViewHolder) holder).att_name.setText(productCategoryList.get(position).toString());
+        ((ItemViewHolder) holder).att_name.setText(productCategoryList.get(position).toString());
 
 
     }
-
-
 
 
     @Override
@@ -105,15 +89,20 @@ public class TagsHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return productCategoryList.size();
     }
 
-
-
+    public boolean containsCaseInsensitive(String s, List<String> l) {
+        for (String string : l) {
+            if (string.equalsIgnoreCase(s.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 
-       // private ImageView categoryImg;
-private TextView att_name;
-
+        // private ImageView categoryImg;
+        private TextView att_name;
 
 
         ItemViewHolder(View view) {
@@ -123,21 +112,13 @@ private TextView att_name;
 
             att_name = view.findViewById(R.id.att_name);
 
-          //  productName  = view.findViewById(R.id.product_name);
+            //  productName  = view.findViewById(R.id.product_name);
 
 
-       //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
+            //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
         }
 
 
-    }
-    public boolean containsCaseInsensitive(String s, List<String> l){
-        for (String string : l){
-            if (string.equalsIgnoreCase(s.trim())){
-                return true;
-            }
-        }
-        return false;
     }
 
 }

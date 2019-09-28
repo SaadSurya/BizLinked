@@ -62,7 +62,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
 
         String mDrawableName = object.getImage();
         int resID = Utils.getResourceId(context, mDrawableName, AppConstant.RESOURCE_FOLDER.DRAWABLES);
-        if(resID != -1)
+        if (resID != -1)
             holder.homeItemImage.setImageResource(resID);
 
 //        holder.homeItemImage.setOnTouchListener(new View.OnTouchListener() {
@@ -90,9 +90,9 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                AnimationHelpers.animation(Techniques.FlipInY,  600, holder.llContainer);
+                AnimationHelpers.animation(Techniques.FlipInY, 600, holder.llContainer);
             }
-        },500);
+        }, 500);
 
 
     }

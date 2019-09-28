@@ -184,7 +184,6 @@
     <string name="pdf_file">&#xf1c1;</string>
 
 
-
     <string name="fa_frown">&#xf119;</string>
     <string name="fa_trash">&#xf2ed;</string>
 
@@ -192,54 +191,44 @@
     <string name="error_occurred">Error Occurred</string>
 
 
-    <string-array name="busines_nature">
-        <item>Manufacturer</item>
-        <item>Whole seller</item>
-        <item>Retailer</item>
-    </string-array>
-
-    <string-array name="cities">
-        <item>Karachi</item>
-        <item>Lahore</item>
-        <item>Islamabad</item>
-    </string-array>
-
     <string name="try_again">Try Again</string>
+
     <string name="title_activity_home">HomeActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_search">Search</string>
-
     <string name="nav_stateless">Stateless Section</string>
+
     <string name="nav_example1">Section with Header</string>
+
     <string name="nav_example2">Section with Header and Footer</string>
     <string name="nav_example4">Expandable Section</string>
     <string name="nav_example5">Grid Section with Header</string>
     <string name="nav_example6">Expandable Grid Section</string>
-
     <string name="nav_example7">SearchView with Sections</string>
     <string name="nav_stateful">Stateful Section</string>
+
     <string name="nav_example3">Section with Header and Footer</string>
     <string name="nav_example8">Animations</string>
-
     <string name="world_topic">World</string>
     <string name="biz_topic">Business</string>
+
     <string name="tech_topic">Technology</string>
     <string name="sports_topic">Sports</string>
-
     <string name="top_rated_movies_topic">Top Rated Movies</string>
     <string name="most_popular_movies_topic">Most Popular Movies</string>
 
     <string name="group_title">Group #%1$s</string>
-
     <string name="more">MORE</string>
-    <string name="see_more">See more..</string>
-    <string name="failed_load">Failed to load, tap to try again.</string>
 
+    <string name="see_more">See more..</string>
+
+    <string name="failed_load">Failed to load, tap to try again.</string>
     <string name="add">ADD</string>
     <string name="clear">CLEAR</string>
+
     <string name="add_group">ADD GROUP</string>
     <string name="navigation_section">navigation section</string>
     <string name="profile">Profile</string>
@@ -254,5 +243,15 @@
     <string name="delete_image">Delete Image</string>
     <string name="change_image">Change Image</string>
     <string name="information">Info</string>
+    <string-array name="busines_nature">
+        <item>Manufacturer</item>
+        <item>Whole seller</item>
+        <item>Retailer</item>
+    </string-array>
+    <string-array name="cities">
+        <item>Karachi</item>
+        <item>Lahore</item>
+        <item>Islamabad</item>
+    </string-array>
 
 </resources>

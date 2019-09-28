@@ -5,17 +5,17 @@ import java.util.List;
 
 public class SubProductCategory implements Serializable {
 
-     int companyID;
+    int companyID;
 
-     int productCategoryID;
+    int productCategoryID;
 
-     String productCategoryName;
+    String productCategoryName;
 
-     String imageID;
+    String imageID;
 
-     int parentProductCategoryID;
+    int parentProductCategoryID;
 
-     List<ProductCategory> SubProductCategories;
+    List<ProductCategory> SubProductCategories;
 
     public int getCompanyID() {
         return companyID;

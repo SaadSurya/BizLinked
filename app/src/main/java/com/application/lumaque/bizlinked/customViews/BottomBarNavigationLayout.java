@@ -18,10 +18,9 @@ import java.util.ArrayList;
 
 public class BottomBarNavigationLayout extends LinearLayout {
 
-    private LinearLayout llBottomNavigationLayout;
-
-    private Context context;
     LayoutInflater inflater;
+    private LinearLayout llBottomNavigationLayout;
+    private Context context;
 
 
     public BottomBarNavigationLayout(Context context) {
@@ -67,9 +66,9 @@ public class BottomBarNavigationLayout extends LinearLayout {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                AnimationHelpers.animation(Techniques.BounceInUp,  400, llBottomNavigationLayout);
+                AnimationHelpers.animation(Techniques.BounceInUp, 400, llBottomNavigationLayout);
             }
-        },500);
+        }, 500);
         //llBottomNavigationLayout.setVisibility(VISIBLE);
     }
 
@@ -89,8 +88,8 @@ public class BottomBarNavigationLayout extends LinearLayout {
                     1.0f
             );
 
-            if(buttons.size() > 1)
-                param.setMarginEnd((int)context.getResources().getDimension(R.dimen.x1));
+            if (buttons.size() > 1)
+                param.setMarginEnd((int) context.getResources().getDimension(R.dimen.x1));
 
             btn.setLayoutParams(param);
             btn.setText(buttons.get(index).getText());

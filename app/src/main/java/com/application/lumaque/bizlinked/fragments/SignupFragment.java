@@ -6,10 +6,8 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
@@ -44,7 +42,7 @@ public class SignupFragment extends BaseFragment {
     EditText etCompanyName;
 
     @Order(2)
-    @Email( messageResId = R.string.error_email)
+    @Email(messageResId = R.string.error_email)
     @Length(min = AppConstant.VALIDATION_RULES.NAME_MIN_LENGTH, messageResId = R.string.error_lname)
     @BindView(R.id.et_user_lname)
     EditText etUserName;
@@ -62,7 +60,7 @@ public class SignupFragment extends BaseFragment {
     EditText etUserPassword;
 
 
-   @Order(4)
+    @Order(4)
     @ConfirmPassword
     @BindView(R.id.et_confirm_password)
     EditText etConfirmPassword;
@@ -70,7 +68,7 @@ public class SignupFragment extends BaseFragment {
     @BindView(R.id.btn_create_account)
     Button btnCreateAccount;
 
-    ArrayList<MajorCategoryModel>   majorCategories;
+    ArrayList<MajorCategoryModel> majorCategories;
 
     public SignupFragment() {
         // Required empty public constructor
@@ -95,12 +93,12 @@ public class SignupFragment extends BaseFragment {
             @Override
             public void run() {
                 int duration = 300;
-                for (int index = 0; index < ((ViewGroup)rootView).getChildCount(); index++) {
+                for (int index = 0; index < ((ViewGroup) rootView).getChildCount(); index++) {
                     AnimationHelpers.animation(Techniques.SlideInDown, duration, ((ViewGroup) rootView).getChildAt(index));
-                    duration+=50;
+                    duration += 50;
                 }
             }
-        },500);
+        }, 500);
     }
   /*  private void initializeViews() {
 
@@ -148,10 +146,9 @@ public class SignupFragment extends BaseFragment {
 
     @Override
     public void onCustomBackPressed() {
-        activityReference.addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE,false);
-       // activityReference.onPageBack();
+        activityReference.addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE, false);
+        // activityReference.onPageBack();
     }
-
 
 
     @OnClick(R.id.btn_create_account)
@@ -159,7 +156,6 @@ public class SignupFragment extends BaseFragment {
         //activityReference.changeActivity(HomeActivity.class,true);
         validateFields();
     }
-
 
 
     @Override
@@ -172,12 +168,11 @@ public class SignupFragment extends BaseFragment {
     private void SignUp() {
 
 
-
         final HashMap<String, String> params = new HashMap<>();
         params.put("CompanyName", etCompanyName.getText().toString());
-        params.put("Username",  etUserName.getText().toString());
-        params.put("Password",  etUserPassword.getText().toString());
-     //   params.put("ProductMajorCategoryID", majorCategories.get(etProductCategory.getSelectedItemPosition()).getMajorCategoryID());
+        params.put("Username", etUserName.getText().toString());
+        params.put("Password", etUserPassword.getText().toString());
+        //   params.put("ProductMajorCategoryID", majorCategories.get(etProductCategory.getSelectedItemPosition()).getMajorCategoryID());
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetails(
                 Request.Method.POST,
@@ -185,7 +180,7 @@ public class SignupFragment extends BaseFragment {
                     @Override
                     public void onSuccess(String response) {
 
-                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile( response);
+                        CompanyProfileModel companyprofile = GsonHelper.GsonToCompanyProfile(response);
 
                         preferenceHelper.putCompany(companyprofile);
 
@@ -196,7 +191,7 @@ public class SignupFragment extends BaseFragment {
 
                     @Override
                     public void onError(String response) {
-                          //  Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+                        //  Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
 
                     }
 

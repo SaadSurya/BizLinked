@@ -10,18 +10,6 @@ import com.application.lumaque.bizlinked.R;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private String[] mDataset;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView textView;
-        public MyViewHolder(TextView v) {
-            super(v);
-            textView = v;
-        }
-    }
-
     // Provide a suitable constructor (depends on the kind of dataset)
     public MyAdapter(String[] myDataset) {
         mDataset = myDataset;
@@ -51,5 +39,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return mDataset.length;
+    }
+
+    // Provide a reference to the views for each data item
+    // Complex data items may need more than one view per item, and
+    // you provide access to all the views for a data item in a view holder
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView textView;
+
+        public MyViewHolder(TextView v) {
+            super(v);
+            textView = v;
+        }
     }
 }

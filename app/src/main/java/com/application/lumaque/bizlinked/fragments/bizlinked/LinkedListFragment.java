@@ -24,8 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class LinkedListFragment extends Fragment implements CustomRecyclerCallBacks  {
-
+public class LinkedListFragment extends Fragment implements CustomRecyclerCallBacks {
 
 
     private static LinkedListFragment linkedlistfragment;
@@ -36,27 +35,23 @@ public class LinkedListFragment extends Fragment implements CustomRecyclerCallBa
     SwipeRefreshLayout swipeRefresh;
 
 
-
     @BindView(R.id.recyclerview)
     RecyclerView linkRecycler;
     Unbinder unbinder;
     BaseActivity activityReference;
     BasePreferenceHelper preferenceHelper;
     View rootView;
-    public static LinkedListFragment getInstance(BaseActivity activityReference, BasePreferenceHelper preferenceHelper,ArrayList<CompanyHeadModel> LinkList ) {
+
+    public static LinkedListFragment getInstance(BaseActivity activityReference, BasePreferenceHelper preferenceHelper, ArrayList<CompanyHeadModel> LinkList) {
         if (linkedlistfragment == null) {
             linkedlistfragment = new LinkedListFragment();
         }
-            linkedlistfragment.activityReference = activityReference;
-            linkedlistfragment.preferenceHelper = preferenceHelper;
-            linkedlistfragment.LinkList = LinkList;
+        linkedlistfragment.activityReference = activityReference;
+        linkedlistfragment.preferenceHelper = preferenceHelper;
+        linkedlistfragment.LinkList = LinkList;
 
         return linkedlistfragment;
     }
-
-
-
-
 
 
     @Nullable
@@ -75,7 +70,6 @@ public class LinkedListFragment extends Fragment implements CustomRecyclerCallBa
     public void onImageClick(CompanyHeadModel companyHeadModel) {
 
 
-
     }
 
     @Override
@@ -83,18 +77,17 @@ public class LinkedListFragment extends Fragment implements CustomRecyclerCallBa
 
 
         ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
-        viewprofilefragment.setViewID(companyHeadModel.getCompanyID(),"customer");
-        activityReference.addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE,true);
+        viewprofilefragment.setViewID(companyHeadModel.getCompanyID(), "customer");
+        activityReference.addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
     }
 
     @Override
     public void onActionClick(CompanyHeadModel companyHeadModel, String tag) {
-        if(getParentFragment() instanceof SupplierFragmentTabs){
+        if (getParentFragment() instanceof SupplierFragmentTabs) {
 
-            ((SupplierFragmentTabs)getParentFragment()).onActionBtnClick(companyHeadModel,tag);
-        }
-        else if(getParentFragment() instanceof CustomerFragmentTabs){
-            ((CustomerFragmentTabs)getParentFragment()).onActionBtnClick(companyHeadModel,tag);
+            ((SupplierFragmentTabs) getParentFragment()).onActionBtnClick(companyHeadModel, tag);
+        } else if (getParentFragment() instanceof CustomerFragmentTabs) {
+            ((CustomerFragmentTabs) getParentFragment()).onActionBtnClick(companyHeadModel, tag);
         }
     }
 
@@ -129,29 +122,17 @@ public class LinkedListFragment extends Fragment implements CustomRecyclerCallBa
 */
 
 
-
-
-
-
-
-
-
-
-
-
         swipeRefresh.setColorSchemeResources(R.color.appThemeColor);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                if(getParentFragment() instanceof SupplierFragmentTabs){
+                if (getParentFragment() instanceof SupplierFragmentTabs) {
 
-                    ((SupplierFragmentTabs)getParentFragment()).refresAllLists();
+                    ((SupplierFragmentTabs) getParentFragment()).refresAllLists();
+                } else if (getParentFragment() instanceof CustomerFragmentTabs) {
+                    ((CustomerFragmentTabs) getParentFragment()).refresAllLists();
                 }
-                else if(getParentFragment() instanceof CustomerFragmentTabs){
-                    ((CustomerFragmentTabs)getParentFragment()).refresAllLists();
-                }
-
 
 
                 swipeRefresh.setRefreshing(false);
@@ -159,15 +140,12 @@ public class LinkedListFragment extends Fragment implements CustomRecyclerCallBa
         });
 
 
-
     }
 
 
+    public void refreshList(ArrayList<CompanyHeadModel> List) {
 
-
-    public void refreshList( ArrayList<CompanyHeadModel> List){
-
-        LinkList=List;
+        LinkList = List;
         itemAdapter.clearAllList();
         itemAdapter.addAllList(LinkList);
 

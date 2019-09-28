@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-        <declare-styleable name="CustomEditText">
-            <attr name="text" format="string" />
-            <attr name="hint" format="string" />
+    <declare-styleable name="CustomEditText">
+        <attr name="text" format="string" />
+        <attr name="hint" format="string" />
 
-        </declare-styleable>
+    </declare-styleable>
 
     <declare-styleable name="PinEntryEditText">
         <attr name="pinAnimationType" format="enum">
@@ -44,9 +44,9 @@
     </declare-styleable>
 
     <declare-styleable name="RealtimeBlurView">
-        <attr name="realtimeBlurRadius" format="dimension"/>
-        <attr name="realtimeDownsampleFactor" format="float"/>
-        <attr name="realtimeOverlayColor" format="color"/>
+        <attr name="realtimeBlurRadius" format="dimension" />
+        <attr name="realtimeDownsampleFactor" format="float" />
+        <attr name="realtimeOverlayColor" format="color" />
     </declare-styleable>
 
 </resources>

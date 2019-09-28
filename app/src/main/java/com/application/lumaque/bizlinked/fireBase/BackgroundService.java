@@ -1,11 +1,9 @@
 package com.application.lumaque.bizlinked.fireBase;
 
 
-import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +13,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.application.lumaque.bizlinked.BizLinkApplication;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.HomeActivity;
 import com.application.lumaque.bizlinked.data_models.bizlinked.FireBaseDataMode;
@@ -31,20 +27,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static com.application.lumaque.bizlinked.BizLinkApplication.channel_1_ID;
 
 
 public class BackgroundService extends Service {
 
-    private NotificationManagerCompat notificationManagerCompat;
     BasePreferenceHelper basePreferenceHelper;
     String msgID;
     boolean isLogin;
     FirebaseDatabase firebaseDatabase;
-
     DatabaseReference reference;
+    private NotificationManagerCompat notificationManagerCompat;
+
+    public static PendingIntent addBackStack(final Context context, final Intent intent) {
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context.getApplicationContext());
+        stackBuilder.addNextIntentWithParentStack(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
 
     @Nullable
     @Override
@@ -68,7 +69,7 @@ public class BackgroundService extends Service {
 
         }
 
-       //   Toast.makeText(this,isLogin + "msgID = "+msgID,Toast.LENGTH_LONG).show();
+        //   Toast.makeText(this,isLogin + "msgID = "+msgID,Toast.LENGTH_LONG).show();
         if (isLogin) {
             notificationListener();
             //    Toast.makeText(this, "notification created", Toast.LENGTH_SHORT).show();
@@ -78,7 +79,7 @@ public class BackgroundService extends Service {
 
     @Override
     public void onCreate() {
-      //  Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
         initialize();
         super.onCreate();
     }
@@ -90,7 +91,6 @@ public class BackgroundService extends Service {
         reference = null;
         super.onDestroy();
     }
-
 
     private void initialize() {
 
@@ -112,8 +112,8 @@ public class BackgroundService extends Service {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     list.add(child.getValue(FireBaseDataMode.class));
                 }
-                if (list.size() != 0 && list.get(list.size()-1).getScreen().equalsIgnoreCase("view_profile")){
-                    showNotification("Request", list.get(list.size()-1).getText(), (String) list.get(list.size()-1).getData().get("companyId").toString());
+                if (list.size() != 0 && list.get(list.size() - 1).getScreen().equalsIgnoreCase("view_profile")) {
+                    showNotification("Request", list.get(list.size() - 1).getText(), (String) list.get(list.size() - 1).getData().get("companyId").toString());
                     dataSnapshot.getRef().removeValue();
                 }
 
@@ -130,7 +130,6 @@ public class BackgroundService extends Service {
 
 
     }
-
 
     private void showNotification(String title, String message, String ID) {
 
@@ -164,13 +163,6 @@ public class BackgroundService extends Service {
         notificationManagerCompat.notify(Integer.parseInt(ID), notification);
 
 
-    }
-
-    public static PendingIntent addBackStack(final Context context, final Intent intent) {
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context.getApplicationContext());
-        stackBuilder.addNextIntentWithParentStack(intent);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 }

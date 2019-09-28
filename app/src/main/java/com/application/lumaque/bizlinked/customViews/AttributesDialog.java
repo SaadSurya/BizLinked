@@ -49,10 +49,6 @@ public class AttributesDialog extends DialogFragment {
     ImageButton tagBtnAdd;
     @BindView(R.id.attribute_cancel)
     Button attributeCancel;
-    private BasePreferenceHelper prefHelper;
-    private ArrayList<ProductAttribute> companyAttributesList;
-    private ArrayList<ProductAttribute> productAttributeArrayList;
-
     //   protected BaseActivity activityReference;
     @BindView(R.id.att_type)
     AutoCompleteTextView attType;
@@ -63,32 +59,33 @@ public class AttributesDialog extends DialogFragment {
     Unbinder unbinder;
     @BindView(R.id.attribute_save)
     Button attributeSave;
-    private ProductAttribute SelectedProductAttribute;
-    private TagsHorizontalAdapter AttributeItemAdapter;
     boolean isNew;
     List itemAttributes = new ArrayList();
     String[] tags = new String[0];
-
     AttributesAdapter attributeNameAdapter;
     AttributesTagAdapter attributeTagNameAdapter;
+    private BasePreferenceHelper prefHelper;
+    private ArrayList<ProductAttribute> companyAttributesList;
+    private ArrayList<ProductAttribute> productAttributeArrayList;
+    private ProductAttribute SelectedProductAttribute;
+    private TagsHorizontalAdapter AttributeItemAdapter;
 
     public AttributesDialog() {
 
     }
 
-    public void setAttribute(ProductAttribute attribute,ArrayList<ProductAttribute> productAttributeArrayList) {
-        this.SelectedProductAttribute = attribute;
-        this.productAttributeArrayList = productAttributeArrayList;
-    }
-
-    public static AttributesDialog newInstance(ProductAttribute attribute, boolean isNew,ArrayList<ProductAttribute> productAttributeArrayList) {
+    public static AttributesDialog newInstance(ProductAttribute attribute, boolean isNew, ArrayList<ProductAttribute> productAttributeArrayList) {
         AttributesDialog frag = new AttributesDialog();
-        frag.setAttribute(attribute,productAttributeArrayList);
+        frag.setAttribute(attribute, productAttributeArrayList);
         frag.isNew = isNew;
 
         return frag;
     }
 
+    public void setAttribute(ProductAttribute attribute, ArrayList<ProductAttribute> productAttributeArrayList) {
+        this.SelectedProductAttribute = attribute;
+        this.productAttributeArrayList = productAttributeArrayList;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -233,11 +230,11 @@ public class AttributesDialog extends DialogFragment {
                                 .setMessage("This Tag Will Be Deleted")
                                 .setCancelable(true)
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dismiss();
-                            }
-                        })
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dismiss();
+                                    }
+                                })
                                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -282,41 +279,35 @@ public class AttributesDialog extends DialogFragment {
     }
 
 
+    private void saveDialog() {
 
-
-    private void saveDialog(){
-
-        if(attType.getText().toString().isEmpty()){
+        if (attType.getText().toString().isEmpty()) {
             Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
 
-        }else
-        if (SelectedProductAttribute == null ) {
+        } else if (SelectedProductAttribute == null) {
 
             SelectedProductAttribute = new ProductAttribute();
             SelectedProductAttribute.setAttributeName(attType.getText().toString());
             // Utils.showToast(getContext(), "select attribute name", AppConstant.TOAST_TYPES.ERROR);
 
-        }else {
+        } else {
             SelectedProductAttribute.setAttributeName(attType.getText().toString());
 
 
         }
 
-        if(isNew && isSelectedBefore()){
+        if (isNew && isSelectedBefore()) {
             Utils.showToast(getContext(), "attribute already selected kindly updated old one", AppConstant.TOAST_TYPES.ERROR);
-        } else if (attTag.getText().toString()== ""){
+        } else if (attTag.getText().toString() == "") {
 
             Utils.showToast(getContext(), "Add tag first", AppConstant.TOAST_TYPES.ERROR);
-        }
-
-        else {
+        } else {
             String[] array = new String[AttributeItemAdapter.productCategoryList.size()];
             AttributeItemAdapter.productCategoryList.toArray(array);
             //String[] abc = (String[]) AttributeItemAdapter.productCategoryList.toArray();
             SelectedProductAttribute.setProductAttributeValueName(array);
 
             //add in cache
-
 
 
             Intent i = new Intent()
@@ -329,19 +320,19 @@ public class AttributesDialog extends DialogFragment {
 
 
     }
-    private boolean isSelectedBefore(){
 
-boolean alreadySelected = false;
+    private boolean isSelectedBefore() {
 
-for(int a = 0; a<productAttributeArrayList.size() ;a++){
+        boolean alreadySelected = false;
 
-    if( attType.getText().toString().equalsIgnoreCase(productAttributeArrayList.get(a).AttributeName))
-    {
-        alreadySelected = true;
+        for (int a = 0; a < productAttributeArrayList.size(); a++) {
 
-    }
+            if (attType.getText().toString().equalsIgnoreCase(productAttributeArrayList.get(a).AttributeName)) {
+                alreadySelected = true;
 
-}
+            }
+
+        }
 
 
         return alreadySelected;

@@ -6,35 +6,35 @@
     android:orientation="vertical">
 
 
+    <Button
+        android:id="@+id/btn_login"
+        style="?attr/roundSkyBlueButtonColorStyle"
+        android:text="@string/login"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_signup"
+        style="?attr/roundSkyBlueButtonColorStyle"
+        android:text="@string/signup"
+        android:visibility="invisible" />
+
+
     <EditText
         android:id="@+id/et_user_name"
         style="?attr/roundEditTextNormalColorStyle"
         android:hint="@string/user_name_here"
         android:text=""
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
     <EditText
         android:id="@+id/et_password"
         style="?attr/roundEditTextNormalColorStyle"
         android:drawableStart="@drawable/ic_key"
         android:hint="@string/password_here"
-        android:text=""
         android:imeOptions="actionDone"
         android:inputType="textPassword"
-        android:visibility="invisible"/>
-
-
-    <Button
-        android:id="@+id/btn_login"
-        android:visibility="invisible"
-        style="?attr/roundSkyBlueButtonColorStyle"
-        android:text="@string/login" />
-
-    <Button
-        android:id="@+id/btn_signup"
-        android:visibility="invisible"
-        style="?attr/roundSkyBlueButtonColorStyle"
-        android:text="@string/signup" />
+        android:text=""
+        android:visibility="invisible" />
 
 
 </LinearLayout>

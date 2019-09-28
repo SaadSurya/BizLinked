@@ -16,12 +16,10 @@
 
 
     <!-- Custom Signature View Dimens-->
-        <dimen name="pen_size">3dp</dimen>
+    <dimen name="pen_size">3dp</dimen>
     <!-- Custom Signature View Dimens-->
 
     <dimen name="x0.5">0.5dp</dimen>
-
-
 
 
     <dimen name="activityPadding">16dp</dimen>

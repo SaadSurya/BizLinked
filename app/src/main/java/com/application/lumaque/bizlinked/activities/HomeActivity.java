@@ -4,17 +4,16 @@ import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.FrameLayout;
+
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.fragments.HomeFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.ViewProfileFragment;
 
-
 import butterknife.BindView;
 
 public class HomeActivity extends BaseActivity {
-
 
 
     @BindView(R.id.fragmentContainer)
@@ -36,33 +35,27 @@ public class HomeActivity extends BaseActivity {
 
         setFireBase();
 
-    //addSupportFragment(new LinksTabsFragment(), AppConstant.TRANSITION_TYPES.FADE);
+        //addSupportFragment(new LinksTabsFragment(), AppConstant.TRANSITION_TYPES.FADE);
 
 
         Bundle extras = getIntent().getExtras();
-        if (extras == null)
-        {
-            addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE,true);
-        }
-        else
-        {
+        if (extras == null) {
+            addSupportFragment(new HomeFragment(), AppConstant.TRANSITION_TYPES.FADE, true);
+        } else {
 
-         if(prefHelper.getLoginStatus()){
-             String VIEWID =   extras.getString("VIEWID");
-             ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
-             viewprofilefragment.setViewID(VIEWID,"customer");
-             addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE,false);
-         }
-         else {
-             changeActivity(RegistrationActivity.class, true);
+            if (prefHelper.getLoginStatus()) {
+                String VIEWID = extras.getString("VIEWID");
+                ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
+                viewprofilefragment.setViewID(VIEWID, "customer");
+                addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE, false);
+            } else {
+                changeActivity(RegistrationActivity.class, true);
 
-             }
+            }
 
         }
 
-        }
-
-
+    }
 
 
     @Override

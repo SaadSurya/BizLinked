@@ -5,11 +5,9 @@
     android:layout_margin="2dp">
 
 
-
     <TextView
 
+        android:id="@+id/att_name"
         style="?attr/tagViewBackgroundImageStyle"
-        android:text="medium"
-android:id="@+id/att_name"
-        />
+        android:text="medium" />
 </LinearLayout>

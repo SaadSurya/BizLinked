@@ -3,24 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.application.lumaque.bizlinked">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:name="com.application.lumaque.bizlinked.BizLinkApplication"
         android:allowBackup="true"
@@ -33,20 +15,6 @@
         android:windowSoftInputMode="stateHidden|adjustPan">
 
 
-        <service
-            android:name="com.application.lumaque.bizlinked.fireBase.BackgroundService"
-            android:exported="false"
-            android:process=":remote">
-
-        </service>
-
-        <receiver android:name="com.application.lumaque.bizlinked.fireBase.StartFirebaseAtBoot">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-            </intent-filter>
-        </receiver>
-
-
         <activity
             android:name="com.application.lumaque.bizlinked.activities.RegistrationActivity"
             android:screenOrientation="portrait"
@@ -57,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.application.lumaque.bizlinked.activities.HomeActivity"
             android:screenOrientation="portrait"
@@ -69,19 +38,50 @@
             android:screenOrientation="unspecified"
             android:theme="@style/Theme.Transparent.Permission"
             tools:replace="android:screenOrientation" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCkGzTgCkq5Je7vTHEGzNZhjJZwn__v910" />
+
+
+        <receiver android:name="com.application.lumaque.bizlinked.fireBase.StartFirebaseAtBoot">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCkGzTgCkq5Je7vTHEGzNZhjJZwn__v910" />
+        <service
+            android:name="com.application.lumaque.bizlinked.fireBase.BackgroundService"
+            android:exported="false"
+            android:process=":remote">
+
+        </service>
 
 
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

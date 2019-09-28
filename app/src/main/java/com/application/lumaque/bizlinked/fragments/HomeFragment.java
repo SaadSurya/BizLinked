@@ -5,25 +5,28 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.adapters.HomeItemAdapter;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.customViews.BottomTabLayout;
 import com.application.lumaque.bizlinked.data_models.HomeItemDataModel;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
-import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
+import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
+
 import java.util.ArrayList;
+
 import butterknife.BindView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -35,7 +38,6 @@ public class HomeFragment extends BaseFragment implements BottomTabLayout.Bottom
     RecyclerView rvHome;
     @BindView(R.id.swipeRefresh)
     SwipeRefreshLayout swipeRefresh;
-
 
 
     BasePreferenceHelper preferenceHelper;
@@ -74,7 +76,6 @@ public class HomeFragment extends BaseFragment implements BottomTabLayout.Bottom
 */
 
 
-
     public void initializeAdapter() {
         itemAdapter = new HomeItemAdapter(activityReference, itemArrayList);
         //rvHome.setItemAnimator(new ScaleInLeftAnimator());
@@ -96,9 +97,9 @@ public class HomeFragment extends BaseFragment implements BottomTabLayout.Bottom
                         if (NetworkUtils.isNetworkAvailable(activityReference)) {
                             try {
                                 BaseFragment className = Utils.getFragmentByName(activityReference, itemArrayList.get(position).getClassName());
-                                activityReference.addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                                activityReference.addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE, true);
                             } catch (Exception e) {
-                                Utils.showToast(activityReference,activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
+                                Utils.showToast(activityReference, activityReference.getString(R.string.will_be_implemented), AppConstant.TOAST_TYPES.INFO);
                                 e.printStackTrace();
                             }
 
@@ -117,9 +118,6 @@ public class HomeFragment extends BaseFragment implements BottomTabLayout.Bottom
 
 
     }
-
-
-
 
 
     public void getAllItems() {
@@ -204,9 +202,9 @@ public class HomeFragment extends BaseFragment implements BottomTabLayout.Bottom
         if (NetworkUtils.isNetworkAvailable(activityReference)) {
             try {
                 BaseFragment fragmentName = Utils.getFragmentByName(activityReference, className);
-                activityReference.addSupportFragment(fragmentName, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                activityReference.addSupportFragment(fragmentName, AppConstant.TRANSITION_TYPES.SLIDE, true);
             } catch (Exception e) {
-                Utils.showToast(activityReference,activityReference.getString(R.string.no_class_available), AppConstant.TOAST_TYPES.INFO);
+                Utils.showToast(activityReference, activityReference.getString(R.string.no_class_available), AppConstant.TOAST_TYPES.INFO);
                 e.printStackTrace();
             }
 

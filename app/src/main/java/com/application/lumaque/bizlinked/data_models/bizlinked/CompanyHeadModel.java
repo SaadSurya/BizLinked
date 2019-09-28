@@ -5,6 +5,12 @@ import java.io.Serializable;
 public class CompanyHeadModel implements Serializable {
 
 
+    String CompanyID;
+    String CompanyName;
+    String CompanyLogo;
+    String LinkType;
+    String LinkStatus;
+
     public String getCompanyID() {
         return CompanyID;
     }
@@ -44,11 +50,5 @@ public class CompanyHeadModel implements Serializable {
     public void setLinkStatus(String linkStatus) {
         LinkStatus = linkStatus;
     }
-
-    String CompanyID;
-            String CompanyName;
-            String CompanyLogo;
-            String LinkType;
-            String LinkStatus;
 
 }

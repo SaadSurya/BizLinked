@@ -23,25 +23,24 @@ import java.util.ArrayList;
 @SuppressLint("ValidFragment")
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
 
-    public GoogleMap getmMap() {
-        return mMap;
-    }
-
-public void setmMap(GoogleMap Map){
-
-    mMap = Map;
-}
-    private GoogleMap mMap;
-    private Marker marker;
     Context context;
     MapReadyListener mapListener;
-
+    private GoogleMap mMap;
+    private Marker marker;
     @SuppressLint("ValidFragment")
     public MapFragment(Context context, MapReadyListener listener) {
         this.context = context;
         mapListener = listener;
     }
 
+    public GoogleMap getmMap() {
+        return mMap;
+    }
+
+    public void setmMap(GoogleMap Map) {
+
+        mMap = Map;
+    }
 
     @Override
     public void onResume() {
@@ -115,7 +114,6 @@ public void setmMap(GoogleMap Map){
     }
 
 
-
     public void addMarkers(ArrayList<PlacesModel> dataList, int zoomLevel) {
         if (mMap != null) {
             ArrayList<PlacesModel> data = new ArrayList<>();
@@ -175,18 +173,17 @@ public void setmMap(GoogleMap Map){
         }
     }
 
-    public void addMarkerWithLatLong(double lat, double lon){
-        if(mMap != null){
+    public void addMarkerWithLatLong(double lat, double lon) {
+        if (mMap != null) {
 
             mMap.clear();
             mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon)));
 
             LatLng cameraPosition = new LatLng(lat, lon);
-            CameraUpdate loc = CameraUpdateFactory.newLatLngZoom(cameraPosition,15);
+            CameraUpdate loc = CameraUpdateFactory.newLatLngZoom(cameraPosition, 15);
             mMap.animateCamera(loc);
         }
     }
-
 
 
     public void addMarker(PlacesModel data) {
@@ -247,8 +244,8 @@ public void setmMap(GoogleMap Map){
         }
     }
 
-    public void clearMap(){
-        if(mMap != null)
+    public void clearMap() {
+        if (mMap != null)
             mMap.clear();
     }
 }

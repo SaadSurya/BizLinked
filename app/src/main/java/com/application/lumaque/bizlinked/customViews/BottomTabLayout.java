@@ -12,25 +12,25 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.helpers.animation.AnimationHelpers;
 import com.daimajia.androidanimations.library.Techniques;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
 public class BottomTabLayout extends LinearLayout {
 
+    ArrayList<BottomBarModal> arrayList = new ArrayList<>();
+    BottomOptionSelectedInterface bottomOptionSelectedInterface;
     private LinearLayout llBottomBarLayout;
     private TextView tvAlert;
     private TextView tvDashboard;
     private TextView tvLiveChat;
     private TextView tvFavourites;
     private Context context;
-
-    ArrayList<BottomBarModal> arrayList = new ArrayList<>();
-
-    BottomOptionSelectedInterface bottomOptionSelectedInterface;
 
 
     public BottomTabLayout(Context context) {
@@ -53,6 +53,38 @@ public class BottomTabLayout extends LinearLayout {
             initAttrs(context, attrs);
     }
 
+    public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {
+        Drawable.ConstantState stateA = drawableA.getConstantState();
+        Drawable.ConstantState stateB = drawableB.getConstantState();
+        // If the constant state is identical, they are using the same drawable resource.
+        // However, the opposite is not necessarily true.
+        return (stateA != null && stateB != null && stateA.equals(stateB))
+                || getBitmap(drawableA).sameAs(getBitmap(drawableB));
+    }
+
+    public static Bitmap getBitmap(Drawable drawable) {
+        Bitmap result;
+        if (drawable instanceof BitmapDrawable) {
+            result = ((BitmapDrawable) drawable).getBitmap();
+        } else {
+            int width = drawable.getIntrinsicWidth();
+            int height = drawable.getIntrinsicHeight();
+            // Some drawables have no intrinsic width - e.g. solid colours.
+            if (width <= 0) {
+                width = 1;
+            }
+            if (height <= 0) {
+                height = 1;
+            }
+
+            result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(result);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        }
+        return result;
+    }
+
     private void initAttrs(Context context, AttributeSet attrs) {
     }
 
@@ -66,7 +98,6 @@ public class BottomTabLayout extends LinearLayout {
 
     }
 
-
     public void resetViews() {
         llBottomBarLayout.setVisibility(GONE);
     }
@@ -75,9 +106,9 @@ public class BottomTabLayout extends LinearLayout {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                AnimationHelpers.animation(Techniques.BounceInUp,  400, llBottomBarLayout);
+                AnimationHelpers.animation(Techniques.BounceInUp, 400, llBottomBarLayout);
             }
-        },250);
+        }, 250);
         //llBottomBarLayout.setVisibility(VISIBLE);
     }
 
@@ -100,11 +131,10 @@ public class BottomTabLayout extends LinearLayout {
 
     private void setBottomLayout() {
         arrayList.add(new BottomBarModal(R.drawable.ic_alert, R.drawable.ic_alert_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color, "AlertFragment"));
-        arrayList.add(new BottomBarModal(R.drawable.ic_dashboard, R.drawable.ic_dashboard_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color,"AlertFragmen"));
-        arrayList.add(new BottomBarModal(R.drawable.ic_live_chat, R.drawable.ic_live_chat_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color,"AlertFragme"));
-        arrayList.add(new BottomBarModal(R.drawable.ic_favourite, R.drawable.ic_favourite_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color,"AlertFragm"));
+        arrayList.add(new BottomBarModal(R.drawable.ic_dashboard, R.drawable.ic_dashboard_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color, "AlertFragmen"));
+        arrayList.add(new BottomBarModal(R.drawable.ic_live_chat, R.drawable.ic_live_chat_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color, "AlertFragme"));
+        arrayList.add(new BottomBarModal(R.drawable.ic_favourite, R.drawable.ic_favourite_active, R.color.appThemeColor, R.color.home_normal_bottom_tab_text_color, "AlertFragm"));
     }
-
 
     private void setTouchListener(View v) {
         final Drawable[] topCompoundDrawable = {null};
@@ -144,42 +174,8 @@ public class BottomTabLayout extends LinearLayout {
         });
     }
 
-
-
-    public void setBottomBarListener(BottomOptionSelectedInterface listener){
+    public void setBottomBarListener(BottomOptionSelectedInterface listener) {
         bottomOptionSelectedInterface = listener;
-    }
-
-    public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {
-        Drawable.ConstantState stateA = drawableA.getConstantState();
-        Drawable.ConstantState stateB = drawableB.getConstantState();
-        // If the constant state is identical, they are using the same drawable resource.
-        // However, the opposite is not necessarily true.
-        return (stateA != null && stateB != null && stateA.equals(stateB))
-                || getBitmap(drawableA).sameAs(getBitmap(drawableB));
-    }
-
-    public static Bitmap getBitmap(Drawable drawable) {
-        Bitmap result;
-        if (drawable instanceof BitmapDrawable) {
-            result = ((BitmapDrawable) drawable).getBitmap();
-        } else {
-            int width = drawable.getIntrinsicWidth();
-            int height = drawable.getIntrinsicHeight();
-            // Some drawables have no intrinsic width - e.g. solid colours.
-            if (width <= 0) {
-                width = 1;
-            }
-            if (height <= 0) {
-                height = 1;
-            }
-
-            result = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(result);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-        }
-        return result;
     }
 
 
@@ -193,6 +189,10 @@ public class BottomTabLayout extends LinearLayout {
 //        searchBtn.setOnClickListener(onClickListener);
 //    }
 
+
+    public interface BottomOptionSelectedInterface {
+        void onOptionSelected(String className);
+    }
 
     public class BottomBarModal implements Serializable {
 
@@ -249,11 +249,6 @@ public class BottomTabLayout extends LinearLayout {
         public void setClassName(String className) {
             this.className = className;
         }
-    }
-
-
-    public interface BottomOptionSelectedInterface{
-        void onOptionSelected(String className);
     }
 
 }

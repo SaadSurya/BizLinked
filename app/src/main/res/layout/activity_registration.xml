@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="?attr/splashBackgroundImageStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -21,9 +20,9 @@
 
             <TextView
                 android:id="@+id/ivLogo"
-                android:visibility="invisible"
+                style="?attr/splashLogoImageStyle"
                 android:text="@string/app_name"
-                style="?attr/splashLogoImageStyle" />
+                android:visibility="invisible" />
 
         </LinearLayout>
 
@@ -39,7 +38,7 @@
             android:orientation="vertical"
             android:scrollbars="none"
 
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
     </LinearLayout>
 

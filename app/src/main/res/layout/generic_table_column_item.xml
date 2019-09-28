@@ -1,11 +1,10 @@
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
     style="?attr/documentRequestTableInfoTextStyle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/x5"
+
+
     android:layout_weight="1"
-
-
     android:gravity="center"
-    android:textStyle="normal"
-    android:layout_marginEnd="@dimen/x5"/>
+    android:textStyle="normal" />

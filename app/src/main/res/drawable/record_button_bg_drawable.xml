@@ -2,10 +2,10 @@
     android:shape="rectangle"
     android:thickness="0dp">
 
+    <solid android:color="@color/capture_document_image_bg" />
+
+
     <stroke
         android:width="3dp"
         android:color="@color/capture_document_image_bg_border" />
-
-
-    <solid android:color="@color/capture_document_image_bg" />
 </shape>

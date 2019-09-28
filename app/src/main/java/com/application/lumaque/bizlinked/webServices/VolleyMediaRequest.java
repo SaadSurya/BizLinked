@@ -14,9 +14,9 @@ public class VolleyMediaRequest extends Request<byte[]> {
     /**
      * Creates a new request with the given method.
      *
-     * @param method the request {@link Method} to use
-     * @param url URL to fetch the string at
-     * @param listener Listener to receive the String response
+     * @param method        the request {@link Method} to use
+     * @param url           URL to fetch the string at
+     * @param listener      Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
      */
     public VolleyMediaRequest(int method, String url, Response.Listener<byte[]> listener,
@@ -30,8 +30,8 @@ public class VolleyMediaRequest extends Request<byte[]> {
     /**
      * Creates a new GET request.
      *
-     * @param url URL to fetch the string at
-     * @param listener Listener to receive the String response
+     * @param url           URL to fetch the string at
+     * @param listener      Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
      */
     public VolleyMediaRequest(String url, Response.Listener<byte[]> listener, Response.ErrorListener errorListener) {

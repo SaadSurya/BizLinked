@@ -1,9 +1,7 @@
 package com.application.lumaque.bizlinked.fragments.bizlinked;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,16 +16,13 @@ import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTo
 import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class SettingFragment extends BaseFragment {
 
 
     @BindView(R.id.setting_list)
     RecyclerView settingList;
-   // Unbinder unbinder;
-
+    // Unbinder unbinder;
 
 
     private RecyclerView.Adapter mAdapter;
@@ -53,12 +48,10 @@ public class SettingFragment extends BaseFragment {
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(activityReference);
         settingList.setLayoutManager(layoutManager);
-String[] myDataset = {"Notification setting"};
+        String[] myDataset = {"Notification setting"};
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(myDataset);
         settingList.setAdapter(mAdapter);
-
-
 
 
         settingList.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), settingList,
@@ -68,7 +61,6 @@ String[] myDataset = {"Notification setting"};
 
                         NotificationSetting categoryListFragment = new NotificationSetting();
                         activityReference.addSupportFragment(categoryListFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-
 
 
                     }

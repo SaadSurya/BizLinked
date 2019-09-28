@@ -7,6 +7,7 @@ public interface TagCloseCallBack {
 
 
     void onImageClick(ProductAttribute productAttribute);
+
     void onRowClick(ProductAttribute productAttribute);
 
 

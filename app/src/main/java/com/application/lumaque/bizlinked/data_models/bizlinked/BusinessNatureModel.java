@@ -6,6 +6,7 @@ public class BusinessNatureModel implements Serializable {
 
 
     String BusinessNatureID;
+    String BusinessNatureName;
 
     public String getBusinessNatureID() {
         return BusinessNatureID;
@@ -22,8 +23,6 @@ public class BusinessNatureModel implements Serializable {
     public void setBusinessNatureName(String businessNatureName) {
         BusinessNatureName = businessNatureName;
     }
-
-    String BusinessNatureName;
 
 
 }

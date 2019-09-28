@@ -6,24 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.bizlinked.TagCloseCallBack;
-import com.application.lumaque.bizlinked.helpers.common.Utils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.signature.ObjectKey;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TagViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -33,21 +24,18 @@ public class TagViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private TagCloseCallBack tagcallbacks;
 
-    public TagViewAdapter(Context context, List<ProductAttribute> categoryRecord,TagCloseCallBack tagcallbacks) {
+    public TagViewAdapter(Context context, List<ProductAttribute> categoryRecord, TagCloseCallBack tagcallbacks) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-      //  this.headerData = new ArrayList<>();
+        //  this.headerData = new ArrayList<>();
         this.productAttributesList = new ArrayList<>();
         this.productAttributesList.addAll(categoryRecord);
         this.tagcallbacks = tagcallbacks;
     }
 
 
-
-
-
     public void clearAllList() {
-      //  headerData.clear();
+        //  headerData.clear();
         productAttributesList.clear();
     }
 
@@ -56,16 +44,17 @@ public class TagViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
 
-public void notifyChangeData(){
-    notifyDataSetChanged();
+    public void notifyChangeData() {
+        notifyDataSetChanged();
 
-}
+    }
+
     public void addItem(ProductAttribute item) {
         this.productAttributesList.add(item);
         notifyDataSetChanged();
     }
 
-    public ArrayList<ProductAttribute> getAttributeLIst(){
+    public ArrayList<ProductAttribute> getAttributeLIst() {
 
         return productAttributesList;
     }
@@ -84,18 +73,17 @@ public void notifyChangeData(){
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
         ProductAttribute currentObject = productAttributesList.get(position);
 
 
-                ((ItemViewHolder) holder).attributeName.setText(currentObject.getAttributeName());
+        ((ItemViewHolder) holder).attributeName.setText(currentObject.getAttributeName());
 
-                 currentObject.getProductAttributeValueName();
+        currentObject.getProductAttributeValueName();
 
-                 showInfo(((ItemViewHolder) holder).tagDiv,currentObject.getProductAttributeValueName());
+        showInfo(((ItemViewHolder) holder).tagDiv, currentObject.getProductAttributeValueName());
         ((ItemViewHolder) holder).Row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,23 +94,34 @@ public void notifyChangeData(){
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return productAttributesList.size();
     }
 
+    private void showInfo(LinearLayout linearLayout, String[] names) {
+        LayoutInflater layoutInfralte = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        linearLayout.removeAllViews();
+        for (int a = 0; a < names.length; a++) {
+            View view = layoutInfralte.inflate(R.layout.tag_layout, null);
+            TextView tv = view.findViewById(R.id.att_name);
+            tv.setText(names[a]);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            linearLayout.addView(view);
+
+        }
 
 
+    }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         ImageButton deleteRow;
         LinearLayout Row;
 
-        TextView  attributeName;
+        TextView attributeName;
 
         LinearLayout tagDiv;
 
@@ -132,7 +131,7 @@ public void notifyChangeData(){
             Row = view.findViewById(R.id.row);
             deleteRow = view.findViewById(R.id.delete_attribute);
             attributeName = view.findViewById(R.id.pro_attribute_name);
-            tagDiv  = view.findViewById(R.id.tag_div);
+            tagDiv = view.findViewById(R.id.tag_div);
             deleteRow.setOnClickListener(this);
 //            Row.setOnClickListener(this);
         }
@@ -158,23 +157,6 @@ public void notifyChangeData(){
 
             }
         }
-
-    }
-
-    private void showInfo(LinearLayout linearLayout, String[] names){
-        LayoutInflater layoutInfralte=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-linearLayout.removeAllViews();
-        for (int a=0;a<names.length;a++){
-            View view=layoutInfralte.inflate(R.layout.tag_layout, null);
-            TextView tv=view.findViewById(R.id.att_name);
-            tv.setText(names[a]);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            linearLayout.addView(view);
-
-        }
-
-
 
     }
 }

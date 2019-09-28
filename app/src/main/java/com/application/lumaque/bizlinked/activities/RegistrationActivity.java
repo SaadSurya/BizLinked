@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.application.lumaque.bizlinked.BizLinkApplication;
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
@@ -21,7 +20,6 @@ public class RegistrationActivity extends BaseActivity {
     TextView ivLogo;
     @BindView(R.id.fragmentContainer)
     ScrollView fragmentContainer;
-
 
 
     @Override
@@ -57,8 +55,8 @@ public class RegistrationActivity extends BaseActivity {
             public void run() {
                 AnimationHelpers.animation(Techniques.BounceInUp, 600, ivLogo);
                 AnimationHelpers.animation(Techniques.BounceInUp, 600, fragmentContainer);
-               // AnimationHelpers.animation(Techniques.BounceInUp, 600, llFooterView);
-                addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE,true);
+                // AnimationHelpers.animation(Techniques.BounceInUp, 600, llFooterView);
+                addSupportFragment(new SelectSigningFragment(), AppConstant.TRANSITION_TYPES.FADE, true);
             }
         }, 500);
 

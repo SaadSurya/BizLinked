@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootView"
     android:layout_width="@dimen/x160"
     android:layout_height="wrap_content"
     android:background="@drawable/shadow_image_new_small">
 
 
+    <LinearLayout
+        android:id="@+id/view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/category_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x90"
+            android:src="@drawable/anonymous_bg" />
 
 
-            <LinearLayout
-                android:id="@+id/view_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/product"
+            android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/category_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:src="@drawable/anonymous_bg"/>
-
-
-                <TextView
-                    android:id="@+id/product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="5dp"
-                    android:text="@string/product"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-            <!--android:background="@drawable/texview_edit_cat_rect"-->
+    </LinearLayout>
+    <!--android:background="@drawable/texview_edit_cat_rect"-->
 
     <TextView
         android:id="@+id/tv_edit_cat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/appThemeColor"
-        android:textStyle="bold"
         android:layout_marginStart="0dp"
         android:background="#80000000"
-        android:gravity="center"
-
         android:drawableStart="@drawable/ic_edit_black_24dp"
+        android:gravity="center"
         android:text="Edit"
-        android:textSize="@dimen/s12" />
 
+        android:textColor="@color/appThemeColor"
+        android:textSize="@dimen/s12"
+        android:textStyle="bold" />
 
 
 </FrameLayout>

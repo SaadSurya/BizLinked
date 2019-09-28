@@ -5,15 +5,26 @@ import java.io.Serializable;
 public class CompanyProfileModel implements Serializable {
 
 
-
-
-
-
-
-
-
-
     String LinkType;
+    String LinkStatus;
+    int CompanyID;
+    String CompanyName;
+    String CityName;
+    String CompanyLogo;
+    //int ProductMajorCategoryID;
+    String ContactNo;
+    String PhoneNo;
+    int[] BusinessNature;
+    String EmailAddress;
+    String Website;
+    String ShopNo;
+    String Market;
+    String Area;
+    String CityID;
+    double Latitude;
+
+    /* String PhoneNo2;*/
+    double Longitude;
 
     public String getLinkType() {
         return LinkType;
@@ -31,10 +42,6 @@ public class CompanyProfileModel implements Serializable {
         LinkStatus = linkStatus;
     }
 
-    String      LinkStatus;
-    int CompanyID;
-    String CompanyName;
-
     public String getCityName() {
         return CityName;
     }
@@ -42,13 +49,6 @@ public class CompanyProfileModel implements Serializable {
     public void setCityName(String cityName) {
         CityName = cityName;
     }
-
-    String CityName;
-    String CompanyLogo;
-    //int ProductMajorCategoryID;
-    String ContactNo;
-    String PhoneNo;
-
 
     public String getPhoneNo() {
         return PhoneNo;
@@ -58,8 +58,6 @@ public class CompanyProfileModel implements Serializable {
         PhoneNo = phoneNo2;
     }
 
-   /* String PhoneNo2;*/
-
     public int[] getBusinessNature() {
         return BusinessNature;
     }
@@ -67,22 +65,6 @@ public class CompanyProfileModel implements Serializable {
     public void setBusinessNature(int[] businessNature) {
         BusinessNature = businessNature;
     }
-
-    int[] BusinessNature;
-
-    String EmailAddress;
-    String Website;
-    String ShopNo;
-    String Market;
-    String Area;
-    String CityID;
-    double Latitude;
-    double Longitude;
-
-
-
-
-
 
     public int getCompanyID() {
         return CompanyID;
@@ -119,7 +101,6 @@ public class CompanyProfileModel implements Serializable {
 */
 
 
-
     public String getContactNo() {
         return ContactNo;
     }
@@ -127,9 +108,6 @@ public class CompanyProfileModel implements Serializable {
     public void setContactNo(String contactNo) {
         ContactNo = contactNo;
     }
-
-
-
 
 
     public String getEmailAddress() {
@@ -195,16 +173,6 @@ public class CompanyProfileModel implements Serializable {
     public void setLongitude(double longitude) {
         Longitude = longitude;
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

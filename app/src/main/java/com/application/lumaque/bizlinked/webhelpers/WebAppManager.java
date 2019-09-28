@@ -8,19 +8,18 @@ import com.application.lumaque.bizlinked.helpers.network.CommonNetworksUtils;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 
 import static com.application.lumaque.bizlinked.helpers.common.Utils.getBytes;
 
 public class WebAppManager {
 
+    private static final WebAppManager ourInstance = new WebAppManager();
     private static Activity activity;
     private static BasePreferenceHelper preferenceHelper;
 
-    private static final WebAppManager ourInstance = new WebAppManager();
+    private WebAppManager() {
+    }
 
     public static WebAppManager getInstance(Activity ctx, BasePreferenceHelper preference) {
         activity = ctx;
@@ -28,15 +27,7 @@ public class WebAppManager {
         return ourInstance;
     }
 
-    private WebAppManager() {
-    }
-
-
-
-
     public void getMediaFile(boolean isProgressShow, String url, int type, HashMap<String, String> extraParams, final APIStringRequestDataCallBack apiStringRequestDataCallBack) {
-
-
 
 
         if (type == AppConstant.ServerAPICalls.HTTP_VERBS.GET)
@@ -45,7 +36,7 @@ public class WebAppManager {
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
                 .setHeaderUserPreference(preferenceHelper)
-               // .setCustomBody(type == AppConstant.ServerAPICalls.HTTP_VERBS.POST ? extraParams : null)
+                // .setCustomBody(type == AppConstant.ServerAPICalls.HTTP_VERBS.POST ? extraParams : null)
                 .mediaRequest(
                         extraParams,
                         type,
@@ -69,14 +60,12 @@ public class WebAppManager {
                 );
     }
 
-    public void getAllGridDetails(HashMap<String, String> extraParams, String url,boolean isProgressShow, final APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void getAllGridDetails(HashMap<String, String> extraParams, String url, boolean isProgressShow, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
         if (extraParams == null)
             LogHelper.getLogger().log("Request" + url);
         else
             LogHelper.getLogger().log("Request" + url + extraParams.toString());
-
-
 
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
@@ -89,7 +78,7 @@ public class WebAppManager {
                             public void onSuccess(String response) {
 
 
-                                    apiRequestDataCallBack.onSuccess(response);
+                                apiRequestDataCallBack.onSuccess(response);
 
                             }
 
@@ -109,15 +98,12 @@ public class WebAppManager {
     }
 
 
-
- public void deleteDetails(HashMap<String, String> extraParams, String url,boolean isProgressShow, final APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void deleteDetails(HashMap<String, String> extraParams, String url, boolean isProgressShow, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
         if (extraParams == null)
             LogHelper.getLogger().log("Request" + url);
         else
             LogHelper.getLogger().log("Request" + url + extraParams.toString());
-
-
 
 
         WebAPIRequestHelper.getInstance(activity, isProgressShow)
@@ -130,7 +116,7 @@ public class WebAppManager {
                             public void onSuccess(String response) {
 
 
-                                    apiRequestDataCallBack.onSuccess(response);
+                                apiRequestDataCallBack.onSuccess(response);
 
                             }
 
@@ -178,7 +164,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, true)
-               .setHeaderUserPreference(preferenceHelper)
+                .setHeaderUserPreference(preferenceHelper)
                 .setCustomBody(params)
                 .postRequest(
                         requestType,
@@ -188,10 +174,8 @@ public class WebAppManager {
                             public void onSuccess(String response) {
 
 
-                                    LogHelper.getLogger().log("Post Response " + response);
-                                    apiRequestDataCallBack.onSuccess(response);
-
-
+                                LogHelper.getLogger().log("Post Response " + response);
+                                apiRequestDataCallBack.onSuccess(response);
 
 
                             }
@@ -212,9 +196,7 @@ public class WebAppManager {
     }
 
 
-
-
-   public void putDetails(int requestType, HashMap<String, String> extraParams, String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void putDetails(int requestType, HashMap<String, String> extraParams, String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
         if (extraParams == null)
             LogHelper.getLogger().log("Post Request" + url);
@@ -243,7 +225,7 @@ public class WebAppManager {
 
 
         WebAPIRequestHelper.getInstance(activity, true)
-               .setPutHeaderUserPreference(preferenceHelper)
+                .setPutHeaderUserPreference(preferenceHelper)
                 .setCustomBody(params)
                 .postRequest(
                         requestType,
@@ -253,10 +235,8 @@ public class WebAppManager {
                             public void onSuccess(String response) {
 
 
-                                    LogHelper.getLogger().log("Post Response " + response);
-                                    apiRequestDataCallBack.onSuccess(response);
-
-
+                                LogHelper.getLogger().log("Post Response " + response);
+                                apiRequestDataCallBack.onSuccess(response);
 
 
                             }
@@ -277,9 +257,7 @@ public class WebAppManager {
     }
 
 
-
     public void saveDetailsJson(int requestType, String jsonString, String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
-
 
 
         WebAPIRequestHelper.getInstance(activity, true)
@@ -293,10 +271,8 @@ public class WebAppManager {
                             public void onSuccess(String response) {
 
 
-                                    LogHelper.getLogger().log("Post Response " + response);
-                                    apiRequestDataCallBack.onSuccess(response);
-
-
+                                LogHelper.getLogger().log("Post Response " + response);
+                                apiRequestDataCallBack.onSuccess(response);
 
 
                             }
@@ -316,12 +292,11 @@ public class WebAppManager {
                 );
     }
 
-    public void uploadImage(String fileName, HashMap<String, String> extraParams,String URL, Boolean showProgress,File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
-
+    public void uploadImage(String fileName, HashMap<String, String> extraParams, String URL, Boolean showProgress, File file, final WebAPIRequestHelper.APIStringRequestDataCallBack apiRequestDataCallBack) {
 
 
         WebAPIRequestHelper.getInstance(activity, showProgress)
-               // .setHeaderUserPreference(preferenceHelper)
+                // .setHeaderUserPreference(preferenceHelper)
                 //.setCustomBody(extraParams)
                 .postRequestMultipart(getBytes(file),
                         fileName, URL
@@ -331,65 +306,65 @@ public class WebAppManager {
     }
 
 
-  /*  public void getAllListUIFields(HashMap<String, String> extraParams, String url, final APIRequestFieldsUIDataCallBack apiRequestDataCallBack) {
+    /*  public void getAllListUIFields(HashMap<String, String> extraParams, String url, final APIRequestFieldsUIDataCallBack apiRequestDataCallBack) {
 
-        if (extraParams == null)
-            LogHelper.getLogger().log("Request" + url);
-        else
-            LogHelper.getLogger().log("Request" + url + extraParams.toString());
+          if (extraParams == null)
+              LogHelper.getLogger().log("Request" + url);
+          else
+              LogHelper.getLogger().log("Request" + url + extraParams.toString());
 
-        HashMap<String, String> params = new HashMap<>();
-        params.put("appCode", preferenceHelper.getUser().getAppCode());
-        params.put("currpage", "1");
-        params.put("pagesize", "1000");
-        params.put("totalpages", "0");
+          HashMap<String, String> params = new HashMap<>();
+          params.put("appCode", preferenceHelper.getUser().getAppCode());
+          params.put("currpage", "1");
+          params.put("pagesize", "1000");
+          params.put("totalpages", "0");
 
-        if (extraParams != null)
-            params.putAll(extraParams);
+          if (extraParams != null)
+              params.putAll(extraParams);
 
 
-        LogHelper.getLogger().log("Final parameters " + params.toString());
+          LogHelper.getLogger().log("Final parameters " + params.toString());
 
-        WebAPIRequestHelper.getInstance(activity, true)
-                //.setHeaderUserPreference(preferenceHelper)
-                .getStringRequest(
-                        AppConstant.ServerAPICalls.IPORTAL_URL +
-                                preferenceHelper.getUser().getAppCode() + "/" +
-                                url +
-                                CommonNetworksUtils.getRequestURI(params),
-                        new WebAPIRequestHelper.APIStringRequestDataCallBack() {
-                            @Override
-                            public void onSuccess(String response) {
+          WebAPIRequestHelper.getInstance(activity, true)
+                  //.setHeaderUserPreference(preferenceHelper)
+                  .getStringRequest(
+                          AppConstant.ServerAPICalls.IPORTAL_URL +
+                                  preferenceHelper.getUser().getAppCode() + "/" +
+                                  url +
+                                  CommonNetworksUtils.getRequestURI(params),
+                          new WebAPIRequestHelper.APIStringRequestDataCallBack() {
+                              @Override
+                              public void onSuccess(String response) {
 
-                                try {
+                                  try {
 
-                                    LogHelper.getLogger().log("Response" + response);
+                                      LogHelper.getLogger().log("Response" + response);
 
-                                    JSONObject responseObj = new JSONObject(response);
-                                    JSONArray recordsArray = responseObj.getJSONArray("records");
-                                    String recordsArrayString = recordsArray.toString();
-                                    apiRequestDataCallBack.onSuccess(GsonHelper.getGSONConverted2(activity, recordsArrayString));
-                                } catch (JSONException e) {
-                                    apiRequestDataCallBack.onError(response);
-                                    e.printStackTrace();
-                                }
-                            }
+                                      JSONObject responseObj = new JSONObject(response);
+                                      JSONArray recordsArray = responseObj.getJSONArray("records");
+                                      String recordsArrayString = recordsArray.toString();
+                                      apiRequestDataCallBack.onSuccess(GsonHelper.getGSONConverted2(activity, recordsArrayString));
+                                  } catch (JSONException e) {
+                                      apiRequestDataCallBack.onError(response);
+                                      e.printStackTrace();
+                                  }
+                              }
 
-                            @Override
-                            public void onError(String response) {
-                                LogHelper.getLogger().log("Response Error " + response);
+                              @Override
+                              public void onError(String response) {
+                                  LogHelper.getLogger().log("Response Error " + response);
 
-                                apiRequestDataCallBack.onError(response);
-                            }
+                                  apiRequestDataCallBack.onError(response);
+                              }
 
-                            @Override
-                            public void onNoNetwork() {
-                                apiRequestDataCallBack.onNoNetwork();
-                            }
-                        }
-                );
-    }
-*/
+                              @Override
+                              public void onNoNetwork() {
+                                  apiRequestDataCallBack.onNoNetwork();
+                              }
+                          }
+                  );
+      }
+  */
  /*   public void getDropDownData
             (HashMap<String, String> extraParams, String url, final APIRequestDropdownCallBack callBack) {
 
@@ -445,10 +420,6 @@ public class WebAppManager {
 
         void onNoNetwork();
     }
-
-
-
-
 
 
 }

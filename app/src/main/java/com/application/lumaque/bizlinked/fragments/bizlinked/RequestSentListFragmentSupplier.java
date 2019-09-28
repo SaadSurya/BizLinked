@@ -24,8 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RequestSentListFragmentSupplier extends Fragment implements CustomRecyclerCallBacks  {
-
+public class RequestSentListFragmentSupplier extends Fragment implements CustomRecyclerCallBacks {
 
 
     private static RequestSentListFragmentSupplier linkedlistfragment;
@@ -42,17 +41,15 @@ public class RequestSentListFragmentSupplier extends Fragment implements CustomR
     BasePreferenceHelper preferenceHelper;
     View rootView;
 
-    public static RequestSentListFragmentSupplier getInstance(BaseActivity activityReference, BasePreferenceHelper preferenceHelper, ArrayList<CompanyHeadModel> LinkList ) {
+    public static RequestSentListFragmentSupplier getInstance(BaseActivity activityReference, BasePreferenceHelper preferenceHelper, ArrayList<CompanyHeadModel> LinkList) {
         if (linkedlistfragment == null) {
             linkedlistfragment = new RequestSentListFragmentSupplier();
         }
-            linkedlistfragment.activityReference = activityReference;
-            linkedlistfragment.preferenceHelper = preferenceHelper;
-            linkedlistfragment.LinkList = LinkList;
+        linkedlistfragment.activityReference = activityReference;
+        linkedlistfragment.preferenceHelper = preferenceHelper;
+        linkedlistfragment.LinkList = LinkList;
         return linkedlistfragment;
     }
-
-
 
 
     @Nullable
@@ -71,24 +68,24 @@ public class RequestSentListFragmentSupplier extends Fragment implements CustomR
     public void onImageClick(CompanyHeadModel companyHeadModel) {
 
 
-
     }
+
     @Override
     public void onListClick(CompanyHeadModel companyHeadModel) {
 
 
         ViewProfileFragment viewprofilefragment = new ViewProfileFragment();
-        viewprofilefragment.setViewID(companyHeadModel.getCompanyID(),"supplier");
-        activityReference.addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE,true);
+        viewprofilefragment.setViewID(companyHeadModel.getCompanyID(), "supplier");
+        activityReference.addSupportFragment(viewprofilefragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
     }
+
     @Override
     public void onActionClick(CompanyHeadModel companyHeadModel, String tag) {
-        if(getParentFragment() instanceof SupplierFragmentTabs){
+        if (getParentFragment() instanceof SupplierFragmentTabs) {
 
-            ((SupplierFragmentTabs)getParentFragment()).onActionBtnClick(companyHeadModel,tag);
-        }
-        else if(getParentFragment() instanceof CustomerFragmentTabs){
-            ((CustomerFragmentTabs)getParentFragment()).onActionBtnClick(companyHeadModel,tag);
+            ((SupplierFragmentTabs) getParentFragment()).onActionBtnClick(companyHeadModel, tag);
+        } else if (getParentFragment() instanceof CustomerFragmentTabs) {
+            ((CustomerFragmentTabs) getParentFragment()).onActionBtnClick(companyHeadModel, tag);
         }
     }
 
@@ -126,14 +123,12 @@ public class RequestSentListFragmentSupplier extends Fragment implements CustomR
             @Override
             public void onRefresh() {
 
-                if(getParentFragment() instanceof SupplierFragmentTabs){
+                if (getParentFragment() instanceof SupplierFragmentTabs) {
 
-                    ((SupplierFragmentTabs)getParentFragment()).refresAllLists();
+                    ((SupplierFragmentTabs) getParentFragment()).refresAllLists();
+                } else if (getParentFragment() instanceof CustomerFragmentTabs) {
+                    ((CustomerFragmentTabs) getParentFragment()).refresAllLists();
                 }
-                else if(getParentFragment() instanceof CustomerFragmentTabs){
-                    ((CustomerFragmentTabs)getParentFragment()).refresAllLists();
-                }
-
 
 
                 swipeRefresh.setRefreshing(false);
@@ -142,12 +137,9 @@ public class RequestSentListFragmentSupplier extends Fragment implements CustomR
     }
 
 
+    public void refreshList(ArrayList<CompanyHeadModel> List) {
 
-
-
-    public void refreshList( ArrayList<CompanyHeadModel> List){
-
-        LinkList=List;
+        LinkList = List;
         itemAdapter.clearAllList();
         itemAdapter.addAllList(LinkList);
 

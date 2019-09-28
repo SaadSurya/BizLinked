@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import com.application.lumaque.bizlinked.data_models.bizlinked.CompanyProfileModel;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
@@ -18,16 +17,16 @@ import java.util.List;
 
 public class BasePreferenceHelper extends PreferenceHelper {
 
-    private Context context;
-    protected static final String KEY_LOGIN_STATUS = "is_login";
-    protected static final String KEY_USER = "user";
     public static final String KEY_DEVICE_TOKEN = "device_token";
     public static final String AUTHENTICATE_USER_TOKEN = "user_token";
-    private static final String FILENAME = "bizlinked_preferences";
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_ATTRIBUTES = "attributes";
     public static final String KEY_SAVE_NOTIFY = "save_notify";
     public static final String KEY_NOTIFY = "notify";
+    protected static final String KEY_LOGIN_STATUS = "is_login";
+    protected static final String KEY_USER = "user";
+    private static final String FILENAME = "bizlinked_preferences";
+    private Context context;
 
 
     public BasePreferenceHelper(Context c) {
@@ -38,11 +37,6 @@ public class BasePreferenceHelper extends PreferenceHelper {
         return context.getSharedPreferences(FILENAME, Activity.MODE_PRIVATE);
     }
 
-    public void setLoginStatus(boolean isLogin) {
-        putBooleanPreference(context, FILENAME, KEY_LOGIN_STATUS, isLogin);
-    }
-
-
     public void setStringPrefrence(String key, String value) {
         putStringPreference(context, FILENAME, key, value);
     }
@@ -50,7 +44,6 @@ public class BasePreferenceHelper extends PreferenceHelper {
     public String getStringPrefrence(String key) {
         return getStringPreference(context, FILENAME, key);
     }
-
 
     public void setIntegerPrefrence(String key, int value) {
         putIntegerPreference(context, FILENAME, key, value);
@@ -60,7 +53,6 @@ public class BasePreferenceHelper extends PreferenceHelper {
         return getIntegerPreference(context, FILENAME, key);
     }
 
-
     public void setBooleanPrefrence(String Key, boolean value) {
         putBooleanPreference(context, FILENAME, Key, value);
     }
@@ -69,9 +61,12 @@ public class BasePreferenceHelper extends PreferenceHelper {
         return getBooleanPreference(context, FILENAME, Key);
     }
 
-
     public boolean getLoginStatus() {
         return getBooleanPreference(context, FILENAME, KEY_LOGIN_STATUS);
+    }
+
+    public void setLoginStatus(boolean isLogin) {
+        putBooleanPreference(context, FILENAME, KEY_LOGIN_STATUS, isLogin);
     }
 
     public void putDeviceToken(String token) {
@@ -109,7 +104,6 @@ public class BasePreferenceHelper extends PreferenceHelper {
     }
 
 
-
     public void putCategory(String categoryArray) {
         putStringPreference(context,
                 FILENAME,
@@ -125,9 +119,8 @@ public class BasePreferenceHelper extends PreferenceHelper {
 
 
         return new GsonBuilder().create().fromJson(
-                getStringPreference(context, FILENAME, KEY_CATEGORY),listType);
+                getStringPreference(context, FILENAME, KEY_CATEGORY), listType);
     }
-
 
 
     public void putAttributes(String AttributesArray) {
@@ -151,7 +144,7 @@ public class BasePreferenceHelper extends PreferenceHelper {
     }
 
 
- public void putNotify(Boolean Notify) {
+    public void putNotify(Boolean Notify) {
         putBooleanPreference(context,
                 FILENAME,
                 KEY_NOTIFY,
@@ -171,7 +164,7 @@ public class BasePreferenceHelper extends PreferenceHelper {
 
 
         return new GsonBuilder().create().fromJson(
-                getStringPreference(context, FILENAME, KEY_ATTRIBUTES),listType);
+                getStringPreference(context, FILENAME, KEY_ATTRIBUTES), listType);
     }
 
     public void removeLoginPreference() {

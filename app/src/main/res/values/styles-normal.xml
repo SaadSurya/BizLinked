@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
-    </style>
+    <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+         <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
+     </style>
 
-    <style name="MyActionButtonStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:minWidth">20dip</item>
-        <item name="android:padding">0dip</item>
-    </style>
--->
+     <style name="MyActionButtonStyle" parent="Theme.AppCompat.Light.NoActionBar">
+         <item name="android:minWidth">20dip</item>
+         <item name="android:padding">0dip</item>
+     </style>
+ -->
     <!-- Normal Style Style Start-->
 
     <!-- Splash Background Root Element Style-->
@@ -102,8 +102,7 @@
 
 
     <!--<item name="android:drawableStart">@drawable/ic_tablet</item>-->
-    <style name="floating_hint_edit_text" >
-
+    <style name="floating_hint_edit_text">
 
 
         <item name="android:layout_marginStart">@dimen/x16</item>
@@ -115,9 +114,6 @@
         <item name="android:layout_height">wrap_content</item>
 
 
-
-
-
         <item name="android:imeOptions">actionNext</item>
         <item name="android:inputType">text</item>
 
@@ -125,7 +121,7 @@
 
 
     <!--<item name="android:drawableStart">@drawable/ic_tablet</item>-->
-    <style name="floating_hint_edit_text_layout" >
+    <style name="floating_hint_edit_text_layout">
 
 
         <item name="android:layout_width">match_parent</item>

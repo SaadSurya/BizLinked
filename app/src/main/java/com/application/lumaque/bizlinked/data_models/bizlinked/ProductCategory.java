@@ -6,9 +6,11 @@ import java.util.ArrayList;
 public class ProductCategory implements Serializable {
 
     public int CompanyID;
-    public int ProductCategoryID ;
-    public String ProductCategoryName ;
+    public int ProductCategoryID;
+    public String ProductCategoryName;
     public ArrayList<ProductCategory> SubProductCategories;
+    public String ImageID;
+    public int ParentProductCategoryID;
 
     public String getImageID() {
         return ImageID;
@@ -17,9 +19,6 @@ public class ProductCategory implements Serializable {
     public void setImageID(String imageID) {
         ImageID = imageID;
     }
-
-    public String ImageID ;
-    public int  ParentProductCategoryID ;
 
     public int getCompanyID() {
         return CompanyID;
@@ -44,7 +43,6 @@ public class ProductCategory implements Serializable {
     public void setProductCategoryName(String productCategoryName) {
         ProductCategoryName = productCategoryName;
     }
-
 
 
     public int getParentProductCategoryID() {

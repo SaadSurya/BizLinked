@@ -42,13 +42,11 @@ import io.github.yavski.fabspeeddial.SimpleMenuListenerAdapter;
 
 public class ProductListFragment extends BaseFragment implements SearchView.OnQueryTextListener {
 
-    CategoryHorizontalAdapter categoryItemAdapter;
-    ProductAdapter productItemAdapter;
-
     public static final String companyId = "companyId";
     public static final String productCategoryId = "productCategoryId";
     public static final String productCategoryName = "productCategoryName";
-
+    CategoryHorizontalAdapter categoryItemAdapter;
+    ProductAdapter productItemAdapter;
     String paramCompanyId = "";
     String paramProductCategoryId = "";
     String paramProductCategoryName = "";
@@ -57,7 +55,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     Boolean isFromNestedCat;
     ProductList ProductList;
-   // ProductList searchProductList;
+    // ProductList searchProductList;
 
 
     //  FabSpeedDial fabSpeedDial = (FabSpeedDial) findViewById(R.id.fab_speed_dial);
@@ -73,19 +71,14 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
 
     @BindView(R.id.mainlayout)
     ConstraintLayout mainlayout;
-
-    private String strQuery = "";
     SearchView searchView;
-
     MenuItem searchItem;
     ImageView closeButton;
-
     @BindView(R.id.category_rv)
     RecyclerView rvCategory;
-
-
     @BindView(R.id.product_desc_view)
     RecyclerView rvProduct;
+    private String strQuery = "";
     private boolean isSearchView = false;
 
     @Override
@@ -97,10 +90,9 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         searchView.onActionViewCollapsed();
         strQuery = "";
 
-        if(isSearchView)
-        {
+        if (isSearchView) {
             initializeViews();
-        }else {
+        } else {
 
             activityReference.onPageBack();
         }
@@ -116,8 +108,7 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
         setHasOptionsMenu(true);
         getBaseActivity().toolbar.setTitle("Products");
         setArguments();
-        if(!paramCompanyId.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID())))
-        {
+        if (!paramCompanyId.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()))) {
             fabSpeedDial.setVisibility(View.GONE);
         }
 
@@ -416,10 +407,8 @@ public class ProductListFragment extends BaseFragment implements SearchView.OnQu
                 categoryList = gsonHelper.GsonToCategoryList(activityReference, response);*/
 
 
-
                 productItemAdapter.clearAllList();
                 productItemAdapter.addAllList(new ArrayList(ProductList.getProduct()));
-
 
 
                 categoryItemAdapter.clearAllList();

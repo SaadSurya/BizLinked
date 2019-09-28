@@ -5,18 +5,17 @@
     android:orientation="vertical">
 
 
-
-<!--
-    <CheckBox
-        android:id="@+id/Cb_notify"
-        android:text="do you want to notify customers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />-->
+    <!--
+        <CheckBox
+            android:id="@+id/Cb_notify"
+            android:text="do you want to notify customers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
 
     <CheckBox
         android:id="@+id/Cb_save"
-        android:text="save setting and do not show this message again"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="save setting and do not show this message again" />
 
 </LinearLayout>

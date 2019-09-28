@@ -1,18 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/x15"
     android:background="@android:color/transparent"
     android:orientation="horizontal">
-
-    <TextView
-        android:id="@+id/label"
-        style="?attr/documentRequestTableInfoTextStyle"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:textStyle="normal" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -39,11 +30,6 @@
                 android:maxLines="1"
                 android:textStyle="normal" />
 
-            <View
-                android:layout_width="@dimen/x1"
-                android:layout_height="match_parent"
-                android:background="@color/add_post_label_color" />
-
             <TextView
                 android:id="@+id/image_tv"
                 style="?attr/documentRequestTableInfoTextStyle"
@@ -53,6 +39,11 @@
                 android:gravity="center"
                 android:text="T" />
 
+            <View
+                android:layout_width="@dimen/x1"
+                android:layout_height="match_parent"
+                android:background="@color/add_post_label_color" />
+
         </LinearLayout>
 
         <View
@@ -60,6 +51,14 @@
             android:layout_height="@dimen/x1"
             android:background="@color/add_post_label_color" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/label"
+        style="?attr/documentRequestTableInfoTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:textStyle="normal" />
 </LinearLayout>
 
 

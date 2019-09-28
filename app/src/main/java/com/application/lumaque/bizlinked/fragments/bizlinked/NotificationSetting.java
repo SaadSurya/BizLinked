@@ -11,9 +11,7 @@ import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class NotificationSetting extends BaseFragment {
     @BindView(R.id.text)

@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class DateFormatHelper {
     public static final String DEFAULT_FORMAT_DATE_PICKER = "dd/MM/yyyy";
-    
+
     public static String formatDate(String date) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         Date newDate = null;

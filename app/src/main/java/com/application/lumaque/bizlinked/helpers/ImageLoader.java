@@ -24,7 +24,7 @@ public class ImageLoader {
     private BasePreferenceHelper preferenceHelper;
 
 
-    public ImageLoader( Activity activity, FrameLayout imagesArray, BasePreferenceHelper preferenceHelper) {
+    public ImageLoader(Activity activity, FrameLayout imagesArray, BasePreferenceHelper preferenceHelper) {
         this.runnableIndex = 0;
         this.imagesArray = imagesArray;
         this.imagesArray = imagesArray;
@@ -33,24 +33,23 @@ public class ImageLoader {
     }
 
 
-    public void loadScanDocumentImages(final boolean isProgressShow,String URL, final OnImageDownload onImageDownload) {
+    public void loadScanDocumentImages(final boolean isProgressShow, String URL, final OnImageDownload onImageDownload) {
         getMediaFile(isProgressShow,
-                imagesArray, null, onImageDownload,URL
+                imagesArray, null, onImageDownload, URL
         );
     }
 
-    public void loadSingleImage(boolean isProgressShow, View view, final OnImageDownload onImageDownload,String URL) {
+    public void loadSingleImage(boolean isProgressShow, View view, final OnImageDownload onImageDownload, String URL) {
 
 
         getMediaFile(isProgressShow,
-                view, null, onImageDownload,URL
+                view, null, onImageDownload, URL
         );
     }
 
     public void getMediaFile(boolean isProgressShow, final View currentView, HashMap<String, String> extraParams
-            , final OnImageDownload imageDownload,String URL
+            , final OnImageDownload imageDownload, String URL
     ) {
-
 
 
         WebAppManager.getInstance(activity, preferenceHelper).getMediaFile(isProgressShow,

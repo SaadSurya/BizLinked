@@ -1,12 +1,11 @@
-<RelativeLayout style="?attr/titlebarNormalBackgroundStyle"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/actionBarLayout">
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionBarLayout"
+    style="?attr/titlebarNormalBackgroundStyle">
 
 
     <ImageView
         android:id="@+id/ivTitleBarMenu"
 
-        style="?attr/titlebarNormalDotsStyle"/>
+        style="?attr/titlebarNormalDotsStyle" />
 
 </RelativeLayout>

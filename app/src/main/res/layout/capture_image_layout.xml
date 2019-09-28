@@ -19,10 +19,6 @@
             android:layout_margin="@dimen/x25"
             android:src="@drawable/ic_capture" />
 
-        <View
-            style="?attr/supportCenterInfoSeperaterLineStyle"
-            android:layout_margin="@dimen/x0" />
-
         <TextView
             style="?attr/supportCenterInfoAddressTextStyle"
 
@@ -32,6 +28,10 @@
             android:textSize="@dimen/s10"
             android:textStyle="bold" />
 
+        <View
+            style="?attr/supportCenterInfoSeperaterLineStyle"
+            android:layout_margin="@dimen/x0" />
+
 
     </LinearLayout>
 
@@ -39,11 +39,10 @@
         android:id="@+id/ivDocumentImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:scaleType="centerInside"
-        android:visibility="gone"
         android:layout_alignTop="@+id/llImageContainerView"
         android:layout_alignBottom="@+id/llImageContainerView"
-        />
+        android:background="@color/black"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
 </RelativeLayout>
 

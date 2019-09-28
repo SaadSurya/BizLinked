@@ -32,7 +32,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -55,7 +54,6 @@ public class SelectSigningFragment extends BaseFragment {
     Button btnSignup;
 
 
-
     public SelectSigningFragment() {
         // Required empty public constructor
     }
@@ -71,13 +69,13 @@ public class SelectSigningFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               // AnimationHelpers.animation(Techniques.SlideInDown, 300,tvIconQr);
-                AnimationHelpers.animation(Techniques.SlideInDown, 300,etUserName);
-                AnimationHelpers.animation(Techniques.SlideInDown, 350,etPassword);
-                AnimationHelpers.animation(Techniques.SlideInDown, 400,btnLogin);
-                AnimationHelpers.animation(Techniques.SlideInDown, 450,btnSignup);
+                // AnimationHelpers.animation(Techniques.SlideInDown, 300,tvIconQr);
+                AnimationHelpers.animation(Techniques.SlideInDown, 300, etUserName);
+                AnimationHelpers.animation(Techniques.SlideInDown, 350, etPassword);
+                AnimationHelpers.animation(Techniques.SlideInDown, 400, btnLogin);
+                AnimationHelpers.animation(Techniques.SlideInDown, 450, btnSignup);
             }
-        },500);
+        }, 500);
 
     }
 
@@ -90,7 +88,7 @@ public class SelectSigningFragment extends BaseFragment {
     }
 
 
-    @OnClick({ R.id.btn_login, R.id.btn_signup})
+    @OnClick({R.id.btn_login, R.id.btn_signup})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -99,11 +97,10 @@ public class SelectSigningFragment extends BaseFragment {
                 break;
             case R.id.btn_signup:
 
-                activityReference.addSupportFragment(new SignupFragment(), AppConstant.TRANSITION_TYPES.FADE,true);
+                activityReference.addSupportFragment(new SignupFragment(), AppConstant.TRANSITION_TYPES.FADE, true);
                 break;
         }
     }
-
 
 
     @Override
@@ -113,13 +110,12 @@ public class SelectSigningFragment extends BaseFragment {
     }
 
 
-
     private void userLogin() {
 
 
         final HashMap<String, String> params = new HashMap<>();
         params.put("Username", etUserName.getText().toString());
-        params.put("Password",  etPassword.getText().toString());
+        params.put("Password", etPassword.getText().toString());
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetails(
                 Request.Method.POST,
@@ -138,17 +134,17 @@ public class SelectSigningFragment extends BaseFragment {
 */
 
 
-                        Toast.makeText(activityReference,"afterLogin"+preferenceHelper.getCompanyProfile().getCompanyID(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(activityReference, "afterLogin" + preferenceHelper.getCompanyProfile().getCompanyID(), Toast.LENGTH_LONG).show();
 
                         activityReference.StartBackgroundService(BackgroundService.class);
-                       // Utils.showToast(activityReference, "Logged in successfully...", AppConstant.TOAST_TYPES.SUCCESS);
+                        // Utils.showToast(activityReference, "Logged in successfully...", AppConstant.TOAST_TYPES.SUCCESS);
                         activityReference.changeActivity(HomeActivity.class, true);
 
                     }
 
                     @Override
                     public void onError(String response) {
-                   //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
 
                     }
 

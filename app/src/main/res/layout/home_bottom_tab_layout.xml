@@ -1,20 +1,18 @@
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llBottomBarLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?attr/homeNormalBottomTabBgColorStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
     android:layout_gravity="bottom"
-    style="?attr/homeNormalBottomTabBgColorStyle">
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tvAlert"
         style="?attr/homeNormalBottomTabTextStyle"
 
         android:drawableTop="@drawable/ic_alert"
-        android:text="@string/alerts"/>
-
+        android:text="@string/alerts" />
 
 
     <TextView
@@ -29,14 +27,14 @@
         style="?attr/homeNormalBottomTabTextStyle"
 
         android:drawableTop="@drawable/ic_live_chat"
-        android:text="@string/live_chat"/>
+        android:text="@string/live_chat" />
 
     <TextView
         android:id="@+id/tvFavourites"
         style="?attr/homeNormalBottomTabTextStyle"
 
         android:drawableTop="@drawable/ic_favourite"
-        android:text="@string/favourites"/>
+        android:text="@string/favourites" />
 
 
 </LinearLayout>

@@ -10,12 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.lumaque.bizlinked.R;
-import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.signature.ObjectKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,23 +24,18 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
     ArrayList<ProductCategory> productCategoryList;
 
 
-
-
     public CategoryHorizontalAdapter(Context context, List<ProductCategory> categoryRecord) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-      //  this.headerData = new ArrayList<>();
+        //  this.headerData = new ArrayList<>();
         this.productCategoryList = new ArrayList<>();
         this.productCategoryList.addAll(categoryRecord);
 
     }
 
 
-
-
-
     public void clearAllList() {
-      //  headerData.clear();
+        //  headerData.clear();
         productCategoryList.clear();
     }
 
@@ -65,22 +58,19 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
         ProductCategory currentObject = productCategoryList.get(position);
 
 
-                ((ItemViewHolder) holder).productName.setText(currentObject.getProductCategoryName());
-        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),currentObject.getImageID()))
+        ((ItemViewHolder) holder).productName.setText(currentObject.getProductCategoryName());
+        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()), currentObject.getImageID()))
                 .apply(new RequestOptions().centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 
 
     }
-
-
 
 
     @Override
@@ -89,14 +79,11 @@ public class CategoryHorizontalAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
 
-
-
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 
         private ImageView categoryImg;
-private TextView productName;
-
+        private TextView productName;
 
 
         ItemViewHolder(View view) {
@@ -106,10 +93,10 @@ private TextView productName;
 
             categoryImg = view.findViewById(R.id.category_img);
 
-            productName  = view.findViewById(R.id.product_name);
+            productName = view.findViewById(R.id.product_name);
 
 
-       //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
+            //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
         }
 
 

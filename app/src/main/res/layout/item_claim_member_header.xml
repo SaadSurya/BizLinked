@@ -4,27 +4,27 @@
     android:background="@color/spouse_header_bg_color"
     android:orientation="horizontal"
     android:padding="@dimen/x0"
-    android:paddingBottom="@dimen/x0"
-    android:paddingEnd="@dimen/x15"
     android:paddingStart="@dimen/x15"
-    android:paddingTop="@dimen/x0">
+    android:paddingTop="@dimen/x0"
+    android:paddingEnd="@dimen/x15"
+    android:paddingBottom="@dimen/x0">
 
     <LinearLayout
         android:id="@+id/header_columns"
-        android:layout_marginBottom="@dimen/x3"
-        android:layout_marginTop="@dimen/x3"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x3"
+        android:layout_marginBottom="@dimen/x3"
         android:layout_weight="0.9"
         android:orientation="horizontal"
         android:paddingTop="@dimen/x5"
-        android:paddingBottom="@dimen/x5"/>
+        android:paddingBottom="@dimen/x5" />
 
     <View
-        android:layout_marginBottom="@dimen/x3"
-        android:layout_marginTop="@dimen/x3"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x3"
+        android:layout_marginBottom="@dimen/x3"
         android:layout_weight="0.1" />
 
 </LinearLayout>

@@ -39,54 +39,34 @@ import butterknife.OnClick;
 public class ViewProfileFragment extends BaseFragment {
 
 
-private String profileID;
-private String strReqType;
     MapFragment mapFragment;
-
-
-
     CompanyProfileModel companyProfileModel;
     @BindView(R.id.flCaptureImage)
     ImageView flCaptureImage1;
-
-
-
     @BindView(R.id.products)
     TextView tvproducts;
-
-
     @BindView(R.id.et_user_link)
     TextView tvLink;
-
-
     @BindView(R.id.et_user_un_link)
     TextView tvUnLink;
-
     @BindView(R.id.et_user_name)
     TextView tvName;
-
-
     @BindView(R.id.textView)
     TextView tvPhone;
-
     @BindView(R.id.textView2)
     TextView tvPhone2;
-
     @BindView(R.id.textView3)
     TextView tvEmail;
     @BindView(R.id.textView4)
     TextView tvWebsite;
     @BindView(R.id.textView5)
     TextView tvAddress;
-
-@BindView(R.id.mainlayout)
-ConstraintLayout mainLayout;
-
-
+    @BindView(R.id.mainlayout)
+    ConstraintLayout mainLayout;
     @BindView(R.id.shimmer_view_container)
-    ShimmerFrameLayout mShimmerViewContainer ;
-
-
+    ShimmerFrameLayout mShimmerViewContainer;
+    private String profileID;
+    private String strReqType;
 
     @Override
     public void onCustomBackPressed() {
@@ -100,8 +80,6 @@ ConstraintLayout mainLayout;
     }
 
 
-
-
     @Override
     public void onPause() {
         mShimmerViewContainer.stopShimmerAnimation();
@@ -111,11 +89,11 @@ ConstraintLayout mainLayout;
     @Override
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
         getBaseActivity().toolbar.setTitle("Profile");
-        if(profileID.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID())))
-        setHasOptionsMenu(true);
+        if (profileID.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID())))
+            setHasOptionsMenu(true);
         else
             setHasOptionsMenu(false);
-        getImages(AppConstant.ServerAPICalls.GET_MEDIA_FILE+profileID);
+        getImages(AppConstant.ServerAPICalls.GET_MEDIA_FILE + profileID);
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.GONE);
@@ -127,8 +105,6 @@ ConstraintLayout mainLayout;
     private void getImages(String URL) {
 
 
-
-
 //        ImageView ivDocumentImage = flCaptureImage1.findViewById(R.id.ivDocumentImage);
 //        setVisibilityOfImageView(true,ivDocumentImage);
         Glide.with(this).load(URL)
@@ -136,11 +112,7 @@ ConstraintLayout mainLayout;
                 .into(flCaptureImage1);
 
 
-
-
     }
-
-
 
 
     private void setVisibilityOfImageView(boolean isVisible, View view) {
@@ -152,26 +124,25 @@ ConstraintLayout mainLayout;
         }
     }
 
-    private void getProfile(){
+    private void getProfile() {
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("companyId",profileID);
+        params.put("companyId", profileID);
         params.put("currentCompanyId", String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()));
 
-        WebAppManager.getInstance(activityReference,preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.GET_COMPANYPROFILE,false, new WebAppManager.APIStringRequestDataCallBack() {
+        WebAppManager.getInstance(activityReference, preferenceHelper).getAllGridDetails(params, AppConstant.ServerAPICalls.GET_COMPANYPROFILE, false, new WebAppManager.APIStringRequestDataCallBack() {
             @Override
             public void onSuccess(String response) {
                 // Utils.showToast(activityReference, "Logged in successfully...", AppConstant.TOAST_TYPES.SUCCESS);
-                companyProfileModel =  GsonHelper.GsonToCompanyProfile(response);
+                companyProfileModel = GsonHelper.GsonToCompanyProfile(response);
                 //JSONArray recordsArray = responseObj.getJSONArray("records");
                 // String recordsArrayString = recordsArray.toString();
-
 
 
                 mapFragment = new MapFragment(activityReference, new MapReadyListener() {
                     @Override
                     public void onMapReady(GoogleMap googleMap) {
-                        if(isAdded()&&isVisible()) {
+                        if (isAdded() && isVisible()) {
                             setSelectedData();
                         }
 
@@ -180,7 +151,7 @@ ConstraintLayout mainLayout;
                 activityReference.addSupportFragmentWithContainerView(mapFragment, R.id.mapContainer);
 
 
-              //  setSelectedData();
+                //  setSelectedData();
 
             }
 
@@ -196,101 +167,72 @@ ConstraintLayout mainLayout;
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
-public void setViewID(String id,String reqType){
+    public void setViewID(String id, String reqType) {
 
 
-    profileID = id;
-    strReqType = reqType;
+        profileID = id;
+        strReqType = reqType;
 
-};
+    }
 
+    ;
 
 
     private void setSelectedData() {
 
         tvName.setText(companyProfileModel.getCompanyName());
-                tvPhone.setText(companyProfileModel.getContactNo());
+        tvPhone.setText(companyProfileModel.getContactNo());
         tvPhone2.setText(companyProfileModel.getPhoneNo());
         tvEmail.setText(companyProfileModel.getEmailAddress());
-                tvWebsite.setText(companyProfileModel.getWebsite());
+        tvWebsite.setText(companyProfileModel.getWebsite());
 
 
-switch (String.valueOf(companyProfileModel.getLinkStatus())){
+        switch (String.valueOf(companyProfileModel.getLinkStatus())) {
 
 
-    case "L":
-        tvLink.setText("Unlink");
-        tvLink.setVisibility(View.VISIBLE);
-        tvUnLink.setVisibility(View.GONE);
-        break;
-    case "N":
-        tvLink.setText("Link");
-        tvLink.setVisibility(View.VISIBLE);
-        tvUnLink.setVisibility(View.GONE);
-        break;
-        case "S":
-        tvLink.setText("Delete Request");
-            tvLink.setVisibility(View.VISIBLE);
-            tvUnLink.setVisibility(View.GONE);
-        break;
-        case "R":
-        tvLink.setText("accept");
-            tvUnLink.setText("Reject");
-            tvLink.setVisibility(View.VISIBLE);
-            tvUnLink.setVisibility(View.VISIBLE);
-        break;
-        default:
-            tvLink.setText("Link");
-            tvLink.setVisibility(View.VISIBLE);
-            tvUnLink.setVisibility(View.GONE);
-            break;
+            case "L":
+                tvLink.setText("Unlink");
+                tvLink.setVisibility(View.VISIBLE);
+                tvUnLink.setVisibility(View.GONE);
+                break;
+            case "N":
+                tvLink.setText("Link");
+                tvLink.setVisibility(View.VISIBLE);
+                tvUnLink.setVisibility(View.GONE);
+                break;
+            case "S":
+                tvLink.setText("Delete Request");
+                tvLink.setVisibility(View.VISIBLE);
+                tvUnLink.setVisibility(View.GONE);
+                break;
+            case "R":
+                tvLink.setText("accept");
+                tvUnLink.setText("Reject");
+                tvLink.setVisibility(View.VISIBLE);
+                tvUnLink.setVisibility(View.VISIBLE);
+                break;
+            default:
+                tvLink.setText("Link");
+                tvLink.setVisibility(View.VISIBLE);
+                tvUnLink.setVisibility(View.GONE);
+                break;
 
 
+        }
 
 
-}
-
-
-        if(profileID.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID())))
-        {  tvLink.setVisibility(View.GONE);
+        if (profileID.equalsIgnoreCase(String.valueOf(preferenceHelper.getCompanyProfile().getCompanyID()))) {
+            tvLink.setVisibility(View.GONE);
             tvUnLink.setVisibility(View.GONE);
         }
 
 
-
-           if(!(companyProfileModel.getShopNo()== null && companyProfileModel.getMarket()== null && companyProfileModel.getArea()== null &&companyProfileModel.getCityID()== null ))
-        tvAddress.setText("Shop # "+ companyProfileModel.getShopNo()==null?"":companyProfileModel.getShopNo()+ " "+companyProfileModel.getMarket()==null?"":companyProfileModel.getMarket()
-                + " "+companyProfileModel.getArea()==null?"":companyProfileModel.getArea()+ " "+companyProfileModel.getCityName()==null?"":companyProfileModel.getCityName());
-
-
-
+        if (!(companyProfileModel.getShopNo() == null && companyProfileModel.getMarket() == null && companyProfileModel.getArea() == null && companyProfileModel.getCityID() == null))
+            tvAddress.setText("Shop # " + companyProfileModel.getShopNo() == null ? "" : companyProfileModel.getShopNo() + " " + companyProfileModel.getMarket() == null ? "" : companyProfileModel.getMarket()
+                    + " " + companyProfileModel.getArea() == null ? "" : companyProfileModel.getArea() + " " + companyProfileModel.getCityName() == null ? "" : companyProfileModel.getCityName());
 
 
         PlacesModel placesModel = new PlacesModel();
@@ -302,7 +244,7 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-        if (mapFragment != null &&( placesModel.getLat()!= 0 && placesModel.getLng() != 0))
+        if (mapFragment != null && (placesModel.getLat() != 0 && placesModel.getLng() != 0))
             mapFragment.addMarker(placesModel);
 //            }
 //        }, 2000);
@@ -326,22 +268,24 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
 
                 ProfileTabsFragment profileTabsFragment = new ProfileTabsFragment();
 
-                activityReference.addSupportFragment(profileTabsFragment, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                activityReference.addSupportFragment(profileTabsFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
             }
         });
 
     }
-    @OnClick({R.id.et_user_link,R.id.et_user_un_link,R.id.products})
+
+    @OnClick({R.id.et_user_link, R.id.et_user_un_link, R.id.products})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.et_user_link:
-                onActionBtnClick(companyProfileModel,view.getTag().toString());
+                onActionBtnClick(companyProfileModel, view.getTag().toString());
                 break;
             case R.id.et_user_un_link:
-                onActionBtnClick(companyProfileModel,view.getTag().toString());
+                onActionBtnClick(companyProfileModel, view.getTag().toString());
 
-                break; case R.id.products:
+                break;
+            case R.id.products:
 
                 Bundle bundle = new Bundle();
                 bundle.putString(ProductListFragment.companyId, profileID);
@@ -355,14 +299,15 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
 
         }
     }
-    protected void onActionBtnClick(CompanyProfileModel companyHeadModel, String tag){
+
+    protected void onActionBtnClick(CompanyProfileModel companyHeadModel, String tag) {
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         mainLayout.setVisibility(View.GONE);
 
         String msgString = null;
         String URL = null;
-        switch (String.valueOf(companyHeadModel.getLinkStatus())){
+        switch (String.valueOf(companyHeadModel.getLinkStatus())) {
 /*
             if(strReqType.equalsIgnoreCase("supplier"))
                 URL =  AppConstant.ServerAPICalls.SEND_SUPPLIER_REQ_URL;
@@ -372,35 +317,34 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
 
 
             case "N":
-                if(strReqType.equalsIgnoreCase("supplier"))
-                URL =  AppConstant.ServerAPICalls.SEND_SUPPLIER_REQ_URL;
-               else
-                    URL =  AppConstant.ServerAPICalls.SEND_CUSTOMER_REQ_URL;
+                if (strReqType.equalsIgnoreCase("supplier"))
+                    URL = AppConstant.ServerAPICalls.SEND_SUPPLIER_REQ_URL;
+                else
+                    URL = AppConstant.ServerAPICalls.SEND_CUSTOMER_REQ_URL;
 
                 break;
             case "S":
-                URL =  AppConstant.ServerAPICalls.CANCEL_REQ_URL;
+                URL = AppConstant.ServerAPICalls.CANCEL_REQ_URL;
                 break;
             case "L":
-                URL =  AppConstant.ServerAPICalls.UNLINKED_REQ_URL;
+                URL = AppConstant.ServerAPICalls.UNLINKED_REQ_URL;
                 break;
             case "R":
-                if(tag.equalsIgnoreCase("add"))
-                    URL =  AppConstant.ServerAPICalls.Accept_REQ_URL;
+                if (tag.equalsIgnoreCase("add"))
+                    URL = AppConstant.ServerAPICalls.Accept_REQ_URL;
                 else
-                    URL =  AppConstant.ServerAPICalls.IGNORE_REQ_URL;
+                    URL = AppConstant.ServerAPICalls.IGNORE_REQ_URL;
                 break;
-                default:
-                    URL =  AppConstant.ServerAPICalls.SEND_SUPPLIER_REQ_URL;
+            default:
+                URL = AppConstant.ServerAPICalls.SEND_SUPPLIER_REQ_URL;
 
-                    break;
+                break;
 
       /*  case "C":
             URL =  AppConstant.ServerAPICalls.CANCEL_REQ_URL;
         break;*/
 
         }
-
 
 
         final HashMap<String, String> params = new HashMap<>();
@@ -427,7 +371,7 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
                             getLinks();
 
                         }*/
-                        Utils.showSnackBar(activityReference,getView(),response,
+                        Utils.showSnackBar(activityReference, getView(), response,
                                 ContextCompat.getColor(activityReference, R.color.grayColor));
 
                     }
@@ -443,8 +387,6 @@ switch (String.valueOf(companyProfileModel.getLinkStatus())){
 
                     }
                 });
-
-
 
 
     }

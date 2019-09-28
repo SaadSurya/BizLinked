@@ -22,14 +22,14 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -107,48 +107,41 @@ import static com.google.android.gms.location.LocationSettingsRequest.Builder;
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
 
-    public Toolbar toolbar;
-
-    TextView supplier, customer, addCategory, categoryList;
-
-
-    private ActionBarDrawerToggle toggle;
-    private BadgeDrawerArrowDrawable badgeDrawable;
-
-
-    private static final String TAG = BaseActivity.class.getSimpleName();
-    private static final int CAMERA_PIC_REQUEST = 110;
-    private static final int LOCATION_REQUEST_CODE = 1100;
-    public BasePreferenceHelper prefHelper;
     public static final String KEY_FRAG_FIRST = "firstFrag";
-    protected Context context;
-    MediaTypePicker mediaPickerListener;
-    ArrayList<String> photoPaths;
     public static final String APP_DIR = "VideoCompressor";
     public static final String COMPRESSED_VIDEOS_DIR = "/Compressed_Videos/";
     public static final String TEMP_DIR = "/Temp/";
-    private boolean loading = false;
+    private static final String TAG = BaseActivity.class.getSimpleName();
+    private static final int CAMERA_PIC_REQUEST = 110;
+    private static final int LOCATION_REQUEST_CODE = 1100;
+    final int FASTEST_INTERVAL = 500;
+    public Toolbar toolbar;
+    public BasePreferenceHelper prefHelper;
+    public BaseFragment baseFragment;
+    protected Context context;
+    TextView supplier, customer, addCategory, categoryList;
+    MediaTypePicker mediaPickerListener;
+    ArrayList<String> photoPaths;
     LocationListener locationListener;
     ProgressBar progressBar;
     FrameLayout progressBarContainer;
+    //    int UPDATE_INTERVAL = 10000;
+    int UPDATE_INTERVAL = 1000;
+    TextView Username;
+    de.hdodenhof.circleimageview.CircleImageView profileImage;
+    //For Places
+    OnActivityResultInterface onActivityResultInterface;
+    DatabaseReference reference;
+    private ActionBarDrawerToggle toggle;
+    private BadgeDrawerArrowDrawable badgeDrawable;
+    private boolean loading = false;
     private Location mLastLocation;
     //For Location
     private GoogleApiClient mGoogleApiClient;
     private Location mLocation;
     private LocationManager locationManager;
     private LocationRequest mLocationRequest;
-    //    int UPDATE_INTERVAL = 10000;
-    int UPDATE_INTERVAL = 1000;
-    final int FASTEST_INTERVAL = 500;
-
-    TextView Username;
-    de.hdodenhof.circleimageview.CircleImageView profileImage;
-
-
-    //For Places
-    OnActivityResultInterface onActivityResultInterface;
     private FirebaseDatabase firebaseDatabase;
-    DatabaseReference reference;
 
     //For Location
     //Abstract Methods
@@ -157,9 +150,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     public abstract int getFragmentFrameLayoutId();
 
     protected abstract void onViewReady();
-
-    public BaseFragment baseFragment;
-
 
     protected ViewGroup getMainView() {
         return (ViewGroup) ((ViewGroup) this
@@ -243,6 +233,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         intent.putExtra(ErrorScreen.STACK_TRACE, throwable.toString());
         startActivity(intent);
     }
+
     public void setFireBase() {
         //  addMenuBadge(true);
 
@@ -969,84 +960,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         return cursor.getString(idx);
     }
 
-    private class AsyncTaskRunner extends AsyncTask<ArrayList<String>, ArrayList<File>, ArrayList<File>> {
-
-        ProgressDialog progressDialog;
-
-        @Override
-        protected ArrayList<File> doInBackground(ArrayList<String>... params) {
-
-            ArrayList<File> compressedAndVideoImageFileList = new ArrayList<>();
-
-            for (int index = 0; index < params[0].size(); index++) {
-
-                File file = new File(params[0].get(index));
-
-                if (file.toString().endsWith(".jpg") ||
-                        file.toString().endsWith(".jpeg") ||
-                        file.toString().endsWith(".png") ||
-                        file.toString().endsWith(".gif")) {
-                    try {
-                        File compressedImageFile = new Compressor(BaseActivity.this).compressToFile(file, "compressed_" + file.getName());
-                        Bitmap bitmap = BitmapFactory.decodeFile(compressedImageFile.getPath());
-                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
-                        byte[] bitmapdata = bos.toByteArray();
-//write the bytes in file
-                        FileOutputStream fos = new FileOutputStream(compressedImageFile);
-                        fos.write(bitmapdata);
-                        fos.flush();
-                        fos.close();
-                        compressedAndVideoImageFileList.add(compressedImageFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    if (!file.toString().endsWith(".3gp")) {
-                        createCompressDir();
-                        String compressVideoPath = Environment.getExternalStorageDirectory()
-                                + File.separator
-                                + APP_DIR
-                                + COMPRESSED_VIDEOS_DIR
-                                + "VIDEO_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".mp4";
-
-                        boolean isCompressSuccess = MediaController.getInstance().convertVideo(file.getAbsolutePath(), compressVideoPath);
-
-                        if (isCompressSuccess) {
-                            compressedAndVideoImageFileList.add(new File(compressVideoPath));
-                        } else {
-                            compressedAndVideoImageFileList.add(file);
-                        }
-
-                    } else {
-                        compressedAndVideoImageFileList.add(file);
-                    }
-                }
-            }
-            return compressedAndVideoImageFileList;
-        }
-
-
-        @Override
-        protected void onPostExecute(ArrayList<File> result) {
-            // execution of result of Long time consuming operation
-            progressDialog.dismiss();
-            mediaPickerListener.onPhotoClicked(result);
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(BaseActivity.this,
-                    context.getString(R.string.app_name),
-                    context.getString(R.string.compressing_please_wait));
-            progressDialog.setCancelable(false);
-            progressDialog.setIndeterminate(true);
-        }
-
-
-    }
-
     private void createCompressDir() {
         File filedir = new File(Environment.getExternalStorageDirectory(), File.separator + APP_DIR);
         if (!filedir.exists()) {
@@ -1062,7 +975,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
 
     }
-
 
     // Location Work
     public Location getLastLocation() {
@@ -1183,7 +1095,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     }
 
-
     @Override
     public void onConnectionSuspended(int i) {
         Log.i(TAG, "Connection Suspended");
@@ -1287,7 +1198,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         this.onActivityResultInterface = activityResultInterface;
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -1369,6 +1279,84 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<ArrayList<String>, ArrayList<File>, ArrayList<File>> {
+
+        ProgressDialog progressDialog;
+
+        @Override
+        protected ArrayList<File> doInBackground(ArrayList<String>... params) {
+
+            ArrayList<File> compressedAndVideoImageFileList = new ArrayList<>();
+
+            for (int index = 0; index < params[0].size(); index++) {
+
+                File file = new File(params[0].get(index));
+
+                if (file.toString().endsWith(".jpg") ||
+                        file.toString().endsWith(".jpeg") ||
+                        file.toString().endsWith(".png") ||
+                        file.toString().endsWith(".gif")) {
+                    try {
+                        File compressedImageFile = new Compressor(BaseActivity.this).compressToFile(file, "compressed_" + file.getName());
+                        Bitmap bitmap = BitmapFactory.decodeFile(compressedImageFile.getPath());
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+                        byte[] bitmapdata = bos.toByteArray();
+//write the bytes in file
+                        FileOutputStream fos = new FileOutputStream(compressedImageFile);
+                        fos.write(bitmapdata);
+                        fos.flush();
+                        fos.close();
+                        compressedAndVideoImageFileList.add(compressedImageFile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    if (!file.toString().endsWith(".3gp")) {
+                        createCompressDir();
+                        String compressVideoPath = Environment.getExternalStorageDirectory()
+                                + File.separator
+                                + APP_DIR
+                                + COMPRESSED_VIDEOS_DIR
+                                + "VIDEO_" + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date()) + ".mp4";
+
+                        boolean isCompressSuccess = MediaController.getInstance().convertVideo(file.getAbsolutePath(), compressVideoPath);
+
+                        if (isCompressSuccess) {
+                            compressedAndVideoImageFileList.add(new File(compressVideoPath));
+                        } else {
+                            compressedAndVideoImageFileList.add(file);
+                        }
+
+                    } else {
+                        compressedAndVideoImageFileList.add(file);
+                    }
+                }
+            }
+            return compressedAndVideoImageFileList;
+        }
+
+
+        @Override
+        protected void onPostExecute(ArrayList<File> result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+            mediaPickerListener.onPhotoClicked(result);
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(BaseActivity.this,
+                    context.getString(R.string.app_name),
+                    context.getString(R.string.compressing_please_wait));
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
+        }
+
+
     }
 
 

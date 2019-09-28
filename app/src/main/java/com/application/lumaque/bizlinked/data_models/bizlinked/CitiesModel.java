@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class CitiesModel implements Serializable {
 
 
-
-  String CityID;
-  String CityName;
+    String CityID;
+    String CityName;
+    String CountryID;
 
     public String getCityID() {
         return CityID;
@@ -32,6 +32,4 @@ public class CitiesModel implements Serializable {
     public void setCountryID(String countryID) {
         CountryID = countryID;
     }
-
-    String         CountryID;
 }

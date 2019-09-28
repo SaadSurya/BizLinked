@@ -51,13 +51,11 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ProfileDetailTabFragment extends Fragment implements MediaTypePicker {
+    private static ProfileDetailTabFragment profileDetailTabFragment;
     ArrayList<BusinessNatureModel> BusinessNatureList;
-
-
     boolean isImageSet = false;
     @BindView(R.id.profile_picture)
     ImageView profilePic;
-
     @BindView(R.id.et_user_name)
     EditText etUserName;
     @BindView(R.id.sp_busines_type)
@@ -72,15 +70,11 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
     EditText etWebsite;
     @BindView(R.id.btn_save)
     Button btSave;
-
-
     ProfileTabsFragment parentFragment;
-
-    private String selectedViewName;
     Unbinder unbinder;
     BaseActivity activityReference;
     BasePreferenceHelper preferenceHelper;
-    private static ProfileDetailTabFragment profileDetailTabFragment;
+    private String selectedViewName;
 
     // private int position;
     // private View currentImageContainerView;
@@ -166,7 +160,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
 
                 companyProfileModel.setBusinessNature(preferenceHelper.getCompanyProfile().getBusinessNature());
                 companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-            //    companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
+                //    companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
                 companyProfileModel.setCompanyName(etUserName.getText().toString());
                 companyProfileModel.setContactNo(etPhone.getText().toString());
                 companyProfileModel.setPhoneNo(etPhone2.getText().toString());
@@ -227,7 +221,7 @@ public class ProfileDetailTabFragment extends Fragment implements MediaTypePicke
         int BN[] = {Integer.parseInt(BusinessNatureList.get(spBusinesType.getSelectedItemPosition()).getBusinessNatureID())};
 
         companyProfileModel.setCompanyID(preferenceHelper.getCompanyProfile().getCompanyID());
-       // companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
+        // companyProfileModel.setProductMajorCategoryID(preferenceHelper.getCompanyProfile().getProductMajorCategoryID());
         companyProfileModel.setCompanyName(etUserName.getText().toString());
         companyProfileModel.setContactNo(etPhone.getText().toString());
         companyProfileModel.setPhoneNo(etPhone2.getText().toString());

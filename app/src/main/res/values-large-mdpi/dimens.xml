@@ -264,25 +264,6 @@
     <dimen name="x350">525dp</dimen>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <dimen name="s1_">-1.5sp</dimen>
     <dimen name="s2_">-3sp</dimen>
     <dimen name="s3_">-4.5sp</dimen>
@@ -376,7 +357,6 @@
     <dimen name="s49">73.5sp</dimen>
     <dimen name="s50">75sp</dimen>
     <dimen name="s55">82.5sp</dimen>
-
 
 
     <dimen name="dots_height_">30dp</dimen>

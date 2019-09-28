@@ -6,13 +6,15 @@ import java.io.InputStream;
 import java.util.Map;
 
 
-
 public class InputStreamNetworkResponse extends NetworkResponse {
+    public final InputStream ins;
+
     /**
      * Creates a new network response.
-     * @param statusCode the HTTP status code
-     * @param data Response body
-     * @param headers Headers returned with this response, or null for none
+     *
+     * @param statusCode  the HTTP status code
+     * @param data        Response body
+     * @param headers     Headers returned with this response, or null for none
      * @param notModified True if the server returned a 304 and the data was already in cache
      */
     public InputStreamNetworkResponse(int statusCode, byte[] data, InputStream ins, Map<String, String> headers,
@@ -30,7 +32,5 @@ public class InputStreamNetworkResponse extends NetworkResponse {
         super(data, headers);
         this.ins = ins;
     }
-
-    public final InputStream ins;
 }
 

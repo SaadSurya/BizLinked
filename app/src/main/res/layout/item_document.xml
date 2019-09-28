@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,30 +12,12 @@
         android:orientation="horizontal"
         android:padding="@dimen/x7">
 
-        <TextView
-            android:id="@+id/tvDocumentSNo"
-            style="?attr/documentRequestTableInfoTextStyle"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:gravity="center"
-            android:text="01"/>
-
-        <TextView
-            android:id="@+id/tvDocumentDescription"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            style="?attr/documentRequestTableInfoTextStyle"
-            android:text="Document Description Here"/>
-
-
         <FrameLayout
             android:id="@+id/flDocumentStatus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.10"
             android:layout_gravity="center"
+            android:layout_weight="0.10"
 
             android:gravity="center">
 
@@ -44,12 +25,11 @@
                 android:id="@+id/viewDocumentStatus"
                 android:layout_width="@dimen/x5"
                 android:layout_height="match_parent"
-                android:background="@color/red"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:background="@color/red" />
 
 
         </FrameLayout>
-
 
         <FrameLayout
             android:id="@+id/flDocumentActionButton"
@@ -68,10 +48,29 @@
 
         </FrameLayout>
 
+
+        <TextView
+            android:id="@+id/tvDocumentSNo"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:text="01" />
+
+
+        <TextView
+            android:id="@+id/tvDocumentDescription"
+            style="?attr/documentRequestTableInfoTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Document Description Here" />
+
     </LinearLayout>
 
     <View
         style="?attr/supportCenterInfoSeperaterLineStyle"
-        android:layout_margin="@dimen/x0"/>
+        android:layout_margin="@dimen/x0" />
 
 </LinearLayout>

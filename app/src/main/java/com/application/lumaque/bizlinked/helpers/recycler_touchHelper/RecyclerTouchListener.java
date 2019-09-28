@@ -11,8 +11,8 @@ import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
-    private GestureDetector gestureDetector;
     public ClickListenerRecycler clickListener;
+    private GestureDetector gestureDetector;
 
     public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListenerRecycler clickListener) {
         this.clickListener = clickListener;
@@ -31,8 +31,6 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
             }
         });
     }
-
-
 
 
     @Override

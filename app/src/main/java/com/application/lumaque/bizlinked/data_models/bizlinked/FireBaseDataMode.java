@@ -5,13 +5,12 @@ import java.util.Map;
 public class FireBaseDataMode {
 
 
+    String screen;
+    String text;
+    Map<String, Object> data;
 
     public FireBaseDataMode() {
     }
-
-
-    String screen;
-    String text;
 
     public Map<String, Object> getData() {
         return data;
@@ -20,9 +19,6 @@ public class FireBaseDataMode {
     public void setData(Map<String, Object> data) {
         this.data = data;
     }
-
-    Map<String,Object> data;
-
 
     public String getScreen() {
         return screen;

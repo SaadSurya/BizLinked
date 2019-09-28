@@ -185,6 +185,7 @@ public class Utils {
 
 
     }
+
     public static byte[] getBytes(File file) {
 
         byte[] fileByteArray = new byte[(int) file.length()];
@@ -200,6 +201,7 @@ public class Utils {
 
         return fileByteArray;
     }
+
     public static void makeLinks(CheckBox checkBox, String[] links, ClickableSpan[] clickableSpans) {
         Spannable mySpannable = (Spannable) checkBox.getText();
         for (int i = 0; i < links.length; i++) {
@@ -679,10 +681,10 @@ public class Utils {
 
     }
 
-    public static String getProdImgURL(String companyID, String ProductID){
+    public static String getProdImgURL(String companyID, String ProductID) {
 
 
-        return AppConstant.ServerAPICalls.GET_PRODUCT_IMG+"companyId="+companyID+"&imageId="+ProductID;
+        return AppConstant.ServerAPICalls.GET_PRODUCT_IMG + "companyId=" + companyID + "&imageId=" + ProductID;
     }
 
 

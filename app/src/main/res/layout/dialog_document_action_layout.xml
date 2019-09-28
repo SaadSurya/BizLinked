@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/x20"
-    android:paddingBottom="@dimen/x20"
-    android:paddingStart="@dimen/x10"
-    android:paddingEnd="@dimen/x10"
     android:background="@drawable/dialog_document_action_bg"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    android:paddingStart="@dimen/x10"
+    android:paddingTop="@dimen/x20"
+    android:paddingEnd="@dimen/x10"
+    android:paddingBottom="@dimen/x20">
 
     <Button
         android:id="@+id/btnScan"
         style="?attr/customerComplainButtonStyle"
-        android:text="@string/scan"/>
+        android:text="@string/scan" />
 
     <Button
         android:id="@+id/btnView"
         style="?attr/customerComplainButtonStyle"
-        android:text="@string/view"/>
+        android:text="@string/view" />
 
     <Button
         android:id="@+id/btnUpload"
         style="?attr/customerComplainButtonStyle"
         android:text="@string/upload" />
-
 
 
 </LinearLayout>

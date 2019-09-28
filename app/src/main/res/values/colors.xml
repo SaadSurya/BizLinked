@@ -66,8 +66,8 @@
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!-- App Theme Color-->
- <!--   <color name="appThemeColor">#23B2C0</color>-->
-   <!-- <color name="appThemeColor">#2D5150</color>-->
+    <!--   <color name="appThemeColor">#23B2C0</color>-->
+    <!-- <color name="appThemeColor">#2D5150</color>-->
     <color name="appThemeColor">#6d0135</color>
     <color name="appPrimaryColor">#272C32</color>
 
@@ -113,6 +113,6 @@
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
     <!-- Custom Signature View Color-->
-        <color name="penRoyalBlue">#4169e1</color>
+    <color name="penRoyalBlue">#4169e1</color>
     <!-- Custom Signature View Color-->
 </resources>

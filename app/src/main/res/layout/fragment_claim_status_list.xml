@@ -12,7 +12,6 @@
             android:text="@string/claim_list" />
 
 
-
         <!-- Table For Document  -->
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"

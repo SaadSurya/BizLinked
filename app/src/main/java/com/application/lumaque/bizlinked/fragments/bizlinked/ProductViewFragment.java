@@ -17,11 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -51,56 +49,42 @@ import me.relex.circleindicator.CircleIndicator;
 public class ProductViewFragment extends BaseFragment implements TagCloseCallBack {
 
 
+    public static final String companyId = "companyId";
+    public static final String productId = "productId";
+    public static final String categoryId = "categoryId";
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout mShimmerViewContainer;
-
     @BindView(R.id.mainlayout)
     ConstraintLayout mainlayout;
-
     @BindView(R.id.viewpager)
     ViewPager viewpager;
-
     @BindView(R.id.indicator)
     CircleIndicator indicator;
-
     @BindView(R.id.pro_category)
     AutoCompleteTextView proCate;
-
-
     @BindView(R.id.pro_name)
     EditText proName;
-
     @BindView(R.id.pro_desc)
     EditText proDesc;
-
     @BindView(R.id.pro_price)
     EditText proPrice;
-
-
     @BindView(R.id.fab_add_image)
     ImageButton fabAddImage;
-
-
-
     @BindView(R.id.product_desc_view)
     ScrollView productDescView;
-
     @BindView(R.id.attribute_layout)
     RecyclerView attributeLayout;
     TextView pubUnPub;
-
-    private Bundle bundle;
-    private Product product;
     int paramCompanyId;
     String paramProductId = "";
     String paramCategoryId = "";
     List<String> ImageList = new ArrayList<>();
-    private CustomPagerAdapter viewpagerAdapter;
-    public static final String companyId = "companyId";
-    public static final String productId = "productId";
-    public static final String categoryId = "categoryId";
     ArrayList<File> imageFile;
     TagViewAdapter tagItemAdapter;
+    private Bundle bundle;
+    private Product product;
+    private CustomPagerAdapter viewpagerAdapter;
+
     @Override
     public void onCustomBackPressed() {
         activityReference.onPageBack();
@@ -121,7 +105,7 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
         setArguments();
 
 
-        if(paramCompanyId==((preferenceHelper.getCompanyProfile().getCompanyID())))
+        if (paramCompanyId == ((preferenceHelper.getCompanyProfile().getCompanyID())))
             setHasOptionsMenu(true);
         else
             setHasOptionsMenu(false);
@@ -136,13 +120,12 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
     }
 
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.view_product_menu, menu);
-       // super.onCreateOptionsMenu(menu);
+        // super.onCreateOptionsMenu(menu);
         //getMenuInflater().inflate(R.menu.activity_main, menu);
-      //  return true;
+        //  return true;
 
         final MenuItem item2 = menu.findItem(R.id.action_view_publish);
         pubUnPub = (TextView) MenuItemCompat.getActionView(item2);
@@ -151,11 +134,10 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
         pubUnPub.setTypeface(null, Typeface.BOLD);
 
 
-
         pubUnPub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(product.IsPublished)
+                if (product.IsPublished)
                     publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
                 else
                     publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
@@ -170,20 +152,20 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
             case R.id.action_view_profile:
                 Bundle bundle = new Bundle();
                 bundle.putInt(companyId, paramCompanyId);
-                bundle.putString(productId,paramProductId);
+                bundle.putString(productId, paramProductId);
 
                 ProductFragment ProductFragment = new ProductFragment();
                 ProductFragment.setArguments(bundle);
                 activityReference.addSupportFragment(ProductFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
 
                 return true;
-        case R.id.action_view_publish:
-            if(product.IsPublished)
-                publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
-            else
-                publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
+            case R.id.action_view_publish:
+                if (product.IsPublished)
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
+                else
+                    publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_PUBLISH);
 
-            return true;
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -235,12 +217,11 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
                 getBaseActivity().toolbar.setTitle(product.getProductName());
 
 
-                if(product.IsPublished){
+                if (product.IsPublished) {
                     pubUnPub.setText("unpublish");
-                }else {
+                } else {
                     pubUnPub.setText("Publish");
                 }
-
 
 
             }
@@ -260,7 +241,6 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
 
 
     }
-
 
 
     private void setArguments() {
@@ -295,6 +275,54 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
+
+    }
+
+    private void setTagAdapter() {
+        tagItemAdapter = new TagViewAdapter(activityReference, product.getProductAttributes(), this);
+        attributeLayout.setLayoutManager(new LinearLayoutManager(activityReference));
+        attributeLayout.setAdapter(tagItemAdapter);
+        attributeLayout.setNestedScrollingEnabled(false);
+    }
+
+    private void publishUnpublishProduct(String URL) {
+        final HashMap<String, String> params = new HashMap<>();
+
+        //params.put("productId", String.valueOf(product.getProductID()));
+        URL = URL + "?productId=" + product.getProductID();
+
+        WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
+                Request.Method.PUT,
+                params, URL, new WebAppManager.APIStringRequestDataCallBack() {
+                    @Override
+                    public void onSuccess(String response) {
+
+                        Utils.showToast(activityReference, "Status Updated", AppConstant.TOAST_TYPES.SUCCESS);
+
+
+                       /* if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
+                            activityReference.clearStackTillFragment(
+                                    ProductViewFragment.class.getName()
+                            );
+                        } else {
+                            onCustomBackPressed();
+                        }
+*/
+
+
+                    }
+
+                    @Override
+                    public void onError(String response) {
+                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
+
+                    }
+
+                    @Override
+                    public void onNoNetwork() {
+
+                    }
+                });
 
     }
 
@@ -357,55 +385,6 @@ public class ProductViewFragment extends BaseFragment implements TagCloseCallBac
             // ModelObject customPagerEnum = ModelObject.values()[position];
             return ImageList.get(position);
         }
-
-    }
-
-    private void setTagAdapter() {
-        tagItemAdapter = new TagViewAdapter(activityReference, product.getProductAttributes(), this);
-        attributeLayout.setLayoutManager(new LinearLayoutManager(activityReference));
-        attributeLayout.setAdapter(tagItemAdapter);
-        attributeLayout.setNestedScrollingEnabled(false);
-        }
-
-    private void publishUnpublishProduct(String URL){
-        final HashMap<String, String> params = new HashMap<>();
-
-        //params.put("productId", String.valueOf(product.getProductID()));
-        URL= URL + "?productId="+product.getProductID();
-
-        WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
-                Request.Method.PUT,
-                params,URL, new WebAppManager.APIStringRequestDataCallBack() {
-                    @Override
-                    public void onSuccess(String response) {
-
-                        Utils.showToast(activityReference, "Status Updated", AppConstant.TOAST_TYPES.SUCCESS);
-
-
-                       /* if (activityReference.isFragmentPresent(ProductViewFragment.class.getName())) {
-                            activityReference.clearStackTillFragment(
-                                    ProductViewFragment.class.getName()
-                            );
-                        } else {
-                            onCustomBackPressed();
-                        }
-*/
-
-
-
-                    }
-
-                    @Override
-                    public void onError(String response) {
-                        //     Utils.showToast(activityReference, "error", AppConstant.TOAST_TYPES.SUCCESS);
-
-                    }
-
-                    @Override
-                    public void onNoNetwork() {
-
-                    }
-                });
 
     }
 

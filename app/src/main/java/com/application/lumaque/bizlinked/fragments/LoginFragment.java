@@ -68,10 +68,9 @@ public class LoginFragment extends BaseFragment {
     protected void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView) {
 
         setupAnimation(rootView);
-    //    getCaptcha();
+        //    getCaptcha();
 
     }
-
 
 
     private void setupAnimation(final View rootView) {
@@ -79,12 +78,12 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void run() {
                 int duration = 300;
-                for (int index = 0; index < ((ViewGroup)rootView).getChildCount(); index++) {
+                for (int index = 0; index < ((ViewGroup) rootView).getChildCount(); index++) {
                     AnimationHelpers.animation(Techniques.SlideInDown, duration, ((ViewGroup) rootView).getChildAt(index));
-                    duration+=50;
+                    duration += 50;
                 }
             }
-        },500);
+        }, 500);
     }
 
     @Override
@@ -112,7 +111,6 @@ public class LoginFragment extends BaseFragment {
         }
 
 
-
     }
 
 
@@ -126,14 +124,13 @@ public class LoginFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ivbRefreshIcon:
-           //     getCaptcha();
+                //     getCaptcha();
                 break;
             case R.id.btn_login:
                 validateFields();
                 break;
         }
     }
-
 
 
 }

@@ -9,11 +9,6 @@
         android:background="@color/support_center_info_bg"
         android:orientation="vertical">
 
-        <TextView
-            style="?attr/allPageCardHeaderStyle"
-            android:drawableStart="@drawable/ic_mic"
-            android:text="@string/voice_recording" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +24,6 @@
                 android:orientation="vertical">
 
 
-
                 <!-- Table For Document  -->
                 <android.support.v4.widget.SwipeRefreshLayout
                     android:id="@+id/swipeRefresh"
@@ -43,7 +37,7 @@
                         android:layout_height="match_parent"
                         android:clickable="true"
                         android:focusable="true"
-                        android:focusableInTouchMode="true"/>
+                        android:focusableInTouchMode="true" />
 
                 </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -56,8 +50,8 @@
                 android:id="@+id/llAudioPlayerControllerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:animateLayoutChanges="true"
+                android:orientation="vertical"
                 android:visibility="invisible">
 
                 <!-- Recording Table List -->
@@ -65,9 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x10"
-                    android:orientation="horizontal"
-                    android:animateLayoutChanges="true">
-
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
 
 
                     <FrameLayout
@@ -77,35 +70,34 @@
                         android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/ivPauseButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/record_button_bg_drawable"
-                            android:padding="@dimen/x12"
 
-                            android:id="@+id/ivPauseButton"
-                            android:src="@drawable/ic_pause"/>
+                            android:padding="@dimen/x12"
+                            android:src="@drawable/ic_pause" />
 
                         <ImageView
+                            android:id="@+id/ivPlayButton"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/record_button_bg_drawable"
-                            android:padding="@dimen/x12"
 
-                            android:id="@+id/ivPlayButton"
+                            android:padding="@dimen/x12"
                             android:src="@drawable/ic_play" />
 
                     </FrameLayout>
 
 
-
                     <ImageView
+                        android:id="@+id/ivStopButton"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@drawable/record_button_bg_drawable"
-                        android:padding="@dimen/x12"
 
-                        android:id="@+id/ivStopButton"
+                        android:padding="@dimen/x12"
                         android:src="@drawable/ic_stop" />
 
                 </LinearLayout>
@@ -115,35 +107,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x10"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/tvRecordingStartTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        style="?attr/documentRequestTableInfoTextStyle"
-                        android:text="00:00"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <SeekBar
                         android:id="@+id/seekbarRecording"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="@dimen/x2"
+                        android:layout_weight="1"
                         android:progressDrawable="@drawable/recording_seekbar_drawable"
-                        android:thumb="@null"/>
+                        android:thumb="@null" />
+
+                    <TextView
+                        android:id="@+id/tvRecordingStartTime"
+                        style="?attr/documentRequestTableInfoTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="00:00" />
 
                     <TextView
                         android:id="@+id/tvRecordingEndTime"
+                        style="?attr/documentRequestTableInfoTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="?attr/documentRequestTableInfoTextStyle"
-                        android:text="00:00"/>
+                        android:text="00:00" />
 
                 </LinearLayout>
 
             </LinearLayout>
-
 
 
             <com.emrekose.recordbutton.RecordButton
@@ -162,15 +153,20 @@
 
         </LinearLayout>
 
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:drawableStart="@drawable/ic_mic"
+            android:text="@string/voice_recording" />
+
 
     </LinearLayout>
 
     <ProgressBar
+        android:id="@+id/progreessBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:id="@+id/progreessBar"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

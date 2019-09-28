@@ -8,10 +8,6 @@
         android:elevation="@dimen/x10"
         android:orientation="vertical">
 
-        <TextView
-            style="?attr/allPageCardHeaderStyle"
-            android:text="@string/document_requested" />
-
         <LinearLayout
             style="?attr/allPageCardHeaderStyle"
             android:layout_marginTop="@dimen/x2"
@@ -24,13 +20,12 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingBottom="@dimen/x15"
-            android:paddingTop="@dimen/x15">
+            android:paddingTop="@dimen/x15"
+            android:paddingBottom="@dimen/x15">
 
 
             <LinearLayout
@@ -38,31 +33,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="@dimen/x7">
-
-                <TextView
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.40"
-                    android:text="@string/locate_cocument" />
-
-
-                <TextView
-                    android:id="@+id/tvDocumentUploadName"
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/x10"
-                    android:layout_weight="0.50"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:text="Document.pdf"
-                    android:padding="@dimen/x2"
-                    android:textColor="@color/customer_support_center_seperater_color"
-                    android:background="@drawable/edittext_borderline"/>
-
 
                 <FrameLayout
                     android:id="@+id/flDocumentBrowseButton"
@@ -81,10 +51,40 @@
 
                 </FrameLayout>
 
+
+                <TextView
+                    android:id="@+id/tvDocumentUploadName"
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/x10"
+                    android:layout_weight="0.50"
+                    android:background="@drawable/edittext_borderline"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:padding="@dimen/x2"
+                    android:text="Document.pdf"
+                    android:textColor="@color/customer_support_center_seperater_color" />
+
+
+                <TextView
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.40"
+                    android:text="@string/locate_cocument" />
+
             </LinearLayout>
 
 
         </LinearLayout>
+
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/document_requested" />
 
 
     </LinearLayout>

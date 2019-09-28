@@ -6,12 +6,17 @@ import java.util.List;
 public class Product implements Serializable {
 
 
-
-    public int CompanyID ;
-    public long ProductID ;
-    public String ProductName ;
-    public String ProductDescription ;
-    public double Price ;
+    public int CompanyID;
+    public long ProductID;
+    public String ProductName;
+    public String ProductDescription;
+    public double Price;
+    public boolean IsPublished;
+    public boolean Notify;
+    public long ProductCategoryID;
+    public String ProductCategoryName;
+    public List<String> Images;
+    public List<ProductAttribute> ProductAttributes;
 
     public boolean isPublished() {
         return IsPublished;
@@ -21,8 +26,6 @@ public class Product implements Serializable {
         IsPublished = published;
     }
 
-    public boolean IsPublished;
-
     public boolean isNotify() {
         return Notify;
     }
@@ -30,12 +33,6 @@ public class Product implements Serializable {
     public void setNotify(boolean notify) {
         Notify = notify;
     }
-
-    public boolean Notify;
-    public long ProductCategoryID ;
-    public String ProductCategoryName ;
-    public List<String> Images ;
-    public List<ProductAttribute> ProductAttributes;
 
     public int getCompanyID() {
         return CompanyID;

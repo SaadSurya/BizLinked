@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="?attr/supportCenterInfoBgStyle"
     android:layout_margin="@dimen/x0"
-    android:padding="@dimen/x0"
-    android:background="@null">
+    android:background="@null"
+    android:padding="@dimen/x0">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,79 +11,6 @@
         android:elevation="@dimen/x10"
         android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="@dimen/x10">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/x7">
-
-                <TextView
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.35"
-                    android:text="@string/hospital_name" />
-
-
-                <EditText
-                    android:id="@+id/tvHospitalName"
-
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.65"
-                    android:background="@drawable/non_panel_hospital_bg"
-                    android:imeOptions="actionDone"
-
-                    android:inputType="text"
-                    android:padding="@dimen/x5" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/x7">
-
-                <TextView
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.35"
-                    android:text="@string/nearest_land_mark" />
-
-
-                <EditText
-                    android:id="@+id/tvLandmark"
-
-                    style="?attr/documentRequestTableInfoTextStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.65"
-                    android:background="@drawable/non_panel_hospital_bg"
-                    android:imeOptions="actionDone"
-
-                    android:inputType="text"
-                    android:padding="@dimen/x5" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/mapContainer"
@@ -109,6 +36,79 @@
                 android:theme="@style/secondaryColorCheckBox" />
 
         </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/x10">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/x7">
+
+                <EditText
+                    android:id="@+id/tvHospitalName"
+
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.65"
+                    android:background="@drawable/non_panel_hospital_bg"
+                    android:imeOptions="actionDone"
+
+                    android:inputType="text"
+                    android:padding="@dimen/x5" />
+
+
+                <TextView
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:text="@string/hospital_name" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/x7">
+
+                <EditText
+                    android:id="@+id/tvLandmark"
+
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.65"
+                    android:background="@drawable/non_panel_hospital_bg"
+                    android:imeOptions="actionDone"
+
+                    android:inputType="text"
+                    android:padding="@dimen/x5" />
+
+
+                <TextView
+                    style="?attr/documentRequestTableInfoTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.35"
+                    android:text="@string/nearest_land_mark" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

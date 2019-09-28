@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class MajorCategoryModel implements Serializable {
 
     String MajorCategoryID;
+    String MajorCategoryName;
 
     public String getMajorCategoryID() {
         return MajorCategoryID;
@@ -21,7 +22,5 @@ public class MajorCategoryModel implements Serializable {
     public void setMajorCategoryName(String majorCategoryName) {
         MajorCategoryName = majorCategoryName;
     }
-
-    String MajorCategoryName;
 
 }

@@ -77,7 +77,7 @@ public class VolleyHelper {
                         }
 
                     }
-break;
+                    break;
                 default:
                     try {
                         jsonObj = new JSONObject(respData);
@@ -88,11 +88,9 @@ break;
                         } catch (Exception e1) {
                             e1.printStackTrace();
                             //ret = SSCApplication.getContext().getResources().getString(R.string.ws_error_general);
-                            if(ret.equals("Server Error"))
-                            {
+                            if (ret.equals("Server Error")) {
                                 ret = context.getResources().getString(R.string.server_error);
-                            }else
-                            {
+                            } else {
 
                                 ret = respData;
                             }

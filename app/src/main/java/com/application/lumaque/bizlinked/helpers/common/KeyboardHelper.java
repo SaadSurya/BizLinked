@@ -25,6 +25,7 @@ public class KeyboardHelper {
         }
 
     }
+
     public static void hideSoftKeyboard(Activity activity) {
         if (activity.getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);

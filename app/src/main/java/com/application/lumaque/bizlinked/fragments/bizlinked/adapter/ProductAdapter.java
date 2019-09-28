@@ -10,13 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.application.lumaque.bizlinked.R;
-import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.signature.ObjectKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,23 +24,18 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ArrayList<Product> productsList;
 
 
-
-
     public ProductAdapter(Context context, List<Product> categoryRecord) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-      //  this.headerData = new ArrayList<>();
+        //  this.headerData = new ArrayList<>();
         this.productsList = new ArrayList<>();
         this.productsList.addAll(categoryRecord);
 
     }
 
 
-
-
-
     public void clearAllList() {
-      //  headerData.clear();
+        //  headerData.clear();
         productsList.clear();
     }
 
@@ -66,34 +58,29 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
         Product currentObject = productsList.get(position);
 
-                ((ItemViewHolder) holder).productName.setText(currentObject.getProductName());
-                ((ItemViewHolder) holder).productPrice.setText(String.valueOf(currentObject.getPrice()));
-                //((ItemViewHolder) holder).productDesc.setText(currentObject.getProductDescription());
+        ((ItemViewHolder) holder).productName.setText(currentObject.getProductName());
+        ((ItemViewHolder) holder).productPrice.setText(String.valueOf(currentObject.getPrice()));
+        //((ItemViewHolder) holder).productDesc.setText(currentObject.getProductDescription());
 
         //String abc = String.valueOf(currentObject.getCompanyID());
         String abc = "0";
-        if(currentObject.getImages().size()>0){
+        if (currentObject.getImages().size() > 0) {
 
             abc = currentObject.getImages().get(0);
         }
 
 
-        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()),abc))
+        Glide.with(context).load(Utils.getProdImgURL(String.valueOf(currentObject.getCompanyID()), abc))
                 .apply(new RequestOptions().centerCrop())
                 .into(((ItemViewHolder) holder).categoryImg);
 
 
-
-
     }
-
-
 
 
     @Override
@@ -102,14 +89,11 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-
-
     public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 
         private ImageView categoryImg;
-private TextView productName,productDesc,productPrice;
-
+        private TextView productName, productDesc, productPrice;
 
 
         ItemViewHolder(View view) {
@@ -119,12 +103,12 @@ private TextView productName,productDesc,productPrice;
 
             categoryImg = view.findViewById(R.id.category_img);
 
-            productName  = view.findViewById(R.id.product_name);
-           // productDesc  = view.findViewById(R.id.product_desc);
-            productPrice  = view.findViewById(R.id.product_price);
+            productName = view.findViewById(R.id.product_name);
+            // productDesc  = view.findViewById(R.id.product_desc);
+            productPrice = view.findViewById(R.id.product_price);
 
 
-       //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
+            //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
         }
 
 

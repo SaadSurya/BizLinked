@@ -11,7 +11,8 @@ public class PlacesModel {
     private double destFrom;
 
 
-    public PlacesModel(){}
+    public PlacesModel() {
+    }
 
     public PlacesModel(String hospCode, double lat, double lng, String name, double rate, double destFrom) {
         this.hospCode = hospCode;

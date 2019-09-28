@@ -17,9 +17,7 @@ public class StartFirebaseAtBoot extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-      //  context.startService(new Intent(context,BackgroundService.class));
-
-
+        //  context.startService(new Intent(context,BackgroundService.class));
 
 
         FirebaseApp.initializeApp(context);
@@ -32,10 +30,10 @@ public class StartFirebaseAtBoot extends BroadcastReceiver {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-                HashMap<String,Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
+                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
 
 
-           //     createNotification("tittle", String.valueOf(value.size()));
+                //     createNotification("tittle", String.valueOf(value.size()));
             }
 
             @Override
@@ -45,9 +43,7 @@ public class StartFirebaseAtBoot extends BroadcastReceiver {
         });
 
 
-
-
-      //  activityReference.StartBackgroundService(BackgroundService.class);
+        //  activityReference.StartBackgroundService(BackgroundService.class);
 
     }
 }

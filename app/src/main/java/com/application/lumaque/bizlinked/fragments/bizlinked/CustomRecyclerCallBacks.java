@@ -6,7 +6,9 @@ public interface CustomRecyclerCallBacks {
 
 
     void onImageClick(CompanyHeadModel companyHeadModel);
+
     void onListClick(CompanyHeadModel companyHeadModel);
-    void onActionClick(CompanyHeadModel companyHeadModel,String tag);
+
+    void onActionClick(CompanyHeadModel companyHeadModel, String tag);
 
 }

@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CustomEditText">
-        <attr name="hint" format="string" />
-        <attr name="text" format="string" />
-
-    </declare-styleable>
     <attr name="appThemeColor" format="reference" />
-
     <attr name="tagViewBackgroundImageStyle" format="reference" />
 
-    <!-- Registration Page Attributes -->
     <attr name="splashBackgroundImageStyle" format="reference" />
+
+    <!-- Registration Page Attributes -->
     <attr name="splashLogoImageStyle" format="reference" />
     <attr name="splashQRIconStyle" format="reference" />
     <attr name="roundPrimaryColorStyle" format="reference" />
     <attr name="roundSkyBlueButtonColorStyle" format="reference" />
     <attr name="roundEditTextNormalColorStyle" format="reference" />
-
-
     <attr name="floatingHintEditTextLayout" format="reference" />
+
+
     <attr name="floatingHintEditText" format="reference" />
+    <attr name="titlebarNormalBackgroundStyle" format="reference" />
     <!-- Registration Page Attributes -->
 
 
     <!-- TitleBar Attributes -->
-    <attr name="titlebarNormalBackgroundStyle" format="reference" />
     <attr name="titlebarNormalImageStyle" format="reference" />
     <attr name="titlebarNormalDotsStyle" format="reference" />
+    <attr name="homeNormalBgColorStyle" format="reference" />
     <!-- TitleBar Attributes -->
 
 
     <!-- Home Page Attributes -->
 
-    <attr name="homeNormalBgColorStyle" format="reference" />
     <attr name="homeNormalCircleImageStyle" format="reference" />
     <attr name="homeNormalCircleImageTextStyle" format="reference" />
-
     <attr name="homeNormalBottomTabBgColorStyle" format="reference" />
+
     <attr name="homeNormalBottomTabTextStyle" format="reference" />
+    <attr name="allPageCardHeaderStyle" format="reference" />
 
     <!-- Home Page Attributes -->
 
 
     <!-- All Page Card Header Attributes -->
-    <attr name="allPageCardHeaderStyle" format="reference" />
+    <attr name="supportCenterInfoBgStyle" format="reference" />
     <!-- All Page Card Header Attributes -->
 
     <!-- Support Center Info Attributes -->
-    <attr name="supportCenterInfoBgStyle" format="reference" />
     <attr name="supportCenterInfoNumberHeaderStyle" format="reference" />
     <attr name="supportCenterInfoNumberStyle" format="reference" />
     <attr name="supportCenterInfoSeperaterLineStyle" format="reference" />
     <attr name="supportCenterInfoAddressTextStyle" format="reference" />
+    <attr name="documentDownloadImageStyle" format="reference" />
     <!-- Support Center Info Attributes -->
 
 
     <!-- Document Download Page Attributes -->
-    <attr name="documentDownloadImageStyle" format="reference" />
     <attr name="documentDownloadFileNameStyle" format="reference" />
     <attr name="documentDownloadFileSizeStyle" format="reference" />
+    <attr name="customerComplainEdiTextStyle" format="reference" />
     <!-- Document Download Page Attributes -->
 
     <!-- Customer Complain Page Attributes -->
-    <attr name="customerComplainEdiTextStyle" format="reference" />
     <attr name="customerComplainButtonStyle" format="reference" />
+    <attr name="documentRequestTableInfoTextStyle" format="reference" />
     <!-- Customer Complain Page Attributes -->
 
     <!--Document Request Page Attributes -->
-    <attr name="documentRequestTableInfoTextStyle" format="reference" />
+    <attr name="tableInfoTextStyleLabel" format="reference" />
     <!-- Document Request Page Attributes -->
 
     <!--Table info label Page Attributes -->
-    <attr name="tableInfoTextStyleLabel" format="reference" />
+    <attr name="tableInfoTextStyleValue" format="reference" />
     <!-- Table info label Page Attributes -->
 
     <!--Table info value Page Attributes -->
-    <attr name="tableInfoTextStyleValue" format="reference" />
+    <attr name="signaturePageCardHeaderStyle" format="reference" />
     <!-- Table info value Page Attributes -->
 
 
     <!-- Signature Header Attributes -->
-    <attr name="signaturePageCardHeaderStyle" format="reference" />
+    <attr name="searchBtnAttrbuteStyle" format="reference" />
     <!-- Signature Header Attributes -->
 
 
     <!-- Map Search Button Attribute -->
-    <attr name="searchBtnAttrbuteStyle" format="reference" />
+    <attr name="withoutRoundSkyBlueButtonColorStyle" format="reference" />
     <!-- Map Search Button Attribute -->
 
 
-    <attr name="withoutRoundSkyBlueButtonColorStyle" format="reference" />
     <attr name="quoteEditItem" format="reference" />
     <attr name="roundHoveredButtonColorStyle" format="reference" />
+    <declare-styleable name="CustomEditText">
+        <attr name="hint" format="string" />
+        <attr name="text" format="string" />
+
+    </declare-styleable>
 
 
     <!-- Custom Signature View Styles-->

@@ -135,7 +135,6 @@ public class MultipartRequest extends Request<NetworkResponse> {
     }
 
 
-
     private void textParse(DataOutputStream dataOutputStream, Map<String, String> params, String encoding) throws IOException {
         try {
             for (Map.Entry<String, String> entry : params.entrySet()) {

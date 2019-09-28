@@ -18,11 +18,6 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <TextView
-                style="?attr/allPageCardHeaderStyle"
-                android:text="@string/get_quote" />
-
-
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,6 +31,11 @@
                     android:orientation="vertical" />
 
             </ScrollView>
+
+
+            <TextView
+                style="?attr/allPageCardHeaderStyle"
+                android:text="@string/get_quote" />
 
         </LinearLayout>
 
@@ -55,6 +55,34 @@
             android:orientation="vertical">
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_decline"
+                    style="?attr/roundHoveredButtonColorStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/x10"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_marginEnd="@dimen/x5"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_weight="0.5"
+                    android:text="@string/decline_text" />
+
+                <Button
+                    android:id="@+id/btn_quotation"
+                    style="?attr/roundHoveredButtonColorStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/x5"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_marginEnd="@dimen/x10"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_weight="0.5"
+                    android:text="@string/continue_text" />
+            </LinearLayout>
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -70,34 +98,6 @@
                     android:orientation="vertical" />
 
             </ScrollView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_decline"
-                    style="?attr/roundHoveredButtonColorStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginBottom="@dimen/x10"
-                    android:layout_marginStart="@dimen/x10"
-                    android:layout_marginEnd="@dimen/x5"
-                    android:layout_marginTop="@dimen/x10"
-                    android:layout_weight="0.5"
-                    android:text="@string/decline_text" />
-
-                <Button
-                    android:id="@+id/btn_quotation"
-                    style="?attr/roundHoveredButtonColorStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginBottom="@dimen/x10"
-                    android:layout_marginStart="@dimen/x5"
-                    android:layout_marginEnd="@dimen/x10"
-                    android:layout_marginTop="@dimen/x10"
-                    android:layout_weight="0.5"
-                    android:text="@string/continue_text" />
-            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 

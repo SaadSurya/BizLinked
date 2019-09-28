@@ -8,9 +8,9 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
+
 import com.application.lumaque.bizlinked.R;
+
 import java.util.List;
 
 public class DialogFactory {
@@ -142,8 +142,8 @@ public class DialogFactory {
                                               DialogInterface.OnClickListener dialogPositive,
                                               CharSequence message,
                                               String title) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(title)
                 .setMessage(message)
@@ -165,18 +165,17 @@ public class DialogFactory {
                                            DialogInterface.OnClickListener dialogPositive,
                                            DialogInterface.OnClickListener dialogNegative, String title,
                                            String message) {
-int a = 1 ;
+        int a = 1;
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-       // alert.setIcon(android.R.drawable.ic_dialog_alert);
+        // alert.setIcon(android.R.drawable.ic_dialog_alert);
         alert.setTitle(title);
-       alert.setMessage(message);
+        alert.setMessage(message);
 
         LayoutInflater vi = (LayoutInflater) activity.getApplicationContext().getSystemService(activity.LAYOUT_INFLATER_SERVICE);
         View input = vi.inflate(R.layout.layout_dialog, null);
 
 
-
-       // final CheckBox input = new CheckBox(activity);
+        // final CheckBox input = new CheckBox(activity);
         input.setId(a);
         alert.setView(input);
 
@@ -202,7 +201,6 @@ int a = 1 ;
         AlertDialog dialog = builderSingle.create();
         dialog.show();
     }
-
 
 
 }

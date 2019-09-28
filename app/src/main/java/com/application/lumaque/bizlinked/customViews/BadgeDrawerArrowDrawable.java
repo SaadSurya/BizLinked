@@ -58,6 +58,10 @@ public class BadgeDrawerArrowDrawable extends DrawerArrowDrawable {
         canvas.drawText(text, x, y + textBounds.height() / 2, textPaint);
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     public void setEnabled(boolean enabled) {
         if (this.enabled != enabled) {
             this.enabled = enabled;
@@ -65,8 +69,8 @@ public class BadgeDrawerArrowDrawable extends DrawerArrowDrawable {
         }
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public String getText() {
+        return text;
     }
 
     public void setText(String text) {
@@ -76,8 +80,8 @@ public class BadgeDrawerArrowDrawable extends DrawerArrowDrawable {
         }
     }
 
-    public String getText() {
-        return text;
+    public int getBackgroundColor() {
+        return backgroundPaint.getColor();
     }
 
     public void setBackgroundColor(int color) {
@@ -87,8 +91,8 @@ public class BadgeDrawerArrowDrawable extends DrawerArrowDrawable {
         }
     }
 
-    public int getBackgroundColor() {
-        return backgroundPaint.getColor();
+    public int getTextColor() {
+        return textPaint.getColor();
     }
 
     public void setTextColor(int color) {
@@ -96,9 +100,5 @@ public class BadgeDrawerArrowDrawable extends DrawerArrowDrawable {
             textPaint.setColor(color);
             invalidateSelf();
         }
-    }
-
-    public int getTextColor() {
-        return textPaint.getColor();
     }
 }

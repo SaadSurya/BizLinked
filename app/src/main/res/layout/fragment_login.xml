@@ -1,9 +1,81 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:background="@color/black"
+    android:gravity="center"
     android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_login"
+        style="?attr/roundSkyBlueButtonColorStyle"
+        android:text="@string/login"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/et_password"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:drawableStart="@drawable/ic_key"
+        android:hint="@string/password_here"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/et_user_name"
+        style="?attr/roundEditTextNormalColorStyle"
+        android:hint="@string/user_name_here"
+        android:visibility="invisible" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x25"
+        android:layout_marginTop="@dimen/x7"
+        android:layout_marginEnd="@dimen/x25"
+        android:layout_marginBottom="@dimen/x7"
+        android:animateLayoutChanges="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/x5">
+
+            <ImageView
+                android:id="@+id/ivbRefreshIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="@dimen/x3"
+                android:src="@drawable/ic_refresh" />
+
+
+            <TextView
+                android:id="@+id/tvCaptchaText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/s13"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+
+        <RadioGroup
+            android:id="@+id/rgCaptcha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal" />
+
+
+    </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,82 +85,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/s18"
         android:textStyle="bold"
-        android:visibility="invisible"/>
-
-    <EditText
-        android:id="@+id/et_user_name"
-        style="?attr/roundEditTextNormalColorStyle"
-        android:hint="@string/user_name_here"
-        android:visibility="invisible"/>
-
-    <EditText
-        android:id="@+id/et_password"
-        style="?attr/roundEditTextNormalColorStyle"
-        android:drawableStart="@drawable/ic_key"
-        android:hint="@string/password_here"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:visibility="invisible"/>
-
-
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:animateLayoutChanges="true"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/x7"
-        android:layout_marginBottom="@dimen/x7"
-        android:layout_marginStart="@dimen/x25"
-        android:layout_marginEnd="@dimen/x25"
-        android:visibility="invisible">
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/x5">
-
-            <TextView
-                android:id="@+id/tvCaptchaText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/s13"
-                android:textStyle="bold"/>
-
-
-            <ImageView
-                android:id="@+id/ivbRefreshIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_refresh"
-                android:layout_gravity="end"
-                android:padding="@dimen/x3"/>
-
-        </FrameLayout>
-
-
-
-        <RadioGroup
-            android:id="@+id/rgCaptcha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:animateLayoutChanges="true"/>
-
-
-    </LinearLayout>
-    
-
-
-    <Button
-        android:id="@+id/btn_login"
-        style="?attr/roundSkyBlueButtonColorStyle"
-        android:text="@string/login"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
 
 </LinearLayout>

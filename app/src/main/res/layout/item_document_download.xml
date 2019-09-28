@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,54 +16,53 @@
             android:id="@+id/framePdfIconContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_weight="0.15">
 
             <ImageView
-               android:id="@+id/ivPdfIcon"
-               style="?attr/documentDownloadImageStyle"/>
+                android:id="@+id/ivPdfIcon"
+                style="?attr/documentDownloadImageStyle" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameDownloadIconContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.15">
+
+            <ImageView
+                android:id="@+id/ivDownloadIcon"
+                style="?attr/documentDownloadImageStyle"
+                android:src="@drawable/ic_download" />
 
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
             android:layout_gravity="center"
+            android:layout_weight="0.7"
             android:orientation="vertical"
             android:paddingStart="@dimen/x5">
 
             <TextView
                 android:id="@+id/tvDocumentDownloadName"
-                style="?attr/documentDownloadFileNameStyle"/>
+                style="?attr/documentDownloadFileNameStyle" />
 
 
             <TextView
                 android:id="@+id/tvDocumentDownloadSize"
-                style="?attr/documentDownloadFileSizeStyle"/>
-
+                style="?attr/documentDownloadFileSizeStyle" />
 
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/frameDownloadIconContainer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.15"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/ivDownloadIcon"
-                style="?attr/documentDownloadImageStyle"
-                android:src="@drawable/ic_download"/>
-
-        </FrameLayout>
-
     </LinearLayout>
 
     <View
-        android:layout_margin="@dimen/x0"
-        style="?attr/supportCenterInfoSeperaterLineStyle"/>
+        style="?attr/supportCenterInfoSeperaterLineStyle"
+        android:layout_margin="@dimen/x0" />
 
 </LinearLayout>

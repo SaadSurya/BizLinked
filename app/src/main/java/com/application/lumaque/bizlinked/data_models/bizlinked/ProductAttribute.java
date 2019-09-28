@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class ProductAttribute implements Serializable {
 
-    public long AttributeID ;
-    public String AttributeName ;
-    public String [] ProductAttributeValueName ;
+    public long AttributeID;
+    public String AttributeName;
+    public String[] ProductAttributeValueName;
 
     public long getAttributeID() {
         return AttributeID;

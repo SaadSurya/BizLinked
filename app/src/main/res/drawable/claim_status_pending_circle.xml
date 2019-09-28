@@ -3,10 +3,10 @@
     android:shape="oval">
 
 
-    <solid android:color="@color/claim_status_pending_color" />
     <size
         android:width="@dimen/x7"
         android:height="@dimen/x7" />
+    <solid android:color="@color/claim_status_pending_color" />
 
 
 </shape>

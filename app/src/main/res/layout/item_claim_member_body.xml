@@ -1,31 +1,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:orientation="vertical"
-    android:id="@+id/parent"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/llInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x3"
+        android:layout_marginBottom="@dimen/x3"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/x5"
-        android:paddingEnd="@dimen/x15"
         android:paddingStart="@dimen/x15"
         android:paddingTop="@dimen/x5"
-        android:layout_marginBottom="@dimen/x3"
-        android:layout_marginTop="@dimen/x3">
-
-        <LinearLayout
-            android:id="@+id/dynamic_columns"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.9"
-            android:orientation="horizontal" />
+        android:paddingEnd="@dimen/x15"
+        android:paddingBottom="@dimen/x5">
 
         <FrameLayout
             style="?attr/documentRequestTableInfoTextStyle"
@@ -42,6 +34,13 @@
 
 
         </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/dynamic_columns"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9"
+            android:orientation="horizontal" />
 
     </LinearLayout>
 

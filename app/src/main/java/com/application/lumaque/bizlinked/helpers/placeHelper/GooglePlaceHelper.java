@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.listener.GooglePlaceDataInterface;
@@ -17,9 +18,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
 import static android.app.Activity.RESULT_CANCELED;
 
 
@@ -29,11 +32,9 @@ public class GooglePlaceHelper {
     public static final int REQUEST_CODE_AUTOCOMPLETE = 6666;
     public static final int PLACE_PICKER = 0;
     public static final int PLACE_AUTOCOMPLETE = 1;
+    private static final String TAG = "Google Place";
     private int apiType;
     private GooglePlaceDataInterface googlePlaceDataInterface;
-
-
-    private static final String TAG = "Google Place";
     private Activity context;
     private Fragment fragment;
 
@@ -51,6 +52,54 @@ public class GooglePlaceHelper {
         this.fragment = fragment;
     }
     //
+
+    /**
+     * GET ADDRESS from Geo Coder.
+     *
+     * @param context
+     * @param LATITUDE
+     * @param LONGITUDE
+     * @return
+     */
+
+    public static GoogleAddressModel getAddress(Context context, double LATITUDE, double LONGITUDE) {
+
+        GoogleAddressModel googleAddressModel = new GoogleAddressModel("", "", "", "", "", "");
+
+        //Set Address
+        try {
+            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null && addresses.size() > 0) {
+
+
+                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                String city = addresses.get(0).getLocality();
+                String state = addresses.get(0).getAdminArea();
+                String country = addresses.get(0).getCountryName();
+                String postalCode = addresses.get(0).getPostalCode();
+                String streetName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+
+
+                googleAddressModel = new GoogleAddressModel(address, city, state, country, postalCode, streetName);
+
+                Log.d(TAG, "getAddress:  address -" + address);
+                Log.d(TAG, "getAddress:  city -" + city);
+                Log.d(TAG, "getAddress:  country -" + country);
+                Log.d(TAG, "getAddress:  state -" + state);
+                Log.d(TAG, "getAddress:  postalCode -" + postalCode);
+                Log.d(TAG, "getAddress:  knownName" + streetName);
+
+
+                String countryCode = addresses.get(0).getCountryCode();
+                Log.d(TAG, "getAddress:  countryCode" + countryCode);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return googleAddressModel;
+    }
 
     /**
      * Call this method in a fragment when you want to open the map
@@ -123,7 +172,7 @@ public class GooglePlaceHelper {
 
                 Place place = PlacePicker.getPlace(context, data);
 
-               String address = place.getAddress().toString();
+                String address = place.getAddress().toString();
                 Double latitude = place.getLatLng().latitude;
                 Double longitude = place.getLatLng().longitude;
 
@@ -144,56 +193,6 @@ public class GooglePlaceHelper {
 
         }
     }
-
-
-    /**
-     * GET ADDRESS from Geo Coder.
-     *
-     * @param context
-     * @param LATITUDE
-     * @param LONGITUDE
-     * @return
-     */
-
-    public static GoogleAddressModel getAddress(Context context, double LATITUDE, double LONGITUDE) {
-
-        GoogleAddressModel googleAddressModel = new GoogleAddressModel("", "", "", "", "", "");
-
-        //Set Address
-        try {
-            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null && addresses.size() > 0) {
-
-
-                String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                String city = addresses.get(0).getLocality();
-                String state = addresses.get(0).getAdminArea();
-                String country = addresses.get(0).getCountryName();
-                String postalCode = addresses.get(0).getPostalCode();
-                String streetName = addresses.get(0).getFeatureName(); // Only if available else return NULL
-
-
-                googleAddressModel = new GoogleAddressModel(address, city, state, country, postalCode, streetName);
-
-                Log.d(TAG, "getAddress:  address -" + address);
-                Log.d(TAG, "getAddress:  city -" + city);
-                Log.d(TAG, "getAddress:  country -" + country);
-                Log.d(TAG, "getAddress:  state -" + state);
-                Log.d(TAG, "getAddress:  postalCode -" + postalCode);
-                Log.d(TAG, "getAddress:  knownName" + streetName);
-
-
-                String countryCode = addresses.get(0).getCountryCode();
-                Log.d(TAG, "getAddress:  countryCode" + countryCode);
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return googleAddressModel;
-    }
-
 
     public static class GoogleAddressModel {
         private String address;

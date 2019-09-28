@@ -17,8 +17,8 @@ import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.activities.baseClass.BaseActivity;
 import com.application.lumaque.bizlinked.constant.AppConstant;
 import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
-import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
+import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
 import com.application.lumaque.bizlinked.helpers.network.VolleyHelper;
 import com.application.lumaque.bizlinked.helpers.preference.BasePreferenceHelper;
 import com.application.lumaque.bizlinked.webServices.APISingletonHelperClass;
@@ -49,6 +49,9 @@ public class WebAPIRequestHelper {
     private String jsonString;
 
 
+    private WebAPIRequestHelper() {
+    }
+
     /**
      * Multipart request variables
      **/
@@ -65,49 +68,21 @@ public class WebAPIRequestHelper {
         return ourInstance;
     }
 
-    private WebAPIRequestHelper() {
-    }
-
-
-    public interface APIStringRequestDataCallBack {
-        void onSuccess(String response);
-
-        void onError(String response);
-
-        void onNoNetwork();
-    }
-
-
-    public interface APIJsonObjectRequestDataCallBack {
-        void onSuccess(JSONObject response);
-
-        void onError(String response);
-
-        void onNoNetwork();
-    }
-
-
-    public interface APIJsonArrayRequestDataCallBack {
-        void onSuccess(JSONArray response);
-
-        void onError(String response);
-
-        void onNoNetwork();
-    }
-
-
     public WebAPIRequestHelper setHeaderUserPreference(BasePreferenceHelper preference) {
         headerParams = new HashMap<>();
 
-        headerParams.put   ("currentCompanyId", (preference.getCompanyProfile())== null ? "" :String.valueOf(preference.getCompanyProfile().getCompanyID()) );;
+        headerParams.put("currentCompanyId", (preference.getCompanyProfile()) == null ? "" : String.valueOf(preference.getCompanyProfile().getCompanyID()));
+        ;
 
         return this;
 
     }
- public WebAPIRequestHelper setPutHeaderUserPreference(BasePreferenceHelper preference) {
+
+    public WebAPIRequestHelper setPutHeaderUserPreference(BasePreferenceHelper preference) {
         headerParams = new HashMap<>();
 
-        headerParams.put   ("currentCompanyId", (preference.getCompanyProfile())== null ? "" :String.valueOf(preference.getCompanyProfile().getCompanyID()) );;
+        headerParams.put("currentCompanyId", (preference.getCompanyProfile()) == null ? "" : String.valueOf(preference.getCompanyProfile().getCompanyID()));
+        ;
 
         return this;
 
@@ -120,7 +95,6 @@ public class WebAPIRequestHelper {
         return this;
     }
 
-
     public WebAPIRequestHelper setCustomBody(Map<String, String> params) {
         postParams = new HashMap<String, String>();
         if (params != null)
@@ -128,9 +102,8 @@ public class WebAPIRequestHelper {
         return this;
     }
 
-
     public WebAPIRequestHelper setCustomJsonBody(String jsonArrayString) {
-        jsonString =jsonArrayString;
+        jsonString = jsonArrayString;
 
         return this;
     }
@@ -193,8 +166,7 @@ public class WebAPIRequestHelper {
         APISingletonHelperClass.getInstance(currentActivity).addToRequestQueue(strReq, url);
     }
 
-
-  public void deleteRequest(final String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
+    public void deleteRequest(final String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
         if (!NetworkUtils.isNetworkAvailable(currentActivity)) {
 
@@ -286,9 +258,7 @@ public class WebAPIRequestHelper {
                 apiRequestDataCallBack.onError(VolleyHelper.getErrorMsg(currentActivity, error));
                 Utils.showToast(currentActivity, VolleyHelper.getErrorMsg(currentActivity, error), AppConstant.TOAST_TYPES.ERROR);
             }
-        })
-
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -314,9 +284,6 @@ public class WebAPIRequestHelper {
         // Adding String request to request queue
         APISingletonHelperClass.getInstance(currentActivity).addToRequestQueue(strReq, url);
     }
-
-
-
 
     public void postJsonRequest(int type, final String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
@@ -352,9 +319,7 @@ public class WebAPIRequestHelper {
                 apiRequestDataCallBack.onError(VolleyHelper.getErrorMsg(currentActivity, error));
                 Utils.showToast(currentActivity, VolleyHelper.getErrorMsg(currentActivity, error), AppConstant.TOAST_TYPES.ERROR);
             }
-        })
-
-        {
+        }) {
             @Override
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
@@ -515,7 +480,6 @@ public class WebAPIRequestHelper {
         APISingletonHelperClass.getInstance(currentActivity).addToRequestQueue(request, url);
     }
 
-
     public void postRequestMultipart(byte[] fileData, String fileName, final String url, final APIStringRequestDataCallBack apiRequestDataCallBack) {
 
         if (!NetworkUtils.isNetworkAvailable(currentActivity)) {
@@ -568,6 +532,32 @@ public class WebAPIRequestHelper {
         // Adding String request to request queue
         APISingletonHelperClass.getInstance(currentActivity).addToRequestQueue(multipartRequest, url);
 
+    }
+
+
+    public interface APIStringRequestDataCallBack {
+        void onSuccess(String response);
+
+        void onError(String response);
+
+        void onNoNetwork();
+    }
+
+    public interface APIJsonObjectRequestDataCallBack {
+        void onSuccess(JSONObject response);
+
+        void onError(String response);
+
+        void onNoNetwork();
+    }
+
+
+    public interface APIJsonArrayRequestDataCallBack {
+        void onSuccess(JSONArray response);
+
+        void onError(String response);
+
+        void onNoNetwork();
     }
 
 

@@ -9,16 +9,16 @@ import com.android.volley.toolbox.Volley;
 
 public class APISingletonHelperClass {
 
-    private RequestQueue mRequestQueue;
-    private static Context mContext;
     private static final APISingletonHelperClass ourInstance = new APISingletonHelperClass();
+    private static Context mContext;
+    private RequestQueue mRequestQueue;
+
+    private APISingletonHelperClass() {
+    }
 
     public static APISingletonHelperClass getInstance(Context context) {
         mContext = context;
         return ourInstance;
-    }
-
-    private APISingletonHelperClass() {
     }
 
     public RequestQueue getRequestQueue() {

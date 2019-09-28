@@ -18,16 +18,15 @@ import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.Unbinder;
 
 public class ProfileTabsFragment extends BaseFragment {
 
 
-
-
     @BindView(R.id.shimmer_view_container)
-    ShimmerFrameLayout mShimmerViewContainer ;
+    ShimmerFrameLayout mShimmerViewContainer;
 
     @BindView(R.id.tabView)
     LinearLayout tabViewLayout;
@@ -50,12 +49,10 @@ public class ProfileTabsFragment extends BaseFragment {
     public void onCustomBackPressed() {
 
 
-
-        if(adapter.getCurrentFragment() instanceof ProfileAddressTabFragment){
+        if (adapter.getCurrentFragment() instanceof ProfileAddressTabFragment) {
             ((ProfileAddressTabFragment) adapter.getCurrentFragment()).doBack();
 
-        }else if(adapter.getCurrentFragment() instanceof ProfileDetailTabFragment)
-        {
+        } else if (adapter.getCurrentFragment() instanceof ProfileDetailTabFragment) {
             ((ProfileDetailTabFragment) adapter.getCurrentFragment()).doBack();
 
         }
@@ -79,9 +76,10 @@ public class ProfileTabsFragment extends BaseFragment {
 
     public void selectFirstFrag() {
 
-        viewPager.setCurrentItem(0,true);
+        viewPager.setCurrentItem(0, true);
 
     }
+
     private void setupTabLayout() {
 
         adapter = new ProfileTabsFragment.ViewPagerAdapter(getChildFragmentManager());
@@ -102,12 +100,11 @@ public class ProfileTabsFragment extends BaseFragment {
             public void onPageSelected(int position) {
 
 
-                if(position==1){
-
+                if (position == 1) {
 
 
                 }
-               String currentTab = "abc";
+                String currentTab = "abc";
                 //(viewPager.getCurrentItem() instanceof ProfileAddressTabFragment)
             }
 
@@ -120,12 +117,17 @@ public class ProfileTabsFragment extends BaseFragment {
 
     }
 
+    public void saveDetailAndNext() {
 
+        viewPager.setCurrentItem(1, true);
+
+    }
 
     // Adapter for the viewpager using FragmentStatePagerAdapter
     class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
         private final ArrayList<String> mFragmentTitleList = new ArrayList<>();
+        private Fragment mCurrentFragment;
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -151,8 +153,6 @@ public class ProfileTabsFragment extends BaseFragment {
             return mFragmentTitleList.get(position);
         }
 
-        private Fragment mCurrentFragment;
-
         public Fragment getCurrentFragment() {
             return mCurrentFragment;
         }
@@ -177,14 +177,6 @@ public class ProfileTabsFragment extends BaseFragment {
         }*/
 
     }
-    public void saveDetailAndNext() {
-
-            viewPager.setCurrentItem(1,true);
-
-    }
-
-
-
 
 
 }

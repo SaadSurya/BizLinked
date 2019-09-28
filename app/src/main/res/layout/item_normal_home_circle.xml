@@ -1,26 +1,24 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_marginStart="@dimen/x5"
-    android:layout_marginEnd="@dimen/x5"
     android:layout_marginTop="@dimen/x10"
-    android:layout_marginBottom="@dimen/x10">
+    android:layout_marginEnd="@dimen/x5"
+    android:layout_marginBottom="@dimen/x10"
+    android:gravity="center"
+    android:orientation="vertical">
 
 
     <ImageView
-        style="?attr/homeNormalCircleImageStyle"
         android:id="@+id/imgCircleOptions"
-        android:src="@drawable/ic_endorsement"
-        android:adjustViewBounds="true"/>
-
+        style="?attr/homeNormalCircleImageStyle"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_endorsement" />
 
 
     <TextView
         android:id="@+id/imgCircleOptionsText"
-        style="?attr/homeNormalCircleImageTextStyle"/>
+        style="?attr/homeNormalCircleImageTextStyle" />
 
 </LinearLayout>

@@ -45,7 +45,7 @@ public class ProfileFragmentTabs extends BaseFragment {
     MenuItem searchItem;
 
 
-    ImageView closeButton ;
+    ImageView closeButton;
 
     @BindView(R.id.recyclerview)
     RecyclerView linkRecycler;
@@ -57,7 +57,7 @@ public class ProfileFragmentTabs extends BaseFragment {
     Unbinder unbinder;
     String strQuery = "";
     int strSelectedTab = -1;
-    ArrayList<CompanyHeadModel>  searchedLinkList;
+    ArrayList<CompanyHeadModel> searchedLinkList;
 
 /*
     ArrayList<CompanyHeadModel> RequestsRecievedList = new ArrayList<>();
@@ -119,13 +119,11 @@ public class ProfileFragmentTabs extends BaseFragment {
     }
 
 
-
-
-
     // Adapter for the viewpager using FragmentStatePagerAdapter
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final ArrayList<Fragment> mFragmentList = new ArrayList<>();
         private final ArrayList<String> mFragmentTitleList = new ArrayList<>();
+        private Fragment mCurrentFragment;
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
@@ -151,8 +149,6 @@ public class ProfileFragmentTabs extends BaseFragment {
             return mFragmentTitleList.get(position);
         }
 
-        private Fragment mCurrentFragment;
-
         public Fragment getCurrentFragment() {
             return mCurrentFragment;
         }
@@ -166,19 +162,6 @@ public class ProfileFragmentTabs extends BaseFragment {
             super.setPrimaryItem(container, position, object);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

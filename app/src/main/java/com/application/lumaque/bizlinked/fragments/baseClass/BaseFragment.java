@@ -33,28 +33,32 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment implements Validator.ValidationListener {
 
     public static final String TAG = BaseFragment.class.getSimpleName();
-
-    public abstract void onCustomBackPressed();
-
     public BasePreferenceHelper preferenceHelper;
-    protected BaseActivity activityReference;
     public boolean isLoadingRegisteration = false;
     public boolean isLoading = false;
+    protected BaseActivity activityReference;
     Validator validator;
     Unbinder unbinder;
     View rootView;
 
+    public abstract void onCustomBackPressed();
+
     //Abstract Methods
     protected abstract int getMainLayout();
-    protected abstract void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState, View rootView);
+
+    protected abstract void onFragmentViewReady(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, View rootView);
+
     //boolean isOptionsMenuShow,boolean isNavigationMenuShow,
-   // protected abstract void setBottomBarLayout(BottomTabLayout bottomTabLayout, BottomBarNavigationLayout bottomBarNavigationLayout);
+    // protected abstract void setBottomBarLayout(BottomTabLayout bottomTabLayout, BottomBarNavigationLayout bottomBarNavigationLayout);
     //Override Methods
-    public void onValidationSuccess() {}
-    public void onValidationFail() {}
+    public void onValidationSuccess() {
+    }
+
+    public void onValidationFail() {
+    }
 
 
-    public View getContainerLayout(){
+    public View getContainerLayout() {
         return rootView;
     }
 
@@ -70,7 +74,7 @@ public abstract class BaseFragment extends Fragment implements Validator.Validat
 
     public void validateFields() {
 
-        if(activityReference != null)
+        if (activityReference != null)
             KeyboardHelper.hideSoftKeyboard(activityReference, activityReference.getWindow().getDecorView());
 
         validator.validate();
@@ -162,7 +166,6 @@ public abstract class BaseFragment extends Fragment implements Validator.Validat
     }
 
 
-
     public void loadingStarted() {
         isLoading = true;
         if (getBaseActivity() != null)
@@ -177,7 +180,7 @@ public abstract class BaseFragment extends Fragment implements Validator.Validat
     }
 
 
-// todo to be in child fragment as abstract method
+    // todo to be in child fragment as abstract method
     private void setTitleBarListener() {
 
         final ArrayList<OptionMenuModal> optionList = new ArrayList<>();
@@ -203,7 +206,7 @@ public abstract class BaseFragment extends Fragment implements Validator.Validat
                         public boolean onMenuItemClick(MenuItem item) {
                             try {
                                 if (item.getItemId() == 2) {
-                                   // logoutUser();
+                                    // logoutUser();
 
                                 } else {
                                     openRequiredFragment(optionList, item);
@@ -229,7 +232,7 @@ public abstract class BaseFragment extends Fragment implements Validator.Validat
         for (OptionMenuModal object : optionList) {
             if (object.getId() == item.getItemId()) {
                 BaseFragment className = Utils.getFragmentByName(getBaseActivity(), object.getClassName());
-                getBaseActivity().addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE,true);
+                getBaseActivity().addSupportFragment(className, AppConstant.TRANSITION_TYPES.SLIDE, true);
             }
         }
     }

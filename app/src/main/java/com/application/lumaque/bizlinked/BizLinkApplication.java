@@ -11,7 +11,7 @@ public class BizLinkApplication extends MultiDexApplication {
 
     public static final String channel_1_ID = "channel1";
 
-   // public static String fireBaseReffID = "";
+    // public static String fireBaseReffID = "";
 
  /*   public static String getFireBaseReffID() {
         return fireBaseReffID;
@@ -29,26 +29,23 @@ public class BizLinkApplication extends MultiDexApplication {
         BizLinkApplication.loginStatus = loginStatus;
     }
 */
-  //  public static boolean loginStatus;
+    //  public static boolean loginStatus;
 
 
-
-        @Override
-        public void onCreate() {
-            super.onCreate();
-           // MultiDex.install(this);
-            FirebaseApp.initializeApp(this);
-            createNotificationChannel();
-            //Fabric.with(this, new Crashlytics());
-        }
-
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // MultiDex.install(this);
+        FirebaseApp.initializeApp(this);
+        createNotificationChannel();
+        //Fabric.with(this, new Crashlytics());
+    }
 
 
-    private void createNotificationChannel(){
+    private void createNotificationChannel() {
         int importance = NotificationManager.IMPORTANCE_HIGH;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
-        {
-            NotificationChannel channel = new NotificationChannel(channel_1_ID,"channel 1" ,importance);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channel_1_ID, "channel 1", importance);
             channel.setDescription("This is channel 1");
             channel.enableLights(true);
             channel.setLightColor(Color.RED);
@@ -56,8 +53,6 @@ public class BizLinkApplication extends MultiDexApplication {
             channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
-
-
 
 
         }

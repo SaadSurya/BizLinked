@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    android:background="@drawable/shadow_image_new_small"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/x16"
-    android:layout_marginRight="@dimen/x16">
+    android:layout_marginRight="@dimen/x16"
+    android:background="@drawable/shadow_image_new_small">
 
     <FrameLayout
 
 
         style="?attr/roundEditTextNormalColorStyle"
-        android:background="@color/transparent"
         android:layout_width="match_parent"
         android:layout_marginStart="@dimen/x0"
         android:layout_marginTop="@dimen/x0"
         android:layout_marginEnd="@dimen/x0"
+        android:background="@color/transparent"
         android:padding="@dimen/x2">
 
 
@@ -27,20 +26,13 @@
             android:layout_gravity="right"
             android:background="@drawable/close"
             android:padding="@dimen/x15"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:background="@color/transparent"
-                android:id="@+id/pro_attribute_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="color" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -60,6 +52,13 @@
 
 
             </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/pro_attribute_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="color" />
 
         </LinearLayout>
 

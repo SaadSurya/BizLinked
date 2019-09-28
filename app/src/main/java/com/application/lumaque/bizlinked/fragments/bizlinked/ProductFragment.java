@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,7 +26,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.application.lumaque.bizlinked.R;
@@ -37,7 +34,6 @@ import com.application.lumaque.bizlinked.customViews.AttributesDialog;
 import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductAttribute;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
-import com.application.lumaque.bizlinked.data_models.bizlinked.ProductList;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.TagViewAdapter;
 import com.application.lumaque.bizlinked.helpers.common.Utils;
@@ -45,7 +41,6 @@ import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
 import com.application.lumaque.bizlinked.helpers.ui.dialogs.DialogFactory;
 import com.application.lumaque.bizlinked.listener.MediaTypePicker;
 import com.application.lumaque.bizlinked.webhelpers.CompanyHelper;
-import com.application.lumaque.bizlinked.webhelpers.ProductHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAPIRequestHelper;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 import com.bumptech.glide.Glide;
@@ -65,11 +60,7 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class ProductFragment extends BaseFragment implements TagCloseCallBack, ResponceCallBack, MediaTypePicker {
 
-    private Bundle bundle;
-    private ArrayList<ProductCategory> companyCategoryList;
-    private ArrayList<ProductAttribute> productAttributes;
     public static final int DATEPICKER_FRAGMENT = 1;
-    private Product product;
     public static final String companyId = "companyId";
     public static final String productId = "productId";
     public static final String categoryId = "categoryId";
@@ -79,56 +70,45 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
     String paramCategoryId = "";
     //    private String newItemFilePath;
     ArrayList<File> imageFile;
-    private CustomPagerAdapter viewpagerAdapter;
     List<String> ImageList = new ArrayList<>();
     TagViewAdapter tagItemAdapter;
-    private boolean isInEditMode = false;
     //    HashMap<String, Integer> hMap = new HashMap<>();
 //    private CatArrayAdapter catArrayAdapter;
     //  int ImageObjectSize;
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout mShimmerViewContainer;
-
     @BindView(R.id.mainlayout)
     ConstraintLayout mainlayout;
-
     @BindView(R.id.viewpager)
     ViewPager viewpager;
-
     @BindView(R.id.indicator)
     CircleIndicator indicator;
-
     @BindView(R.id.pro_category)
     AutoCompleteTextView proCate;
-
-
     @BindView(R.id.pro_name)
     EditText proName;
-
     @BindView(R.id.pro_desc)
     EditText proDesc;
-
     @BindView(R.id.pro_price)
     EditText proPrice;
-
     @BindView(R.id.add_att)
     ImageButton addAtt;
-
     @BindView(R.id.fab_add_image)
     ImageButton fabAddImage;
-
     @BindView(R.id.btn_save)
     Button btnSave;
-
- @BindView(R.id.btn_publish)
+    @BindView(R.id.btn_publish)
     Button btnPublish;
-
     @BindView(R.id.product_desc_view)
     ScrollView productDescView;
-
     @BindView(R.id.attribute_layout)
     RecyclerView attributeLayout;
-
+    private Bundle bundle;
+    private ArrayList<ProductCategory> companyCategoryList;
+    private ArrayList<ProductAttribute> productAttributes;
+    private Product product;
+    private CustomPagerAdapter viewpagerAdapter;
+    private boolean isInEditMode = false;
 
     @Override
     public void onCustomBackPressed() {
@@ -235,9 +215,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                 proDesc.setText(product.getProductDescription());
                 proPrice.setText(String.valueOf(product.getPrice()));
 
-                if(product.IsPublished){
+                if (product.IsPublished) {
                     btnPublish.setVisibility(View.GONE);
-                   // btnPublish.setText("UNPUBLISH");
+                    // btnPublish.setText("UNPUBLISH");
                 }
 
             }
@@ -266,7 +246,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     @Override
     public void onRowClick(ProductAttribute productAttribute) {
-        showAttributeDialog(productAttribute, false,tagItemAdapter.getAttributeLIst());
+        showAttributeDialog(productAttribute, false, tagItemAdapter.getAttributeLIst());
 
 
     }
@@ -353,70 +333,6 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     }
 
-
-    public class CustomPagerAdapter extends PagerAdapter {
-
-        private Context mContext;
-
-        public CustomPagerAdapter(Context context) {
-            mContext = context;
-        }
-
-        public void addItem() {
-
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup collection, int position) {
-            // ModelObject modelObject = ModelObject.values()[position];
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_product_header, collection, false);
-            ImageView headerView = layout.findViewById(R.id.imageView);
-
-            Glide.with(activityReference).load(ImageList.get(position))
-                    .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
-                    .into(headerView);
-                    headerView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ImageSliderFragment imageSliderFragment = new ImageSliderFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putStringArrayList("IMAGELINKS", new ArrayList<String>(ImageList));
-                    imageSliderFragment.setArguments(bundle);
-                    activityReference.addSupportFragment(imageSliderFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
-
-                }
-            });
-
-            collection.addView(layout);
-            return layout;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup collection, int position, Object view) {
-            collection.removeView((View) view);
-        }
-
-        @Override
-        public int getCount() {
-
-            return ImageList.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            // ModelObject customPagerEnum = ModelObject.values()[position];
-            return ImageList.get(position);
-        }
-
-    }
-
-
     private void cacheCat() {
 
 
@@ -426,7 +342,6 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
 
     }
-
 
     private void setTagAdapter() {
 
@@ -439,10 +354,9 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     }
 
-
-    private void showAttributeDialog(ProductAttribute attribute, boolean isNew,ArrayList<ProductAttribute> productAttributeArrayList) {
+    private void showAttributeDialog(ProductAttribute attribute, boolean isNew, ArrayList<ProductAttribute> productAttributeArrayList) {
         FragmentManager fm = activityReference.getSupportFragmentManager();
-        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute, isNew,productAttributeArrayList);
+        AttributesDialog editNameDialogFragment = AttributesDialog.newInstance(attribute, isNew, productAttributeArrayList);
         if (editNameDialogFragment.getDialog() != null)
             editNameDialogFragment.getDialog().setCanceledOnTouchOutside(false);
         //  editNameDialogFragment.show(fm, "fragment_attribute_dialog");
@@ -467,7 +381,7 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
                         tagItemAdapter.addItem(returnedAtt);
 
                     tagItemAdapter.notifyChangeData();
-                 //   Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
+                    //   Toast.makeText(activityReference, "show", Toast.LENGTH_SHORT).show();
                 } else if (resultCode == Activity.RESULT_CANCELED) {
 
                 }
@@ -506,25 +420,24 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
 
     }
 
-
-    @OnClick({R.id.add_att, R.id.btn_save, R.id.fab_add_image,R.id.btn_publish})
+    @OnClick({R.id.add_att, R.id.btn_save, R.id.fab_add_image, R.id.btn_publish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_publish:
-               if(isInEditMode) {
-                   //todo api call of publish
-                   editPubButClick(view);
-               }else
-                saveClick(true);
+                if (isInEditMode) {
+                    //todo api call of publish
+                    editPubButClick(view);
+                } else
+                    saveClick(true);
 
                 break;
-                case R.id.btn_save:
+            case R.id.btn_save:
                 saveClick(false);
 
                 break;
             case R.id.add_att:
                 //onSave();
-                showAttributeDialog(null, true,tagItemAdapter.getAttributeLIst());
+                showAttributeDialog(null, true, tagItemAdapter.getAttributeLIst());
 
                 break;
 
@@ -535,28 +448,27 @@ public class ProductFragment extends BaseFragment implements TagCloseCallBack, R
         }
     }
 
-private void editPubButClick(View view){
+    private void editPubButClick(View view) {
 
 
+        if (!product.IsPublished) {
 
-    if(!product.IsPublished){
+            saveClick(true);
+        } else
+            publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
 
-        saveClick(true);
+
     }
-    else
-        publishUnpublishProduct(AppConstant.ServerAPICalls.PRODUCT_UNPUBLISH);
 
-
-}
-    private void publishUnpublishProduct(String URL){
+    private void publishUnpublishProduct(String URL) {
         final HashMap<String, String> params = new HashMap<>();
 
         //params.put("productId", String.valueOf(product.getProductID()));
-URL= URL + "?productId="+product.getProductID();
+        URL = URL + "?productId=" + product.getProductID();
 
         WebAppManager.getInstance(activityReference, preferenceHelper).putDetails(
                 Request.Method.PUT,
-                params,URL, new WebAppManager.APIStringRequestDataCallBack() {
+                params, URL, new WebAppManager.APIStringRequestDataCallBack() {
                     @Override
                     public void onSuccess(String response) {
 
@@ -570,8 +482,6 @@ URL= URL + "?productId="+product.getProductID();
                         } else {
                             onCustomBackPressed();
                         }
-
-
 
 
                     }
@@ -589,74 +499,69 @@ URL= URL + "?productId="+product.getProductID();
                 });
 
     }
- private void saveClick(final boolean publish){
-     String catName = proCate.getText().toString();
-     product.setProductCategoryName(proCate.getText().toString());
-     product.setProductName(proName.getText().toString());
-     product.setProductDescription(proDesc.getText().toString());
-     product.setPrice(Double.parseDouble(proPrice.getText().toString()));
+
+    private void saveClick(final boolean publish) {
+        String catName = proCate.getText().toString();
+        product.setProductCategoryName(proCate.getText().toString());
+        product.setProductName(proName.getText().toString());
+        product.setProductDescription(proDesc.getText().toString());
+        product.setPrice(Double.parseDouble(proPrice.getText().toString()));
 //                if (hMap.get(catName) != null) {
 //                    product.setProductCategoryID(hMap.get(catName));
 //                }
-     product.setProductAttributes(tagItemAdapter.getAttributeLIst());
+        product.setProductAttributes(tagItemAdapter.getAttributeLIst());
 
 
+        boolean saveNotify = preferenceHelper.getSaveNotiy();
+        if (publish) {
+            final int a = 1;
+            product.setPublished(publish);
+            if (!saveNotify) {
 
+                DialogFactory.createInputDialog(getActivity(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ViewGroup edit = (ViewGroup) ((AlertDialog) dialog).findViewById(a);
+                        //    CheckBox notify =  edit.findViewById(R.id.Cb_notify);
+                        CheckBox saveSetting = edit.findViewById(R.id.Cb_save);
+                        if (saveSetting.isChecked()) {
 
+                            preferenceHelper.putsaveNotify(saveSetting.isChecked());
+                            preferenceHelper.putNotify(true);
 
-boolean saveNotify =preferenceHelper.getSaveNotiy();
-     if(publish)
-     {
-         final int a = 1 ;
-         product.setPublished(publish);
-        if(!saveNotify) {
+                        }
 
-            DialogFactory.createInputDialog(getActivity(), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ViewGroup edit = (ViewGroup) ((AlertDialog) dialog).findViewById(a);
-                //    CheckBox notify =  edit.findViewById(R.id.Cb_notify);
-                    CheckBox saveSetting =  edit.findViewById(R.id.Cb_save);
-                    if(saveSetting.isChecked()){
-
-                        preferenceHelper.putsaveNotify(saveSetting.isChecked());
                         preferenceHelper.putNotify(true);
 
+                        savbtn();
+
                     }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        preferenceHelper.putNotify(false);
+                        savbtn();
 
-                    preferenceHelper.putNotify(true);
+                    }
+                }, "Your product will be published", "do you want to notify your customers? ").show();
+            } else {
+                product.setNotify(preferenceHelper.getNotiy());
+                savbtn();
 
-                    savbtn();
+            }
 
-                }
-            }, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    preferenceHelper.putNotify(false);
-                    savbtn();
 
-                }
-            },"Your product will be published","do you want to notify your customers? ").show();
-         }else {
-            product.setNotify(preferenceHelper.getNotiy());
+        } else {
             savbtn();
-
         }
 
+    }
 
+    private void savbtn() {
+        String jsonString = g.toJson(product);
+        prodSaveReq(jsonString);
+    }
 
-
-     }
-     else{
-         savbtn();
-     }
-
- }
-
- private  void savbtn(){
-     String jsonString = g.toJson(product);
-     prodSaveReq(jsonString);
- }
     private void prodSaveReq(String jsonString) {
 
         WebAppManager.getInstance(activityReference, preferenceHelper).saveDetailsJson(
@@ -700,7 +605,6 @@ boolean saveNotify =preferenceHelper.getSaveNotiy();
 
     }
 
-
     private void startShimerAnimation() {
         isLoading = true;
         mShimmerViewContainer.startShimmerAnimation();
@@ -714,6 +618,68 @@ boolean saveNotify =preferenceHelper.getSaveNotiy();
         mShimmerViewContainer.stopShimmerAnimation();
         mainlayout.setVisibility(View.VISIBLE);
         mShimmerViewContainer.setVisibility(View.GONE);
+    }
+
+    public class CustomPagerAdapter extends PagerAdapter {
+
+        private Context mContext;
+
+        public CustomPagerAdapter(Context context) {
+            mContext = context;
+        }
+
+        public void addItem() {
+
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup collection, int position) {
+            // ModelObject modelObject = ModelObject.values()[position];
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.fragment_product_header, collection, false);
+            ImageView headerView = layout.findViewById(R.id.imageView);
+
+            Glide.with(activityReference).load(ImageList.get(position))
+                    .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())).centerCrop())
+                    .into(headerView);
+            headerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImageSliderFragment imageSliderFragment = new ImageSliderFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("IMAGELINKS", new ArrayList<String>(ImageList));
+                    imageSliderFragment.setArguments(bundle);
+                    activityReference.addSupportFragment(imageSliderFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
+
+                }
+            });
+
+            collection.addView(layout);
+            return layout;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup collection, int position, Object view) {
+            collection.removeView((View) view);
+        }
+
+        @Override
+        public int getCount() {
+
+            return ImageList.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            // ModelObject customPagerEnum = ModelObject.values()[position];
+            return ImageList.get(position);
+        }
+
     }
 
 }

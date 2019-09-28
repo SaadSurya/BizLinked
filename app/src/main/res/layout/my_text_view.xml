@@ -4,13 +4,11 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:id="@+id/text"
-       android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/x5"
         android:text="Notification Setting"
-        android:textSize="@dimen/s22"
-        ></TextView>
+        android:textSize="@dimen/s22"></TextView>
 </LinearLayout>

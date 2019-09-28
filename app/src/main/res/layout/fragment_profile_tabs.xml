@@ -7,6 +7,78 @@
     >
 
 
+    <LinearLayout
+        android:id="@+id/no_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="no record found"
+            android:textSize="@dimen/s22" />
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tabView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/support_center_info_bg"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/ProfileTabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x40"
+            android:background="?attr/appThemeColor"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="@dimen/x0"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="?attr/allPageCardHeaderStyle"
+            app:tabTextColor="@color/white" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
@@ -22,91 +94,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
+
             <include layout="@layout/data_placeholder_layout" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <LinearLayout
-        android:id="@+id/no_record"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/support_center_info_bg"
-android:visibility="gone"
-        android:orientation="vertical">
-
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:textSize="@dimen/s22"
-          android:text="no record found"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/support_center_info_bg"
-        android:visibility="gone"
-        android:orientation="vertical">
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-           >
-
-
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/tabView"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/support_center_info_bg"
-        android:orientation="vertical"
-        >
-
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/ProfileTabs"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x40"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            android:background="?attr/appThemeColor"
-            app:tabTextColor="@color/white"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorHeight="@dimen/x0"
-            app:tabBackground="@drawable/tab_color_selector"
-            app:tabTextAppearance="?attr/allPageCardHeaderStyle"/>
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-
-    </LinearLayout>
 
 
 </FrameLayout>

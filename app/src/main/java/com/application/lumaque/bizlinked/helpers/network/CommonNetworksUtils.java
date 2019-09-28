@@ -8,8 +8,8 @@ public class CommonNetworksUtils {
 
     public static String getRequestURI(HashMap<String, String> params) {
         StringBuilder paramsStr = new StringBuilder("");
-        if(params!=null){
-             paramsStr.append("?");
+        if (params != null) {
+            paramsStr.append("?");
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
@@ -23,8 +23,8 @@ public class CommonNetworksUtils {
 
     public static String getDeleteURI(HashMap<String, String> params) {
         StringBuilder paramsStr = new StringBuilder("");
-        if(params!=null){
-             paramsStr.append("/");
+        if (params != null) {
+            paramsStr.append("/");
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();

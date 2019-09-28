@@ -17,28 +17,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.signature.ObjectKey;
 
-
 import java.util.ArrayList;
 
 public class LinkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     final LayoutInflater inflater;
     Context context;
     ArrayList<CompanyHeadModel> linkRecord;
- //   private ArrayList<ArrayList<Record>> headerData;
+    //   private ArrayList<ArrayList<Record>> headerData;
 
     private CustomRecyclerCallBacks customrecyclercallbacks;
-
 
 
     public LinkListAdapter(Context context, ArrayList<CompanyHeadModel> linkRecord, CustomRecyclerCallBacks customrecyclercallbacks) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-      //  this.headerData = new ArrayList<>();
+        //  this.headerData = new ArrayList<>();
         this.linkRecord = new ArrayList<>();
         this.linkRecord.addAll(linkRecord);
         this.customrecyclercallbacks = customrecyclercallbacks;
     }
-
 
 
     private boolean isPositionHeader(int position) {
@@ -47,7 +44,7 @@ public class LinkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     public void clearAllList() {
-      //  headerData.clear();
+        //  headerData.clear();
         linkRecord.clear();
     }
 
@@ -70,28 +67,22 @@ public class LinkListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
 
-        CompanyHeadModel currentObject =linkRecord.get(position);
-
+        CompanyHeadModel currentObject = linkRecord.get(position);
 
 
         ((ItemViewHolder) holder).tvName.setText(currentObject.getCompanyName());
-        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE+currentObject.getCompanyID())
+        Glide.with(context).load(AppConstant.ServerAPICalls.GET_MEDIA_FILE + currentObject.getCompanyID())
                 .apply(new RequestOptions().signature(new ObjectKey(System.currentTimeMillis())))
                 .into(((ItemViewHolder) holder).profilePicView);
 
 
-
-setAddDeleteViews(currentObject,((ItemViewHolder) holder).imSub,((ItemViewHolder) holder).imAdd);
-
+        setAddDeleteViews(currentObject, ((ItemViewHolder) holder).imSub, ((ItemViewHolder) holder).imAdd);
 
 
     }
-
-
 
 
     @Override
@@ -99,14 +90,33 @@ setAddDeleteViews(currentObject,((ItemViewHolder) holder).imSub,((ItemViewHolder
         return linkRecord.size();
     }
 
+    private void setAddDeleteViews(CompanyHeadModel currentObject, ImageButton subBtn, ImageButton addBtn) {
 
+        if (currentObject.getLinkStatus().equalsIgnoreCase("N")) {
+            addBtn.setVisibility(View.VISIBLE);
+            subBtn.setVisibility(View.GONE);
 
+        } else if (currentObject.getLinkStatus().equalsIgnoreCase("L")) {
+            addBtn.setVisibility(View.GONE);
+            subBtn.setVisibility(View.VISIBLE);
+
+        } else if (currentObject.getLinkStatus().equalsIgnoreCase("S")) {
+            addBtn.setVisibility(View.GONE);
+            subBtn.setVisibility(View.VISIBLE);
+
+        } else if (currentObject.getLinkStatus().equalsIgnoreCase("R")) {
+            addBtn.setVisibility(View.VISIBLE);
+            subBtn.setVisibility(View.VISIBLE);
+
+        }
+
+    }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         private TextView tvName;
-        private ImageButton imSub,imAdd;
+        private ImageButton imSub, imAdd;
 
         private de.hdodenhof.circleimageview.CircleImageView profilePicView;
 
@@ -127,7 +137,7 @@ setAddDeleteViews(currentObject,((ItemViewHolder) holder).imSub,((ItemViewHolder
             tvName.setOnClickListener(this);
 
 
-       //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
+            //     FontHelper.getHelper().setFontStyle(FontHelper.FONT_AWESOME_REGULAR, trashTv, context);
         }
 
         @Override
@@ -138,53 +148,21 @@ setAddDeleteViews(currentObject,((ItemViewHolder) holder).imSub,((ItemViewHolder
             switch (view.getId()) {
                 case R.id.profile_image: {
 
-                 customrecyclercallbacks.onImageClick(linkRecord.get(position));
+                    customrecyclercallbacks.onImageClick(linkRecord.get(position));
                 }
                 break;
                 case R.id.tvItem: {
 
-                 customrecyclercallbacks.onListClick(linkRecord.get(position));
+                    customrecyclercallbacks.onListClick(linkRecord.get(position));
                 }
                 break;
                 default:
-                    customrecyclercallbacks.onActionClick(linkRecord.get(position),view.getTag().toString());
+                    customrecyclercallbacks.onActionClick(linkRecord.get(position), view.getTag().toString());
                     break;
             }
 
 
-
-
         }
-    }
-
-
-    private  void setAddDeleteViews(CompanyHeadModel currentObject, ImageButton subBtn, ImageButton addBtn){
-
-        if(currentObject.getLinkStatus().equalsIgnoreCase("N"))
-        {
-            addBtn.setVisibility(View.VISIBLE);
-            subBtn.setVisibility(View.GONE);
-
-        }
-        else if(currentObject.getLinkStatus().equalsIgnoreCase("L"))
-        {
-            addBtn.setVisibility(View.GONE);
-            subBtn.setVisibility(View.VISIBLE);
-
-        }
-        else if(currentObject.getLinkStatus().equalsIgnoreCase("S"))
-        {
-            addBtn.setVisibility(View.GONE);
-            subBtn.setVisibility(View.VISIBLE);
-
-        }
-        else if(currentObject.getLinkStatus().equalsIgnoreCase("R"))
-        {
-            addBtn.setVisibility(View.VISIBLE);
-            subBtn.setVisibility(View.VISIBLE);
-
-        }
-
     }
 
 }

@@ -50,16 +50,14 @@ public class ErrorScreen extends BaseActivity {
     }
 
 
-
-
     @OnClick(R.id.btn_retry)
     public void onViewClicked() {
         startSplashScreen();
 
     }
 
-    private void startSplashScreen(){
-        Intent intent=new Intent(this,RegistrationActivity.class);
+    private void startSplashScreen() {
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
         finish();
     }

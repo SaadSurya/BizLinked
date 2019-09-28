@@ -3,7 +3,6 @@ package com.application.lumaque.bizlinked.fragments.bizlinked;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -18,16 +17,11 @@ import android.widget.ImageView;
 
 import com.application.lumaque.bizlinked.R;
 import com.application.lumaque.bizlinked.constant.AppConstant;
-import com.application.lumaque.bizlinked.data_models.bizlinked.Product;
 import com.application.lumaque.bizlinked.data_models.bizlinked.ProductCategory;
 import com.application.lumaque.bizlinked.fragments.baseClass.BaseFragment;
 import com.application.lumaque.bizlinked.fragments.bizlinked.adapter.CategoryListAdapter;
 import com.application.lumaque.bizlinked.helpers.common.KeyboardHelper;
-import com.application.lumaque.bizlinked.helpers.common.Utils;
 import com.application.lumaque.bizlinked.helpers.network.GsonHelper;
-import com.application.lumaque.bizlinked.helpers.network.NetworkUtils;
-import com.application.lumaque.bizlinked.helpers.recycler_touchHelper.RecyclerTouchListener;
-import com.application.lumaque.bizlinked.listener.ClickListenerRecycler;
 import com.application.lumaque.bizlinked.webhelpers.WebAppManager;
 
 import java.util.ArrayList;
@@ -40,14 +34,12 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
 
     @BindView(R.id.rv_category_list)
     RecyclerView categoryListRV;
-    private String strQuery = "";
     SearchView searchView;
-
     MenuItem searchItem;
     ImageView closeButton;
-
     @BindView(R.id.fab_cat_list)
     FloatingActionButton fabCatList;
+    private String strQuery = "";
     private int companyId;
     private ArrayList<ProductCategory> productCategoriesList;
     private ArrayList<ProductCategory> productCategoriesListSearched;
@@ -76,6 +68,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
 
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -86,6 +79,7 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
             initializeViews();
 
     }
+
     private void initializeViews() {
         ProductCategory productCategory = new ProductCategory();
 
@@ -199,14 +193,14 @@ public class CategoryListFragment extends BaseFragment implements SearchView.OnQ
                 NewCategoryFragment newCategoryFragment = new NewCategoryFragment();
 
 //                    ProductCategory category = new ProductCategory();
-                    Bundle bundle = new Bundle();
+                Bundle bundle = new Bundle();
 //                        bundle.putSerializable("CAT_OBJ", currentObject.getSubProductCategories().get(position));
-                    if (productSubCategory != null){
-                        bundle.putSerializable("CAT_OBJ", productSubCategory);
+                if (productSubCategory != null) {
+                    bundle.putSerializable("CAT_OBJ", productSubCategory);
 
-                    }
-                    bundle.putBoolean("isFromNestedCAT", true);
-                    newCategoryFragment.setArguments(bundle);
+                }
+                bundle.putBoolean("isFromNestedCAT", true);
+                newCategoryFragment.setArguments(bundle);
 
                 activityReference.addSupportFragment(newCategoryFragment, AppConstant.TRANSITION_TYPES.SLIDE, true);
                 break;

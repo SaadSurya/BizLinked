@@ -9,14 +9,14 @@ import com.daimajia.androidanimations.library.YoYo;
 
 public class AnimationHelpers {
 
-    public static void animation(Techniques techniques, int duration, final View view){
+    public static void animation(Techniques techniques, int duration, final View view) {
         YoYo.with(techniques)
                 .duration(duration)
                 .repeat(0)
                 .onStart(new YoYo.AnimatorCallback() {
                     @Override
                     public void call(Animator animator) {
-                        if(view.getVisibility() == View.INVISIBLE || view.getVisibility() == View.GONE)
+                        if (view.getVisibility() == View.INVISIBLE || view.getVisibility() == View.GONE)
                             view.setVisibility(View.VISIBLE);
                     }
                 }).playOn(view);
@@ -29,7 +29,7 @@ public class AnimationHelpers {
                 .onStart(new YoYo.AnimatorCallback() {
                     @Override
                     public void call(Animator animator) {
-                        if(view.getVisibility() == View.INVISIBLE || view.getVisibility() == View.GONE)
+                        if (view.getVisibility() == View.INVISIBLE || view.getVisibility() == View.GONE)
                             view.setVisibility(View.VISIBLE);
                     }
                 })

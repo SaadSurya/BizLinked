@@ -8,10 +8,6 @@
         android:elevation="@dimen/x10"
         android:orientation="vertical">
 
-        <TextView
-            style="?attr/allPageCardHeaderStyle"
-            android:text="@string/document_requested" />
-
         <LinearLayout
             style="?attr/allPageCardHeaderStyle"
             android:layout_marginTop="@dimen/x2"
@@ -23,6 +19,10 @@
                 android:text="@string/view_document" />
 
         </LinearLayout>
+
+        <TextView
+            style="?attr/allPageCardHeaderStyle"
+            android:text="@string/document_requested" />
 
 
         <!-- Table For Document  -->
@@ -37,11 +37,9 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvViewDocument"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
 
     </LinearLayout>

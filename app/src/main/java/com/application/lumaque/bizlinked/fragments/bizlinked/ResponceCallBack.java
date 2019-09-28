@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public interface ResponceCallBack {
 
 
-
     void onCategoryResponce(ArrayList<ProductCategory> categoryList);
 
 }
